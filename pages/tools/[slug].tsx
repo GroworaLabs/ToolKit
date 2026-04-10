@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
@@ -523,11 +523,7 @@ function ToolSidebar({ slug }: { slug: string }) {
     if (slug === 'sort-lines')              return <SortLinesSidebar />;
     if (slug === 'reverse-text')            return <ReverseTextSidebar />;
     if (slug === 'find-and-replace')        return <FindAndReplaceSidebar />;
-    if (slug === 'number-base-converter')  return <NumberBaseSidebar />;
-    if (slug === 'power-converter')        return <PowerSidebar />;
-    if (slug === 'torque-converter')       return <TorqueSidebar />;
-    if (slug === 'pace-converter')         return <PaceSidebar />;
-    if (slug === 'bitrate-converter')      return <BitrateSidebar />;
+    if (SIDEBAR_INFO_LOADERS[slug])        return <GenericInfoSidebar slug={slug} />;
     return null;
 }
 
@@ -804,41 +800,22 @@ function QrSidebar() {
     );
 }
 
-/* ── New converter sidebars ────────────────────────────── */
-const NumberBaseSidebar = dynamic(
-    () => import('@/tools/number-base-converter').then(m => {
-        const { sidebarInfo } = m as { sidebarInfo: { label: string; value: string }[] };
-        return function Sidebar() { return <InfoSidebar items={sidebarInfo} />; };
-    }), { ssr: false }
-) as React.ComponentType;
+const SIDEBAR_INFO_LOADERS: Record<string, () => Promise<{ label: string; value: string }[]>> = {
+    'number-base-converter': () => import('@/tools/number-base-converter').then(m => (m as any).sidebarInfo),
+    'power-converter':       () => import('@/tools/power-converter').then(m => (m as any).sidebarInfo),
+    'torque-converter':      () => import('@/tools/torque-converter').then(m => (m as any).sidebarInfo),
+    'pace-converter':        () => import('@/tools/pace-converter').then(m => (m as any).sidebarInfo),
+    'bitrate-converter':     () => import('@/tools/bitrate-converter').then(m => (m as any).sidebarInfo),
+};
 
-const PowerSidebar = dynamic(
-    () => import('@/tools/power-converter').then(m => {
-        const { sidebarInfo } = m as { sidebarInfo: { label: string; value: string }[] };
-        return function Sidebar() { return <InfoSidebar items={sidebarInfo} />; };
-    }), { ssr: false }
-) as React.ComponentType;
-
-const TorqueSidebar = dynamic(
-    () => import('@/tools/torque-converter').then(m => {
-        const { sidebarInfo } = m as { sidebarInfo: { label: string; value: string }[] };
-        return function Sidebar() { return <InfoSidebar items={sidebarInfo} />; };
-    }), { ssr: false }
-) as React.ComponentType;
-
-const PaceSidebar = dynamic(
-    () => import('@/tools/pace-converter').then(m => {
-        const { sidebarInfo } = m as { sidebarInfo: { label: string; value: string }[] };
-        return function Sidebar() { return <InfoSidebar items={sidebarInfo} />; };
-    }), { ssr: false }
-) as React.ComponentType;
-
-const BitrateSidebar = dynamic(
-    () => import('@/tools/bitrate-converter').then(m => {
-        const { sidebarInfo } = m as { sidebarInfo: { label: string; value: string }[] };
-        return function Sidebar() { return <InfoSidebar items={sidebarInfo} />; };
-    }), { ssr: false }
-) as React.ComponentType;
+function GenericInfoSidebar({ slug }: { slug: string }) {
+    const [items, setItems] = useState<{ label: string; value: string }[] | null>(null);
+    useEffect(() => {
+        SIDEBAR_INFO_LOADERS[slug]?.().then(setItems);
+    }, [slug]);
+    if (!items) return null;
+    return <InfoSidebar items={items} />;
+}
 
 /* ── Page ─────────────────────────────────────────────── */
 interface Props { tool: ToolMeta; }
