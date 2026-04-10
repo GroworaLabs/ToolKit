@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="32" viewBox="0 0 120 32">
+  <!-- Icon box -->
+  <rect width="32" height="32" rx="8" fill="#059669"/>
+  <!-- Bolt -->
+  <polygon points="19,3 9,18 15,18 13,29 23,14 17,14 19,3" fill="white"/>
+  <!-- Wordmark white -->
+  <text
+    x="40"
+    y="23"
+    font-family="'Outfit', 'Helvetica Neue', Arial, sans-serif"
+    font-weight="700"
+    font-size="18"
+    letter-spacing="-0.4"
+    fill="#ffffff"
+  >ToolKit</text>
+</svg>
