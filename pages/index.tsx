@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { Layout } from '@/components/ui/Layout';
 import { ToolCard } from '@/components/ui/ToolCard';
-import { getByCategory, getLiveTools, getSoonTools } from '@/lib/registry';
+import { getByCategory, getLiveTools, getSoonTools, CATEGORY_SLUGS } from '@/lib/registry';
 import { IcoShield, IcoCode, IcoCount, IcoZap, IcoKey } from '@/components/icons';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.webtoolkit.tech';
@@ -16,13 +16,6 @@ const FEATURES = [
   { Icon: IcoCount,  color: 'var(--ink-2)', bg: 'var(--border)',   title: 'Free forever',         desc: 'All tools are free with no rate limits, no paywalls, no upgrade prompts.' },
 ];
 
-const CATEGORY_SLUGS: Record<string, string> = {
-  'Security':        '/tools/security',
-  'Developer Tools': '/tools/developer',
-  'Text & Writing':  '/tools/text',
-  'Design':          '/tools/design',
-  'Value Converter': '/tools/value-converter',
-};
 
 const HomePage: NextPage = () => {
   const byCategory = getByCategory();

@@ -365,6 +365,24 @@ html, body { overflow-x: hidden; }
   }
 }
 
+/* ─── Generic converter row (power, torque, bitrate, etc.) ── */
+.conv-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.conv-row-label { flex-shrink: 0; }
+@media (max-width: 480px) {
+  .conv-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+  .conv-row-label { width: auto !important; }
+}
+
 /* ─── Color Palette swatches ─────────────────── */
 .palette-swatches {
   display: flex;
