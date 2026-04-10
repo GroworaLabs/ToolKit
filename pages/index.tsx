@@ -21,6 +21,7 @@ const CATEGORY_SLUGS: Record<string, string> = {
   'Developer Tools': '/tools/developer',
   'Text & Writing':  '/tools/text',
   'Design':          '/tools/design',
+  'Value Converter': '/tools/value-converter',
 };
 
 const HomePage: NextPage = () => {
