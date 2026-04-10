@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useState, useRef, useEffect } from 'react';
 import { Layout } from '@/components/ui/Layout';
 import { ToolCard } from '@/components/ui/ToolCard';
 import { getByCategory, getLiveTools, getSoonTools } from '@/lib/registry';
@@ -26,6 +27,57 @@ const HomePage: NextPage = () => {
   const byCategory = getByCategory();
   const liveTools  = getLiveTools();
   const soonTools  = getSoonTools();
+  const [query, setQuery]   = useState('');
+  const [open, setOpen]     = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [activeTab, setActiveTab] = useState<'tools' | 'variants'>('tools');
+  const searchRef           = useRef<HTMLDivElement>(null);
+
+  const q = query.trim().toLowerCase();
+
+  const allToolHits = q
+    ? [
+        ...liveTools.filter(t => t.name.toLowerCase().includes(q)),
+        ...liveTools.filter(t => !t.name.toLowerCase().includes(q) && (
+          t.tagline.toLowerCase().includes(q) || t.category.toLowerCase().includes(q)
+        )),
+      ]
+    : [];
+
+  interface VariantHit { variantName: string; toolName: string; href: string; }
+  const allVariantHits: VariantHit[] = q
+    ? liveTools.flatMap(t =>
+        (t.variants ?? [])
+          .filter(v => v.seoH1.toLowerCase().includes(q))
+          .map(v => ({ variantName: v.seoH1, toolName: t.name, href: `/tools/${t.slug}/${v.slug}` }))
+      )
+    : [];
+
+  const hasResults  = allToolHits.length > 0 || allVariantHits.length > 0;
+  const closeSearch = () => setOpen(false);
+
+  // auto-switch to a tab that has results
+  useEffect(() => {
+    if (allToolHits.length > 0) setActiveTab('tools');
+    else if (allVariantHits.length > 0) setActiveTab('variants');
+  }, [q]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
 
   /* ── Schema blocks ─────────────────────────────────────── */
   const organizationSchema = {
@@ -126,6 +178,137 @@ const HomePage: NextPage = () => {
                 Password generators, text utilities, color palettes, JSON formatters and more.
                 Every tool runs in your browser — no signup, no tracking, nothing stored.
               </p>
+
+              <div className="a3" style={{ maxWidth: 680, margin: '0 auto 24px', position: 'relative', zIndex: 10 }} ref={searchRef}>
+                <div style={{ position: 'relative' }}>
+                  <svg style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'var(--ink-3)', pointerEvents: 'none', zIndex: 1 }} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                  </svg>
+                  <input
+                    type="search"
+                    value={query}
+                    onChange={e => { setQuery(e.target.value); setOpen(true); }}
+                    placeholder="Search tools…"
+                    style={{ width: '100%', padding: '12px 16px 12px 42px', fontSize: 15, border: `1.5px solid ${open && q ? 'var(--ink-3)' : 'var(--border)'}`, borderRadius: open && q ? '12px 12px 0 0' : '12px', background: 'var(--white)', color: 'var(--ink)', outline: 'none', boxSizing: 'border-box', transition: 'border-color .15s, border-radius .1s' }}
+                    onFocus={e => { setOpen(true); e.currentTarget.style.borderColor = 'var(--ink-3)'; }}
+                    onBlur={e => { if (!(open && q)) e.currentTarget.style.borderColor = 'var(--border)'; }}
+                    autoComplete="off"
+                  />
+
+                  {open && q && (
+                    <div style={{ position: 'absolute', top: 'calc(100% - 1px)', left: 0, right: 0, background: 'var(--white)', border: '1.5px solid var(--ink-3)', borderTop: 'none', borderRadius: '0 0 12px 12px', boxShadow: '0 12px 32px rgba(0,0,0,.12)', zIndex: 1000, overflow: 'hidden' }}>
+
+                      {!hasResults ? (
+                        <div style={{ padding: '14px 16px', fontSize: 13, color: 'var(--ink-3)' }}>
+                          Nothing found for "<strong style={{ color: 'var(--ink)', fontWeight: 600 }}>{query}</strong>"
+                        </div>
+
+                      ) : isMobile ? (
+                        /* ── Mobile: tabs ── */
+                        <>
+                          <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', background: 'var(--surface, #f9f9f9)' }}>
+                            {(['tools', 'variants'] as const).map(tab => {
+                              const count = tab === 'tools' ? allToolHits.length : allVariantHits.length;
+                              const isActive = activeTab === tab;
+                              const hasTab = count > 0;
+                              return (
+                                <button
+                                  key={tab}
+                                  disabled={!hasTab}
+                                  onClick={() => setActiveTab(tab)}
+                                  style={{ flex: 1, padding: '10px 12px', fontSize: 13, fontWeight: isActive ? 700 : 500, color: !hasTab ? 'var(--ink-3)' : isActive ? 'var(--ink)' : 'var(--ink-2)', background: 'transparent', border: 'none', borderBottom: isActive ? '2px solid var(--ink)' : '2px solid transparent', cursor: hasTab ? 'pointer' : 'default', transition: 'color .15s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginBottom: -1 }}
+                                >
+                                  {tab === 'tools' ? 'Tools' : 'Presets'}
+                                  {hasTab && (
+                                    <span style={{ fontSize: 11, fontWeight: 500, color: isActive ? 'var(--ink-2)' : 'var(--ink-3)', background: isActive ? 'var(--border)' : 'transparent', borderRadius: 99, padding: '1px 6px' }}>
+                                      {count}
+                                    </span>
+                                  )}
+                                </button>
+                              );
+                            })}
+                          </div>
+                          <div style={{ overflowY: 'auto', maxHeight: 260 }}>
+                            {activeTab === 'tools' && allToolHits.map(tool => (
+                              <Link key={tool.slug} href={`/tools/${tool.slug}`}
+                                onClick={() => { closeSearch(); setQuery(''); }}
+                                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: '10px 14px', textDecoration: 'none', borderBottom: '1px solid var(--border)', background: 'var(--white)', transition: 'background .1s' }}
+                                onMouseEnter={e => (e.currentTarget.style.background = 'var(--surface, #f7f7f7)')}
+                                onMouseLeave={e => (e.currentTarget.style.background = 'var(--white)')}
+                              >
+                                <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{tool.name}</span>
+                                <span style={{ fontSize: 12, color: 'var(--ink-3)', flexShrink: 0 }}>{tool.category}</span>
+                              </Link>
+                            ))}
+                            {activeTab === 'variants' && allVariantHits.map(v => (
+                              <Link key={v.href} href={v.href}
+                                onClick={() => { closeSearch(); setQuery(''); }}
+                                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: '10px 14px', textDecoration: 'none', borderBottom: '1px solid var(--border)', background: 'var(--white)', transition: 'background .1s' }}
+                                onMouseEnter={e => (e.currentTarget.style.background = 'var(--surface, #f7f7f7)')}
+                                onMouseLeave={e => (e.currentTarget.style.background = 'var(--white)')}
+                              >
+                                <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{v.variantName}</span>
+                                <span style={{ fontSize: 12, color: 'var(--ink-3)', flexShrink: 0 }}>{v.toolName}</span>
+                              </Link>
+                            ))}
+                          </div>
+                        </>
+
+                      ) : (
+                        /* ── Desktop: two columns ── */
+                        <div style={{ display: 'grid', gridTemplateColumns: allToolHits.length > 0 && allVariantHits.length > 0 ? '1fr 1fr' : '1fr' }}>
+
+                          {allToolHits.length > 0 && (
+                            <div style={{ borderRight: allVariantHits.length > 0 ? '1px solid var(--border)' : 'none', display: 'flex', flexDirection: 'column' }}>
+                              <div style={{ padding: '7px 14px 6px', fontSize: 10, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--ink-3)', background: 'var(--surface, #f9f9f9)', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <span>Tools</span>
+                                <span style={{ fontWeight: 500, letterSpacing: 0, textTransform: 'none', fontSize: 11 }}>{allToolHits.length}</span>
+                              </div>
+                              <div style={{ overflowY: 'auto', maxHeight: 280 }}>
+                                {allToolHits.map(tool => (
+                                  <Link key={tool.slug} href={`/tools/${tool.slug}`}
+                                    onClick={() => { closeSearch(); setQuery(''); }}
+                                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: '7px 14px', textDecoration: 'none', borderBottom: '1px solid var(--border)', background: 'var(--white)', transition: 'background .1s' }}
+                                    onMouseEnter={e => (e.currentTarget.style.background = 'var(--surface, #f7f7f7)')}
+                                    onMouseLeave={e => (e.currentTarget.style.background = 'var(--white)')}
+                                  >
+                                    <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{tool.name}</span>
+                                    <span style={{ fontSize: 11, color: 'var(--ink-3)', flexShrink: 0, whiteSpace: 'nowrap' }}>{tool.category}</span>
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {allVariantHits.length > 0 && (
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                              <div style={{ padding: '7px 14px 6px', fontSize: 10, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--ink-3)', background: 'var(--surface, #f9f9f9)', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <span>Presets</span>
+                                <span style={{ fontWeight: 500, letterSpacing: 0, textTransform: 'none', fontSize: 11 }}>{allVariantHits.length}</span>
+                              </div>
+                              <div style={{ overflowY: 'auto', maxHeight: 280 }}>
+                                {allVariantHits.map(v => (
+                                  <Link key={v.href} href={v.href}
+                                    onClick={() => { closeSearch(); setQuery(''); }}
+                                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: '7px 14px', textDecoration: 'none', borderBottom: '1px solid var(--border)', background: 'var(--white)', transition: 'background .1s' }}
+                                    onMouseEnter={e => (e.currentTarget.style.background = 'var(--surface, #f7f7f7)')}
+                                    onMouseLeave={e => (e.currentTarget.style.background = 'var(--white)')}
+                                  >
+                                    <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{v.variantName}</span>
+                                    <span style={{ fontSize: 11, color: 'var(--ink-3)', flexShrink: 0, whiteSpace: 'nowrap' }}>{v.toolName}</span>
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                        </div>
+                      )}
+
+                    </div>
+                  )}
+                </div>
+              </div>
 
               <div className="a3" style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 <Link href="/tools" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '12px 22px', background: 'var(--ink)', color: '#fff', borderRadius: 'var(--r-l)', fontSize: 15, fontWeight: 600, textDecoration: 'none', transition: 'background .13s' }}>

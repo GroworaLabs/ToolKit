@@ -47,7 +47,7 @@ function VariantSidebar({ tool, currentSlug }: { tool: ToolMeta; currentSlug: st
   return (
       <div style={{ padding: '16px', background: 'var(--white)', border: '1px solid var(--border)', borderRadius: 'var(--r-l)', boxShadow: 'var(--sh-xs)' }}>
         <p style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--ink-4)', marginBottom: 10 }}>
-          More variants
+          More presets
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
           {visible.map(v => (
@@ -272,7 +272,7 @@ const VariantPage: NextPage<Props> = ({ tool, variant, relatedVariantItems }) =>
           {relatedVariantItems.length > 0 && (
               <section style={{ maxWidth: 1000, margin: '48px auto 0', padding: '0 16px' }}>
                 <p style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--ink-4)', marginBottom: 14 }}>
-                  Related variants
+                  Related presets
                 </p>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
                   {relatedVariantItems.map(rv => (
