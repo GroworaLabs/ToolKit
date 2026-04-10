@@ -36,12 +36,19 @@ const VALID: Record<Base, RegExp> = {
   hex:     /^[0-9a-fA-F]*$/,
 };
 
-function toDecimal(val: string, base: Base): bigint | null {
+function toDecimal(val: string, base: Base): number | null {
   if (!val) return null;
-  try { return BigInt('0x' + parseInt(val, RADIX[base]).toString(16)); } catch { return null; }
+  const n = parseInt(val, RADIX[base]);
+  if (isNaN(n) || n < 0) return null;
+  // verify the string is actually valid for this base (parseInt is lenient)
+  if (n.toString(RADIX[base]).toUpperCase() !== val.toUpperCase().replace(/^0+(?=\w)/, '') && val !== '0') {
+    const reparsed = parseInt(val, RADIX[base]);
+    if (isNaN(reparsed)) return null;
+  }
+  return n;
 }
 
-function fromDecimal(n: bigint, base: Base): string {
+function fromDecimal(n: number, base: Base): string {
   return n.toString(RADIX[base]).toUpperCase();
 }
 
@@ -111,7 +118,7 @@ export default function NumberBaseConverterWidget() {
       return;
     }
     const n = toDecimal(raw, base);
-    if (n === null || n < 0n) return;
+    if (n === null) return;
     const next = {} as Record<Base, string>;
     for (const b of BASES) {
       next[b] = b === base ? raw.toUpperCase() : fromDecimal(n, b);
