@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
@@ -59,6 +59,11 @@ const TOOL_DATA: Record<string, () => Promise<{ faq: FaqItem[]; [key: string]: u
     'sort-lines':               () => import('@/tools/sort-lines'),
     'reverse-text':             () => import('@/tools/reverse-text'),
     'find-and-replace':         () => import('@/tools/find-and-replace'),
+    'number-base-converter':    () => import('@/tools/number-base-converter'),
+    'power-converter':          () => import('@/tools/power-converter'),
+    'torque-converter':         () => import('@/tools/torque-converter'),
+    'pace-converter':           () => import('@/tools/pace-converter'),
+    'bitrate-converter':        () => import('@/tools/bitrate-converter'),
 };
 
 const TOOL_WIDGETS: Record<string, React.ComponentType> = {
@@ -95,6 +100,11 @@ const TOOL_WIDGETS: Record<string, React.ComponentType> = {
     'sort-lines':                    dynamic(() => import('@/tools/sort-lines/component'),                    { ssr: false }) as React.ComponentType,
     'reverse-text':                  dynamic(() => import('@/tools/reverse-text/component'),                  { ssr: false }) as React.ComponentType,
     'find-and-replace':              dynamic(() => import('@/tools/find-and-replace/component'),              { ssr: false }) as React.ComponentType,
+    'number-base-converter':         dynamic(() => import('@/tools/number-base-converter/component'),         { ssr: false }) as React.ComponentType,
+    'power-converter':               dynamic(() => import('@/tools/power-converter/component'),               { ssr: false }) as React.ComponentType,
+    'torque-converter':              dynamic(() => import('@/tools/torque-converter/component'),              { ssr: false }) as React.ComponentType,
+    'pace-converter':                dynamic(() => import('@/tools/pace-converter/component'),                { ssr: false }) as React.ComponentType,
+    'bitrate-converter':             dynamic(() => import('@/tools/bitrate-converter/component'),             { ssr: false }) as React.ComponentType,
 };
 
 /* ── Password generator sidebar ────────────────────────── */
@@ -513,6 +523,7 @@ function ToolSidebar({ slug }: { slug: string }) {
     if (slug === 'sort-lines')              return <SortLinesSidebar />;
     if (slug === 'reverse-text')            return <ReverseTextSidebar />;
     if (slug === 'find-and-replace')        return <FindAndReplaceSidebar />;
+    if (SIDEBAR_INFO_LOADERS[slug])        return <GenericInfoSidebar slug={slug} />;
     return null;
 }
 
@@ -789,6 +800,23 @@ function QrSidebar() {
     );
 }
 
+const SIDEBAR_INFO_LOADERS: Record<string, () => Promise<{ label: string; value: string }[]>> = {
+    'number-base-converter': () => import('@/tools/number-base-converter').then(m => (m as any).sidebarInfo),
+    'power-converter':       () => import('@/tools/power-converter').then(m => (m as any).sidebarInfo),
+    'torque-converter':      () => import('@/tools/torque-converter').then(m => (m as any).sidebarInfo),
+    'pace-converter':        () => import('@/tools/pace-converter').then(m => (m as any).sidebarInfo),
+    'bitrate-converter':     () => import('@/tools/bitrate-converter').then(m => (m as any).sidebarInfo),
+};
+
+function GenericInfoSidebar({ slug }: { slug: string }) {
+    const [items, setItems] = useState<{ label: string; value: string }[] | null>(null);
+    useEffect(() => {
+        SIDEBAR_INFO_LOADERS[slug]?.().then(setItems);
+    }, [slug]);
+    if (!items) return null;
+    return <InfoSidebar items={items} />;
+}
+
 /* ── Page ─────────────────────────────────────────────── */
 interface Props { tool: ToolMeta; }
 
@@ -1053,6 +1081,11 @@ const TOOL_CONTENT: Record<string, React.ComponentType> = {
     'sort-lines':                    dynamic(() => import('@/tools/sort-lines/content'),                    { ssr: false }) as React.ComponentType,
     'reverse-text':                  dynamic(() => import('@/tools/reverse-text/content'),                  { ssr: false }) as React.ComponentType,
     'find-and-replace':              dynamic(() => import('@/tools/find-and-replace/content'),              { ssr: false }) as React.ComponentType,
+    'number-base-converter':         dynamic(() => import('@/tools/number-base-converter/content'),         { ssr: false }) as React.ComponentType,
+    'power-converter':               dynamic(() => import('@/tools/power-converter/content'),               { ssr: false }) as React.ComponentType,
+    'torque-converter':              dynamic(() => import('@/tools/torque-converter/content'),              { ssr: false }) as React.ComponentType,
+    'pace-converter':                dynamic(() => import('@/tools/pace-converter/content'),                { ssr: false }) as React.ComponentType,
+    'bitrate-converter':             dynamic(() => import('@/tools/bitrate-converter/content'),             { ssr: false }) as React.ComponentType,
 };
 
 function ToolContent({ slug }: { slug: string }) {

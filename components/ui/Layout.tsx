@@ -1,7 +1,9 @@
 import type { ReactNode } from 'react';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { getLiveTools } from '@/lib/registry';
+import type { ToolMeta } from '@/lib/types';
 
 export function Logo() {
     return (
@@ -20,9 +22,46 @@ const CATEGORIES = [
 
 interface LayoutProps { children: ReactNode; activeNav?: 'home' | 'tools'; }
 
+interface VariantHit { variantName: string; toolName: string; href: string; }
+
 export function Layout({ children, activeNav }: LayoutProps) {
-    const router = useRouter();
-    const [open, setOpen] = useState(false);
+    const router     = useRouter();
+    const liveTools  = getLiveTools();
+    const [open, setOpen]           = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchOpen, setSearchOpen]   = useState(false);
+    const searchRef  = useRef<HTMLDivElement>(null);
+
+    const q = searchQuery.trim().toLowerCase();
+
+    const allToolHits: ToolMeta[] = q ? [
+        ...liveTools.filter(t => t.name.toLowerCase().includes(q)),
+        ...liveTools.filter(t => !t.name.toLowerCase().includes(q) && (
+            t.tagline.toLowerCase().includes(q) || t.category.toLowerCase().includes(q)
+        )),
+    ] : [];
+
+    const allVariantHits: VariantHit[] = q ? liveTools.flatMap(t =>
+        (t.variants ?? [])
+            .filter(v => v.seoH1.toLowerCase().includes(q))
+            .map(v => ({ variantName: v.seoH1, toolName: t.name, href: `/tools/${t.slug}/${v.slug}` }))
+    ) : [];
+
+    const hasResults = allToolHits.length > 0 || allVariantHits.length > 0;
+    const bothCols   = allToolHits.length > 0 && allVariantHits.length > 0;
+
+    useEffect(() => {
+        const handler = (e: MouseEvent) => {
+            if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+                setSearchOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handler);
+        return () => document.removeEventListener('mousedown', handler);
+    }, []);
+
+    // Close search on route change
+    useEffect(() => { setSearchOpen(false); setSearchQuery(''); }, [router.pathname]);
 
     const isActive = (href: string) => {
         if (activeNav === 'home'  && href === '/') return true;
@@ -47,6 +86,83 @@ export function Layout({ children, activeNav }: LayoutProps) {
                             <Link key={href} href={href} className={`nav-pill${isActive(href) ? ' on' : ''}`} style={{ fontSize: 12 }}>{label}</Link>
                         ))}
                     </nav>
+
+                    {/* Desktop search */}
+                    <div className="header-search" ref={searchRef} style={{ position: 'relative', flex: '0 0 auto' }}>
+                        <svg style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--ink-3)', pointerEvents: 'none' }} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        <input
+                            type="search"
+                            value={searchQuery}
+                            onChange={e => { setSearchQuery(e.target.value); setSearchOpen(true); }}
+                            placeholder="Search tools…"
+                            autoComplete="off"
+                            style={{ width: 200, padding: '6px 10px 6px 32px', fontSize: 13, border: '1px solid var(--border)', borderRadius: 8, background: 'var(--white)', color: 'var(--ink)', outline: 'none', transition: 'border-color .15s', display: 'block' }}
+                            onFocus={e => { setSearchOpen(true); e.currentTarget.style.borderColor = 'var(--ink-3)'; }}
+                            onBlur={e => (e.currentTarget.style.borderColor = 'var(--border)')}
+                        />
+
+                        {/* Dropdown — detached panel below header */}
+                        {searchOpen && q && (
+                            <div style={{ position: 'absolute', top: 'calc(100% + 8px)', right: 0, width: 'max-content', minWidth: bothCols ? 480 : 240, maxWidth: 'min(860px, 90vw)', background: 'var(--white)', border: '1px solid var(--border)', borderRadius: 12, boxShadow: '0 4px 6px -2px rgba(0,0,0,.05), 0 16px 40px -8px rgba(0,0,0,.12)', zIndex: 200, overflow: 'hidden' }}>
+
+                                {!hasResults ? (
+                                    <div style={{ padding: '14px 16px', fontSize: 13, color: 'var(--ink-3)' }}>
+                                        Nothing found for "<strong style={{ color: 'var(--ink)', fontWeight: 600 }}>{searchQuery}</strong>"
+                                    </div>
+                                ) : (
+                                    <div style={{ display: 'grid', gridTemplateColumns: bothCols ? '1fr 1fr' : '1fr' }}>
+
+                                        {allToolHits.length > 0 && (
+                                            <div style={{ borderRight: bothCols ? '1px solid var(--border)' : 'none', display: 'flex', flexDirection: 'column' }}>
+                                                <div style={{ padding: '8px 14px 7px', fontSize: 10, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--ink-3)', background: 'var(--surface, #f9f9f9)', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                    <span>Tools</span>
+                                                    <span style={{ fontWeight: 500, letterSpacing: 0, textTransform: 'none', fontSize: 11 }}>{allToolHits.length}</span>
+                                                </div>
+                                                <div style={{ overflowY: 'auto', maxHeight: 320 }}>
+                                                    {allToolHits.map(tool => (
+                                                        <Link key={tool.slug} href={`/tools/${tool.slug}`}
+                                                            onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
+                                                            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, padding: '8px 14px', textDecoration: 'none', borderBottom: '1px solid var(--border)', background: 'var(--white)', transition: 'background .1s' }}
+                                                            onMouseEnter={e => (e.currentTarget.style.background = 'var(--surface, #f7f7f7)')}
+                                                            onMouseLeave={e => (e.currentTarget.style.background = 'var(--white)')}
+                                                        >
+                                                            <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', whiteSpace: 'nowrap' }}>{tool.name}</span>
+                                                            <span style={{ fontSize: 11, color: 'var(--ink-3)', flexShrink: 0, background: 'var(--border)', borderRadius: 99, padding: '1px 7px', whiteSpace: 'nowrap' }}>{tool.category}</span>
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {allVariantHits.length > 0 && (
+                                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                <div style={{ padding: '8px 14px 7px', fontSize: 10, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--ink-3)', background: 'var(--surface, #f9f9f9)', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                    <span>Presets</span>
+                                                    <span style={{ fontWeight: 500, letterSpacing: 0, textTransform: 'none', fontSize: 11 }}>{allVariantHits.length}</span>
+                                                </div>
+                                                <div style={{ overflowY: 'auto', maxHeight: 320 }}>
+                                                    {allVariantHits.map(v => (
+                                                        <Link key={v.href} href={v.href}
+                                                            onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
+                                                            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, padding: '8px 14px', textDecoration: 'none', borderBottom: '1px solid var(--border)', background: 'var(--white)', transition: 'background .1s' }}
+                                                            onMouseEnter={e => (e.currentTarget.style.background = 'var(--surface, #f7f7f7)')}
+                                                            onMouseLeave={e => (e.currentTarget.style.background = 'var(--white)')}
+                                                        >
+                                                            <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', whiteSpace: 'nowrap' }}>{v.variantName}</span>
+                                                            <span style={{ fontSize: 11, color: 'var(--ink-3)', flexShrink: 0, whiteSpace: 'nowrap' }}>{v.toolName}</span>
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
 
                     {/* Hamburger — proper X animation */}
                     <button

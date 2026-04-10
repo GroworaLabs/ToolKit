@@ -74,11 +74,13 @@ html, body { overflow-x: hidden; }
 }
 
 /* ─── Desktop nav / hamburger visibility ───── */
-.desktop-nav { display: none; align-items: center; gap: 2px; }
-.ham         { display: flex; }
+.desktop-nav   { display: none; align-items: center; gap: 2px; }
+.ham           { display: flex; }
+.header-search { display: none; }
 @media (min-width: 640px) {
-  .desktop-nav { display: flex; }
-  .ham         { display: none !important; }
+  .desktop-nav   { display: flex; }
+  .ham           { display: none !important; }
+  .header-search { display: flex; align-items: center; }
 }
 
 /* ─── Tool page 2-col grid ───────────────────── */

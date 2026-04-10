@@ -42,6 +42,11 @@ export const IcoDedup    = ({ size = 16 }: IconProps) => <svg width={size} heigh
 export const IcoSort     = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="9" y2="18"/><polyline points="18 9 21 6 18 3"/><line x1="21" y1="6" x2="21" y2="18"/><polyline points="18 15 21 18 18 21"/></svg>;
 export const IcoFlip     = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/><line x1="12" y1="5" x2="12" y2="19"/></svg>;
 export const IcoFindReplace = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="10" cy="10" r="7"/><line x1="15.5" y1="15.5" x2="22" y2="22"/><path d="M8 10h4"/><path d="M10 8v4"/></svg>;
+export const IcoBinary    = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="4" height="4" rx="1"/><rect x="10" y="4" width="4" height="4" rx="1" fill="currentColor" stroke="none"/><rect x="3" y="11" width="4" height="4" rx="1" fill="currentColor" stroke="none"/><rect x="10" y="11" width="4" height="4" rx="1"/><polyline points="19 8 22 11 19 14"/><line x1="14" y1="11" x2="22" y2="11"/></svg>;
+export const IcoPowerBtn  = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18.36 6.64a9 9 0 11-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>;
+export const IcoWrench    = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>;
+export const IcoStopwatch = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="13" r="8"/><polyline points="12 9 12 13 15 13"/><path d="M9 2h6"/><line x1="12" y1="2" x2="12" y2="5"/></svg>;
+export const IcoSignal    = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1.5 8.5a13 13 0 0121 0"/><path d="M5 12a9 9 0 0114 0"/><path d="M8.5 15.5a5 5 0 017 0"/><circle cx="12" cy="19" r="1.5" fill="currentColor" stroke="none"/></svg>;
 
 /* ── Map: tool slug → icon component ─────────────────── */
 import type { ComponentType } from 'react';
@@ -80,4 +85,9 @@ export const TOOL_ICONS: Record<string, ComponentType<IconProps>> = {
   'sort-lines':                IcoSort,
   'reverse-text':              IcoFlip,
   'find-and-replace':          IcoFindReplace,
+  'number-base-converter':     IcoBinary,
+  'power-converter':           IcoPowerBtn,
+  'torque-converter':          IcoWrench,
+  'pace-converter':            IcoStopwatch,
+  'bitrate-converter':         IcoSignal,
 };
