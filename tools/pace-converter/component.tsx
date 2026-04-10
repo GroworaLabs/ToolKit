@@ -57,8 +57,8 @@ interface FieldRowProps {
 function FieldRow({ label, hint, value, active, onChange }: FieldRowProps) {
   const [focused, setFocused] = useState(false);
   return (
-    <div style={{ padding: '12px 0', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 12 }}>
-      <label style={{ width: 140, flexShrink: 0, fontSize: 13, fontWeight: 600, color: active ? 'var(--green)' : 'var(--ink)' }}>
+    <div className="conv-row" style={{ padding: '12px 0' }}>
+      <label className="conv-row-label" style={{ width: 140, fontSize: 13, fontWeight: 600, color: active ? 'var(--green)' : 'var(--ink)' }}>
         {label}
       </label>
       <input

@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { Layout } from '@/components/ui/Layout';
 import { FaqSection } from '@/components/ui/FaqSection';
 import { ToolCard } from '@/components/ui/ToolCard';
-import { getBySlug, getLiveSlugs, TOOLS } from '@/lib/registry';
+import { getBySlug, getLiveSlugs, TOOLS, CATEGORY_SLUGS } from '@/lib/registry';
 import type { ToolMeta, FaqItem } from '@/lib/types';
 
 /* ── Static paths — only live tools get pages ─────────── */
@@ -820,13 +820,6 @@ function GenericInfoSidebar({ slug }: { slug: string }) {
 /* ── Page ─────────────────────────────────────────────── */
 interface Props { tool: ToolMeta; }
 
-const CATEGORY_SLUGS: Record<string, string> = {
-    'Security':        '/tools/security',
-    'Developer Tools': '/tools/developer',
-    'Text & Writing':  '/tools/text',
-    'Design':          '/tools/design',
-    'Value Converter': '/tools/value-converter',
-};
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.webtoolkit.tech';
 

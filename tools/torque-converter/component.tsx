@@ -30,8 +30,8 @@ function Row({ unit, value, active, onChange }: {
 }) {
   const [focused, setFocused] = useState(false);
   return (
-    <div style={{ padding: '10px 0', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 12 }}>
-      <label style={{ width: 240, flexShrink: 0, fontSize: 13, fontWeight: 600, color: active ? 'var(--green)' : 'var(--ink)', cursor: 'pointer' }}>
+    <div className="conv-row">
+      <label className="conv-row-label" style={{ width: 240, fontSize: 13, fontWeight: 600, color: active ? 'var(--green)' : 'var(--ink)', cursor: 'pointer' }}>
         {UNIT_DEFS[unit].label}
       </label>
       <input

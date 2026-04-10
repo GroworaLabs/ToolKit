@@ -1289,6 +1289,26 @@ export const TOOLS: ToolMeta[] = [
 ];
 
 /* ── Helpers ──────────────────────────────────────────── */
+export const CATEGORY_SLUGS: Record<string, string> = {
+  'Security':        '/tools/security',
+  'Developer Tools': '/tools/developer',
+  'Text & Writing':  '/tools/text',
+  'Design':          '/tools/design',
+  'Value Converter': '/tools/value-converter',
+};
+
+export const getCategories = (): { href: string; label: string }[] => {
+  const seen = new Set<string>();
+  const result: { href: string; label: string }[] = [];
+  for (const tool of TOOLS.filter(t => t.live)) {
+    if (!seen.has(tool.category) && CATEGORY_SLUGS[tool.category]) {
+      seen.add(tool.category);
+      result.push({ href: CATEGORY_SLUGS[tool.category], label: tool.category });
+    }
+  }
+  return result;
+};
+
 export const getLiveTools  = () => TOOLS.filter(t => t.live);
 export const getSoonTools  = () => TOOLS.filter(t => !t.live);
 export const getFeatured   = () => TOOLS.find(t => t.featured);

@@ -68,8 +68,8 @@ function Row({ base, value, active, onChange }: RowProps) {
   };
 
   return (
-    <div style={{ padding: '12px 0', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 12 }}>
-      <div style={{ width: 160, flexShrink: 0 }}>
+    <div className="conv-row" style={{ padding: '12px 0' }}>
+      <div className="conv-row-label" style={{ width: 160 }}>
         <div style={{ fontSize: 13, fontWeight: 600, color: active ? 'var(--green)' : 'var(--ink)', transition: 'color .15s' }}>
           {LABELS[base]}
         </div>
