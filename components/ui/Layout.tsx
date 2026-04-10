@@ -187,6 +187,7 @@ export function Layout({ children, activeNav }: LayoutProps) {
                     </div>
                 </div>
             </footer>
+
         </div>
     );
 }
