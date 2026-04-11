@@ -69,6 +69,11 @@ const TOOL_DATA: Record<string, () => Promise<{ faq: FaqItem[]; [key: string]: u
     'css-unit-converter': () => import('@/tools/css-unit-converter'),
     'html-entities':      () => import('@/tools/html-entities'),
     'semver-comparator':  () => import('@/tools/semver-comparator'),
+    'text-repeater':      () => import('@/tools/text-repeater'),
+    'remove-whitespace':  () => import('@/tools/remove-whitespace'),
+    'text-to-morse':      () => import('@/tools/text-to-morse'),
+    'nato-alphabet':      () => import('@/tools/nato-alphabet'),
+    'rot13-encoder':      () => import('@/tools/rot13-encoder'),
 };
 
 const TOOL_WIDGETS: Record<string, React.ComponentType> = {
@@ -115,6 +120,11 @@ const TOOL_WIDGETS: Record<string, React.ComponentType> = {
     'css-unit-converter': dynamic(() => import('@/tools/css-unit-converter/component'), { ssr: false }) as React.ComponentType,
     'html-entities':      dynamic(() => import('@/tools/html-entities/component'),      { ssr: false }) as React.ComponentType,
     'semver-comparator':  dynamic(() => import('@/tools/semver-comparator/component'),  { ssr: false }) as React.ComponentType,
+    'text-repeater':      dynamic(() => import('@/tools/text-repeater/component'),      { ssr: false }) as React.ComponentType,
+    'remove-whitespace':  dynamic(() => import('@/tools/remove-whitespace/component'),  { ssr: false }) as React.ComponentType,
+    'text-to-morse':      dynamic(() => import('@/tools/text-to-morse/component'),      { ssr: false }) as React.ComponentType,
+    'nato-alphabet':      dynamic(() => import('@/tools/nato-alphabet/component'),      { ssr: false }) as React.ComponentType,
+    'rot13-encoder':      dynamic(() => import('@/tools/rot13-encoder/component'),      { ssr: false }) as React.ComponentType,
 };
 
 /* ── Password generator sidebar ────────────────────────── */
@@ -626,6 +636,124 @@ function SemverComparatorSidebar() {
     );
 }
 
+/* ── Text Repeater sidebar ──────────────────────────────── */
+const TextRepeaterSidebar = dynamic(
+    () => import('@/tools/text-repeater').then(m => {
+        const { useCases } = m as { useCases: { label: string; desc: string }[] };
+        return function Sidebar() {
+            return (
+                <div className="tool-sidebar">
+                    <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 16 }}>Use cases</p>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        {useCases.map(({ label, desc }) => (
+                            <div key={label} style={{ padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
+                                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 2 }}>{label}</div>
+                                <div style={{ fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.5 }}>{desc}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+    }), { ssr: false }
+) as React.ComponentType;
+
+/* ── Remove Whitespace sidebar ──────────────────────────── */
+const RemoveWhitespaceSidebar = dynamic(
+    () => import('@/tools/remove-whitespace').then(m => {
+        const { operationGuide } = m as { operationGuide: { label: string; desc: string }[] };
+        return function Sidebar() {
+            return (
+                <div className="tool-sidebar">
+                    <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 16 }}>Operations</p>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        {operationGuide.map(({ label, desc }) => (
+                            <div key={label} style={{ padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
+                                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 2 }}>{label}</div>
+                                <div style={{ fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.5 }}>{desc}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+    }), { ssr: false }
+) as React.ComponentType;
+
+/* ── Text-to-Morse sidebar ──────────────────────────────── */
+const TextToMorseSidebar = dynamic(
+    () => import('@/tools/text-to-morse').then(m => {
+        const { morseReference } = m as { morseReference: { char: string; code: string }[] };
+        return function Sidebar() {
+            return (
+                <div className="tool-sidebar">
+                    <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 14 }}>Morse reference (A–M)</p>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        {morseReference.map(({ char, code }) => (
+                            <div key={char} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '7px 0', borderBottom: '1px solid var(--border)' }}>
+                                <span style={{ fontFamily: 'JetBrains Mono, monospace', fontWeight: 700, fontSize: 14, color: 'var(--ink)', minWidth: 14 }}>{char}</span>
+                                <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 14, color: 'var(--green)', letterSpacing: 2 }}>{code}</span>
+                            </div>
+                        ))}
+                    </div>
+                    <div style={{ marginTop: 14, padding: '10px 12px', background: 'var(--page-bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-m)' }}>
+                        <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--ink-3)', marginBottom: 4 }}>FORMAT</div>
+                        <div style={{ fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.5 }}>Letters separated by space, words by " / "</div>
+                    </div>
+                </div>
+            );
+        };
+    }), { ssr: false }
+) as React.ComponentType;
+
+/* ── NATO Alphabet sidebar ──────────────────────────────── */
+const NatoAlphabetSidebar = dynamic(
+    () => import('@/tools/nato-alphabet').then(m => {
+        const { natoTable } = m as { natoTable: { letter: string; word: string; phonetic: string }[] };
+        return function Sidebar() {
+            return (
+                <div className="tool-sidebar">
+                    <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 14 }}>Quick reference (A–M)</p>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        {natoTable.map(({ letter, word, phonetic }) => (
+                            <div key={letter} style={{ display: 'flex', alignItems: 'baseline', gap: 8, padding: '8px 0', borderBottom: '1px solid var(--border)' }}>
+                                <span style={{ fontFamily: 'JetBrains Mono, monospace', fontWeight: 700, fontSize: 13, color: 'var(--green)', minWidth: 14 }}>{letter}</span>
+                                <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', minWidth: 64 }}>{word}</span>
+                                <span style={{ fontSize: 11, color: 'var(--ink-4)', fontStyle: 'italic' }}>{phonetic}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+    }), { ssr: false }
+) as React.ComponentType;
+
+/* ── ROT13 sidebar ──────────────────────────────────────── */
+const Rot13Sidebar = dynamic(
+    () => import('@/tools/rot13-encoder').then(m => {
+        const { cipherComparison } = m as { cipherComparison: { cipher: string; key: string; security: string; use: string }[] };
+        return function Sidebar() {
+            return (
+                <div className="tool-sidebar">
+                    <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 14 }}>Cipher comparison</p>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        {cipherComparison.map(({ cipher, key, security, use }) => (
+                            <div key={cipher} style={{ padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                                    <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, fontWeight: 700, color: cipher === 'ROT13' ? 'var(--green)' : 'var(--ink)', background: cipher === 'ROT13' ? 'var(--green-lt)' : 'var(--border)', padding: '1px 6px', borderRadius: 4 }}>{cipher}</span>
+                                    <span style={{ fontSize: 11, color: 'var(--ink-4)' }}>{security}</span>
+                                </div>
+                                <div style={{ fontSize: 11, color: 'var(--ink-3)', lineHeight: 1.4 }}>{use}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+    }), { ssr: false }
+) as React.ComponentType;
+
 /* ── Sidebar router ────────────────────────────────────── */
 function ToolSidebar({ slug }: { slug: string }) {
     if (slug === 'password-generator') return <PasswordGeneratorSidebar />;
@@ -661,6 +789,11 @@ function ToolSidebar({ slug }: { slug: string }) {
     if (slug === 'css-unit-converter') return <CssUnitConverterSidebar />;
     if (slug === 'html-entities')      return <HtmlEntitiesSidebar />;
     if (slug === 'semver-comparator')  return <SemverComparatorSidebar />;
+    if (slug === 'text-repeater')      return <TextRepeaterSidebar />;
+    if (slug === 'remove-whitespace')  return <RemoveWhitespaceSidebar />;
+    if (slug === 'text-to-morse')      return <TextToMorseSidebar />;
+    if (slug === 'nato-alphabet')      return <NatoAlphabetSidebar />;
+    if (slug === 'rot13-encoder')      return <Rot13Sidebar />;
     if (SIDEBAR_INFO_LOADERS[slug])        return <GenericInfoSidebar slug={slug} />;
     return null;
 }
@@ -1222,6 +1355,11 @@ const TOOL_CONTENT: Record<string, React.ComponentType> = {
     'css-unit-converter': dynamic(() => import('@/tools/css-unit-converter/content'), { ssr: false }) as React.ComponentType,
     'html-entities':      dynamic(() => import('@/tools/html-entities/content'),      { ssr: false }) as React.ComponentType,
     'semver-comparator':  dynamic(() => import('@/tools/semver-comparator/content'),  { ssr: false }) as React.ComponentType,
+    'text-repeater':      dynamic(() => import('@/tools/text-repeater/content'),      { ssr: false }) as React.ComponentType,
+    'remove-whitespace':  dynamic(() => import('@/tools/remove-whitespace/content'),  { ssr: false }) as React.ComponentType,
+    'text-to-morse':      dynamic(() => import('@/tools/text-to-morse/content'),      { ssr: false }) as React.ComponentType,
+    'nato-alphabet':      dynamic(() => import('@/tools/nato-alphabet/content'),      { ssr: false }) as React.ComponentType,
+    'rot13-encoder':      dynamic(() => import('@/tools/rot13-encoder/content'),      { ssr: false }) as React.ComponentType,
 };
 
 function ToolContent({ slug }: { slug: string }) {
