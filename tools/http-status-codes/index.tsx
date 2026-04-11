@@ -1,0 +1,21 @@
+import { FaqItem } from '@/lib/types';
+
+export const faq: FaqItem[] = [
+    { q: 'What are HTTP status codes?', a: 'HTTP status codes are three-digit numbers returned by a web server in response to a client\'s request. The first digit indicates the response category: 1xx (informational), 2xx (success), 3xx (redirection), 4xx (client error), and 5xx (server error). They are defined in RFC 9110 (HTTP Semantics).' },
+    { q: 'What is the difference between 301 and 302?', a: '301 Moved Permanently tells clients the resource has moved to a new URL forever — browsers and search engines update their caches, and future requests go directly to the new URL. 302 Found is a temporary redirect; browsers redirect the user but keep the original URL in cache. Use 301 for SEO-safe permanent redirects, 302 for temporary ones (e.g. during maintenance).' },
+    { q: 'What is the difference between 401 and 403?', a: '401 Unauthorized means the client must authenticate — the request lacks valid credentials or the provided credentials are wrong. 403 Forbidden means the server understood the request and the client may be authenticated, but does not have permission to access the resource. In practice: 401 = "you need to log in", 403 = "you\'re logged in but not allowed".' },
+    { q: 'When should I return 400 vs 422?', a: '400 Bad Request is appropriate when the request itself is malformed — wrong content type, missing required header, unparseable body. 422 Unprocessable Content (formerly Unprocessable Entity) is for well-formed requests that fail validation — correct JSON but a required field is missing or a value fails a business rule. REST APIs increasingly use 422 for validation errors with a structured error body.' },
+    { q: 'What does 204 No Content mean?', a: '204 No Content means the request succeeded but there is no response body to return. It is used for DELETE operations (resource deleted, nothing to return), PUT or PATCH operations when the update was applied silently, and OPTIONS requests in CORS preflight. Unlike 200, a 204 response must not include a message body.' },
+    { q: 'What is a 429 error?', a: '429 Too Many Requests indicates rate limiting — the client has exceeded the allowed number of requests in a given time window. APIs typically return a Retry-After header indicating how many seconds to wait before retrying. Proper clients implement exponential backoff when receiving 429 responses.' },
+    { q: 'What is the 418 I\'m a Teapot status?', a: '418 I\'m a Teapot was defined as an April Fools\' joke in RFC 2324 (Hyper Text Coffee Pot Control Protocol, 1998). Despite being a joke, it was preserved in later HTTP RFCs to avoid breaking existing implementations. Some developers return 418 for endpoints that intentionally refuse a request for humorous reasons. It has no practical HTTP protocol meaning.' },
+    { q: 'What is the difference between 502 and 503?', a: '502 Bad Gateway means the server acting as a proxy or gateway received an invalid response from an upstream server — the origin server is down, crashed, or returned garbage. 503 Service Unavailable means the server is temporarily unable to handle requests — typically due to maintenance or overload. 503 usually includes a Retry-After header; 502 does not.' },
+    { q: 'Should I return 200 with an error body or use an error status code?', a: 'Always use a proper error status code. Returning 200 OK with {"error": "not found"} in the body is an anti-pattern called "200 with error body" or "error masking". It breaks HTTP semantics, makes logs useless, confuses monitoring systems, and forces every client to parse the body before knowing if the request succeeded. Use 4xx for client errors and 5xx for server errors.' },
+];
+
+export const sidebarInfo = [
+    { label: '1xx Informational', desc: 'Request received, processing continues'         },
+    { label: '2xx Success',       desc: 'Request successfully received and processed'    },
+    { label: '3xx Redirection',   desc: 'Further action needed to complete the request'  },
+    { label: '4xx Client Error',  desc: 'Request contains bad syntax or cannot be filled' },
+    { label: '5xx Server Error',  desc: 'Server failed to fulfill a valid request'        },
+];

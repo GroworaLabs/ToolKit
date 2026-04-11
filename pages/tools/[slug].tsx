@@ -64,6 +64,11 @@ const TOOL_DATA: Record<string, () => Promise<{ faq: FaqItem[]; [key: string]: u
     'torque-converter':         () => import('@/tools/torque-converter'),
     'pace-converter':           () => import('@/tools/pace-converter'),
     'bitrate-converter':        () => import('@/tools/bitrate-converter'),
+    'json-to-yaml':       () => import('@/tools/json-to-yaml'),
+    'http-status-codes':  () => import('@/tools/http-status-codes'),
+    'css-unit-converter': () => import('@/tools/css-unit-converter'),
+    'html-entities':      () => import('@/tools/html-entities'),
+    'semver-comparator':  () => import('@/tools/semver-comparator'),
 };
 
 const TOOL_WIDGETS: Record<string, React.ComponentType> = {
@@ -105,6 +110,11 @@ const TOOL_WIDGETS: Record<string, React.ComponentType> = {
     'torque-converter':              dynamic(() => import('@/tools/torque-converter/component'),              { ssr: false }) as React.ComponentType,
     'pace-converter':                dynamic(() => import('@/tools/pace-converter/component'),                { ssr: false }) as React.ComponentType,
     'bitrate-converter':             dynamic(() => import('@/tools/bitrate-converter/component'),             { ssr: false }) as React.ComponentType,
+    'json-to-yaml':       dynamic(() => import('@/tools/json-to-yaml/component'),       { ssr: false }) as React.ComponentType,
+    'http-status-codes':  dynamic(() => import('@/tools/http-status-codes/component'),  { ssr: false }) as React.ComponentType,
+    'css-unit-converter': dynamic(() => import('@/tools/css-unit-converter/component'), { ssr: false }) as React.ComponentType,
+    'html-entities':      dynamic(() => import('@/tools/html-entities/component'),      { ssr: false }) as React.ComponentType,
+    'semver-comparator':  dynamic(() => import('@/tools/semver-comparator/component'),  { ssr: false }) as React.ComponentType,
 };
 
 /* ── Password generator sidebar ────────────────────────── */
@@ -493,6 +503,129 @@ const FindAndReplaceSidebar = dynamic(
     }), { ssr: false }
 ) as React.ComponentType;
 
+/* ── JSON-to-YAML sidebar ───────────────────────────────── */
+function JsonToYamlSidebar() {
+    return (
+        <div className="tool-sidebar">
+            <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 16 }}>Key YAML rules</p>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {[
+                    { label: 'Indentation',  desc: 'Use 2 spaces per level — tabs are not allowed in YAML' },
+                    { label: 'Comments',     desc: 'Lines starting with # are ignored by YAML parsers'      },
+                    { label: 'Booleans',     desc: 'true/false/yes/no/on/off — quote them if you mean strings' },
+                    { label: 'Null values',  desc: 'null and ~ both mean null in YAML'                       },
+                    { label: 'Multiline',    desc: '| preserves newlines, > folds them into spaces'          },
+                ].map(({ label, desc }) => (
+                    <div key={label} style={{ padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
+                        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 2 }}>{label}</div>
+                        <div style={{ fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.5 }}>{desc}</div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+/* ── HTTP Status Codes sidebar ──────────────────────────── */
+function HttpStatusCodesSidebar() {
+    return (
+        <div className="tool-sidebar">
+            <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 16 }}>Status categories</p>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {[
+                    { cat: '1xx', label: 'Informational', color: '#6b7280', bg: 'rgba(107,114,128,.1)',  desc: 'Request received, processing continues' },
+                    { cat: '2xx', label: 'Success',       color: 'var(--green)', bg: 'var(--green-lt)',  desc: 'Request successfully received and processed' },
+                    { cat: '3xx', label: 'Redirection',   color: '#2563eb', bg: 'var(--blue-lt)',        desc: 'Further action needed to complete the request' },
+                    { cat: '4xx', label: 'Client Error',  color: '#b45309', bg: 'rgba(245,158,11,.1)',   desc: 'Request contains bad syntax or cannot be filled' },
+                    { cat: '5xx', label: 'Server Error',  color: 'var(--red)', bg: 'var(--red-lt)',      desc: 'Server failed to fulfill a valid request' },
+                ].map(({ cat, label, color, bg, desc }) => (
+                    <div key={cat} style={{ padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
+                            <span style={{ fontSize: 12, fontWeight: 700, padding: '1px 7px', borderRadius: 99, background: bg, color }}>{cat}</span>
+                            <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)' }}>{label}</span>
+                        </div>
+                        <div style={{ fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.5 }}>{desc}</div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+/* ── CSS Unit Converter sidebar ─────────────────────────── */
+function CssUnitConverterSidebar() {
+    return (
+        <div className="tool-sidebar">
+            <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 14 }}>Common base values</p>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {[
+                    { label: '1rem (default)', value: '16px'     },
+                    { label: '1pt',            value: '1.333px'  },
+                    { label: '1cm',            value: '37.795px' },
+                    { label: '1in',            value: '96px'     },
+                    { label: '1vw @ 1440px',   value: '14.4px'   },
+                    { label: '1vh @ 900px',    value: '9px'      },
+                ].map(({ label, value }) => (
+                    <div key={label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '9px 0', borderBottom: '1px solid var(--border)' }}>
+                        <span style={{ fontSize: 13, color: 'var(--ink-2)' }}>{label}</span>
+                        <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, fontWeight: 600, color: 'var(--ink)', background: 'var(--border)', padding: '2px 8px', borderRadius: 'var(--r-s)' }}>{value}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+/* ── HTML Entities sidebar ──────────────────────────────── */
+function HtmlEntitiesSidebar() {
+    return (
+        <div className="tool-sidebar">
+            <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 14 }}>Quick reference</p>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {[
+                    { entity: '&amp;',   char: '&',    desc: 'Ampersand'          },
+                    { entity: '&lt;',    char: '<',    desc: 'Less-than'          },
+                    { entity: '&gt;',    char: '>',    desc: 'Greater-than'       },
+                    { entity: '&quot;',  char: '"',    desc: 'Quotation mark'     },
+                    { entity: '&apos;',  char: "'",    desc: 'Apostrophe'         },
+                    { entity: '&nbsp;',  char: '⎵',   desc: 'Non-breaking space' },
+                    { entity: '&copy;',  char: '©',   desc: 'Copyright'          },
+                    { entity: '&mdash;', char: '—',   desc: 'Em dash'            },
+                ].map(({ entity, char, desc }) => (
+                    <div key={entity} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 0', borderBottom: '1px solid var(--border)' }}>
+                        <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'var(--green)', background: 'var(--green-lt)', padding: '1px 5px', borderRadius: 3, minWidth: 72, flexShrink: 0 }}>{entity}</code>
+                        <span style={{ fontWeight: 700, fontSize: 13, color: 'var(--ink)', minWidth: 18 }}>{char}</span>
+                        <span style={{ fontSize: 11, color: 'var(--ink-4)' }}>{desc}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+/* ── Semver Comparator sidebar ──────────────────────────── */
+function SemverComparatorSidebar() {
+    return (
+        <div className="tool-sidebar">
+            <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 14 }}>Range operators</p>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {[
+                    { op: '^1.2.3',  desc: '>=1.2.3 <2.0.0 — minor+patch'  },
+                    { op: '~1.2.3',  desc: '>=1.2.3 <1.3.0 — patch only'   },
+                    { op: '>=1.2.3', desc: 'Any version at or above'         },
+                    { op: '1.x',     desc: '>=1.0.0 <2.0.0 — wildcard'      },
+                    { op: '*',       desc: 'Any version (use with caution)'   },
+                ].map(({ op, desc }) => (
+                    <div key={op} style={{ display: 'flex', alignItems: 'baseline', gap: 10, padding: '8px 0', borderBottom: '1px solid var(--border)' }}>
+                        <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, color: 'var(--green)', background: 'var(--green-lt)', padding: '1px 6px', borderRadius: 4, flexShrink: 0, minWidth: 72 }}>{op}</code>
+                        <span style={{ fontSize: 12, color: 'var(--ink-3)' }}>{desc}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
 /* ── Sidebar router ────────────────────────────────────── */
 function ToolSidebar({ slug }: { slug: string }) {
     if (slug === 'password-generator') return <PasswordGeneratorSidebar />;
@@ -523,6 +656,11 @@ function ToolSidebar({ slug }: { slug: string }) {
     if (slug === 'sort-lines')              return <SortLinesSidebar />;
     if (slug === 'reverse-text')            return <ReverseTextSidebar />;
     if (slug === 'find-and-replace')        return <FindAndReplaceSidebar />;
+    if (slug === 'json-to-yaml')       return <JsonToYamlSidebar />;
+    if (slug === 'http-status-codes')  return <HttpStatusCodesSidebar />;
+    if (slug === 'css-unit-converter') return <CssUnitConverterSidebar />;
+    if (slug === 'html-entities')      return <HtmlEntitiesSidebar />;
+    if (slug === 'semver-comparator')  return <SemverComparatorSidebar />;
     if (SIDEBAR_INFO_LOADERS[slug])        return <GenericInfoSidebar slug={slug} />;
     return null;
 }
@@ -1079,6 +1217,11 @@ const TOOL_CONTENT: Record<string, React.ComponentType> = {
     'torque-converter':              dynamic(() => import('@/tools/torque-converter/content'),              { ssr: false }) as React.ComponentType,
     'pace-converter':                dynamic(() => import('@/tools/pace-converter/content'),                { ssr: false }) as React.ComponentType,
     'bitrate-converter':             dynamic(() => import('@/tools/bitrate-converter/content'),             { ssr: false }) as React.ComponentType,
+    'json-to-yaml':       dynamic(() => import('@/tools/json-to-yaml/content'),       { ssr: false }) as React.ComponentType,
+    'http-status-codes':  dynamic(() => import('@/tools/http-status-codes/content'),  { ssr: false }) as React.ComponentType,
+    'css-unit-converter': dynamic(() => import('@/tools/css-unit-converter/content'), { ssr: false }) as React.ComponentType,
+    'html-entities':      dynamic(() => import('@/tools/html-entities/content'),      { ssr: false }) as React.ComponentType,
+    'semver-comparator':  dynamic(() => import('@/tools/semver-comparator/content'),  { ssr: false }) as React.ComponentType,
 };
 
 function ToolContent({ slug }: { slug: string }) {

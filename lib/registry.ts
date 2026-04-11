@@ -583,7 +583,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Convert JSON to YAML or YAML to JSON instantly. Validates syntax, handles nested structures. Free online JSON/YAML converter — no signup.',
     category:       'Developer Tools',
     keywords:       ['json to yaml', 'yaml to json', 'json yaml converter', 'convert json to yaml online', 'yaml converter'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'xml-to-json',
@@ -655,7 +655,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Quick reference for all HTTP status codes. Searchable list of 1xx informational, 2xx success, 3xx redirect, 4xx client error and 5xx server error codes. Free.',
     category:       'Developer Tools',
     keywords:       ['http status codes', 'http status code reference', '404 meaning', 'http error codes list', 'rest api status codes'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'mime-types',
@@ -751,7 +751,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Convert CSS units instantly — px to rem, rem to px, em, %, vw, vh and pt. Set your base font size for accurate calculations. Free online CSS unit tool.',
     category:       'Developer Tools',
     keywords:       ['css unit converter', 'px to rem converter', 'rem to px', 'px to em', 'css units calculator'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'semver-comparator',
@@ -763,7 +763,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Compare semantic version strings instantly. Check if a version is greater, less or equal. Validate semver format. Free online semver tool — no signup.',
     category:       'Developer Tools',
     keywords:       ['semver comparator', 'semantic version comparator', 'compare semver', 'version number comparison', 'semver validator'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'json-schema-generator',
@@ -967,7 +967,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Encode special characters as HTML entities or decode HTML entities back to plain text. Free online HTML entity encoder — no signup, instant results.',
     category:       'Developer Tools',
     keywords:       ['html entities encoder', 'html entity decoder', 'html encode online', 'html escape online', 'html entities converter'],
-    live:           false,
+    live:           true,
   },
 
   /* ── Value Converter ───────────────────────────────── */

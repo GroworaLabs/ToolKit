@@ -399,7 +399,7 @@ export function Layout({ children, activeNav }: LayoutProps) {
                         aria-label={open ? 'Close menu' : 'Open menu'}
                         aria-expanded={open}
                         className="ham"
-                        style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: 36, height: 36, padding: 0, background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0, position: 'relative' }}
+                        style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: 36, height: 36, padding: 0, background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0, position: 'relative', marginLeft: 'auto' }}
                     >
                         {/* Top bar */}
                         <span style={{
