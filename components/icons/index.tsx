@@ -47,6 +47,11 @@ export const IcoPowerBtn  = ({ size = 16 }: IconProps) => <svg width={size} heig
 export const IcoWrench    = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>;
 export const IcoStopwatch = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="13" r="8"/><polyline points="12 9 12 13 15 13"/><path d="M9 2h6"/><line x1="12" y1="2" x2="12" y2="5"/></svg>;
 export const IcoSignal    = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1.5 8.5a13 13 0 0121 0"/><path d="M5 12a9 9 0 0114 0"/><path d="M8.5 15.5a5 5 0 017 0"/><circle cx="12" cy="19" r="1.5" fill="currentColor" stroke="none"/></svg>;
+export const IcoArrows    = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>;
+export const IcoServer    = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="6" cy="18" r="1" fill="currentColor" stroke="none"/></svg>;
+export const IcoRuler     = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l18-18"/><path d="M6.35 14.83L5 16.18"/><path d="M9.54 11.64L7.82 13.36"/><path d="M12.73 8.45L11 10.17"/><path d="M15.92 5.26L14.47 6.71"/></svg>;
+export const IcoAngle     = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 6 10 12 4 18"/><line x1="12" y1="18" x2="20" y2="18"/></svg>;
+export const IcoTag       = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/><line x1="14" y1="9" x2="18" y2="13" strokeWidth="1.5"/></svg>;
 
 /* ── Map: tool slug → icon component ─────────────────── */
 import type { ComponentType } from 'react';
@@ -90,4 +95,9 @@ export const TOOL_ICONS: Record<string, ComponentType<IconProps>> = {
   'torque-converter':          IcoWrench,
   'pace-converter':            IcoStopwatch,
   'bitrate-converter':         IcoSignal,
+  'json-to-yaml':              IcoArrows,
+  'http-status-codes':         IcoServer,
+  'css-unit-converter':        IcoRuler,
+  'html-entities':             IcoAngle,
+  'semver-comparator':         IcoTag,
 };
