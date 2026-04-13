@@ -6,7 +6,8 @@ import { Layout } from '@/components/ui/Layout';
 import { FaqSection } from '@/components/ui/FaqSection';
 import { ToolCard } from '@/components/ui/ToolCard';
 import { getBySlug, getLiveSlugs, TOOLS, CATEGORY_SLUGS } from '@/lib/registry';
-import type { ToolMeta, FaqItem } from '@/lib/types';
+import type { ToolMeta, FaqItem, GuideMeta } from '@/lib/types';
+import { getGuidesByTool } from '@/lib/guides';
 
 /* ── Static paths — only live tools get pages ─────────── */
 export const getStaticPaths: GetStaticPaths = () => ({
@@ -16,10 +17,11 @@ export const getStaticPaths: GetStaticPaths = () => ({
 
 /* ── Static props ──────────────────────────────────────── */
 export const getStaticProps: GetStaticProps = ({ params }) => {
-    const slug = params?.slug as string;
-    const tool = getBySlug(slug);
+    const slug        = params?.slug as string;
+    const tool        = getBySlug(slug);
     if (!tool) return { notFound: true };
-    return { props: { tool } };
+    const relatedGuides = getGuidesByTool(slug);
+    return { props: { tool, relatedGuides } };
 };
 
 /* ── Dynamic tool loader ───────────────────────────────── */
@@ -1089,12 +1091,12 @@ function GenericInfoSidebar({ slug }: { slug: string }) {
 }
 
 /* ── Page ─────────────────────────────────────────────── */
-interface Props { tool: ToolMeta; }
+interface Props { tool: ToolMeta; relatedGuides: GuideMeta[]; }
 
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.webtoolkit.tech';
 
-const ToolPage: NextPage<Props> = ({ tool }) => {
+const ToolPage: NextPage<Props> = ({ tool, relatedGuides }) => {
     const Widget = TOOL_WIDGETS[tool.slug];
     const relatedTools = TOOLS.filter(t => t.category === tool.category && t.slug !== tool.slug).slice(0, 4);
     const toolUrl = `${BASE_URL}/tools/${tool.slug}`;
@@ -1230,8 +1232,23 @@ const ToolPage: NextPage<Props> = ({ tool }) => {
                             )}
                         </div>
 
-                        {/* Right — tool-specific sidebar (hidden on mobile via CSS) */}
-                        <ToolSidebar slug={tool.slug} />
+                        {/* Right — sidebar column: tool-specific sidebar + guides */}
+                        <div className="sidebar-col">
+                            <ToolSidebar slug={tool.slug} />
+                            {relatedGuides.length > 0 && (
+                                <div style={{ marginTop: 20 }}>
+                                    <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--ink-4)', marginBottom: 12 }}>Related guides</p>
+                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                        {relatedGuides.map(g => (
+                                            <a key={g.slug} href={`/guides/${g.slug}`} style={{ display: 'block', padding: '11px 0', borderBottom: '1px solid var(--border)', textDecoration: 'none' }}>
+                                                <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--ink)', lineHeight: 1.35, marginBottom: 4 }}>{g.title}</div>
+                                                <div style={{ fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.5 }}>{g.description}</div>
+                                            </a>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </section>
 

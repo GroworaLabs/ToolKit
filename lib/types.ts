@@ -39,6 +39,22 @@ export type ToolCategory =
     | 'Design'
     | 'Value Converter';
 
+/* ── Guides ─────────────────────────────────────────── */
+
+export interface GuideMeta {
+  slug:        string;
+  title:       string;
+  description: string;
+  category:    ToolCategory;
+  tools:       string[];   // array of tool slugs
+  tags:        string[];
+  publishedAt: string;     // ISO date string "YYYY-MM-DD"
+}
+
+export interface GuideWithContent extends GuideMeta {
+  contentHtml: string;
+}
+
 /* ── FAQ ────────────────────────────────────────────── */
 
 export interface FaqItem {

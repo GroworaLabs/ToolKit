@@ -110,6 +110,20 @@ html, body { overflow-x: hidden; }
   }
 }
 
+/* ─── Sidebar column wrapper (tool sidebar + guides together) ── */
+.sidebar-col {
+  order: 2;
+}
+@media (min-width: 768px) {
+  .sidebar-col {
+    padding-top: 44px;
+    order: unset;
+  }
+  .sidebar-col .tool-sidebar {
+    padding-top: 0;
+  }
+}
+
 /* ─── Tool cards grid ────────────────────────── */
 .tools-grid {
   display: grid;
@@ -318,6 +332,66 @@ html, body { overflow-x: hidden; }
 .b-green { background: var(--green-lt); color: var(--green); border: 1px solid var(--green-mid); }
 .b-amber { background: var(--amber-lt); color: var(--amber); border: 1px solid rgba(217,119,6,.2); }
 .b-gray  { background: var(--border);   color: var(--ink-3); border: 1px solid var(--border-md); }
+.b-blue  { background: rgba(59,130,246,.08); color: #2563eb; border: 1px solid rgba(59,130,246,.2); }
+
+/* ─── Guides grid ────────────────────────────── */
+.guides-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+@media (max-width: 640px) {
+  .guides-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Guide layout (article + sidebar) ──────── */
+@media (min-width: 900px) {
+  .guide-layout {
+    grid-template-columns: 1fr 280px !important;
+    align-items: start;
+  }
+}
+
+/* ─── Guide prose (rendered markdown) ───────── */
+.guide-prose { font-size: 15px; line-height: 1.75; color: var(--ink-2); max-width: 680px; }
+.guide-prose h2 { font-size: 19px; font-weight: 700; color: var(--ink); margin: 36px 0 12px; }
+.guide-prose h3 { font-size: 16px; font-weight: 600; color: var(--ink); margin: 28px 0 10px; }
+.guide-prose p  { margin: 0 0 16px; }
+.guide-prose ul, .guide-prose ol { padding-left: 22px; margin: 0 0 16px; }
+.guide-prose li { margin-bottom: 6px; }
+.guide-prose strong { font-weight: 600; color: var(--ink); }
+.guide-prose a  { color: #2563eb; text-decoration: underline; text-underline-offset: 3px; }
+.guide-prose a:hover { color: #1d4ed8; }
+.guide-prose code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; padding: 2px 6px;
+  background: var(--page-bg); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--ink);
+}
+.guide-prose pre {
+  background: var(--page-bg); border: 1px solid var(--border);
+  border-radius: var(--r-m); padding: 16px; overflow-x: auto;
+  margin: 0 0 20px;
+}
+.guide-prose pre code { background: none; border: none; padding: 0; font-size: 13px; }
+.guide-prose blockquote {
+  border-left: 3px solid var(--border-md); padding-left: 16px;
+  margin: 0 0 16px; color: var(--ink-3);
+}
+.guide-prose table { border-collapse: collapse; width: 100%; margin: 0 0 20px; font-size: 14px; }
+.guide-prose th { text-align: left; font-weight: 600; color: var(--ink); padding: 8px 12px; border-bottom: 2px solid var(--border); }
+.guide-prose td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+.guide-prose hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+/* ─── Guide card ─────────────────────────────── */
+.guide-card {
+  display: block; text-decoration: none;
+  padding: 16px; border-radius: var(--r-l);
+  background: var(--white); border: 1px solid var(--border);
+  transition: border-color .15s, box-shadow .15s, transform .15s;
+}
+.guide-card:hover  { border-color: #3b82f6; box-shadow: 0 4px 14px rgba(59,130,246,.1); transform: translateY(-2px); }
+.guide-card:active { transform: translateY(0); }
 
 /* ─── Scrollbar ──────────────────────────────── */
 ::-webkit-scrollbar        { width: 5px; height: 5px; }
