@@ -9,7 +9,8 @@ import { ToolCard } from '@/components/ui/ToolCard';
 import {
   getBySlug, getVariant, getAllVariantPaths, TOOLS, CATEGORY_SLUGS,
 } from '@/lib/registry';
-import type { ToolMeta, ToolVariant, PasswordOptions } from '@/lib/types';
+import type { ToolMeta, ToolVariant, PasswordOptions, GuideMeta } from '@/lib/types';
+import { getGuidesByTool } from '@/lib/guides';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.webtoolkit.tech';
 
@@ -91,6 +92,7 @@ interface Props {
   tool:                ToolMeta;
   variant:             ToolVariant;
   relatedVariantItems: RelatedVariantItem[];
+  relatedGuides:       GuideMeta[];
 }
 
 export const getStaticProps: GetStaticProps<Props> = ({ params }) => {
@@ -108,11 +110,13 @@ export const getStaticProps: GetStaticProps<Props> = ({ params }) => {
       })
       .filter((x): x is RelatedVariantItem => x !== null);
 
-  return { props: { tool: JSON.parse(JSON.stringify(tool)), variant, relatedVariantItems } };
+  const relatedGuides = getGuidesByTool(slug);
+
+  return { props: { tool: JSON.parse(JSON.stringify(tool)), variant, relatedVariantItems, relatedGuides } };
 };
 
 /* ── Page ─────────────────────────────────────────────── */
-const VariantPage: NextPage<Props> = ({ tool, variant, relatedVariantItems }) => {
+const VariantPage: NextPage<Props> = ({ tool, variant, relatedVariantItems, relatedGuides }) => {
   const toolUrl      = `${BASE_URL}/tools/${tool.slug}`;
   const variantUrl   = `${toolUrl}/${variant.slug}`;
   const categoryHref = CATEGORY_SLUGS[tool.category] ?? '/tools';
@@ -235,6 +239,21 @@ const VariantPage: NextPage<Props> = ({ tool, variant, relatedVariantItems }) =>
 
                 {/* Other variants */}
                 <VariantSidebar tool={tool} currentSlug={variant.slug} />
+
+                {/* Related guides */}
+                {relatedGuides.length > 0 && (
+                    <div style={{ marginTop: 4 }}>
+                        <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--ink-4)', marginBottom: 12 }}>Related guides</p>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            {relatedGuides.map(g => (
+                                <a key={g.slug} href={`/guides/${g.slug}`} style={{ display: 'block', padding: '11px 0', borderBottom: '1px solid var(--border)', textDecoration: 'none' }}>
+                                    <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--ink)', lineHeight: 1.35, marginBottom: 4 }}>{g.title}</div>
+                                    <div style={{ fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.5 }}>{g.description}</div>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                )}
               </aside>
             </div>
           </section>

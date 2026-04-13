@@ -13,7 +13,7 @@ export function Logo() {
     );
 }
 
-interface LayoutProps { children: ReactNode; activeNav?: 'home' | 'tools'; }
+interface LayoutProps { children: ReactNode; activeNav?: 'home' | 'tools' | 'guides'; }
 
 interface VariantHit { variantName: string; toolName: string; href: string; }
 
@@ -314,6 +314,13 @@ export function Layout({ children, activeNav }: LayoutProps) {
                                 );
                             })()}
                         </div>
+
+                        <Link
+                            href="/guides"
+                            className={`nav-pill${router.pathname.startsWith('/guides') ? ' on' : ''}`}
+                        >
+                            Guides
+                        </Link>
                     </nav>
 
                     {/* Desktop search */}
@@ -427,7 +434,7 @@ export function Layout({ children, activeNav }: LayoutProps) {
                     <div style={{ borderTop: '1px solid var(--border)', background: 'var(--white)', padding: '8px 12px 16px' }}>
                         {/* Main links */}
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginBottom: 8 }}>
-                            {[{ href: '/', label: 'Home' }, { href: '/tools', label: 'All Tools' }].map(({ href, label }) => (
+                            {[{ href: '/', label: 'Home' }, { href: '/tools', label: 'All Tools' }, { href: '/guides', label: 'Guides' }].map(({ href, label }) => (
                                 <Link key={href} href={href} onClick={() => setOpen(false)}
                                       style={{ padding: '11px 12px', borderRadius: 'var(--r-m)', fontSize: 15, fontWeight: 500, color: isActive(href) ? 'var(--green)' : 'var(--ink-2)', background: isActive(href) ? 'var(--green-lt)' : 'transparent', textDecoration: 'none', display: 'block' }}>
                                     {label}
@@ -513,6 +520,7 @@ export function Layout({ children, activeNav }: LayoutProps) {
                                 </p>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                                     {[
+                                        { href: '/guides',  label: 'Guides'  },
                                         { href: '/about',   label: 'About'   },
                                         { href: '/contact', label: 'Contact' },
                                         { href: '/privacy', label: 'Privacy' },

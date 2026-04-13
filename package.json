@@ -9,6 +9,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@types/marked": "^5.0.2",
+    "gray-matter": "^4.0.3",
+    "marked": "^18.0.0",
     "next": "14.2.3",
     "qrcode": "^1.5.4",
     "react": "^18",
