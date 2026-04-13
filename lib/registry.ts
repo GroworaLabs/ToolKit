@@ -342,7 +342,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Repeat any text or string a custom number of times with an optional separator. Useful for generating test data and placeholder content. Free, no signup.',
     category:       'Text & Writing',
     keywords:       ['text repeater', 'repeat text online', 'duplicate text generator', 'string repeater'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'find-and-replace',
@@ -366,7 +366,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Remove extra whitespace from text instantly — strip leading/trailing spaces, collapse double spaces, remove blank lines and tabs. Free online tool, no signup.',
     category:       'Text & Writing',
     keywords:       ['whitespace remover', 'remove extra spaces online', 'trim whitespace tool', 'strip spaces from text', 'clean text whitespace'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'text-to-morse',
@@ -378,7 +378,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Convert text to Morse code or translate Morse code back to plain text instantly. Supports international Morse code standard. Free, no signup.',
     category:       'Text & Writing',
     keywords:       ['morse code translator', 'text to morse code', 'morse code converter online', 'decode morse code', 'morse encoder decoder'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'nato-alphabet',
@@ -390,7 +390,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Convert any text to NATO phonetic alphabet spelling instantly. Alpha, Bravo, Charlie — great for phone communication and clarity. Free, no signup.',
     category:       'Text & Writing',
     keywords:       ['nato alphabet converter', 'phonetic alphabet online', 'nato phonetic alphabet', 'spell out text nato'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'rot13-encoder',
@@ -402,7 +402,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Encode and decode text with the ROT13 cipher instantly. The same tool encodes and decodes — just paste your text and see the result. Free, no signup.',
     category:       'Text & Writing',
     keywords:       ['rot13 encoder', 'rot13 decoder', 'rot13 cipher online', 'rot13 converter', 'caesar cipher online'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'text-to-binary',
