@@ -80,11 +80,11 @@ Running status of the Month 1–2 foundation from the monetization roadmap. Upda
 - `2026-04-14` `google-adsense-account` meta tag in `_document.tsx`
 - `2026-04-14` Sitemap expanded: `/guides`, `/contact`, all guide detail pages
 - `2026-04-14` Mobile layout fixes on guide pages (overflowing tables, `min-width: 0` on grid children, site-wide `text-align: justify` with exceptions)
+- `2026-04-14` Deployed to production; verified live: `ads.txt` returns 200, `google-adsense-account` meta tag present, sitemap lists 87 URLs including all guides
+- `2026-04-14` Tool pages — content + FAQ now SSR-rendered. Dropped `{ ssr: false }` from `TOOL_CONTENT`; moved FAQ data into `getStaticProps` so `FaqSection` + FAQPage JSON-LD render at build time. Every tool page now ships ~500 words + ~8 Q&A + schema in initial HTML (was: one sentence + empty widget placeholder). Only the interactive widget itself stays client-only.
 
 ### Pending — blocks AdSense re-submission
-- Deploy and verify `curl https://www.webtoolkit.tech/ads.txt` returns 200
 - Google Search Console: verify ownership, submit sitemap, monitor indexing
-- 300–500 word explanatory text on every tool page (before the widget)
 - Write ≥10 more guides (600–800 words each)
 - Author byline + E-E-A-T signals on guides (name, photo, bio, social links)
 - Expand About page — founder story, expertise

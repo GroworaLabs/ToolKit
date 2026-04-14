@@ -16,12 +16,14 @@ export const getStaticPaths: GetStaticPaths = () => ({
 });
 
 /* ── Static props ──────────────────────────────────────── */
-export const getStaticProps: GetStaticProps = ({ params }) => {
-    const slug        = params?.slug as string;
-    const tool        = getBySlug(slug);
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+    const slug          = params?.slug as string;
+    const tool          = getBySlug(slug);
     if (!tool) return { notFound: true };
     const relatedGuides = getGuidesByTool(slug);
-    return { props: { tool, relatedGuides } };
+    const loader        = TOOL_DATA[slug];
+    const faq: FaqItem[] = loader ? (await loader()).faq as FaqItem[] : [];
+    return { props: { tool, relatedGuides, faq } };
 };
 
 /* ── Dynamic tool loader ───────────────────────────────── */
@@ -1091,12 +1093,12 @@ function GenericInfoSidebar({ slug }: { slug: string }) {
 }
 
 /* ── Page ─────────────────────────────────────────────── */
-interface Props { tool: ToolMeta; relatedGuides: GuideMeta[]; }
+interface Props { tool: ToolMeta; relatedGuides: GuideMeta[]; faq: FaqItem[]; }
 
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.webtoolkit.tech';
 
-const ToolPage: NextPage<Props> = ({ tool, relatedGuides }) => {
+const ToolPage: NextPage<Props> = ({ tool, relatedGuides, faq }) => {
     const Widget = TOOL_WIDGETS[tool.slug];
     const relatedTools = TOOLS.filter(t => t.category === tool.category && t.slug !== tool.slug).slice(0, 4);
     const toolUrl = `${BASE_URL}/tools/${tool.slug}`;
@@ -1259,7 +1261,7 @@ const ToolPage: NextPage<Props> = ({ tool, relatedGuides }) => {
                 <ToolContent slug={tool.slug} />
 
                 {/* ── FAQ with FAQPage schema ────────────────── */}
-                <ToolFaq slug={tool.slug} />
+                <ToolFaq faq={faq} />
 
                 {/* ── Related tools ─────────────────────────── */}
                 {relatedTools.length > 0 && (
@@ -1327,56 +1329,56 @@ function ToolVariants({ tool }: { tool: ToolMeta }) {
     );
 }
 
-/* ── Tool content sections ─────────────────────────────── */
+/* ── Tool content sections — SSR-rendered for SEO + initial HTML ─── */
 const TOOL_CONTENT: Record<string, React.ComponentType> = {
-    'password-generator': dynamic(() => import('@/tools/password-generator/content'), { ssr: false }) as React.ComponentType,
-    'word-counter':       dynamic(() => import('@/tools/word-counter/content'),       { ssr: false }) as React.ComponentType,
-    'json-formatter':     dynamic(() => import('@/tools/json-formatter/content'),     { ssr: false }) as React.ComponentType,
-    'base64':             dynamic(() => import('@/tools/base64/content'),             { ssr: false }) as React.ComponentType,
-    'case-converter':     dynamic(() => import('@/tools/case-converter/content'),     { ssr: false }) as React.ComponentType,
-    'hash-generator':     dynamic(() => import('@/tools/hash-generator/content'),     { ssr: false }) as React.ComponentType,
-    'url-encoder':        dynamic(() => import('@/tools/url-encoder/content'),        { ssr: false }) as React.ComponentType,
-    'uuid-generator':     dynamic(() => import('@/tools/uuid-generator/content'),     { ssr: false }) as React.ComponentType,
-    'lorem-ipsum':        dynamic(() => import('@/tools/lorem-ipsum/content'),        { ssr: false }) as React.ComponentType,
-    'markdown-editor':    dynamic(() => import('@/tools/markdown-editor/content'),    { ssr: false }) as React.ComponentType,
-    'color-palette':      dynamic(() => import('@/tools/color-palette/content'),      { ssr: false }) as React.ComponentType,
-    'regex-tester':       dynamic(() => import('@/tools/regex-tester/content'),       { ssr: false }) as React.ComponentType,
-    'username-generator': dynamic(() => import('@/tools/username-generator/content'), { ssr: false }) as React.ComponentType,
-    'qr-code-generator':  dynamic(() => import('@/tools/qr-code-generator/content'), { ssr: false }) as React.ComponentType,
-    'color-converter':    dynamic(() => import('@/tools/color-converter/content'),    { ssr: false }) as React.ComponentType,
-    'time-converter':     dynamic(() => import('@/tools/time-converter/content'),     { ssr: false }) as React.ComponentType,
-    'csv-to-json':        dynamic(() => import('@/tools/csv-to-json/content'),        { ssr: false }) as React.ComponentType,
-    'text-diff':                dynamic(() => import('@/tools/text-diff/content'),                { ssr: false }) as React.ComponentType,
-    'reading-time-calculator':  dynamic(() => import('@/tools/reading-time-calculator/content'),  { ssr: false }) as React.ComponentType,
-    'random-text-generator':    dynamic(() => import('@/tools/random-text-generator/content'),    { ssr: false }) as React.ComponentType,
-    'timestamp-converter':      dynamic(() => import('@/tools/timestamp-converter/content'),      { ssr: false }) as React.ComponentType,
-    'cron-generator':           dynamic(() => import('@/tools/cron-generator/content'),           { ssr: false }) as React.ComponentType,
-    'favicon-generator':             dynamic(() => import('@/tools/favicon-generator/content'),             { ssr: false }) as React.ComponentType,
-    'jwt-decoder':                   dynamic(() => import('@/tools/jwt-decoder/content'),                   { ssr: false }) as React.ComponentType,
-    'password-strength-checker':     dynamic(() => import('@/tools/password-strength-checker/content'),     { ssr: false }) as React.ComponentType,
-    'hmac-generator':                dynamic(() => import('@/tools/hmac-generator/content'),                { ssr: false }) as React.ComponentType,
-    'random-token-generator':        dynamic(() => import('@/tools/random-token-generator/content'),        { ssr: false }) as React.ComponentType,
-    'api-key-generator':             dynamic(() => import('@/tools/api-key-generator/content'),             { ssr: false }) as React.ComponentType,
-    'text-to-slug':                  dynamic(() => import('@/tools/text-to-slug/content'),                  { ssr: false }) as React.ComponentType,
-    'duplicate-line-remover':        dynamic(() => import('@/tools/duplicate-line-remover/content'),        { ssr: false }) as React.ComponentType,
-    'sort-lines':                    dynamic(() => import('@/tools/sort-lines/content'),                    { ssr: false }) as React.ComponentType,
-    'reverse-text':                  dynamic(() => import('@/tools/reverse-text/content'),                  { ssr: false }) as React.ComponentType,
-    'find-and-replace':              dynamic(() => import('@/tools/find-and-replace/content'),              { ssr: false }) as React.ComponentType,
-    'number-base-converter':         dynamic(() => import('@/tools/number-base-converter/content'),         { ssr: false }) as React.ComponentType,
-    'power-converter':               dynamic(() => import('@/tools/power-converter/content'),               { ssr: false }) as React.ComponentType,
-    'torque-converter':              dynamic(() => import('@/tools/torque-converter/content'),              { ssr: false }) as React.ComponentType,
-    'pace-converter':                dynamic(() => import('@/tools/pace-converter/content'),                { ssr: false }) as React.ComponentType,
-    'bitrate-converter':             dynamic(() => import('@/tools/bitrate-converter/content'),             { ssr: false }) as React.ComponentType,
-    'json-to-yaml':       dynamic(() => import('@/tools/json-to-yaml/content'),       { ssr: false }) as React.ComponentType,
-    'http-status-codes':  dynamic(() => import('@/tools/http-status-codes/content'),  { ssr: false }) as React.ComponentType,
-    'css-unit-converter': dynamic(() => import('@/tools/css-unit-converter/content'), { ssr: false }) as React.ComponentType,
-    'html-entities':      dynamic(() => import('@/tools/html-entities/content'),      { ssr: false }) as React.ComponentType,
-    'semver-comparator':  dynamic(() => import('@/tools/semver-comparator/content'),  { ssr: false }) as React.ComponentType,
-    'text-repeater':      dynamic(() => import('@/tools/text-repeater/content'),      { ssr: false }) as React.ComponentType,
-    'remove-whitespace':  dynamic(() => import('@/tools/remove-whitespace/content'),  { ssr: false }) as React.ComponentType,
-    'text-to-morse':      dynamic(() => import('@/tools/text-to-morse/content'),      { ssr: false }) as React.ComponentType,
-    'nato-alphabet':      dynamic(() => import('@/tools/nato-alphabet/content'),      { ssr: false }) as React.ComponentType,
-    'rot13-encoder':      dynamic(() => import('@/tools/rot13-encoder/content'),      { ssr: false }) as React.ComponentType,
+    'password-generator':        dynamic(() => import('@/tools/password-generator/content')) as React.ComponentType,
+    'word-counter':              dynamic(() => import('@/tools/word-counter/content')) as React.ComponentType,
+    'json-formatter':            dynamic(() => import('@/tools/json-formatter/content')) as React.ComponentType,
+    'base64':                    dynamic(() => import('@/tools/base64/content')) as React.ComponentType,
+    'case-converter':            dynamic(() => import('@/tools/case-converter/content')) as React.ComponentType,
+    'hash-generator':            dynamic(() => import('@/tools/hash-generator/content')) as React.ComponentType,
+    'url-encoder':               dynamic(() => import('@/tools/url-encoder/content')) as React.ComponentType,
+    'uuid-generator':            dynamic(() => import('@/tools/uuid-generator/content')) as React.ComponentType,
+    'lorem-ipsum':               dynamic(() => import('@/tools/lorem-ipsum/content')) as React.ComponentType,
+    'markdown-editor':           dynamic(() => import('@/tools/markdown-editor/content')) as React.ComponentType,
+    'color-palette':             dynamic(() => import('@/tools/color-palette/content')) as React.ComponentType,
+    'regex-tester':              dynamic(() => import('@/tools/regex-tester/content')) as React.ComponentType,
+    'username-generator':        dynamic(() => import('@/tools/username-generator/content')) as React.ComponentType,
+    'qr-code-generator':         dynamic(() => import('@/tools/qr-code-generator/content')) as React.ComponentType,
+    'color-converter':           dynamic(() => import('@/tools/color-converter/content')) as React.ComponentType,
+    'time-converter':            dynamic(() => import('@/tools/time-converter/content')) as React.ComponentType,
+    'csv-to-json':               dynamic(() => import('@/tools/csv-to-json/content')) as React.ComponentType,
+    'text-diff':                 dynamic(() => import('@/tools/text-diff/content')) as React.ComponentType,
+    'reading-time-calculator':   dynamic(() => import('@/tools/reading-time-calculator/content')) as React.ComponentType,
+    'random-text-generator':     dynamic(() => import('@/tools/random-text-generator/content')) as React.ComponentType,
+    'timestamp-converter':       dynamic(() => import('@/tools/timestamp-converter/content')) as React.ComponentType,
+    'cron-generator':            dynamic(() => import('@/tools/cron-generator/content')) as React.ComponentType,
+    'favicon-generator':         dynamic(() => import('@/tools/favicon-generator/content')) as React.ComponentType,
+    'jwt-decoder':               dynamic(() => import('@/tools/jwt-decoder/content')) as React.ComponentType,
+    'password-strength-checker': dynamic(() => import('@/tools/password-strength-checker/content')) as React.ComponentType,
+    'hmac-generator':            dynamic(() => import('@/tools/hmac-generator/content')) as React.ComponentType,
+    'random-token-generator':    dynamic(() => import('@/tools/random-token-generator/content')) as React.ComponentType,
+    'api-key-generator':         dynamic(() => import('@/tools/api-key-generator/content')) as React.ComponentType,
+    'text-to-slug':              dynamic(() => import('@/tools/text-to-slug/content')) as React.ComponentType,
+    'duplicate-line-remover':    dynamic(() => import('@/tools/duplicate-line-remover/content')) as React.ComponentType,
+    'sort-lines':                dynamic(() => import('@/tools/sort-lines/content')) as React.ComponentType,
+    'reverse-text':              dynamic(() => import('@/tools/reverse-text/content')) as React.ComponentType,
+    'find-and-replace':          dynamic(() => import('@/tools/find-and-replace/content')) as React.ComponentType,
+    'number-base-converter':     dynamic(() => import('@/tools/number-base-converter/content')) as React.ComponentType,
+    'power-converter':           dynamic(() => import('@/tools/power-converter/content')) as React.ComponentType,
+    'torque-converter':          dynamic(() => import('@/tools/torque-converter/content')) as React.ComponentType,
+    'pace-converter':            dynamic(() => import('@/tools/pace-converter/content')) as React.ComponentType,
+    'bitrate-converter':         dynamic(() => import('@/tools/bitrate-converter/content')) as React.ComponentType,
+    'json-to-yaml':              dynamic(() => import('@/tools/json-to-yaml/content')) as React.ComponentType,
+    'http-status-codes':         dynamic(() => import('@/tools/http-status-codes/content')) as React.ComponentType,
+    'css-unit-converter':        dynamic(() => import('@/tools/css-unit-converter/content')) as React.ComponentType,
+    'html-entities':             dynamic(() => import('@/tools/html-entities/content')) as React.ComponentType,
+    'semver-comparator':         dynamic(() => import('@/tools/semver-comparator/content')) as React.ComponentType,
+    'text-repeater':             dynamic(() => import('@/tools/text-repeater/content')) as React.ComponentType,
+    'remove-whitespace':         dynamic(() => import('@/tools/remove-whitespace/content')) as React.ComponentType,
+    'text-to-morse':             dynamic(() => import('@/tools/text-to-morse/content')) as React.ComponentType,
+    'nato-alphabet':             dynamic(() => import('@/tools/nato-alphabet/content')) as React.ComponentType,
+    'rot13-encoder':             dynamic(() => import('@/tools/rot13-encoder/content')) as React.ComponentType,
 };
 
 function ToolContent({ slug }: { slug: string }) {
@@ -1385,39 +1387,27 @@ function ToolContent({ slug }: { slug: string }) {
     return <Content />;
 }
 
-/* ── Async FAQ loader + FAQPage schema ─────────────────── */
-function ToolFaq({ slug }: { slug: string }) {
-    const loader = TOOL_DATA[slug];
-    if (!loader) return null;
-
-    const LazyFaq = dynamic(
-        () => loader().then(m => {
-            const items = m.faq as FaqItem[];
-            const faqSchema = {
-                '@context': 'https://schema.org',
-                '@type': 'FAQPage',
-                mainEntity: items.map(item => ({
-                    '@type': 'Question',
-                    name: item.q,
-                    acceptedAnswer: { '@type': 'Answer', text: item.a },
-                })),
-            };
-            return function Faq() {
-                return (
-                    <>
-                        <script
-                            type="application/ld+json"
-                            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-                        />
-                        <FaqSection items={items} />
-                    </>
-                );
-            };
-        }),
-        { ssr: false }
+/* ── SSR FAQ + FAQPage schema — loaded at build time ───── */
+function ToolFaq({ faq }: { faq: FaqItem[] }) {
+    if (!faq || faq.length === 0) return null;
+    const faqSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faq.map(item => ({
+            '@type': 'Question',
+            name: item.q,
+            acceptedAnswer: { '@type': 'Answer', text: item.a },
+        })),
+    };
+    return (
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+            />
+            <FaqSection items={faq} />
+        </>
     );
-
-    return <LazyFaq />;
 }
 
 export default ToolPage;
