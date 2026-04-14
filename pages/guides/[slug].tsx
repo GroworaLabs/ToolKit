@@ -90,7 +90,7 @@ const GuidePage: NextPage<Props> = ({ guide, relatedTools }) => {
             </ol>
           </nav>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 40 }} className="guide-layout">
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)', gap: 40 }} className="guide-layout">
 
             {/* ── Article ── */}
             <article>

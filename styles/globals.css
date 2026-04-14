@@ -46,7 +46,19 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align: justify;
 }
+
+/* ─── Justify exceptions ─────────────────────── */
+h1, h2, h3, h4, h5, h6,
+button, label, input, textarea, select, option,
+nav, a, .nav-pill,
+.badge, .ov, .disp, .hdg,
+.btn-main, .btn-icon,
+.tc-live, .tc-soon,
+.guide-card,
+pre, code,
+li { text-align: left; }
 
 /* ─── Typography ─────────────────────────────── */
 .ov {
@@ -345,9 +357,11 @@ html, body { overflow-x: hidden; }
 }
 
 /* ─── Guide layout (article + sidebar) ──────── */
+.guide-layout > * { min-width: 0; }
+
 @media (min-width: 900px) {
   .guide-layout {
-    grid-template-columns: 1fr 280px !important;
+    grid-template-columns: minmax(0, 1fr) 280px !important;
     align-items: start;
   }
 }
@@ -378,8 +392,8 @@ html, body { overflow-x: hidden; }
   border-left: 3px solid var(--border-md); padding-left: 16px;
   margin: 0 0 16px; color: var(--ink-3);
 }
-.guide-prose table { border-collapse: collapse; width: 100%; margin: 0 0 20px; font-size: 14px; }
-.guide-prose th { text-align: left; font-weight: 600; color: var(--ink); padding: 8px 12px; border-bottom: 2px solid var(--border); }
+.guide-prose table { border-collapse: collapse; width: 100%; margin: 0 0 20px; font-size: 14px; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.guide-prose th { text-align: left; font-weight: 600; color: var(--ink); padding: 8px 12px; border-bottom: 2px solid var(--border); white-space: nowrap; }
 .guide-prose td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
 .guide-prose hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
 
