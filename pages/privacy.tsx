@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Layout } from '@/components/ui/Layout';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.webtoolkit.tech';
-const UPDATED  = '2026-03-26';
+const UPDATED  = '2026-04-14';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -51,9 +51,9 @@ const PrivacyPage: NextPage = () => (
             <ul style={{ paddingLeft: 18, fontSize: 14, color: 'var(--ink-2)', lineHeight: 1.9, margin: 0 }}>
               <li>We <strong>never see</strong> any data you enter into our tools</li>
               <li>All tool processing happens <strong>locally in your browser</strong></li>
-              <li>We use Google Analytics for <strong>anonymized</strong> page-view statistics only</li>
-              <li>We use <strong>no advertising trackers</strong> or third-party data brokers</li>
-              <li>We store <strong>no cookies</strong> beyond what Google Analytics sets</li>
+              <li>Optional analytics load <strong>only if you consent</strong> via the cookie banner</li>
+              <li>We use <strong>no advertising trackers</strong> unless you opt in to marketing cookies</li>
+              <li>You can change your choice any time via <strong>Cookie preferences</strong> in the footer</li>
             </ul>
           </div>
 
@@ -69,13 +69,14 @@ const PrivacyPage: NextPage = () => (
             </Section>
 
             <Section title="3. Analytics">
-              <p style={{ marginBottom: 12 }}>We use <strong>Google Analytics 4</strong> to collect anonymized usage statistics including: pages visited, time on page, browser type, device type, and general geographic region (country level). We do not enable features that collect personally identifiable information.</p>
-              <p style={{ marginBottom: 12 }}>You can opt out of Google Analytics by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--green)', textDecoration: 'underline' }}>Google Analytics Opt-out Browser Add-on</a>.</p>
-              <p>We do not use any other analytics services, advertising networks, or tracking pixels.</p>
+              <p style={{ marginBottom: 12 }}>We may use <strong>Google Analytics 4</strong> to collect anonymized usage statistics including: pages visited, time on page, browser type, device type, and general geographic region (country level). IP anonymization is enabled. We do not enable features that collect personally identifiable information.</p>
+              <p style={{ marginBottom: 12 }}>Analytics scripts load <strong>only if you grant analytics consent</strong> via our cookie banner. If you reject analytics or haven't decided, no analytics scripts run and no analytics cookies are set.</p>
+              <p>You can change your choice any time via <strong>Cookie preferences</strong> in the footer. We do not use any other analytics services, advertising networks, or tracking pixels.</p>
             </Section>
 
             <Section title="4. Cookies">
-              <p>We do not set any cookies ourselves. Google Analytics sets the following first-party cookies: <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 13, background: 'var(--border)', padding: '1px 5px', borderRadius: 3 }}>_ga</code> (2 years) and <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 13, background: 'var(--border)', padding: '1px 5px', borderRadius: 3 }}>_ga_*</code> (2 years). These contain a randomly generated identifier used solely to distinguish returning visitors for statistical purposes.</p>
+              <p style={{ marginBottom: 12 }}>We store a small <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 13, background: 'var(--border)', padding: '1px 5px', borderRadius: 3 }}>tk_consent</code> entry in your browser's localStorage to remember your cookie-consent choice. This entry contains no personal data — only your preferences.</p>
+              <p>If you consent to analytics, Google Analytics sets <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 13, background: 'var(--border)', padding: '1px 5px', borderRadius: 3 }}>_ga</code> and <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 13, background: 'var(--border)', padding: '1px 5px', borderRadius: 3 }}>_ga_*</code> first-party cookies (2 years). See our <Link href="/cookies" style={{ color: 'var(--green)', textDecoration: 'underline' }}>Cookie Policy</Link> for the full list.</p>
             </Section>
 
             <Section title="5. Affiliate links">

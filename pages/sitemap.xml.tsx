@@ -1,5 +1,6 @@
 import type { GetServerSideProps } from 'next';
 import { getLiveTools, getAllVariantPaths } from '@/lib/registry';
+import { getAllGuides } from '@/lib/guides';
 
 interface SitemapEntry {
   url:        string;
@@ -16,7 +17,10 @@ function buildSitemap(baseUrl: string): string {
     { url: '/',                priority: '1.0', changefreq: 'weekly',  lastmod: today },
     // Tools catalog
     { url: '/tools',           priority: '0.9', changefreq: 'weekly',  lastmod: today },
+    // Guides catalog
+    { url: '/guides',          priority: '0.8', changefreq: 'weekly',  lastmod: today },
     { url: '/about',           priority: '0.5', changefreq: 'monthly', lastmod: today },
+    { url: '/contact',         priority: '0.4', changefreq: 'monthly', lastmod: today },
     // Category pillar pages
     { url: '/tools/security',  priority: '0.9', changefreq: 'weekly',  lastmod: today },
     { url: '/tools/developer', priority: '0.9', changefreq: 'weekly',  lastmod: today },
@@ -35,6 +39,13 @@ function buildSitemap(baseUrl: string): string {
       priority:   '0.7',
       changefreq: 'monthly' as const,
       lastmod:    today,
+    })),
+    // Guide pages
+    ...getAllGuides().map(g => ({
+      url:        `/guides/${g.slug}`,
+      priority:   '0.7',
+      changefreq: 'monthly' as const,
+      lastmod:    g.publishedAt ? g.publishedAt.split('T')[0] : today,
     })),
   ];
 

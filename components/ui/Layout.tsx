@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getLiveTools, getCategories } from '@/lib/registry';
 import type { ToolMeta } from '@/lib/types';
+import { openCookiePreferences } from '@/components/ui/CookieConsent';
 
 export function Logo() {
     return (
@@ -523,7 +524,6 @@ export function Layout({ children, activeNav }: LayoutProps) {
                                         { href: '/guides',  label: 'Guides'  },
                                         { href: '/about',   label: 'About'   },
                                         { href: '/contact', label: 'Contact' },
-                                        { href: '/privacy', label: 'Privacy' },
                                     ].map(({ href, label }) => (
                                         <Link key={href} href={href}
                                               style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)', textDecoration: 'none', fontWeight: 500, transition: 'color .13s' }}
@@ -532,6 +532,40 @@ export function Layout({ children, activeNav }: LayoutProps) {
                                             {label}
                                         </Link>
                                     ))}
+                                </div>
+                            </div>
+
+                            <div>
+                                <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.09em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: 16 }}>
+                                    Legal
+                                </p>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                                    {[
+                                        { href: '/privacy', label: 'Privacy' },
+                                        { href: '/terms',   label: 'Terms'   },
+                                        { href: '/cookies', label: 'Cookies' },
+                                    ].map(({ href, label }) => (
+                                        <Link key={href} href={href}
+                                              style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)', textDecoration: 'none', fontWeight: 500, transition: 'color .13s' }}
+                                              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                                              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.75)')}>
+                                            {label}
+                                        </Link>
+                                    ))}
+                                    <button
+                                        type="button"
+                                        onClick={openCookiePreferences}
+                                        style={{
+                                            background: 'none', border: 'none', padding: 0,
+                                            fontSize: 14, color: 'rgba(255,255,255,0.75)', textAlign: 'left',
+                                            fontWeight: 500, cursor: 'pointer', transition: 'color .13s',
+                                            fontFamily: 'inherit',
+                                        }}
+                                        onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                                        onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.75)')}
+                                    >
+                                        Cookie preferences
+                                    </button>
                                 </div>
                             </div>
                         </div>
