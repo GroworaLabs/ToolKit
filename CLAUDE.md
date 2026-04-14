@@ -82,10 +82,10 @@ Running status of the Month 1–2 foundation from the monetization roadmap. Upda
 - `2026-04-14` Mobile layout fixes on guide pages (overflowing tables, `min-width: 0` on grid children, site-wide `text-align: justify` with exceptions)
 - `2026-04-14` Deployed to production; verified live: `ads.txt` returns 200, `google-adsense-account` meta tag present, sitemap lists 87 URLs including all guides
 - `2026-04-14` Tool pages — content + FAQ now SSR-rendered. Dropped `{ ssr: false }` from `TOOL_CONTENT`; moved FAQ data into `getStaticProps` so `FaqSection` + FAQPage JSON-LD render at build time. Every tool page now ships ~500 words + ~8 Q&A + schema in initial HTML (was: one sentence + empty widget placeholder). Only the interactive widget itself stays client-only.
+- `2026-04-14` 10 new guides published — jwt-tokens-explained, regex-cheat-sheet, uuid-vs-ulid-vs-nanoid, json-vs-yaml, sha-256-vs-md5, cron-expressions-explained, url-encoding-explained, hmac-vs-hash, markdown-cheat-sheet, color-models-explained. All 750–1100 words, each links back to 1–3 existing tools (drives "Related guides" sidebar). Guides total now 12 vs ~50 tools.
 
 ### Pending — blocks AdSense re-submission
 - Google Search Console: verify ownership, submit sitemap, monitor indexing
-- Write ≥10 more guides (600–800 words each)
 - Author byline + E-E-A-T signals on guides (name, photo, bio, social links)
 - Expand About page — founder story, expertise
 
