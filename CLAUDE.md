@@ -83,6 +83,7 @@ Running status of the Month 1–2 foundation from the monetization roadmap. Upda
 - `2026-04-14` Deployed to production; verified live: `ads.txt` returns 200, `google-adsense-account` meta tag present, sitemap lists 87 URLs including all guides
 - `2026-04-14` Tool pages — content + FAQ now SSR-rendered. Dropped `{ ssr: false }` from `TOOL_CONTENT`; moved FAQ data into `getStaticProps` so `FaqSection` + FAQPage JSON-LD render at build time. Every tool page now ships ~500 words + ~8 Q&A + schema in initial HTML (was: one sentence + empty widget placeholder). Only the interactive widget itself stays client-only.
 - `2026-04-14` 10 new guides published — jwt-tokens-explained, regex-cheat-sheet, uuid-vs-ulid-vs-nanoid, json-vs-yaml, sha-256-vs-md5, cron-expressions-explained, url-encoding-explained, hmac-vs-hash, markdown-cheat-sheet, color-models-explained. All 750–1100 words, each links back to 1–3 existing tools (drives "Related guides" sidebar). Guides total now 12 vs ~50 tools.
+- `2026-04-15` Custom 404 page (`pages/404.tsx`) with in-page search across tools, presets, and guides. Seeds query from attempted URL path (e.g. `/jsn-formatter` → pre-fills `jsn formatter`). Empty-query state shows popular tools grid + nav links to home/tools/guides.
 
 ### Pending — blocks AdSense re-submission
 - Google Search Console: verify ownership, submit sitemap, monitor indexing
@@ -96,7 +97,6 @@ Running status of the Month 1–2 foundation from the monetization roadmap. Upda
 
 ### Deferred
 - Favorites / Recent tools (localStorage)
-- 404 page with search
 - Keyboard shortcuts, dark mode, RSS for guides
 - Comparison pages ("Best X 2026", "X vs Y")
 - Wire ads/affiliate scripts behind `consent.marketing` (plumbing ready)

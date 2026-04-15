@@ -5,7 +5,11 @@
       "Bash(echo \"EXIT:$?\")",
       "Bash(npx tsc:*)",
       "Bash(npm install:*)",
-      "WebFetch(domain:www.webtoolkit.tech)"
+      "WebFetch(domain:www.webtoolkit.tech)",
+      "Bash(curl -s http://localhost:3000/does-not-exist-xyz)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3000/tools)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3000/guides)"
     ]
   }
 }
