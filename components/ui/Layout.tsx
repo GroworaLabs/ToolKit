@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { getLiveTools, getCategories } from '@/lib/registry';
 import type { ToolMeta } from '@/lib/types';
 import { openCookiePreferences } from '@/components/ui/CookieConsent';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 export function Logo() {
     return (
@@ -138,7 +139,7 @@ export function Layout({ children, activeNav }: LayoutProps) {
         <div style={{ background: 'var(--page-bg)', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
 
             {/* ── Header ── */}
-            <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, background: 'rgba(244,243,239,.97)', backdropFilter: 'blur(10px)', borderBottom: '1px solid var(--border)' }}>
+            <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, background: 'var(--header-bg)', backdropFilter: 'blur(10px)', borderBottom: '1px solid var(--border)' }}>
                 <div ref={wrapRef} className="wrap-wide" style={{ height: 52, display: 'flex', alignItems: 'center', gap: 8 }}>
                     <Logo />
 
@@ -401,13 +402,17 @@ export function Layout({ children, activeNav }: LayoutProps) {
                         )}
                     </div>
 
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginLeft: 'auto' }}>
+                        <ThemeToggle />
+                    </div>
+
                     {/* Hamburger — proper X animation */}
                     <button
                         onClick={() => setOpen(o => !o)}
                         aria-label={open ? 'Close menu' : 'Open menu'}
                         aria-expanded={open}
                         className="ham"
-                        style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: 36, height: 36, padding: 0, background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0, position: 'relative', marginLeft: 'auto' }}
+                        style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: 36, height: 36, padding: 0, background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0, position: 'relative' }}
                     >
                         {/* Top bar */}
                         <span style={{
