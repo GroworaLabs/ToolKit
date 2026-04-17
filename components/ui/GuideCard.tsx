@@ -13,7 +13,7 @@ export function GuideCard({ guide }: GuideCardProps) {
   return (
     <Link href={`/guides/${guide.slug}`} className="guide-card">
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8, gap: 8 }}>
-        <span className="badge b-blue" style={{ flexShrink: 0 }}>{guide.category}</span>
+        <span className="badge b-green" style={{ flexShrink: 0 }}>{guide.category}</span>
         {date && (
           <span style={{ fontSize: 11, color: 'var(--ink-3)', flexShrink: 0 }}>{date}</span>
         )}

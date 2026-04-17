@@ -32,7 +32,7 @@ export default function PasswordGeneratorContent() {
                             { n: '4', title: 'Save it in a password manager', desc: 'Paste the password directly into your password manager (Bitwarden, 1Password, Dashlane) before using it anywhere else. Never store passwords in plain text files or browser notes.' },
                         ].map(({ n, title, desc }) => (
                             <li key={n} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                                <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--ink)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{n}</span>
+                                <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--bg-accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{n}</span>
                                 <div>
                                     <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--ink)', marginBottom: 4 }}>{title}</div>
                                     <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--ink-3)', margin: 0 }}>{desc}</p>
@@ -61,7 +61,7 @@ export default function PasswordGeneratorContent() {
                     <div style={{ overflowX: 'auto', marginBottom: 14 }}>
                         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
                             <thead>
-                            <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                            <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                                 {['Password', 'Length', 'Entropy', 'Time to crack'].map(h => (
                                     <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600, fontFamily: 'Outfit, sans-serif' }}>{h}</th>
                                 ))}
@@ -69,10 +69,10 @@ export default function PasswordGeneratorContent() {
                             </thead>
                             <tbody>
                             {[
-                                { pwd: 'password123',         len: '11', entropy: '~37 bits', time: 'Instant',           bg: '#fef2f2' },
-                                { pwd: 'P@ssw0rd!',           len: '9',  entropy: '~45 bits', time: 'Minutes',           bg: '#fef2f2' },
-                                { pwd: 'xK9#mP2qL',           len: '9',  entropy: '~59 bits', time: 'Days',              bg: '#fffbeb' },
-                                { pwd: 'xK9#mP2qLvR4!nW8s',  len: '18', entropy: '~118 bits',time: 'Billions of years',  bg: '#f0fdf4' },
+                                { pwd: 'password123',         len: '11', entropy: '~37 bits', time: 'Instant',           bg: 'var(--red-lt)' },
+                                { pwd: 'P@ssw0rd!',           len: '9',  entropy: '~45 bits', time: 'Minutes',           bg: 'var(--red-lt)' },
+                                { pwd: 'xK9#mP2qL',           len: '9',  entropy: '~59 bits', time: 'Days',              bg: 'var(--amber-lt)' },
+                                { pwd: 'xK9#mP2qLvR4!nW8s',  len: '18', entropy: '~118 bits',time: 'Billions of years',  bg: 'var(--green-lt)' },
                             ].map(({ pwd, len, entropy, time, bg }) => (
                                 <tr key={pwd} style={{ background: bg, borderBottom: '1px solid var(--border)' }}>
                                     <td style={{ padding: '10px 14px', fontFamily: 'JetBrains Mono, monospace', fontSize: 13 }}>{pwd}</td>
@@ -310,7 +310,7 @@ export default function PasswordGeneratorContent() {
                                     href={href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    style={{ display: 'block', padding: '8px 14px', background: 'var(--ink)', color: '#fff', borderRadius: 'var(--r-m)', fontSize: 13, fontWeight: 600, textDecoration: 'none', textAlign: 'center', transition: 'background .13s' }}
+                                    style={{ display: 'block', padding: '8px 14px', background: 'var(--bg-accent)', color: '#fff', borderRadius: 'var(--r-m)', fontSize: 13, fontWeight: 600, textDecoration: 'none', textAlign: 'center', transition: 'background .13s' }}
                                 >
                                     {cta} →
                                 </a>

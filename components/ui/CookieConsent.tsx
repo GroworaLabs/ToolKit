@@ -219,5 +219,5 @@ const btnSecondary: React.CSSProperties = {
   ...btnBase, background: 'var(--white)', color: 'var(--ink-2)',
 };
 const btnPrimary: React.CSSProperties = {
-  ...btnBase, background: 'var(--ink)', color: 'var(--white)', borderColor: 'var(--ink)',
+  ...btnBase, background: 'var(--bg-accent)', color: '#fff', borderColor: 'var(--bg-accent)',
 };

@@ -83,7 +83,7 @@ export default function NatoAlphabetContent() {
             },
           ].map(({ n, title, desc }) => (
             <li key={n} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-              <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--ink)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{n}</span>
+              <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--bg-accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{n}</span>
               <div>
                 <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--ink)', marginBottom: 4 }}>{title}</div>
                 <P>{desc}</P>
@@ -104,7 +104,7 @@ export default function NatoAlphabetContent() {
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
             <thead>
-              <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+              <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                 {['Letter', 'Code word', 'Pronunciation'].map(h => (
                   <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600 }}>{h}</th>
                 ))}
@@ -135,7 +135,7 @@ export default function NatoAlphabetContent() {
         <div style={{ overflowX: 'auto', marginBottom: 16 }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
             <thead>
-              <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+              <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                 {['Digit', 'Standard', 'Aviation pronunciation', 'Why it changed'].map(h => (
                   <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600 }}>{h}</th>
                 ))}

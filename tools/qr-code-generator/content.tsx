@@ -31,7 +31,7 @@ export default function QrCodeGeneratorContent() {
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
                 <thead>
-                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                   {['Content type', 'Format example', 'What it does'].map(h => (
                       <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600, fontFamily: 'Outfit, sans-serif' }}>{h}</th>
                   ))}
@@ -74,7 +74,7 @@ export default function QrCodeGeneratorContent() {
                 { level: 'L — 7%',  use: 'Clean digital displays, screens, low-risk environments', color: 'var(--green)',  bg: 'var(--green-lt)' },
                 { level: 'M — 15%', use: 'General purpose — the recommended default for most uses', color: 'var(--blue)',   bg: 'var(--blue-lt)' },
                 { level: 'Q — 25%', use: 'When adding a logo overlay on top of the QR code',       color: 'var(--amber)',  bg: 'var(--amber-lt)' },
-                { level: 'H — 30%', use: 'Outdoor, industrial, or high-damage risk environments',   color: 'var(--red)',    bg: '#fef2f2' },
+                { level: 'H — 30%', use: 'Outdoor, industrial, or high-damage risk environments',   color: 'var(--red)',    bg: 'var(--red-lt)' },
               ].map(({ level, use, color, bg }) => (
                   <div key={level} style={{ padding: '14px 16px', background: bg, border: `1px solid ${color}33`, borderRadius: 'var(--r-l)' }}>
                     <div style={{ fontSize: 14, fontWeight: 700, color, marginBottom: 6 }}>{level}</div>
@@ -95,7 +95,7 @@ export default function QrCodeGeneratorContent() {
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
                 <thead>
-                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                   {['Use case', 'Min print size', 'Recommended download', 'Notes'].map(h => (
                       <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600, fontFamily: 'Outfit, sans-serif' }}>{h}</th>
                   ))}
@@ -215,7 +215,7 @@ export default function QrCodeGeneratorContent() {
               Need to encode data for API requests? Try the <a href="/tools/base64" style={{ color: 'var(--green)', textDecoration: 'underline' }}>Base64 Encoder</a> or <a href="/tools/url-encoder" style={{ color: 'var(--green)', textDecoration: 'underline' }}>URL Encoder</a>. For secure sharing of credentials via a link, consider a self-destructing note service. To generate a password to encode in your QR code, use the <a href="/tools/password-generator" style={{ color: 'var(--green)', textDecoration: 'underline' }}>Password Generator</a>.
             </p>
           </section>
-
+
 
         </div>
       </div>

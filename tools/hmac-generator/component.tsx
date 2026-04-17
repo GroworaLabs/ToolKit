@@ -96,7 +96,7 @@ export default function HmacGeneratorWidget() {
       </div>
 
       {/* Output */}
-      {error && <div style={{ padding: '10px 14px', background: '#fef2f2', border: '1px solid #fca5a5', borderRadius: 'var(--r-m)', fontSize: 13, color: '#dc2626', marginBottom: 12 }}>{error}</div>}
+      {error && <div style={{ padding: '10px 14px', background: 'var(--red-lt)', border: '1px solid var(--red)', borderRadius: 'var(--r-m)', fontSize: 13, color: 'var(--red)', marginBottom: 12 }}>{error}</div>}
 
       {result ? (
         <>

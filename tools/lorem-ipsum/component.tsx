@@ -62,7 +62,7 @@ export default function LoremIpsumWidget() {
 
             {/* Actions */}
             <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
-                <button onClick={generate} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, padding: '12px', background: 'var(--ink)', color: '#fff', border: 'none', borderRadius: 'var(--r-m)', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>
+                <button onClick={generate} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, padding: '12px', background: 'var(--bg-accent)', color: '#fff', border: 'none', borderRadius: 'var(--r-m)', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>
                     <IcoZap /> Generate
                 </button>
                 <button onClick={copy} disabled={!output} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '12px 16px', background: copied ? 'var(--green)' : 'var(--white)', color: copied ? '#fff' : 'var(--ink-2)', border: `1.5px solid ${copied ? 'var(--green)' : 'var(--border)'}`, borderRadius: 'var(--r-m)', fontSize: 13, fontWeight: 600, cursor: output ? 'pointer' : 'default', opacity: output ? 1 : 0.4 }}>

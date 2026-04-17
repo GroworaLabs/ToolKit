@@ -245,7 +245,7 @@ export default function TextDiffWidget() {
           <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--green)', background: 'var(--green-lt)', padding: '3px 9px', borderRadius: 99 }}>
             +{stats.added} added
           </span>
-          <span style={{ fontSize: 11, fontWeight: 700, color: '#dc2626', background: '#fef2f2', padding: '3px 9px', borderRadius: 99 }}>
+          <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--red)', background: 'var(--red-lt)', padding: '3px 9px', borderRadius: 99 }}>
             −{stats.removed} removed
           </span>
           <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--ink-3)', background: 'var(--border)', padding: '3px 9px', borderRadius: 99 }}>
@@ -287,7 +287,7 @@ export default function TextDiffWidget() {
               const isAdd = line.type === 'insert';
               const isDel = line.type === 'delete';
               const bg    = isAdd ? 'rgba(5,150,105,.08)'  : isDel ? 'rgba(220,38,38,.08)'  : 'transparent';
-              const color = isAdd ? 'var(--green)'          : isDel ? '#dc2626'               : 'var(--ink-3)';
+              const color = isAdd ? 'var(--green)'          : isDel ? 'var(--red)'               : 'var(--ink-3)';
               const prefix = isAdd ? '+' : isDel ? '−' : ' ';
               return (
                 <div key={idx} style={{ display: 'flex', background: bg, borderBottom: '1px solid var(--border)', minHeight: 22 }}>
@@ -298,7 +298,7 @@ export default function TextDiffWidget() {
                     {line.bLine ?? ''}
                   </span>
                   <span style={{ width: 20, textAlign: 'center', flexShrink: 0, color, fontWeight: 700, lineHeight: '24px', fontSize: 13 }}>{prefix}</span>
-                  <span style={{ flex: 1, padding: '2px 12px 2px 0', color: isDel ? '#dc2626' : isAdd ? 'var(--green)' : 'var(--ink)', lineHeight: '20px', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
+                  <span style={{ flex: 1, padding: '2px 12px 2px 0', color: isDel ? 'var(--red)' : isAdd ? 'var(--green)' : 'var(--ink)', lineHeight: '20px', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
                     {line.value}
                   </span>
                 </div>
@@ -334,7 +334,7 @@ export default function TextDiffWidget() {
                 return (
                   <div key={idx} style={{ display: 'flex', background: isDel ? 'rgba(220,38,38,.08)' : 'transparent', borderBottom: '1px solid var(--border)', minHeight: 22 }}>
                     <span style={{ ...lineNoStyle, borderRight: '1px solid var(--border)', padding: '2px 6px 2px 0', lineHeight: '20px', color: isDel ? 'rgba(220,38,38,.5)' : 'var(--ink-4)' }}>{row.aLine ?? ''}</span>
-                    <span style={{ flex: 1, padding: '2px 10px', color: isDel ? '#dc2626' : 'var(--ink-4)', lineHeight: '20px', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{row.aValue ?? ''}</span>
+                    <span style={{ flex: 1, padding: '2px 10px', color: isDel ? 'var(--red)' : 'var(--ink-4)', lineHeight: '20px', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{row.aValue ?? ''}</span>
                   </div>
                 );
               })}

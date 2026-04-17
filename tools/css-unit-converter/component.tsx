@@ -135,7 +135,7 @@ export default function CssUnitConverterWidget() {
             {/* Results table */}
             {results ? (
                 <div style={{ border: '1px solid var(--border)', borderRadius: 'var(--r-l)', overflow: 'hidden' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '52px minmax(0, 1fr) minmax(0, 1fr)', background: 'var(--ink)', color: '#fff', padding: '8px 12px', fontSize: 11, fontWeight: 700, fontFamily: 'Outfit, sans-serif', gap: 8 }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '52px minmax(0, 1fr) minmax(0, 1fr)', background: 'var(--bg-accent)', color: '#fff', padding: '8px 12px', fontSize: 11, fontWeight: 700, fontFamily: 'Outfit, sans-serif', gap: 8 }}>
                         <span>UNIT</span>
                         <span>VALUE</span>
                         <span>DESCRIPTION</span>

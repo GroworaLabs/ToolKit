@@ -41,7 +41,7 @@ export default function HashGeneratorWidget() {
             <button
                 onClick={generate}
                 disabled={!input || loading}
-                style={{ width: '100%', padding: '12px', background: !input || loading ? 'var(--border)' : 'var(--ink)', color: '#fff', border: 'none', borderRadius: 'var(--r-m)', fontSize: 14, fontWeight: 600, cursor: input && !loading ? 'pointer' : 'default', marginBottom: 20, transition: 'background .13s' }}
+                style={{ width: '100%', padding: '12px', background: !input || loading ? 'var(--border)' : 'var(--bg-accent)', color: '#fff', border: 'none', borderRadius: 'var(--r-m)', fontSize: 14, fontWeight: 600, cursor: input && !loading ? 'pointer' : 'default', marginBottom: 20, transition: 'background .13s' }}
             >
                 {loading ? 'Hashing…' : 'Generate Hashes'}
             </button>

@@ -44,8 +44,8 @@ export default function HmacGeneratorContent() {
             {[
               {
                 title: 'Plain hash (SHA-256)',
-                color: '#dc2626',
-                bg: '#fef2f2',
+                color: 'var(--red)',
+                bg: 'var(--red-lt)',
                 points: [
                   'No key required — anyone can compute it',
                   'Proves data integrity only (not altered in transit)',
@@ -92,7 +92,7 @@ export default function HmacGeneratorContent() {
               { step: '4', title: 'Compare using constant-time equality', desc: 'Compare your computed HMAC to the one in the header using a constant-time comparison function. Never use == or ===, which leak timing information that attackers can exploit to forge signatures character by character.' },
             ].map(({ step, title, desc }) => (
               <div key={step} style={{ display: 'flex', gap: 14, alignItems: 'flex-start', padding: '12px 16px', background: 'var(--white)', border: '1px solid var(--border)', borderRadius: 'var(--r-l)' }}>
-                <span style={{ width: 26, height: 26, borderRadius: '50%', background: 'var(--ink)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, flexShrink: 0 }}>{step}</span>
+                <span style={{ width: 26, height: 26, borderRadius: '50%', background: 'var(--bg-accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, flexShrink: 0 }}>{step}</span>
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--ink)', marginBottom: 4 }}>{title}</div>
                   <p style={{ fontSize: 13, color: 'var(--ink-3)', lineHeight: 1.65, margin: 0 }}>{desc}</p>

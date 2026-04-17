@@ -102,7 +102,7 @@ export default function TorqueConverterWidget() {
         <div style={{ overflowX: 'auto' }}>
           <table style={{ minWidth: 420, borderCollapse: 'collapse', fontSize: 13 }}>
             <thead>
-              <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+              <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                 {['Application', 'N·m', 'ft·lb'].map(h => (
                   <th key={h} style={{ padding: '8px 12px', textAlign: 'left', fontFamily: 'Outfit, sans-serif', fontWeight: 600 }}>{h}</th>
                 ))}

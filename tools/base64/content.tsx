@@ -30,7 +30,7 @@ export default function Base64Content() {
               { n: '4', title: 'Copy the output', desc: 'Click Copy to grab the result. Everything runs locally — your text never leaves the browser.' },
             ].map(({ n, title, desc }) => (
               <li key={n} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--ink)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{n}</span>
+                <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--bg-accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{n}</span>
                 <div>
                   <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--ink)', marginBottom: 4 }}>{title}</div>
                   <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--ink-3)', margin: 0 }}>{desc}</p>
@@ -200,7 +200,7 @@ export default function Base64Content() {
             Note: the <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12 }}>-n</code> flag in the <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12 }}>echo</code> command prevents a trailing newline from being included in the encoded output. Without it, the result will include the newline character and produce unexpected padding.
           </p>
         </section>
-
+
 
       </div>
     </div>

@@ -135,7 +135,7 @@ export default function CronContent() {
                     <div style={{ overflowX: 'auto', width: '100%' }}>
                         <table style={{ minWidth: 480, borderCollapse: 'collapse', fontSize: 14 }}>
                             <thead>
-                                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                                     {['Character', 'Name', 'Example', 'Meaning'].map(h => (
                                         <th key={h} style={thStyle}>{h}</th>
                                     ))}
@@ -173,7 +173,7 @@ export default function CronContent() {
                     <div style={{ overflowX: 'auto', width: '100%' }}>
                         <table style={{ minWidth: 360, borderCollapse: 'collapse', fontSize: 14 }}>
                             <thead>
-                                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                                     {['Expression', 'Meaning'].map(h => (
                                         <th key={h} style={thStyle}>{h}</th>
                                     ))}

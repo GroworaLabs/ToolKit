@@ -305,7 +305,7 @@ const HomePage: NextPage = () => {
               </div>
 
               <div className="a3" style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                <Link href="/tools" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '12px 22px', background: 'var(--ink)', color: '#fff', borderRadius: 'var(--r-l)', fontSize: 15, fontWeight: 600, textDecoration: 'none', transition: 'background .13s' }}>
+                <Link href="/tools" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '12px 22px', background: '#1c1a14', color: '#fff', borderRadius: 'var(--r-l)', fontSize: 15, fontWeight: 600, textDecoration: 'none', transition: 'background .13s' }} className="dark-panel">
                   Browse all tools →
                 </Link>
                 <Link href="/tools/password-generator" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '12px 22px', background: 'var(--white)', color: 'var(--ink)', border: '1.5px solid var(--border)', borderRadius: 'var(--r-l)', fontSize: 15, fontWeight: 600, textDecoration: 'none', transition: 'border-color .13s' }}>
@@ -398,7 +398,7 @@ const HomePage: NextPage = () => {
           {/* ── Bottom CTA ─────────────────────────── */}
           <section style={{ padding: '64px 0 0' }}>
             <div className="wrap-wide">
-              <div style={{ padding: 'clamp(28px, 5vw, 48px)', background: 'var(--ink)', borderRadius: 'var(--r-xl)', textAlign: 'center' }}>
+              <div className="dark-panel" style={{ padding: 'clamp(28px, 5vw, 48px)', background: '#1c1a14', borderRadius: 'var(--r-xl)', textAlign: 'center' }}>
                 <h2 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: 'clamp(20px, 3vw, 28px)', color: '#fff', marginBottom: 12, letterSpacing: '-0.02em' }}>
                   Everything you need, nothing you don't
                 </h2>

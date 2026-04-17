@@ -97,9 +97,9 @@ const GuidesPage: NextPage<Props> = ({ guides, categories }) => {
                   style={{
                     padding: '5px 14px', borderRadius: 99, fontSize: 13, fontWeight: 500,
                     border: '1px solid',
-                    borderColor: activeCategory === cat ? '#3b82f6' : 'var(--border)',
-                    background:  activeCategory === cat ? 'rgba(59,130,246,.08)' : 'var(--white)',
-                    color:       activeCategory === cat ? '#2563eb' : 'var(--ink-3)',
+                    borderColor: activeCategory === cat ? 'var(--green)' : 'var(--border)',
+                    background:  activeCategory === cat ? 'var(--green-lt)' : 'var(--white)',
+                    color:       activeCategory === cat ? 'var(--green)' : 'var(--ink-3)',
                     cursor: 'pointer', transition: 'all .15s',
                   }}
                 >

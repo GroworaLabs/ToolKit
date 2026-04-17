@@ -316,7 +316,7 @@ const ContactPage: NextPage = () => {
 
                                 {/* Error */}
                                 {status === 'error' && (
-                                    <div style={{ padding: '12px 16px', background: 'var(--red-lt)', border: '1px solid #fca5a5', borderRadius: 'var(--r-m)', fontSize: 13, color: 'var(--red)' }}>
+                                    <div style={{ padding: '12px 16px', background: 'var(--red-lt)', border: '1px solid var(--red)', borderRadius: 'var(--r-m)', fontSize: 13, color: 'var(--red)' }}>
                                         Something went wrong. Email us directly at{' '}
                                         <a href="mailto:groworalabs@outlook.com" style={{ color: 'var(--red)', fontWeight: 600 }}>
                                             groworalabs@outlook.com
@@ -330,7 +330,7 @@ const ContactPage: NextPage = () => {
                                     disabled={status === 'sending' || isRateLimited}
                                     style={{
                                         padding: '13px 24px',
-                                        background: isRateLimited ? 'var(--ink-3)' : status === 'sending' ? 'var(--ink-3)' : 'var(--ink)',
+                                        background: isRateLimited ? 'var(--ink-3)' : status === 'sending' ? 'var(--ink-3)' : 'var(--bg-accent)',
                                         color: '#fff', border: 'none', borderRadius: 'var(--r-m)',
                                         fontSize: 15, fontWeight: 600,
                                         cursor: (status === 'sending' || isRateLimited) ? 'not-allowed' : 'pointer',

@@ -9,6 +9,8 @@ import { getBySlug, getLiveSlugs, TOOLS, CATEGORY_SLUGS } from '@/lib/registry';
 import type { ToolMeta, FaqItem, GuideMeta } from '@/lib/types';
 import { getGuidesByTool } from '@/lib/guides';
 
+const jsonLd = (data: unknown) => JSON.stringify(data).replace(/</g, '\\u003c');
+
 /* ── Static paths — only live tools get pages ─────────── */
 export const getStaticPaths: GetStaticPaths = () => ({
     paths: getLiveSlugs().map(slug => ({ params: { slug } })),
@@ -814,7 +816,7 @@ function ColorConverterSidebar() {
                     { n: '4', title: 'Copy what you need',       desc: 'Click any output row to copy it to clipboard.' },
                 ].map(({ n, title, desc }) => (
                     <li key={n} style={{ display: 'flex', gap: 12, padding: '12px 0', borderBottom: '1px solid var(--border)' }}>
-                        <span style={{ width: 24, height: 24, borderRadius: '50%', background: 'var(--ink)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, flexShrink: 0, marginTop: 1 }}>{n}</span>
+                        <span style={{ width: 24, height: 24, borderRadius: '50%', background: 'var(--bg-accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, flexShrink: 0, marginTop: 1 }}>{n}</span>
                         <div>
                             <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 3 }}>{title}</div>
                             <div style={{ fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.55 }}>{desc}</div>
@@ -858,7 +860,7 @@ function TextDiffSidebar() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
                 {[
                     { symbol: '+', label: 'Added',     bg: 'rgba(5,150,105,.08)',  color: 'var(--green)', desc: 'In Modified only' },
-                    { symbol: '−', label: 'Removed',   bg: 'rgba(220,38,38,.08)', color: '#dc2626',       desc: 'In Original only' },
+                    { symbol: '−', label: 'Removed',   bg: 'rgba(220,38,38,.08)', color: 'var(--red)',       desc: 'In Original only' },
                     { symbol: ' ', label: 'Unchanged', bg: 'transparent',          color: 'var(--ink-3)',  desc: 'In both texts' },
                 ].map(({ symbol, label, bg, color, desc }) => (
                     <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
@@ -966,7 +968,7 @@ function CronSidebar() {
                     { pos: '5', name: 'Day of week',   range: '0–6'   },
                 ].map(({ pos, name, range }) => (
                     <div key={pos} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '9px 0', borderBottom: '1px solid var(--border)' }}>
-                        <span style={{ width: 22, height: 22, borderRadius: '50%', background: 'var(--ink)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, flexShrink: 0 }}>{pos}</span>
+                        <span style={{ width: 22, height: 22, borderRadius: '50%', background: 'var(--bg-accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, flexShrink: 0 }}>{pos}</span>
                         <div style={{ flex: 1, minWidth: 0 }}>
                             <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--ink)' }}>{name}</div>
                             <div style={{ fontSize: 11, color: 'var(--ink-4)', fontFamily: 'JetBrains Mono, monospace' }}>{range}</div>
@@ -1035,7 +1037,7 @@ function CsvToJsonSidebar() {
                     { n: '4', title: 'Copy or download',      desc: 'Copy the JSON to clipboard or download it as a .json file.' },
                 ].map(({ n, title, desc }) => (
                     <li key={n} style={{ display: 'flex', gap: 12, padding: '12px 0', borderBottom: '1px solid var(--border)' }}>
-                        <span style={{ width: 24, height: 24, borderRadius: '50%', background: 'var(--ink)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, flexShrink: 0, marginTop: 1 }}>{n}</span>
+                        <span style={{ width: 24, height: 24, borderRadius: '50%', background: 'var(--bg-accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, flexShrink: 0, marginTop: 1 }}>{n}</span>
                         <div>
                             <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 3 }}>{title}</div>
                             <div style={{ fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.55 }}>{desc}</div>
@@ -1063,7 +1065,7 @@ function QrSidebar() {
             <ol style={{ paddingLeft: 0, listStyle: 'none', margin: 0, display: 'flex', flexDirection: 'column', gap: 0 }}>
                 {steps.map(({ n, title, desc }) => (
                     <li key={n} style={{ display: 'flex', gap: 12, padding: '12px 0', borderBottom: '1px solid var(--border)' }}>
-                        <span style={{ width: 24, height: 24, borderRadius: '50%', background: 'var(--ink)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, flexShrink: 0, marginTop: 1 }}>{n}</span>
+                        <span style={{ width: 24, height: 24, borderRadius: '50%', background: 'var(--bg-accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, flexShrink: 0, marginTop: 1 }}>{n}</span>
                         <div>
                             <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 3 }}>{title}</div>
                             <div style={{ fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.55 }}>{desc}</div>
@@ -1128,7 +1130,7 @@ const ToolPage: NextPage<Props> = ({ tool, relatedGuides, faq }) => {
 
                 {/* ── Structured data: SoftwareApplication (expanded) ── */}
                 <script type="application/ld+json" dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
+                    __html: jsonLd({
                         '@context': 'https://schema.org',
                         '@type': 'SoftwareApplication',
                         '@id': `${toolUrl}/#software`,
@@ -1162,7 +1164,7 @@ const ToolPage: NextPage<Props> = ({ tool, relatedGuides, faq }) => {
 
                 {/* ── Structured data: HowTo ── */}
                 <script type="application/ld+json" dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
+                    __html: jsonLd({
                         '@context': 'https://schema.org',
                         '@type': 'HowTo',
                         name: `How to use ${tool.name}`,
@@ -1184,7 +1186,7 @@ const ToolPage: NextPage<Props> = ({ tool, relatedGuides, faq }) => {
 
                 {/* ── Structured data: BreadcrumbList ── */}
                 <script type="application/ld+json" dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
+                    __html: jsonLd({
                         '@context': 'https://schema.org',
                         '@type': 'BreadcrumbList',
                         itemListElement: [
@@ -1403,7 +1405,7 @@ function ToolFaq({ faq }: { faq: FaqItem[] }) {
         <>
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+                dangerouslySetInnerHTML={{ __html: jsonLd(faqSchema) }}
             />
             <FaqSection items={faq} />
         </>

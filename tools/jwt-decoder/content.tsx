@@ -29,8 +29,8 @@ export default function JwtDecoderContent() {
             {[
               {
                 part: 'Header',
-                color: '#7c3aed',
-                bg: '#f5f3ff',
+                color: 'var(--blue)',
+                bg: 'var(--blue-lt)',
                 desc: 'A JSON object declaring the token type and signing algorithm. Example: {"alg":"HS256","typ":"JWT"}. The "alg" field is critical — it tells the verification library which algorithm to use. Always validate that "alg" matches what your application expects. Never accept tokens with "alg":"none".',
                 fields: [
                   { k: 'alg', v: 'Signing algorithm: HS256, RS256, ES256, etc.' },
@@ -55,8 +55,8 @@ export default function JwtDecoderContent() {
               },
               {
                 part: 'Signature',
-                color: '#2563eb',
-                bg: '#eff6ff',
+                color: 'var(--blue)',
+                bg: 'var(--blue-lt)',
                 desc: 'The cryptographic proof that the header and payload were not altered. Computed as: HMAC-SHA256(base64url(header) + "." + base64url(payload), secret) for HS256, or an RSA/ECDSA signature for asymmetric algorithms. Only the signature section is secret — the header and payload are just encoded.',
                 fields: [],
               },
@@ -89,7 +89,7 @@ export default function JwtDecoderContent() {
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
-                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                   {['Algorithm', 'Type', 'Key', 'Best for'].map(h => (
                     <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600, fontFamily: 'Outfit, sans-serif', whiteSpace: 'nowrap' }}>{h}</th>
                   ))}

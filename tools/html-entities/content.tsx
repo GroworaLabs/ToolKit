@@ -110,7 +110,7 @@ export default function HtmlEntitiesContent() {
                     <div style={{ overflowX: 'auto' }}>
                         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
                             <thead>
-                                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                                     {['Character', 'Named Entity', 'Decimal', 'Hex', 'Category'].map(h => (
                                         <th key={h} style={{ padding: '10px 12px', textAlign: 'left', fontWeight: 600, fontFamily: 'Outfit, sans-serif' }}>{h}</th>
                                     ))}

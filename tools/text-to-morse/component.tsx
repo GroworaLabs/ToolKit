@@ -31,7 +31,7 @@ export default function TextToMorseWidget() {
             onClick={() => { setDirection(d.value); clear(); }}
             style={{
               padding: '7px 16px', border: 'none', borderRadius: 'var(--r-m)',
-              background: direction === d.value ? 'var(--ink)' : 'var(--border)',
+              background: direction === d.value ? 'var(--bg-accent)' : 'var(--border)',
               color: direction === d.value ? '#fff' : 'var(--ink-3)',
               fontSize: 13, fontWeight: 600, cursor: 'pointer',
               transition: 'background .15s, color .15s',

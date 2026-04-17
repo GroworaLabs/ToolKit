@@ -122,7 +122,7 @@ export default function DuplicateLineRemoverWidget() {
                 padding: '3px 10px',
                 borderRadius: 'var(--r-s)',
                 border: 'none',
-                background: copied ? 'var(--green)' : 'var(--ink)',
+                background: copied ? 'var(--green)' : 'var(--bg-accent)',
                 color: '#fff',
                 fontSize: 11,
                 fontWeight: 600,
@@ -160,7 +160,7 @@ export default function DuplicateLineRemoverWidget() {
         <div style={{ display: 'flex', gap: 20, marginTop: 10, flexWrap: 'wrap' }}>
           {[
             { label: 'Lines kept',    value: result.kept,    color: 'var(--green)' },
-            { label: 'Duplicates removed', value: result.removed, color: '#dc2626' },
+            { label: 'Duplicates removed', value: result.removed, color: 'var(--red)' },
           ].map(({ label, value, color }) => (
             <div key={label} style={{ fontSize: 12, color: 'var(--ink-3)' }}>
               <span style={{ fontWeight: 700, color, fontFamily: 'JetBrains Mono, monospace' }}>{value}</span>

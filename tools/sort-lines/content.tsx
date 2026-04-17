@@ -30,7 +30,7 @@ export default function SortLinesContent() {
               { n: '4', title: 'Copy the result', desc: 'Click Copy on the output panel to grab the sorted lines ready for paste into your editor, spreadsheet, or terminal.' },
             ].map(({ n, title, desc }) => (
               <li key={n} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--ink)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{n}</span>
+                <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--bg-accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{n}</span>
                 <div>
                   <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--ink)', marginBottom: 4 }}>{title}</div>
                   <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--ink-3)', margin: 0 }}>{desc}</p>
@@ -50,7 +50,7 @@ export default function SortLinesContent() {
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
-                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                   {['Sort mode', 'Best for', 'Example input', 'Example output'].map(h => (
                     <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600, fontFamily: 'Outfit, sans-serif' }}>{h}</th>
                   ))}
@@ -89,7 +89,7 @@ export default function SortLinesContent() {
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             {[
-              { title: 'Alphabetical sort (wrong for numbers)', lines: ['1', '10', '100', '2', '20', '3'], color: '#fef2f2', border: 'rgba(220,38,38,.2)', label: 'Lexicographic' },
+              { title: 'Alphabetical sort (wrong for numbers)', lines: ['1', '10', '100', '2', '20', '3'], color: 'var(--red-lt)', border: 'rgba(220,38,38,.2)', label: 'Lexicographic' },
               { title: 'Numeric sort (correct for numbers)', lines: ['1', '2', '3', '10', '20', '100'], color: 'var(--green-lt)', border: 'var(--green-mid, rgba(5,150,105,.2))', label: 'By value' },
             ].map(({ title, lines, color, border, label }) => (
               <div key={label} style={{ padding: '16px', background: color, border: `1px solid ${border}`, borderRadius: 'var(--r-l)' }}>

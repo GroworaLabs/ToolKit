@@ -104,7 +104,7 @@ export default function RandomTextWidget() {
           <button onClick={() => setCount(c => Math.min(cfg.max, c + 1))} style={{ width: 32, height: 36, border: '1.5px solid var(--border)', borderRadius: 'var(--r-s)', background: 'var(--white)', color: 'var(--ink-2)', fontSize: 18, cursor: 'pointer', flexShrink: 0 }}>+</button>
           <span style={{ fontSize: 13, color: 'var(--ink-3)' }}>{cfg.unit}</span>
         </div>
-        <button onClick={run} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '9px 18px', background: 'var(--ink)', color: '#fff', border: 'none', borderRadius: 'var(--r-m)', fontSize: 13, fontWeight: 700, cursor: 'pointer', flexShrink: 0 }}>
+        <button onClick={run} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '9px 18px', background: 'var(--bg-accent)', color: '#fff', border: 'none', borderRadius: 'var(--r-m)', fontSize: 13, fontWeight: 700, cursor: 'pointer', flexShrink: 0 }}>
           <IcoRefresh /> Generate
         </button>
       </div>

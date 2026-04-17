@@ -29,7 +29,7 @@ export default function TextToSlugContent() {
               { n: '3', title: 'Copy the result', desc: 'Your slug appears instantly in the green output box. Click Copy to grab it, then paste directly into your CMS, router config, or file name.' },
             ].map(({ n, title, desc }) => (
               <li key={n} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--ink)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{n}</span>
+                <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--bg-accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{n}</span>
                 <div>
                   <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--ink)', marginBottom: 4 }}>{title}</div>
                   <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--ink-3)', margin: 0 }}>{desc}</p>
@@ -49,7 +49,7 @@ export default function TextToSlugContent() {
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
-                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                   {['Practice', 'Recommended', 'Avoid', 'Reason'].map(h => (
                     <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600, fontFamily: 'Outfit, sans-serif' }}>{h}</th>
                   ))}
@@ -134,8 +134,8 @@ export default function TextToSlugContent() {
             Common slug mistakes to avoid
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 14 }}>
-            <div style={{ padding: '20px', background: '#fef2f2', border: '1px solid rgba(220,38,38,.2)', borderRadius: 'var(--r-l)' }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#dc2626', marginBottom: 12 }}>Mistakes that hurt SEO</div>
+            <div style={{ padding: '20px', background: 'var(--red-lt)', border: '1px solid rgba(220,38,38,.2)', borderRadius: 'var(--r-l)' }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--red)', marginBottom: 12 }}>Mistakes that hurt SEO</div>
               <ul style={{ paddingLeft: 18, fontSize: 14, color: 'var(--ink-2)', lineHeight: 1.85, margin: 0 }}>
                 <li>Using query parameters instead of clean slugs (?id=123)</li>
                 <li>Keeping stop words that dilute keyword signals</li>

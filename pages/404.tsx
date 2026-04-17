@@ -218,7 +218,7 @@ const NotFoundPage: NextPage<Props> = ({ tools, guides, popular }) => {
 
           {/* Quick links */}
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center' }}>
-            <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '11px 20px', background: 'var(--ink)', color: '#fff', borderRadius: 'var(--r-l)', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
+            <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '11px 20px', background: 'var(--bg-accent)', color: '#fff', borderRadius: 'var(--r-l)', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
               ← Back to home
             </Link>
             <Link href="/tools" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '11px 20px', background: 'var(--white)', color: 'var(--ink)', border: '1.5px solid var(--border)', borderRadius: 'var(--r-l)', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>

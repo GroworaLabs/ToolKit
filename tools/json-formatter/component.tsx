@@ -69,7 +69,7 @@ export default function JsonFormatterWidget() {
                 </span>
                             )}
                             {result.valid === false && (
-                                <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--red,#dc2626)', background: '#fef2f2', padding: '2px 8px', borderRadius: 99 }}>
+                                <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--red,#dc2626)', background: 'var(--red-lt)', padding: '2px 8px', borderRadius: 99 }}>
                   Invalid
                 </span>
                             )}
@@ -82,7 +82,7 @@ export default function JsonFormatterWidget() {
                     </div>
 
                     {result.error ? (
-                        <div style={{ padding: '12px 14px', background: '#fef2f2', border: '1.5px solid rgba(220,38,38,.2)', borderRadius: 'var(--r-m)', fontSize: 13, color: 'var(--red,#dc2626)', fontFamily: 'JetBrains Mono, monospace' }}>
+                        <div style={{ padding: '12px 14px', background: 'var(--red-lt)', border: '1.5px solid rgba(220,38,38,.2)', borderRadius: 'var(--r-m)', fontSize: 13, color: 'var(--red,#dc2626)', fontFamily: 'JetBrains Mono, monospace' }}>
                             {result.error}
                         </div>
                     ) : (

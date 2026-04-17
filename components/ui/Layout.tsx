@@ -5,11 +5,13 @@ import { useRouter } from 'next/router';
 import { getLiveTools, getCategories } from '@/lib/registry';
 import type { ToolMeta } from '@/lib/types';
 import { openCookiePreferences } from '@/components/ui/CookieConsent';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 export function Logo() {
     return (
         <Link href="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', flexShrink: 0 }}>
-            <img src="/logo.svg" alt="ToolKit" width={120} height={32} style={{ display: 'block', height: 32, width: 'auto' }} />
+            <img src="/logo.svg"       alt="ToolKit" width={120} height={32} className="logo-for-light" style={{ display: 'block', height: 32, width: 'auto' }} />
+            <img src="/logo-light.svg" alt=""        width={120} height={32} className="logo-for-dark"  style={{ display: 'none',  height: 32, width: 'auto' }} aria-hidden />
         </Link>
     );
 }
@@ -138,7 +140,7 @@ export function Layout({ children, activeNav }: LayoutProps) {
         <div style={{ background: 'var(--page-bg)', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
 
             {/* ── Header ── */}
-            <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, background: 'rgba(244,243,239,.97)', backdropFilter: 'blur(10px)', borderBottom: '1px solid var(--border)' }}>
+            <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, background: 'var(--header-bg)', backdropFilter: 'blur(10px)', borderBottom: '1px solid var(--border)' }}>
                 <div ref={wrapRef} className="wrap-wide" style={{ height: 52, display: 'flex', alignItems: 'center', gap: 8 }}>
                     <Logo />
 
@@ -401,29 +403,33 @@ export function Layout({ children, activeNav }: LayoutProps) {
                         )}
                     </div>
 
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginLeft: 'auto' }}>
+                        <ThemeToggle />
+                    </div>
+
                     {/* Hamburger — proper X animation */}
                     <button
                         onClick={() => setOpen(o => !o)}
                         aria-label={open ? 'Close menu' : 'Open menu'}
                         aria-expanded={open}
                         className="ham"
-                        style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: 36, height: 36, padding: 0, background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0, position: 'relative', marginLeft: 'auto' }}
+                        style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: 36, height: 36, padding: 0, background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0, position: 'relative' }}
                     >
                         {/* Top bar */}
                         <span style={{
-                            position: 'absolute', width: 20, height: 2, background: 'var(--ink)', borderRadius: 2,
+                            position: 'absolute', width: 20, height: 2, background: 'var(--bg-accent)', borderRadius: 2,
                             transform: open ? 'rotate(45deg)' : 'translateY(-6px)',
                             transition: 'transform .22s ease',
                         }} />
                         {/* Middle bar — fades out when open */}
                         <span style={{
-                            position: 'absolute', width: 20, height: 2, background: 'var(--ink)', borderRadius: 2,
+                            position: 'absolute', width: 20, height: 2, background: 'var(--bg-accent)', borderRadius: 2,
                             opacity: open ? 0 : 1,
                             transition: 'opacity .15s ease',
                         }} />
                         {/* Bottom bar */}
                         <span style={{
-                            position: 'absolute', width: 20, height: 2, background: 'var(--ink)', borderRadius: 2,
+                            position: 'absolute', width: 20, height: 2, background: 'var(--bg-accent)', borderRadius: 2,
                             transform: open ? 'rotate(-45deg)' : 'translateY(6px)',
                             transition: 'transform .22s ease',
                         }} />
@@ -475,7 +481,7 @@ export function Layout({ children, activeNav }: LayoutProps) {
             </main>
 
             {/* ── Footer ── */}
-            <footer style={{ background: 'var(--ink)', marginTop: 64 }}>
+            <footer className="dark-panel" style={{ background: '#1c1a14', marginTop: 64 }}>
                 <div className="wrap-wide" style={{ padding: 'clamp(40px, 6vw, 56px) 16px 0' }}>
 
                     {/* Top section */}

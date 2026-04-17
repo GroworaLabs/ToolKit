@@ -17,7 +17,7 @@ const PREVIEW_STYLES = `
   .md-preview ul,.md-preview ol { padding-left: 1.4em; margin-bottom: .85em; }
   .md-preview li { margin-bottom: .25em; }
   .md-preview code { font-family: 'JetBrains Mono', monospace; font-size: 12px; background: var(--border); padding: 2px 6px; border-radius: 4px; color: var(--ink); }
-  .md-preview pre { background: var(--ink); color: #e2e8f0; padding: 14px; border-radius: 8px; overflow-x: auto; margin-bottom: .85em; }
+  .md-preview pre { background: var(--bg-accent); color: #e2e8f0; padding: 14px; border-radius: 8px; overflow-x: auto; margin-bottom: .85em; }
   .md-preview pre code { background: none; padding: 0; color: inherit; font-size: 13px; }
   .md-preview blockquote { border-left: 3px solid var(--green); padding: 6px 14px; color: var(--ink-3); margin: .85em 0; background: var(--green-lt); border-radius: 0 6px 6px 0; }
   .md-preview a { color: var(--green); text-decoration: underline; }

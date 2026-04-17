@@ -127,7 +127,7 @@ const AboutPage: NextPage = () => {
             <div className="rule" style={{ marginTop: 48 }} />
 
             <div style={{ marginTop: 32, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-              <Link href="/tools" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '11px 20px', background: 'var(--ink)', color: '#fff', borderRadius: 'var(--r-l)', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
+              <Link href="/tools" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '11px 20px', background: 'var(--bg-accent)', color: '#fff', borderRadius: 'var(--r-l)', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
                 Browse all tools →
               </Link>
               <Link href="/privacy" style={{ display: 'inline-flex', alignItems: 'center', padding: '11px 20px', background: 'var(--white)', color: 'var(--ink-2)', border: '1.5px solid var(--border)', borderRadius: 'var(--r-l)', fontSize: 14, fontWeight: 500, textDecoration: 'none' }}>

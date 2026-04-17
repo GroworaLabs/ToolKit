@@ -159,7 +159,7 @@ export default function CronWidget() {
       </div>
 
       {/* Expression + copy */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 16px', background: 'var(--ink)', borderRadius: 'var(--r-m)', marginBottom: 12 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 16px', background: 'var(--bg-accent)', borderRadius: 'var(--r-m)', marginBottom: 12 }}>
         <code style={{ flex: 1, fontFamily: 'JetBrains Mono, monospace', fontSize: 'clamp(13px, 3.5vw, 18px)', fontWeight: 700, color: '#fff', letterSpacing: '0.05em', wordBreak: 'break-all', minWidth: 0 }}>{expr}</code>
         <button onClick={copy} style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '6px 12px', background: copied ? 'var(--green)' : 'rgba(255,255,255,.12)', color: '#fff', border: 'none', borderRadius: 'var(--r-s)', fontSize: 12, fontWeight: 600, cursor: 'pointer', transition: 'all .14s', flexShrink: 0 }}>
           {copied ? <IcoCheck /> : <IcoCopy />} {copied ? 'Copied!' : 'Copy'}

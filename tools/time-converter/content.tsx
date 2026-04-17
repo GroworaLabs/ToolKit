@@ -125,7 +125,7 @@ export default function TimeConverterContent() {
                     <div style={{ overflowX: 'auto', width: '100%' }}>
                         <table style={{ minWidth: 420, borderCollapse: 'collapse', fontSize: 14 }}>
                             <thead>
-                                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                                     {['Duration', 'Seconds', 'Minutes', 'Hours'].map(h => (
                                         <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontFamily: 'Outfit, sans-serif', fontWeight: 600 }}>{h}</th>
                                     ))}
@@ -171,7 +171,7 @@ export default function TimeConverterContent() {
                     <div style={{ overflowX: 'auto', width: '100%' }}>
                         <table style={{ minWidth: 520, borderCollapse: 'collapse', fontSize: 14 }}>
                             <thead>
-                                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                                     {['Uptime SLA', 'Downtime / year', 'Downtime / month', 'Downtime / week'].map(h => (
                                         <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontFamily: 'Outfit, sans-serif', fontWeight: 600 }}>{h}</th>
                                     ))}
@@ -200,7 +200,7 @@ export default function TimeConverterContent() {
                         Based on 365.25 days per year average (accounting for leap years).
                     </p>
                 </section>
-
+
 
                 {/* ── Tips for accurate conversions ────────────── */}
                 <section style={{ marginBottom: 48 }}>
