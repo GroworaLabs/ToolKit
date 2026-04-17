@@ -100,7 +100,7 @@ export default function ApiKeyGeneratorContent() {
               { n: '7', title: 'Rotation support',    desc: 'Allow users to generate new keys and set an expiry date for old ones. Implement a grace period where both old and new keys work, then automatically revoke the old key.' },
             ].map(({ n, title, desc }) => (
               <li key={n} style={{ display: 'flex', gap: 14, padding: '12px 16px', background: 'var(--white)', border: '1px solid var(--border)', borderRadius: 'var(--r-l)' }}>
-                <span style={{ width: 24, height: 24, borderRadius: '50%', background: 'var(--ink)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, flexShrink: 0 }}>{n}</span>
+                <span style={{ width: 24, height: 24, borderRadius: '50%', background: 'var(--bg-accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, flexShrink: 0 }}>{n}</span>
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--ink)', marginBottom: 4 }}>{title}</div>
                   <p style={{ fontSize: 13, color: 'var(--ink-3)', lineHeight: 1.65, margin: 0 }}>{desc}</p>

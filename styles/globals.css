@@ -18,6 +18,7 @@
   --green:     #059669;
   --green-lt:  #ecfdf5;
   --green-mid: #d1fae5;
+  --green-deep: #047857;
 
   --amber:     #d97706;
   --amber-lt:  #fffbeb;
@@ -28,6 +29,8 @@
 
   --red:       #dc2626;
   --red-lt:    #fef2f2;
+
+  --bg-accent: #1c1a14;
 
   --header-bg: rgba(244,243,239,.97);
   --surface:   #f9f9f9;
@@ -60,6 +63,7 @@ html.dark {
   --green:     #10b981;
   --green-lt:  rgba(16,185,129,.14);
   --green-mid: rgba(16,185,129,.32);
+  --green-deep: #34d399;
 
   --amber:     #f59e0b;
   --amber-lt:  rgba(245,158,11,.14);
@@ -71,6 +75,8 @@ html.dark {
   --red:       #f87171;
   --red-lt:    rgba(248,113,113,.14);
 
+  --bg-accent: #4a463d;
+
   --header-bg: rgba(26,24,20,.94);
   --surface:   #2b2923;
 
@@ -80,6 +86,12 @@ html.dark {
 
   color-scheme: dark;
 }
+
+html.dark .dark-panel { border: 1px solid var(--border); }
+html.dark footer.dark-panel { border: none; border-top: 1px solid var(--border); }
+
+html.dark .logo-for-light { display: none !important; }
+html.dark .logo-for-dark  { display: block !important; }
 
 html, body { transition: background-color .18s ease, color .18s ease; }
 
@@ -302,7 +314,7 @@ html, body { overflow-x: hidden; }
 .btn-main {
   display: flex; align-items: center; justify-content: center;
   gap: 7px; width: 100%; padding: 13px 20px;
-  background: var(--ink); color: var(--white);
+  background: var(--bg-accent); color: #fff;
   border: none; border-radius: var(--r-l);
   font-family: 'Outfit', sans-serif; font-size: 15px;
   font-weight: 600; cursor: pointer; letter-spacing: -.01em;
@@ -310,6 +322,7 @@ html, body { overflow-x: hidden; }
   -webkit-tap-highlight-color: transparent;
 }
 .btn-main:hover  { background: var(--ink-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(28,26,20,.15); }
+html.dark .btn-main:hover { background: #5d5a50; box-shadow: 0 4px 12px rgba(0,0,0,.35); }
 .btn-main:active { transform: none; box-shadow: none; }
 
 .btn-icon {
@@ -421,8 +434,8 @@ html, body { overflow-x: hidden; }
 .guide-prose ul, .guide-prose ol { padding-left: 22px; margin: 0 0 16px; }
 .guide-prose li { margin-bottom: 6px; }
 .guide-prose strong { font-weight: 600; color: var(--ink); }
-.guide-prose a  { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
-.guide-prose a:hover { color: var(--blue-deep); }
+.guide-prose a  { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+.guide-prose a:hover { color: var(--green-deep); }
 .guide-prose code {
   font-family: 'JetBrains Mono', monospace;
   font-size: 13px; padding: 2px 6px;
@@ -451,7 +464,7 @@ html, body { overflow-x: hidden; }
   background: var(--white); border: 1px solid var(--border);
   transition: border-color .15s, box-shadow .15s, transform .15s;
 }
-.guide-card:hover  { border-color: #3b82f6; box-shadow: 0 4px 14px rgba(59,130,246,.1); transform: translateY(-2px); }
+.guide-card:hover  { border-color: var(--green); box-shadow: 0 4px 14px rgba(5,150,105,.1); transform: translateY(-2px); }
 .guide-card:active { transform: translateY(0); }
 
 /* ─── Scrollbar ──────────────────────────────── */

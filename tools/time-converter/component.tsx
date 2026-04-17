@@ -158,7 +158,7 @@ export default function TimeConverterWidget() {
         <div style={{ overflowX: 'auto', width: '100%' }}>
           <table style={{ minWidth: 480, borderCollapse: 'collapse', fontSize: 13 }}>
             <thead>
-              <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+              <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                 {['Duration', 'Seconds', 'Minutes', 'Hours', 'Days'].map(h => (
                   <th key={h} style={{ padding: '8px 12px', textAlign: 'left', fontFamily: 'Outfit, sans-serif', fontWeight: 600 }}>{h}</th>
                 ))}

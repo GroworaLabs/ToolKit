@@ -41,7 +41,7 @@ export default function UsernameGeneratorWidget() {
                 ))}
             </div>
 
-            <button onClick={() => generateNew()} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, padding: '12px', background: 'var(--ink)', color: '#fff', border: 'none', borderRadius: 'var(--r-m)', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>
+            <button onClick={() => generateNew()} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, padding: '12px', background: 'var(--bg-accent)', color: '#fff', border: 'none', borderRadius: 'var(--r-m)', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>
                 <IcoRefresh /> Generate new
             </button>
 

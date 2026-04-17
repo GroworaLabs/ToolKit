@@ -118,7 +118,7 @@ export default function TextToSlugWidget() {
             padding: '6px 12px',
             borderRadius: 'var(--r-s)',
             border: 'none',
-            background: copied ? 'var(--green)' : 'var(--ink)',
+            background: copied ? 'var(--green)' : 'var(--bg-accent)',
             color: '#fff',
             fontSize: 12,
             fontWeight: 600,

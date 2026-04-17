@@ -30,7 +30,7 @@ function crackTime(bits: number): string {
 function analyze(pw: string) {
   const entropy = calcEntropy(pw);
   const score   = Math.min(100, Math.round((entropy / 80) * 100));
-  let label = 'Very weak'; let color = '#dc2626';
+  let label = 'Very weak'; let color = 'var(--red)';
   if (entropy >= 60)      { label = 'Strong';      color = 'var(--green)'; }
   else if (entropy >= 45) { label = 'Good';        color = '#10b981'; }
   else if (entropy >= 30) { label = 'Moderate';    color = '#f59e0b'; }

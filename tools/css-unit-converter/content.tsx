@@ -27,7 +27,7 @@ export default function CssUnitConverterContent() {
                             { unit: 'rem', color: 'var(--green)', use: 'Font sizes, spacing, layout dimensions, max-width, gap', why: 'Scales with root font size. Respects user\'s browser preference. Consistent across nested components. 1rem = 16px by default.' },
                             { unit: 'px',  color: '#2563eb',     use: 'Borders (1px), box-shadow blur/spread, outline offsets, transform values', why: 'Pixel-perfect control for fine details. Does not scale with font preferences — intentional for borders and decorative elements.' },
                             { unit: 'em',  color: '#b45309',     use: 'Padding inside buttons/badges (scaled to the component\'s own text), letter-spacing', why: 'Relative to the element\'s own font-size, not the root. Useful when a spacing value should grow proportionally with the component\'s text.' },
-                            { unit: '%',   color: '#7c3aed',     use: 'Widths inside flex/grid, responsive images (max-width: 100%), padding-top hacks for aspect ratios', why: 'Relative to parent\'s dimension. For width/height, references parent\'s size. Note: padding and margin % always reference parent\'s width, even for vertical values.' },
+                            { unit: '%',   color: 'var(--blue)',     use: 'Widths inside flex/grid, responsive images (max-width: 100%), padding-top hacks for aspect ratios', why: 'Relative to parent\'s dimension. For width/height, references parent\'s size. Note: padding and margin % always reference parent\'s width, even for vertical values.' },
                         ].map(({ unit, color, use, why }) => (
                             <div key={unit} style={{ padding: '16px', background: 'var(--white)', border: '1px solid var(--border)', borderRadius: 'var(--r-l)' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
@@ -114,7 +114,7 @@ body { font-size: 1rem; }  /* inherit from root */
                     <div style={{ overflowX: 'auto' }}>
                         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
                             <thead>
-                                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                                     {['Unit', 'Full name', 'In pixels (96 DPI)', 'Use case'].map(h => (
                                         <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600, fontFamily: 'Outfit, sans-serif' }}>{h}</th>
                                     ))}

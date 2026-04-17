@@ -152,7 +152,7 @@ export default function FaviconWidget() {
           <div>
             <label style={{ fontSize: 12, fontWeight: 600, color: 'var(--ink-3)', display: 'block', marginBottom: 6 }}>Quick colours</label>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-              {['#0f172a','#1e40af','#047857','#b91c1c','#7c3aed','#ea580c','#ffffff','#f1f5f9'].map(c => (
+              {['#0f172a','#1e40af','#047857','#b91c1c','var(--blue)','#ea580c','#ffffff','#f1f5f9'].map(c => (
                 <button key={c} onClick={() => setBg(c)} title={c}
                   style={{ width: 28, height: 28, borderRadius: 6, background: c, border: `2px solid ${bg === c ? 'var(--green)' : 'var(--border)'}`, cursor: 'pointer', flexShrink: 0 }} />
               ))}
@@ -194,7 +194,7 @@ export default function FaviconWidget() {
           </button>
         ))}
         <button onClick={dlIco}
-          style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '8px 16px', background: 'var(--ink)', color: '#fff', border: 'none', borderRadius: 'var(--r-m)', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>
+          style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '8px 16px', background: 'var(--bg-accent)', color: '#fff', border: 'none', borderRadius: 'var(--r-m)', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>
           <IcoDownload /> Download favicon.ico
         </button>
       </div>

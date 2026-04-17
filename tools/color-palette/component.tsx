@@ -158,13 +158,13 @@ export default function ColorPaletteWidget() {
                     style={{
                         flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
                         padding: '11px 16px',
-                        background: 'var(--ink)', color: '#fff',
+                        background: 'var(--bg-accent)', color: '#fff',
                         border: 'none', borderRadius: 'var(--r-m)',
                         fontSize: 14, fontWeight: 600, cursor: 'pointer',
                         transition: 'background .13s, transform .11s',
                     }}
                     onMouseEnter={e => { e.currentTarget.style.background = '#2e2c22'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = 'var(--ink)'; e.currentTarget.style.transform = ''; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'var(--bg-accent)'; e.currentTarget.style.transform = ''; }}
                 >
                     <IcoRefresh /> Generate palette
                 </button>

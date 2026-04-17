@@ -54,7 +54,7 @@ export default function UuidGeneratorWidget() {
 
             {/* Actions */}
             <div style={{ display: 'flex', gap: 8 }}>
-                <button onClick={generate} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, padding: '12px', background: 'var(--ink)', color: '#fff', border: 'none', borderRadius: 'var(--r-m)', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>
+                <button onClick={generate} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, padding: '12px', background: 'var(--bg-accent)', color: '#fff', border: 'none', borderRadius: 'var(--r-m)', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>
                     <IcoRefresh /> Generate
                 </button>
                 {uuids.length > 1 && (

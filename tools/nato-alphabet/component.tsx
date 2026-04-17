@@ -64,7 +64,7 @@ export default function NatoAlphabetWidget() {
                 onClick={() => setMode(m.value)}
                 style={{
                   padding: '5px 12px', border: 'none', borderRadius: 'var(--r-s)',
-                  background: mode === m.value ? 'var(--ink)' : 'var(--border)',
+                  background: mode === m.value ? 'var(--bg-accent)' : 'var(--border)',
                   color: mode === m.value ? '#fff' : 'var(--ink-3)',
                   fontSize: 12, fontWeight: 600, cursor: 'pointer',
                   transition: 'background .15s, color .15s',
@@ -112,10 +112,10 @@ export default function NatoAlphabetWidget() {
                   borderRadius: 'var(--r-m)', minWidth: 52, maxWidth: 100,
                 }}
               >
-                <span style={{ fontFamily: 'JetBrains Mono, monospace', fontWeight: 700, fontSize: 16, color: t.unknown ? '#dc2626' : 'var(--green)', lineHeight: 1 }}>
+                <span style={{ fontFamily: 'JetBrains Mono, monospace', fontWeight: 700, fontSize: 16, color: t.unknown ? 'var(--red)' : 'var(--green)', lineHeight: 1 }}>
                   {t.char}
                 </span>
-                <span style={{ fontSize: 11, color: t.unknown ? '#dc2626' : 'var(--ink-2)', marginTop: 4, textAlign: 'center', wordBreak: 'break-word', lineHeight: 1.3 }}>
+                <span style={{ fontSize: 11, color: t.unknown ? 'var(--red)' : 'var(--ink-2)', marginTop: 4, textAlign: 'center', wordBreak: 'break-word', lineHeight: 1.3 }}>
                   {t.word}
                 </span>
               </div>

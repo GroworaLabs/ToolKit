@@ -41,6 +41,6 @@ export const faq: FaqItem[] = [
 
 export const diffLegend = [
   { symbol: '+', label: 'Added',     desc: 'Line exists in Modified but not in Original', color: 'var(--green)',      bg: 'var(--green-lt)'  },
-  { symbol: '−', label: 'Removed',   desc: 'Line exists in Original but not in Modified', color: '#dc2626',           bg: '#fef2f2'           },
+  { symbol: '−', label: 'Removed',   desc: 'Line exists in Original but not in Modified', color: 'var(--red)',           bg: 'var(--red-lt)'           },
   { symbol: ' ', label: 'Unchanged', desc: 'Line is identical in both texts',              color: 'var(--ink-3)',      bg: 'var(--page-bg)'   },
 ];

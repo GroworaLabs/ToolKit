@@ -28,7 +28,7 @@ export default function JsonToYamlContent() {
                     <div style={{ overflowX: 'auto' }}>
                         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
                             <thead>
-                                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                                     {['Feature', 'JSON', 'YAML'].map(h => (
                                         <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600, fontFamily: 'Outfit, sans-serif' }}>{h}</th>
                                     ))}

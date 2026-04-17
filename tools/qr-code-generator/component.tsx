@@ -135,7 +135,7 @@ export default function QrCodeGeneratorWidget() {
             {/* Download buttons */}
             {dataUrl && (
                 <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
-                    <button onClick={downloadPng} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, padding: '11px', background: 'var(--ink)', color: '#fff', border: 'none', borderRadius: 'var(--r-m)', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>
+                    <button onClick={downloadPng} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, padding: '11px', background: 'var(--bg-accent)', color: '#fff', border: 'none', borderRadius: 'var(--r-m)', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>
                         <IcoDownload /> Download PNG
                     </button>
                     <button onClick={downloadSvg} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '11px 16px', background: 'var(--white)', color: 'var(--ink-2)', border: '1.5px solid var(--border)', borderRadius: 'var(--r-m)', fontSize: 13, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>

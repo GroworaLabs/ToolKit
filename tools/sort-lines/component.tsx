@@ -138,7 +138,7 @@ export default function SortLinesWidget() {
               style={{
                 display: 'flex', alignItems: 'center', gap: 4, padding: '3px 10px',
                 borderRadius: 'var(--r-s)', border: 'none',
-                background: copied ? 'var(--green)' : 'var(--ink)', color: '#fff',
+                background: copied ? 'var(--green)' : 'var(--bg-accent)', color: '#fff',
                 fontSize: 11, fontWeight: 600, cursor: output ? 'pointer' : 'not-allowed', opacity: output ? 1 : 0.4,
               }}
             >

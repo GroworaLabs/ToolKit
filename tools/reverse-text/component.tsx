@@ -111,7 +111,7 @@ export default function ReverseTextWidget() {
             position: 'absolute', top: 10, right: 10,
             display: 'flex', alignItems: 'center', gap: 5,
             padding: '5px 10px', borderRadius: 'var(--r-s)', border: 'none',
-            background: copied ? 'var(--green)' : 'var(--ink)', color: '#fff',
+            background: copied ? 'var(--green)' : 'var(--bg-accent)', color: '#fff',
             fontSize: 12, fontWeight: 600, cursor: output ? 'pointer' : 'not-allowed', opacity: output ? 1 : 0.4,
             transition: 'background .15s',
           }}

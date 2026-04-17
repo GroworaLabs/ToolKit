@@ -10,7 +10,8 @@ import { ThemeToggle } from '@/components/ui/ThemeToggle';
 export function Logo() {
     return (
         <Link href="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', flexShrink: 0 }}>
-            <img src="/logo.svg" alt="ToolKit" width={120} height={32} style={{ display: 'block', height: 32, width: 'auto' }} />
+            <img src="/logo.svg"       alt="ToolKit" width={120} height={32} className="logo-for-light" style={{ display: 'block', height: 32, width: 'auto' }} />
+            <img src="/logo-light.svg" alt=""        width={120} height={32} className="logo-for-dark"  style={{ display: 'none',  height: 32, width: 'auto' }} aria-hidden />
         </Link>
     );
 }
@@ -416,19 +417,19 @@ export function Layout({ children, activeNav }: LayoutProps) {
                     >
                         {/* Top bar */}
                         <span style={{
-                            position: 'absolute', width: 20, height: 2, background: 'var(--ink)', borderRadius: 2,
+                            position: 'absolute', width: 20, height: 2, background: 'var(--bg-accent)', borderRadius: 2,
                             transform: open ? 'rotate(45deg)' : 'translateY(-6px)',
                             transition: 'transform .22s ease',
                         }} />
                         {/* Middle bar — fades out when open */}
                         <span style={{
-                            position: 'absolute', width: 20, height: 2, background: 'var(--ink)', borderRadius: 2,
+                            position: 'absolute', width: 20, height: 2, background: 'var(--bg-accent)', borderRadius: 2,
                             opacity: open ? 0 : 1,
                             transition: 'opacity .15s ease',
                         }} />
                         {/* Bottom bar */}
                         <span style={{
-                            position: 'absolute', width: 20, height: 2, background: 'var(--ink)', borderRadius: 2,
+                            position: 'absolute', width: 20, height: 2, background: 'var(--bg-accent)', borderRadius: 2,
                             transform: open ? 'rotate(-45deg)' : 'translateY(6px)',
                             transition: 'transform .22s ease',
                         }} />
@@ -480,7 +481,7 @@ export function Layout({ children, activeNav }: LayoutProps) {
             </main>
 
             {/* ── Footer ── */}
-            <footer style={{ background: 'var(--ink)', marginTop: 64 }}>
+            <footer className="dark-panel" style={{ background: '#1c1a14', marginTop: 64 }}>
                 <div className="wrap-wide" style={{ padding: 'clamp(40px, 6vw, 56px) 16px 0' }}>
 
                     {/* Top section */}

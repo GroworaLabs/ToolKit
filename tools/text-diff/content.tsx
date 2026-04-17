@@ -41,7 +41,7 @@ export default function TextDiffContent() {
           <div style={{ padding: '16px 20px', background: 'var(--page-bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-l)', fontFamily: 'JetBrains Mono, monospace', fontSize: 13, lineHeight: 1.8 }}>
             <div style={{ color: 'var(--ink-3)', marginBottom: 8, fontFamily: 'Outfit, sans-serif', fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Example unified diff output</div>
             <div style={{ color: 'var(--ink-3)' }}>{'  '} const greeting = "Hello";</div>
-            <div style={{ color: '#dc2626' }}>{'− '} console.log(greeting + " world");</div>
+            <div style={{ color: 'var(--red)' }}>{'− '} console.log(greeting + " world");</div>
             <div style={{ color: 'var(--green)' }}>{'+ '} console.log(`{'${greeting}'} universe`);</div>
             <div style={{ color: 'var(--ink-3)' }}>{'  '} return greeting;</div>
           </div>
@@ -154,7 +154,7 @@ export default function TextDiffContent() {
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
-                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                   {['Prefix', 'Colour', 'Meaning', 'Line numbers shown'].map(h => (
                     <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontFamily: 'Outfit, sans-serif', fontWeight: 600 }}>{h}</th>
                   ))}

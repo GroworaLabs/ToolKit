@@ -27,7 +27,7 @@ export default function UsernameGeneratorContent() {
                 { n: '4', title: 'Check availability before registering', desc: 'This tool generates the username — it doesn\'t check platform availability. Always verify your chosen handle is available on the target platform before committing.' },
               ].map(({ n, title, desc }) => (
                   <li key={n} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                    <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--ink)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{n}</span>
+                    <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--bg-accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{n}</span>
                     <div>
                       <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--ink)', marginBottom: 4 }}>{title}</div>
                       <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--ink-3)', margin: 0 }}>{desc}</p>
@@ -68,7 +68,7 @@ export default function UsernameGeneratorContent() {
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
                 <thead>
-                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                   {['Platform', 'Max length', 'Allowed characters', 'Notes'].map(h => (
                       <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600, fontFamily: 'Outfit, sans-serif' }}>{h}</th>
                   ))}
@@ -110,7 +110,7 @@ export default function UsernameGeneratorContent() {
             <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ink-2)' }}>
               If your preferred username is taken on a high-priority platform but available elsewhere, consider slight variations that still feel consistent: adding a craft-specific suffix (devname, namedev), using your full name in a compact format (firstlast or first_last), or registering your personal domain at the chosen name and redirecting from there. The key is to choose a variation you can live with long-term, since changing handles after you have built an audience is disruptive and causes link rot.
             </p>
-          </section>
+          </section>
 
 
           <section style={{ marginBottom: 48 }}>

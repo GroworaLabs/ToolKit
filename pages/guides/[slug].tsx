@@ -96,7 +96,7 @@ const GuidePage: NextPage<Props> = ({ guide, relatedTools }) => {
             <article>
               {/* Meta */}
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16, flexWrap: 'wrap' }}>
-                <span className="badge b-blue">{guide.category}</span>
+                <span className="badge b-green">{guide.category}</span>
                 {date && <span style={{ fontSize: 12, color: 'var(--ink-3)' }}>{date}</span>}
               </div>
 

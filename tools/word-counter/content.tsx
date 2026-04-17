@@ -27,7 +27,7 @@ export default function WordCounterContent() {
                 { n: '4', title: 'Clear and start over', desc: 'Click the X button to clear the text area and reset all counters when you\'re ready to analyze a new piece of content.' },
               ].map(({ n, title, desc }) => (
                   <li key={n} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                    <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--ink)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{n}</span>
+                    <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--bg-accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{n}</span>
                     <div>
                       <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--ink)', marginBottom: 4 }}>{title}</div>
                       <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--ink-3)', margin: 0 }}>{desc}</p>
@@ -47,7 +47,7 @@ export default function WordCounterContent() {
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
                 <thead>
-                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                   {['Platform / Content type', 'Limit / Recommendation', 'Notes'].map(h => (
                       <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600, fontFamily: 'Outfit, sans-serif' }}>{h}</th>
                   ))}
@@ -106,8 +106,8 @@ export default function WordCounterContent() {
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 10 }}>
               {[
-                { range: 'Under 300 words',    label: 'Thin content',    color: 'var(--red)',   bg: '#fef2f2', note: 'Rarely ranks for competitive terms' },
-                { range: '300–600 words',      label: 'Minimal',         color: 'var(--amber)', bg: '#fffbeb', note: 'OK for simple queries and landing pages' },
+                { range: 'Under 300 words',    label: 'Thin content',    color: 'var(--red)',   bg: 'var(--red-lt)', note: 'Rarely ranks for competitive terms' },
+                { range: '300–600 words',      label: 'Minimal',         color: 'var(--amber)', bg: 'var(--amber-lt)', note: 'OK for simple queries and landing pages' },
                 { range: '600–1,500 words',    label: 'Standard',        color: 'var(--blue)',  bg: 'var(--blue-lt)', note: 'Good for most topics and tools' },
                 { range: '1,500–2,500 words',  label: 'Comprehensive',   color: 'var(--green)', bg: 'var(--green-lt)', note: 'Best for competitive SEO terms' },
                 { range: '2,500+ words',       label: 'In-depth guide',  color: 'var(--green)', bg: 'var(--green-lt)', note: 'Ideal for pillar pages and guides' },
@@ -132,7 +132,7 @@ export default function WordCounterContent() {
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
                 <thead>
-                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                   {['Platform', 'Character limit', 'Visible without click', 'Tips'].map(h => (
                       <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600, fontFamily: 'Outfit, sans-serif' }}>{h}</th>
                   ))}
@@ -162,7 +162,7 @@ export default function WordCounterContent() {
               </table>
             </div>
           </section>
-
+
 
           {/* ── Writing tips ────────────────────────────── */}
           <section style={{ marginBottom: 48 }}>

@@ -30,7 +30,7 @@ export default function DuplicateLineRemoverContent() {
               { n: '4', title: 'Copy the result', desc: 'Click Copy on the output panel to grab the deduplicated text. The stats below the panels show exactly how many lines were kept and how many duplicates were removed.' },
             ].map(({ n, title, desc }) => (
               <li key={n} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--ink)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{n}</span>
+                <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--bg-accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{n}</span>
                 <div>
                   <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--ink)', marginBottom: 4 }}>{title}</div>
                   <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--ink-3)', margin: 0 }}>{desc}</p>
@@ -50,7 +50,7 @@ export default function DuplicateLineRemoverContent() {
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
-                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                   {['Option', 'Default', 'What it does', 'When to use'].map(h => (
                     <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600, fontFamily: 'Outfit, sans-serif' }}>{h}</th>
                   ))}
@@ -96,7 +96,7 @@ export default function DuplicateLineRemoverContent() {
               {
                 title: 'Log file analysis',
                 desc: 'Server error logs and application logs often repeat the same error message hundreds of times. Removing duplicates collapses the noise, letting you see the distinct error types rather than wading through thousands of identical stack traces.',
-                color: '#fffbeb',
+                color: 'var(--amber-lt)',
                 border: 'rgba(217,119,6,.2)',
               },
               {

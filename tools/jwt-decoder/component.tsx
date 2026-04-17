@@ -73,13 +73,13 @@ export default function JwtDecoderWidget() {
       {!input && <p style={{ fontSize: 12, color: 'var(--ink-4)', margin: '4px 0 12px', fontStyle: 'italic' }}>Showing sample token — paste yours above to decode it.</p>}
 
       {error ? (
-        <div style={{ padding: '12px 14px', background: '#fef2f2', border: '1px solid #fca5a5', borderRadius: 'var(--r-m)', fontSize: 13, color: '#dc2626', marginTop: 8 }}>{error}</div>
+        <div style={{ padding: '12px 14px', background: 'var(--red-lt)', border: '1px solid var(--red)', borderRadius: 'var(--r-m)', fontSize: 13, color: 'var(--red)', marginTop: 8 }}>{error}</div>
       ) : (
         <div style={{ marginTop: 14 }}>
           {/* Status badges */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 16 }}>
             {exp !== null && (
-              <span style={{ fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 99, background: isExpired ? '#fef2f2' : 'var(--green-lt)', color: isExpired ? '#dc2626' : 'var(--green)', border: `1px solid ${isExpired ? '#fca5a5' : 'rgba(5,150,105,.3)'}` }}>
+              <span style={{ fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 99, background: isExpired ? 'var(--red-lt)' : 'var(--green-lt)', color: isExpired ? 'var(--red)' : 'var(--green)', border: `1px solid ${isExpired ? 'var(--red)' : 'rgba(5,150,105,.3)'}` }}>
                 {isExpired ? `Expired ${fmtDate(exp)}` : `Expires ${fmtDate(exp)}`}
               </span>
             )}
@@ -89,7 +89,7 @@ export default function JwtDecoderWidget() {
               </span>
             )}
             {isNotYet && nbf !== null && (
-              <span style={{ fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 99, background: '#fffbeb', color: '#d97706', border: '1px solid #fcd34d' }}>
+              <span style={{ fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 99, background: 'var(--amber-lt)', color: 'var(--amber)', border: '1px solid var(--amber)' }}>
                 Not valid until {fmtDate(nbf)}
               </span>
             )}

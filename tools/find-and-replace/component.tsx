@@ -76,9 +76,9 @@ export default function FindAndReplaceWidget() {
           <input
             value={find} onChange={e => setFind(e.target.value)}
             placeholder={useRegex ? 'regex pattern…' : 'search text…'}
-            style={{ ...fieldStyle, borderColor: result.error ? '#dc2626' : 'var(--border)' }}
+            style={{ ...fieldStyle, borderColor: result.error ? 'var(--red)' : 'var(--border)' }}
           />
-          {result.error && <div style={{ fontSize: 11, color: '#dc2626', marginTop: 4 }}>{result.error}</div>}
+          {result.error && <div style={{ fontSize: 11, color: 'var(--red)', marginTop: 4 }}>{result.error}</div>}
         </div>
         <div>
           <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--ink-4)', textTransform: 'uppercase', letterSpacing: '0.07em', display: 'block', marginBottom: 5 }}>Replace with</label>
@@ -129,7 +129,7 @@ export default function FindAndReplaceWidget() {
               style={{
                 display: 'flex', alignItems: 'center', gap: 4, padding: '3px 10px',
                 borderRadius: 'var(--r-s)', border: 'none',
-                background: copied ? 'var(--green)' : 'var(--ink)', color: '#fff',
+                background: copied ? 'var(--green)' : 'var(--bg-accent)', color: '#fff',
                 fontSize: 11, fontWeight: 600, cursor: (result.output && !result.error) ? 'pointer' : 'not-allowed',
                 opacity: (result.output && !result.error) ? 1 : 0.4,
               }}

@@ -102,7 +102,7 @@ export default function TimestampContent() {
                     <div style={{ overflowX: 'auto' }}>
                         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
                             <thead>
-                                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                                     {['Format', 'Example', 'Used in'].map(h => (
                                         <th key={h} style={thStyle}>{h}</th>
                                     ))}
@@ -219,7 +219,7 @@ export default function TimestampContent() {
                     <div style={{ overflowX: 'auto' }}>
                         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
                             <thead>
-                                <tr style={{ background: 'var(--ink)', color: '#fff' }}>
+                                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
                                     {['Language', 'Seconds', 'Milliseconds'].map(h => (
                                         <th key={h} style={thStyle}>{h}</th>
                                     ))}
