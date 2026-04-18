@@ -5,6 +5,7 @@ category: "Developer Tools"
 tools: ["url-encoder", "base64"]
 tags: ["url encoding", "web development", "http", "percent encoding"]
 publishedAt: "2026-04-14"
+author: "marcus-chen"
 ---
 
 ## Why URLs Need Encoding

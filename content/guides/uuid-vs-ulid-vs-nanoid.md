@@ -5,6 +5,7 @@ category: "Developer Tools"
 tools: ["uuid-generator", "random-token-generator"]
 tags: ["uuid", "ulid", "ids", "databases"]
 publishedAt: "2026-04-14"
+author: "olivia-bennett"
 ---
 
 ## Why the Choice Matters

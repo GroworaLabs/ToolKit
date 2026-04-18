@@ -5,6 +5,7 @@ category: "Developer Tools"
 tools: ["cron-generator", "timestamp-converter"]
 tags: ["cron", "scheduling", "devops", "jobs"]
 publishedAt: "2026-04-14"
+author: "olivia-bennett"
 ---
 
 ## Cron, in One Line

@@ -25,6 +25,7 @@ export function getAllGuides(): GuideMeta[] {
         tools:       data.tools       ?? [],
         tags:        data.tags        ?? [],
         publishedAt: data.publishedAt ?? '',
+        author:      data.author      ?? 'marcus-chen',
       } satisfies GuideMeta;
     })
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
@@ -47,6 +48,7 @@ export function getGuideBySlug(slug: string): GuideWithContent | null {
     tools:       data.tools       ?? [],
     tags:        data.tags        ?? [],
     publishedAt: data.publishedAt ?? '',
+    author:      data.author      ?? 'marcus-chen',
     contentHtml,
   };
 }

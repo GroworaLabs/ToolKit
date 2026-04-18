@@ -5,6 +5,7 @@ category: "Security"
 tools: ["hmac-generator", "hash-generator"]
 tags: ["hmac", "api security", "signing", "webhooks"]
 publishedAt: "2026-04-14"
+author: "marcus-chen"
 ---
 
 ## Same Tools, Different Jobs

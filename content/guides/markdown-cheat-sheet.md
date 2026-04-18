@@ -5,6 +5,7 @@ category: "Text & Writing"
 tools: ["markdown-editor"]
 tags: ["markdown", "writing", "documentation", "cheat sheet"]
 publishedAt: "2026-04-14"
+author: "olivia-bennett"
 ---
 
 ## Why Markdown Stuck

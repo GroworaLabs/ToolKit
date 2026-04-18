@@ -49,10 +49,21 @@ export interface GuideMeta {
   tools:       string[];   // array of tool slugs
   tags:        string[];
   publishedAt: string;     // ISO date string "YYYY-MM-DD"
+  author:      string;     // author id — see lib/authors.ts
 }
 
 export interface GuideWithContent extends GuideMeta {
   contentHtml: string;
+}
+
+/* ── Authors ────────────────────────────────────────── */
+
+export interface Author {
+  id:    string;
+  name:  string;
+  title: string;
+  bio:   string;
+  image: string;
 }
 
 /* ── FAQ ────────────────────────────────────────────── */

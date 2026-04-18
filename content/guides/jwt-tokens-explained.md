@@ -5,6 +5,7 @@ category: "Security"
 tools: ["jwt-decoder", "base64", "hmac-generator"]
 tags: ["jwt", "authentication", "security", "api"]
 publishedAt: "2026-04-14"
+author: "marcus-chen"
 ---
 
 ## What Is a JWT?
