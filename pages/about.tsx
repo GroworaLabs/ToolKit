@@ -14,7 +14,7 @@ const AboutPage: NextPage = () => {
       <>
         <Head>
           <title>About ToolKit — Free Browser-Based Tools for Developers</title>
-          <meta name="description" content="ToolKit is a free collection of browser-based utilities for developers and designers. No signup, no tracking, no data collection. Built to respect your privacy." />
+          <meta name="description" content="Why ToolKit exists, how our tools are built and tested, our editorial standards, and how to reach us. Free, 100% client-side utilities for developers and designers." />
           <link rel="canonical" href={`${BASE_URL}/about`} />
           <meta property="og:title"       content="About ToolKit" />
           <meta property="og:description" content="Free browser-based tools for developers and designers. No signup, no tracking, 100% client-side." />
@@ -85,6 +85,32 @@ const AboutPage: NextPage = () => {
               </section>
 
               <section>
+                <h2 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: 20, color: 'var(--ink)', marginBottom: 12, letterSpacing: '-0.01em' }}>Why we built it</h2>
+                <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ink-2)', marginBottom: 12 }}>
+                  Most "free online tools" are quietly hostile. They ship heavy ad tags before the tool itself loads. They send your input to a server because their codebase was written in a language that can't run in the browser. They gate CSV exports behind an account. They log every payload you paste, even when the tool is something as sensitive as a JWT decoder or a password generator.
+                </p>
+                <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ink-2)', marginBottom: 12 }}>
+                  Developers notice. Designers notice. Anyone who's ever pasted a production secret into a random site and then felt a chill half an hour later — they all notice. The trust problem is the whole problem.
+                </p>
+                <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ink-2)' }}>
+                  ToolKit is our answer: every tool runs client-side, there are no accounts, no tracking by default, and the source of truth is the browser you're already using. If a tool does not need a server to work, we will never add one.
+                </p>
+              </section>
+
+              <section>
+                <h2 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: 20, color: 'var(--ink)', marginBottom: 12, letterSpacing: '-0.01em' }}>Editorial standards</h2>
+                <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ink-2)', marginBottom: 12 }}>
+                  Every tool is built against native browser APIs wherever possible — <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 13, background: 'var(--border)', padding: '1px 5px', borderRadius: 3 }}>crypto.subtle</code> for hashing and HMAC, <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 13, background: 'var(--border)', padding: '1px 5px', borderRadius: 3 }}>TextEncoder</code>/<code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 13, background: 'var(--border)', padding: '1px 5px', borderRadius: 3 }}>TextDecoder</code> for encoding, <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 13, background: 'var(--border)', padding: '1px 5px', borderRadius: 3 }}>crypto.randomUUID()</code> for IDs. We check output against RFC-compliant reference implementations before a tool ships and when the underlying standard changes.
+                </p>
+                <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ink-2)', marginBottom: 12 }}>
+                  Guides are written by developers with direct production experience in the topic they cover — authentication, hashing, scheduling, regex, data formats. Every code snippet is runnable as written. When a standard is superseded (for example, MD5 or SHA-1 moving from "legacy" to "broken"), we revise the guide rather than quietly leaving it stale.
+                </p>
+                <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ink-2)' }}>
+                  If you find a factual error, an outdated recommendation, or a bug in any tool, <Link href="/contact" style={{ color: 'var(--green)', textDecoration: 'underline' }}>let us know</Link> — corrections ship within days, not quarters.
+                </p>
+              </section>
+
+              <section>
                 <h2 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: 20, color: 'var(--ink)', marginBottom: 12, letterSpacing: '-0.01em' }}>How it works</h2>
                 <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ink-2)', marginBottom: 12 }}>
                   Every tool uses native browser APIs — the Web Crypto API for password and hash generation, <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 13, background: 'var(--border)', padding: '1px 5px', borderRadius: 3 }}>JSON.parse()</code> and <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 13, background: 'var(--border)', padding: '1px 5px', borderRadius: 3 }}>JSON.stringify()</code> for the JSON Formatter, <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 13, background: 'var(--border)', padding: '1px 5px', borderRadius: 3 }}>crypto.randomUUID()</code> for UUIDs. No external libraries handle core tool logic.
@@ -105,13 +131,6 @@ const AboutPage: NextPage = () => {
               </section>
 
               <section>
-                <h2 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: 20, color: 'var(--ink)', marginBottom: 12, letterSpacing: '-0.01em' }}>What's coming next</h2>
-                <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ink-2)' }}>
-                  We're actively building more tools — QR code generator, timestamp converter, text diff checker, color converter, CSS gradient generator, and more. All {soonCount}+ planned tools are listed in the <Link href="/tools" style={{ color: 'var(--green)', textDecoration: 'underline' }}>tools directory</Link> as coming soon.
-                </p>
-              </section>
-
-              <section>
                 <h2 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: 20, color: 'var(--ink)', marginBottom: 12, letterSpacing: '-0.01em' }}>Tech stack</h2>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                   {['Next.js 14', 'TypeScript', 'Web Crypto API', 'Vercel', 'Static Site Generation'].map(tag => (
@@ -120,6 +139,13 @@ const AboutPage: NextPage = () => {
                   </span>
                   ))}
                 </div>
+              </section>
+
+              <section>
+                <h2 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: 20, color: 'var(--ink)', marginBottom: 12, letterSpacing: '-0.01em' }}>Get in touch</h2>
+                <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ink-2)' }}>
+                  Tool requests, bug reports, feedback, correction notes, or guide suggestions — all welcome via the <Link href="/contact" style={{ color: 'var(--green)', textDecoration: 'underline' }}>contact page</Link>. We read everything and reply to messages that need a reply.
+                </p>
               </section>
 
             </div>
