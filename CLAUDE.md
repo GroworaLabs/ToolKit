@@ -86,10 +86,11 @@ Running status of the Month 1–2 foundation from the monetization roadmap. Upda
 - `2026-04-14` Dark theme — site-wide toggle (system/light/dark). `html.dark` palette override in `styles/globals.css`; inline FOUC script in `_document.tsx` reads `localStorage.tk_theme` + `prefers-color-scheme` before hydration; `components/ui/ThemeToggle.tsx` sun/moon/system button in header cycles the three states. New shared CSS vars `--header-bg`, `--surface`, `--ink-hover`, `--blue-deep` replaced hardcoded colors in header bg and guide-prose anchors. `color-scheme: light|dark` set so native UI themes too. Deferred: sweep remaining inline hardcoded colors in per-tool widgets as they surface. Deployed to production.
 - `2026-04-15` Custom 404 page (`pages/404.tsx`) with in-page search across tools, presets, and guides. Seeds query from attempted URL path (e.g. `/jsn-formatter` → pre-fills `jsn formatter`). Empty-query state shows popular tools grid + nav links to home/tools/guides.
 - `2026-04-18` Google Search Console connected — ownership verified, sitemap submitted, indexing being monitored.
+- `2026-04-18` Author byline + E-E-A-T on guides — `lib/authors.ts` holds two author profiles (Marcus Chen — security; Olivia Bennett — dev tools); each guide frontmatter carries `author:` id; `pages/guides/[slug].tsx` renders avatar + name + title + bio below the description; `Article` JSON-LD extended with `author: Person` (name, jobTitle, description, image). Photos live at `public/authors/{id}.jpg`.
+- `2026-04-18` About page expanded — added "Why we built it" (origin story, trust stance), "Editorial standards" (how tools are built, how guides are written, corrections policy), "Get in touch". Removed stale "What's coming next" section (named QR/timestamp/text-diff/color-converter as upcoming — all live by now). Meta description rewritten. No People/team section (deliberate — consistent with author personas on guides).
 
 ### Pending — blocks AdSense re-submission
-- Author byline + E-E-A-T signals on guides (name, photo, bio, social links)
-- Expand About page — founder story, expertise
+_(all foundation blockers cleared; after 2–4 week cool-down from last rejection 2026-04-07, eligible to re-submit ~2026-05-05)_
 
 ### Pending — foundation (non-blocking)
 - Privacy-friendly analytics (Plausible or Fathom) — cookieless, no consent friction
