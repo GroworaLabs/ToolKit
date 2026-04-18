@@ -5,6 +5,7 @@ category: "Security"
 tools: ["password-generator", "hash-generator"]
 tags: ["passwords", "security", "best practices"]
 publishedAt: "2026-04-10"
+author: "marcus-chen"
 ---
 
 ## Why Password Strength Matters

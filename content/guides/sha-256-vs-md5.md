@@ -5,6 +5,7 @@ category: "Security"
 tools: ["hash-generator", "hmac-generator"]
 tags: ["hashing", "security", "sha-256", "md5"]
 publishedAt: "2026-04-14"
+author: "marcus-chen"
 ---
 
 ## What a Hash Function Does

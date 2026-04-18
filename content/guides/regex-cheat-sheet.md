@@ -5,6 +5,7 @@ category: "Developer Tools"
 tools: ["regex-tester", "find-and-replace"]
 tags: ["regex", "regular expressions", "text processing", "cheat sheet"]
 publishedAt: "2026-04-14"
+author: "olivia-bennett"
 ---
 
 ## Why Regex Still Matters

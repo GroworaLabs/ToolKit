@@ -5,6 +5,7 @@ category: "Design"
 tools: ["color-converter", "color-palette"]
 tags: ["color", "css", "design", "frontend"]
 publishedAt: "2026-04-14"
+author: "olivia-bennett"
 ---
 
 ## Same Color, Three Notations

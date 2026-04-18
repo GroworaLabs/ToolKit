@@ -5,6 +5,7 @@ category: "Developer Tools"
 tools: ["base64", "url-encoder"]
 tags: ["base64", "encoding", "web development", "api"]
 publishedAt: "2026-04-08"
+author: "marcus-chen"
 ---
 
 ## What Is Base64?

@@ -5,6 +5,7 @@ import { Layout } from '@/components/ui/Layout';
 import { ToolCard } from '@/components/ui/ToolCard';
 import { getGuideBySlug, getGuideSlugs } from '@/lib/guides';
 import { getBySlug } from '@/lib/registry';
+import { getAuthor } from '@/lib/authors';
 import type { GuideWithContent, ToolMeta } from '@/lib/types';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.webtoolkit.tech';
@@ -36,6 +37,8 @@ const GuidePage: NextPage<Props> = ({ guide, relatedTools }) => {
     ? new Date(guide.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
     : null;
 
+  const author = getAuthor(guide.author);
+
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -43,6 +46,13 @@ const GuidePage: NextPage<Props> = ({ guide, relatedTools }) => {
     description:     guide.description,
     datePublished:   guide.publishedAt,
     url:             `${BASE_URL}/guides/${guide.slug}`,
+    author: {
+      '@type':      'Person',
+      name:         author.name,
+      jobTitle:     author.title,
+      description:  author.bio,
+      image:        `${BASE_URL}${author.image}`,
+    },
     publisher: {
       '@type': 'Organization',
       name:    'ToolKit',
@@ -104,9 +114,34 @@ const GuidePage: NextPage<Props> = ({ guide, relatedTools }) => {
                 {guide.title}
               </h1>
 
-              <p style={{ fontSize: 15, color: 'var(--ink-2)', lineHeight: 1.65, marginBottom: 32, maxWidth: 640 }}>
+              <p style={{ fontSize: 15, color: 'var(--ink-2)', lineHeight: 1.65, marginBottom: 24, maxWidth: 640 }}>
                 {guide.description}
               </p>
+
+              {/* Author byline */}
+              <div style={{
+                display: 'flex', alignItems: 'center', gap: 12,
+                padding: '14px 16px', marginBottom: 28,
+                background: 'var(--surface)', border: '1px solid var(--border)',
+                borderRadius: 'var(--r-m)', maxWidth: 640,
+              }}>
+                <img
+                  src={author.image}
+                  alt={author.name}
+                  width={44}
+                  height={44}
+                  style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover', flexShrink: 0, background: 'var(--page-bg)' }}
+                />
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)' }}>
+                    {author.name}
+                    <span style={{ fontWeight: 400, color: 'var(--ink-3)' }}> · {author.title}</span>
+                  </div>
+                  <div style={{ fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.5, marginTop: 2 }}>
+                    {author.bio}
+                  </div>
+                </div>
+              </div>
 
               {/* Tags */}
               {guide.tags.length > 0 && (

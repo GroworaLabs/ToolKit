@@ -5,6 +5,7 @@ category: "Developer Tools"
 tools: ["json-formatter", "json-to-yaml"]
 tags: ["json", "yaml", "configuration", "devops"]
 publishedAt: "2026-04-14"
+author: "olivia-bennett"
 ---
 
 ## One Problem, Two Syntaxes
