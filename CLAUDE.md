@@ -99,7 +99,7 @@ _(all foundation blockers cleared; after 2–4 week cool-down from last rejectio
 
 ### Deferred
 - Favorites / Recent tools (localStorage)
-- Keyboard shortcuts, dark mode, RSS for guides
+- Keyboard shortcuts, RSS for guides
 - Comparison pages ("Best X 2026", "X vs Y")
 - Wire ads/affiliate scripts behind `consent.marketing` (plumbing ready)
 
