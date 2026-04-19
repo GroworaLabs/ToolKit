@@ -4,7 +4,21 @@ import { Layout } from '@/components/ui/Layout';
 import { GuideCard } from '@/components/ui/GuideCard';
 import { getAllGuides } from '@/lib/guides';
 import type { GuideMeta, ToolCategory } from '@/lib/types';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+
+const PER_PAGE = 9;
+
+function getPageNumbers(current: number, total: number): (number | '…')[] {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  const pages: (number | '…')[] = [1];
+  if (current > 3) pages.push('…');
+  for (let i = Math.max(2, current - 1); i <= Math.min(total - 1, current + 1); i++) {
+    pages.push(i);
+  }
+  if (current < total - 2) pages.push('…');
+  pages.push(total);
+  return pages;
+}
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.webtoolkit.tech';
 
@@ -21,10 +35,27 @@ export const getStaticProps: GetStaticProps<Props> = () => {
 
 const GuidesPage: NextPage<Props> = ({ guides, categories }) => {
   const [activeCategory, setActiveCategory] = useState<string>('All');
+  const [currentPage, setCurrentPage] = useState(1);
+  const gridTopRef = useRef<HTMLDivElement>(null);
 
   const filtered = activeCategory === 'All'
     ? guides
     : guides.filter(g => g.category === activeCategory);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
+  const pageStart  = (currentPage - 1) * PER_PAGE;
+  const paginated  = filtered.slice(pageStart, pageStart + PER_PAGE);
+
+  useEffect(() => { setCurrentPage(1); }, [activeCategory]);
+
+  useEffect(() => {
+    if (currentPage > totalPages) setCurrentPage(totalPages);
+  }, [currentPage, totalPages]);
+
+  const goToPage = (p: number) => {
+    setCurrentPage(p);
+    gridTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -110,20 +141,101 @@ const GuidesPage: NextPage<Props> = ({ guides, categories }) => {
           )}
 
           {/* Guide count */}
-          <p style={{ fontSize: 13, color: 'var(--ink-3)', marginBottom: 20 }}>
+          <p ref={gridTopRef} style={{ fontSize: 13, color: 'var(--ink-3)', marginBottom: 20, scrollMarginTop: 20 }}>
             {filtered.length} {filtered.length === 1 ? 'guide' : 'guides'}
             {activeCategory !== 'All' ? ` in ${activeCategory}` : ''}
+            {totalPages > 1 && ` · page ${currentPage} of ${totalPages}`}
           </p>
 
           {/* Grid */}
-          {filtered.length > 0 ? (
+          {paginated.length > 0 ? (
             <div className="guides-grid">
-              {filtered.map(guide => (
+              {paginated.map(guide => (
                 <GuideCard key={guide.slug} guide={guide} />
               ))}
             </div>
           ) : (
             <p style={{ color: 'var(--ink-3)', fontSize: 14 }}>No guides yet in this category.</p>
+          )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <nav
+              aria-label="Guides pagination"
+              style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 4, marginTop: 40, flexWrap: 'wrap' }}
+            >
+              <button
+                onClick={() => goToPage(currentPage - 1)}
+                disabled={currentPage === 1}
+                aria-label="Previous page"
+                style={{
+                  height: 34, padding: '0 12px',
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  borderRadius: 8, fontSize: 13, fontWeight: 500, lineHeight: 1,
+                  border: '1px solid var(--border)',
+                  background: 'var(--white)',
+                  color: currentPage === 1 ? 'var(--ink-4)' : 'var(--ink-2)',
+                  cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
+                  opacity: currentPage === 1 ? 0.5 : 1,
+                  transition: 'all .15s',
+                }}
+              >
+                ← Prev
+              </button>
+
+              {getPageNumbers(currentPage, totalPages).map((n, i) => (
+                n === '…' ? (
+                  <span
+                    key={`ellipsis-${i}`}
+                    style={{
+                      height: 34, minWidth: 20,
+                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                      color: 'var(--ink-4)', fontSize: 13, lineHeight: 1,
+                    }}
+                  >
+                    …
+                  </span>
+                ) : (
+                  <button
+                    key={n}
+                    onClick={() => goToPage(n)}
+                    aria-current={n === currentPage ? 'page' : undefined}
+                    aria-label={`Go to page ${n}`}
+                    style={{
+                      height: 34, minWidth: 34, padding: '0 8px',
+                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                      borderRadius: 8, fontSize: 13, fontWeight: 500, lineHeight: 1,
+                      border: '1px solid',
+                      borderColor: n === currentPage ? 'var(--green)' : 'var(--border)',
+                      background:  n === currentPage ? 'var(--green-lt)' : 'var(--white)',
+                      color:       n === currentPage ? 'var(--green)' : 'var(--ink-2)',
+                      cursor: 'pointer', transition: 'all .15s',
+                    }}
+                  >
+                    {n}
+                  </button>
+                )
+              ))}
+
+              <button
+                onClick={() => goToPage(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                aria-label="Next page"
+                style={{
+                  height: 34, padding: '0 12px',
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  borderRadius: 8, fontSize: 13, fontWeight: 500, lineHeight: 1,
+                  border: '1px solid var(--border)',
+                  background: 'var(--white)',
+                  color: currentPage === totalPages ? 'var(--ink-4)' : 'var(--ink-2)',
+                  cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
+                  opacity: currentPage === totalPages ? 0.5 : 1,
+                  transition: 'all .15s',
+                }}
+              >
+                Next →
+              </button>
+            </nav>
           )}
 
         </div>
