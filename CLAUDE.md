@@ -92,16 +92,23 @@ Running status of the Month 1–2 foundation from the monetization roadmap. Upda
 ### Pending — blocks AdSense re-submission
 _(all foundation blockers cleared; after 2–4 week cool-down from last rejection 2026-04-07, eligible to re-submit ~2026-05-05)_
 
-### Pending — foundation (non-blocking)
-- Privacy-friendly analytics (Plausible or Fathom) — cookieless, no consent friction
-- Dynamic OG images via `@vercel/og`
-- Email capture on soon-tools ("notify me when this launches")
+### Pending — HIGH priority (do before AdSense re-submit)
+_Focus: fix "thin content" rejection reason + build affiliate-ready surfaces._
+- Publish more guides — target 20+ total before re-submit (currently 12 vs ~50 tools). Each guide should link to 1–3 tools and, where natural, 1–2 affiliate-ready products.
+- Comparison pages ("Best password managers 2026", "Bitwarden vs 1Password", "X vs Y") — highest affiliate ROI for dev audience; targets commercial-intent keywords.
 
-### Deferred
-- Favorites / Recent tools (localStorage)
-- Keyboard shortcuts, RSS for guides
-- Comparison pages ("Best X 2026", "X vs Y")
-- Wire ads/affiliate scripts behind `consent.marketing` (plumbing ready)
+### Pending — MEDIUM priority (after AdSense approval)
+- Dynamic OG images via `@vercel/og` — better CTR on social/Slack/Discord shares, ~1 day of work.
+- Wire ads/affiliate scripts behind `consent.marketing` — plumbing ready; activate when first affiliate links ship in guides.
+
+### Pending — LOW priority (nice to have, no direct monetization impact)
+- Favorites / Recent tools (localStorage) — retention, not acquisition.
+- Email capture on soon-tools ("notify me when this launches") — useful for launch pings once there's a list to notify.
+- RSS for guides — dev audience appreciates it, but traffic contribution is minimal.
+
+### Deferred / skip for now
+- Privacy-friendly analytics (Plausible or Fathom) — GA4 already consent-gated and working; $9–14/mo with no direct ROI at current traffic. Revisit if >40% opt out of consent, or if cookie banner is removed entirely.
+- Keyboard shortcuts — power-user polish, no monetization impact.
 
 ## Conventions
 
