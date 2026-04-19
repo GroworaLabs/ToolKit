@@ -9,7 +9,9 @@
       "Bash(curl -s http://localhost:3000/does-not-exist-xyz)",
       "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3000/)",
       "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3000/tools)",
-      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3000/guides)"
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3000/guides)",
+      "Bash(awk '/slug:/{s=$0} /live:/{print s, \"->\", $0}' D:/My/business/ToolKit/lib/registry.ts)",
+      "Bash(grep \"true$\")"
     ]
   }
 }
