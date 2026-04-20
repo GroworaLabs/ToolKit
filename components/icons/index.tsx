@@ -57,6 +57,8 @@ export const IcoTrim       = ({ size = 16 }: IconProps) => <svg width={size} hei
 export const IcoMorse      = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="4" cy="12" r="2" fill="currentColor" stroke="none"/><rect x="8" y="10" width="6" height="4" rx="2" fill="currentColor" stroke="none"/><circle cx="18" cy="12" r="2" fill="currentColor" stroke="none"/><circle cx="4" cy="6" r="2" fill="currentColor" stroke="none"/><rect x="8" y="4" width="10" height="4" rx="2" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="2" fill="currentColor" stroke="none"/><rect x="8" y="16" width="4" height="4" rx="2" fill="currentColor" stroke="none"/></svg>;
 export const IcoNato       = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>;
 export const IcoCipher     = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><path d="M12 16v-2"/><circle cx="12" cy="16" r="1" fill="currentColor" stroke="none"/><path d="M8 16h.01M16 16h.01"/></svg>;
+export const IcoBattery    = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/><polyline points="11 9 8 12 11 15"/><line x1="8" y1="12" x2="14" y2="12"/></svg>;
+export const IcoShieldLock = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><rect x="9" y="10" width="6" height="5" rx="1"/><path d="M10 10V8a2 2 0 114 0v2"/></svg>;
 
 /* ── Map: tool slug → icon component ─────────────────── */
 import type { ComponentType } from 'react';
@@ -110,4 +112,6 @@ export const TOOL_ICONS: Record<string, ComponentType<IconProps>> = {
   'text-to-morse':             IcoMorse,
   'nato-alphabet':             IcoNato,
   'rot13-encoder':             IcoCipher,
+  'energy-converter':          IcoBattery,
+  'bcrypt-generator':          IcoShieldLock,
 };
