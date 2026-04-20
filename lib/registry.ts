@@ -1077,7 +1077,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Convert energy between joules, kilojoules, calories, kilocalories, kilowatt-hours and BTU. All units update as you type. Free online energy unit converter.',
     category:       'Value Converter',
     keywords:       ['energy converter', 'joules to calories', 'kwh to joules', 'btu to joules', 'energy unit converter'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'frequency-converter',
