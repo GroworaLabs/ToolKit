@@ -41,11 +41,13 @@ export type ToolCategory =
 
 /* ── Guides ─────────────────────────────────────────── */
 
+export type GuideCategory = ToolCategory | 'Reviews';
+
 export interface GuideMeta {
   slug:        string;
   title:       string;
   description: string;
-  category:    ToolCategory;
+  category:    GuideCategory;
   tools:       string[];   // array of tool slugs
   tags:        string[];
   publishedAt: string;     // ISO date string "YYYY-MM-DD"
