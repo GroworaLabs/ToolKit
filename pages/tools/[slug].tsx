@@ -80,6 +80,8 @@ const TOOL_DATA: Record<string, () => Promise<{ faq: FaqItem[]; [key: string]: u
     'text-to-morse':      () => import('@/tools/text-to-morse'),
     'nato-alphabet':      () => import('@/tools/nato-alphabet'),
     'rot13-encoder':      () => import('@/tools/rot13-encoder'),
+    'energy-converter':   () => import('@/tools/energy-converter'),
+    'bcrypt-generator':   () => import('@/tools/bcrypt-generator'),
 };
 
 const TOOL_WIDGETS: Record<string, React.ComponentType> = {
@@ -131,6 +133,8 @@ const TOOL_WIDGETS: Record<string, React.ComponentType> = {
     'text-to-morse':      dynamic(() => import('@/tools/text-to-morse/component'),      { ssr: false }) as React.ComponentType,
     'nato-alphabet':      dynamic(() => import('@/tools/nato-alphabet/component'),      { ssr: false }) as React.ComponentType,
     'rot13-encoder':      dynamic(() => import('@/tools/rot13-encoder/component'),      { ssr: false }) as React.ComponentType,
+    'energy-converter':   dynamic(() => import('@/tools/energy-converter/component'),   { ssr: false }) as React.ComponentType,
+    'bcrypt-generator':   dynamic(() => import('@/tools/bcrypt-generator/component'),   { ssr: false }) as React.ComponentType,
 };
 
 /* ── Password generator sidebar ────────────────────────── */
@@ -1381,6 +1385,8 @@ const TOOL_CONTENT: Record<string, React.ComponentType> = {
     'text-to-morse':             dynamic(() => import('@/tools/text-to-morse/content')) as React.ComponentType,
     'nato-alphabet':             dynamic(() => import('@/tools/nato-alphabet/content')) as React.ComponentType,
     'rot13-encoder':             dynamic(() => import('@/tools/rot13-encoder/content')) as React.ComponentType,
+    'energy-converter':          dynamic(() => import('@/tools/energy-converter/content')) as React.ComponentType,
+    'bcrypt-generator':          dynamic(() => import('@/tools/bcrypt-generator/content')) as React.ComponentType,
 };
 
 function ToolContent({ slug }: { slug: string }) {
