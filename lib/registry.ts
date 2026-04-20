@@ -172,7 +172,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Generate and verify bcrypt password hashes online. Choose cost factor 4–12. Free browser-based bcrypt tool — no data sent to any server.',
     category:       'Security',
     keywords:       ['bcrypt generator', 'bcrypt hash online', 'bcrypt password', 'bcrypt verifier'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'jwt-decoder',
