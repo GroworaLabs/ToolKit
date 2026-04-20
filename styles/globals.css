@@ -431,8 +431,13 @@ html.dark .btn-main:hover { background: #5d5a50; box-shadow: 0 4px 12px rgba(0,0
 .guide-prose h2 { font-size: 19px; font-weight: 700; color: var(--ink); margin: 36px 0 12px; }
 .guide-prose h3 { font-size: 16px; font-weight: 600; color: var(--ink); margin: 28px 0 10px; }
 .guide-prose p  { margin: 0 0 16px; }
-.guide-prose ul, .guide-prose ol { padding-left: 22px; margin: 0 0 16px; }
-.guide-prose li { margin-bottom: 6px; }
+.guide-prose ul { padding-left: 22px; margin: 0 0 16px; list-style: disc outside; }
+.guide-prose ol { padding-left: 22px; margin: 0 0 16px; list-style: decimal outside; }
+.guide-prose ul ul { list-style: circle outside; margin-bottom: 0; margin-top: 6px; }
+.guide-prose ol ol { list-style: lower-alpha outside; margin-bottom: 0; margin-top: 6px; }
+.guide-prose li { margin-bottom: 8px; padding-left: 4px; }
+.guide-prose li::marker { color: var(--ink-3); }
+.guide-prose li > p { margin-bottom: 8px; }
 .guide-prose strong { font-weight: 600; color: var(--ink); }
 .guide-prose a  { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
 .guide-prose a:hover { color: var(--green-deep); }
