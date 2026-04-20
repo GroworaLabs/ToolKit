@@ -1,11 +1,14 @@
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { Layout } from '@/components/ui/Layout';
 import { ToolCard } from '@/components/ui/ToolCard';
+import { GuideCard } from '@/components/ui/GuideCard';
 import { getByCategory, getLiveTools, getSoonTools, CATEGORY_SLUGS } from '@/lib/registry';
+import { getAllGuides } from '@/lib/guides';
 import { IcoShield, IcoCode, IcoCount, IcoZap, IcoKey } from '@/components/icons';
+import type { GuideMeta } from '@/lib/types';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.webtoolkit.tech';
 
@@ -17,7 +20,15 @@ const FEATURES = [
 ];
 
 
-const HomePage: NextPage = () => {
+interface Props {
+  latestGuides: GuideMeta[];
+}
+
+export const getStaticProps: GetStaticProps<Props> = () => {
+  return { props: { latestGuides: getAllGuides().slice(0, 3) } };
+};
+
+const HomePage: NextPage<Props> = ({ latestGuides }) => {
   const byCategory = getByCategory();
   const liveTools  = getLiveTools();
   const soonTools  = getSoonTools();
@@ -395,11 +406,31 @@ const HomePage: NextPage = () => {
             </div>
           </section>
 
+          {/* ── Guides & reviews ───────────────────── */}
+          {latestGuides.length > 0 && (
+            <section style={{ padding: '64px 0 0' }}>
+              <div className="wrap-wide">
+                <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 28, flexWrap: 'wrap', gap: 12 }}>
+                  <div>
+                    <p className="ov" style={{ marginBottom: 10 }}>Guides & reviews</p>
+                    <h2 className="hdg" style={{ fontSize: 'clamp(20px, 3vw, 28px)' }}>Practical reads for developers</h2>
+                  </div>
+                  <Link href="/guides" style={{ fontSize: 13, fontWeight: 600, color: 'var(--green)', textDecoration: 'none' }}>
+                    Read all guides →
+                  </Link>
+                </div>
+                <div className="guides-grid">
+                  {latestGuides.map(guide => <GuideCard key={guide.slug} guide={guide} />)}
+                </div>
+              </div>
+            </section>
+          )}
+
           {/* ── Bottom CTA ─────────────────────────── */}
           <section style={{ padding: '64px 0 0' }}>
             <div className="wrap-wide">
               <div className="dark-panel" style={{ padding: 'clamp(28px, 5vw, 48px)', background: '#1c1a14', borderRadius: 'var(--r-xl)', textAlign: 'center' }}>
-                <h2 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: 'clamp(20px, 3vw, 28px)', color: '#fff', marginBottom: 12, letterSpacing: '-0.02em' }}>
+                <h2 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: 'clamp(20px, 3vw, 28px)', color: '#fff', marginBottom: 12, letterSpacing: '-0.02em', textAlign: 'center' }}>
                   Everything you need, nothing you don't
                 </h2>
                 <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.65)', marginBottom: 24, maxWidth: 420, margin: '0 auto 24px' }}>
