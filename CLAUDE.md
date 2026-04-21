@@ -2,6 +2,8 @@
 
 This file is the portable project context. It lives in git, so it follows the repo across machines. Keep it updated as work progresses (see **Maintenance** at the bottom).
 
+**Companion plan:** [`TOOLS_PLAN.md`](./TOOLS_PLAN.md) — prioritized roadmap for all `live: false` tools + the new AI category. Read it before planning any new tool work.
+
 ---
 
 ## Product
