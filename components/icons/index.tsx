@@ -59,6 +59,7 @@ export const IcoNato       = ({ size = 16 }: IconProps) => <svg width={size} hei
 export const IcoCipher     = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><path d="M12 16v-2"/><circle cx="12" cy="16" r="1" fill="currentColor" stroke="none"/><path d="M8 16h.01M16 16h.01"/></svg>;
 export const IcoBattery    = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/><polyline points="11 9 8 12 11 15"/><line x1="8" y1="12" x2="14" y2="12"/></svg>;
 export const IcoShieldLock = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><rect x="9" y="10" width="6" height="5" rx="1"/><path d="M10 10V8a2 2 0 114 0v2"/></svg>;
+export const IcoTokens     = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="9" width="5" height="6" rx="1.5"/><rect x="9.5" y="9" width="5" height="6" rx="1.5"/><rect x="17" y="9" width="5" height="6" rx="1.5"/></svg>;
 
 /* ── Map: tool slug → icon component ─────────────────── */
 import type { ComponentType } from 'react';
@@ -114,4 +115,5 @@ export const TOOL_ICONS: Record<string, ComponentType<IconProps>> = {
   'rot13-encoder':             IcoCipher,
   'energy-converter':          IcoBattery,
   'bcrypt-generator':          IcoShieldLock,
+  'token-counter':             IcoTokens,
 };

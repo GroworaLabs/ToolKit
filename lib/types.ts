@@ -37,7 +37,8 @@ export type ToolCategory =
     | 'Text & Writing'
     | 'Developer Tools'
     | 'Design'
-    | 'Value Converter';
+    | 'Value Converter'
+    | 'AI';
 
 /* ── Guides ─────────────────────────────────────────── */
 

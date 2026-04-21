@@ -28,6 +28,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return { props: { tool, relatedGuides, faq } };
 };
 
+/* ── Tools that use a wide single-column layout (sidebar drops below) ── */
+const WIDE_TOOLS = new Set<string>(['token-counter']);
+
 /* ── Dynamic tool loader ───────────────────────────────── */
 
 // Map slug → dynamic import of { faq, ...sidebar data }
@@ -82,6 +85,7 @@ const TOOL_DATA: Record<string, () => Promise<{ faq: FaqItem[]; [key: string]: u
     'rot13-encoder':      () => import('@/tools/rot13-encoder'),
     'energy-converter':   () => import('@/tools/energy-converter'),
     'bcrypt-generator':   () => import('@/tools/bcrypt-generator'),
+    'token-counter':      () => import('@/tools/token-counter'),
 };
 
 const TOOL_WIDGETS: Record<string, React.ComponentType> = {
@@ -135,6 +139,7 @@ const TOOL_WIDGETS: Record<string, React.ComponentType> = {
     'rot13-encoder':      dynamic(() => import('@/tools/rot13-encoder/component'),      { ssr: false }) as React.ComponentType,
     'energy-converter':   dynamic(() => import('@/tools/energy-converter/component'),   { ssr: false }) as React.ComponentType,
     'bcrypt-generator':   dynamic(() => import('@/tools/bcrypt-generator/component'),   { ssr: false }) as React.ComponentType,
+    'token-counter':      dynamic(() => import('@/tools/token-counter/component'),      { ssr: false }) as React.ComponentType,
 };
 
 /* ── Password generator sidebar ────────────────────────── */
@@ -1205,7 +1210,7 @@ const ToolPage: NextPage<Props> = ({ tool, relatedGuides, faq }) => {
 
             <Layout>
                 {/* ── Hero + Tool ───────────────────────────── */}
-                <section style={{ maxWidth: 1000, margin: '0 auto', padding: 'clamp(32px, 5vw, 52px) 16px 0' }}>
+                <section style={{ maxWidth: WIDE_TOOLS.has(tool.slug) ? 1200 : 1000, margin: '0 auto', padding: 'clamp(32px, 5vw, 52px) 16px 0' }}>
                     {/* Breadcrumb — visible, also semantic */}
                     <nav aria-label="Breadcrumb" style={{ marginBottom: 20 }}>
                         <ol style={{ display: 'flex', gap: 6, alignItems: 'center', listStyle: 'none', fontSize: 13, color: 'var(--ink-3)', flexWrap: 'wrap' }}>
@@ -1223,7 +1228,7 @@ const ToolPage: NextPage<Props> = ({ tool, relatedGuides, faq }) => {
                         </ol>
                     </nav>
 
-                    <div className="tool-grid">
+                    <div className={`tool-grid${WIDE_TOOLS.has(tool.slug) ? ' tool-grid--wide' : ''}`}>
                         {/* Left */}
                         <div>
                             <p className="ov a0" style={{ marginBottom: 10 }}>{tool.category}</p>
@@ -1387,6 +1392,7 @@ const TOOL_CONTENT: Record<string, React.ComponentType> = {
     'rot13-encoder':             dynamic(() => import('@/tools/rot13-encoder/content')) as React.ComponentType,
     'energy-converter':          dynamic(() => import('@/tools/energy-converter/content')) as React.ComponentType,
     'bcrypt-generator':          dynamic(() => import('@/tools/bcrypt-generator/content')) as React.ComponentType,
+    'token-counter':             dynamic(() => import('@/tools/token-counter/content')) as React.ComponentType,
 };
 
 function ToolContent({ slug }: { slug: string }) {

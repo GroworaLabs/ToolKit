@@ -12,7 +12,8 @@
       "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3000/guides)",
       "Bash(awk '/slug:/{s=$0} /live:/{print s, \"->\", $0}' D:/My/business/ToolKit/lib/registry.ts)",
       "Bash(grep \"true$\")",
-      "Bash(npx next *)"
+      "Bash(npx next *)",
+      "mcp__plugin_playwright_playwright__browser_evaluate"
     ]
   }
 }

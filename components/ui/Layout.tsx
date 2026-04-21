@@ -48,6 +48,12 @@ const CAT_ICONS: Record<string, React.ReactNode> = {
             <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
         </svg>
     ),
+    'AI': (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v1a3 3 0 0 0-3 3v1a3 3 0 0 0-2 2.83V14a3 3 0 0 0 3 3v1a3 3 0 0 0 3 3h2a3 3 0 0 0 3-3v-1a3 3 0 0 0 3-3v-1.17A3 3 0 0 0 18 10V9a3 3 0 0 0-3-3V5a3 3 0 0 0-3-3z"/>
+            <path d="M12 6v12M9 10h6M9 14h6"/>
+        </svg>
+    ),
 };
 
 const CAT_DESCS: Record<string, string> = {
@@ -56,6 +62,7 @@ const CAT_DESCS: Record<string, string> = {
     'Text & Writing':  'Case, diff, slugs, counters',
     'Design':          'Colors, palettes, favicons, QR',
     'Value Converter': 'Units, bitrate, pace, torque',
+    'AI':              'Tokens, prompts, LLM utilities',
 };
 
 export function Layout({ children, activeNav }: LayoutProps) {
