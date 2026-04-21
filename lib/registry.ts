@@ -1286,6 +1286,18 @@ export const TOOLS: ToolMeta[] = [
     keywords:       ['favicon generator', 'favicon generator online', 'create favicon', 'favicon maker', 'free favicon generator'],
     live:           true,
   },
+  {
+    slug:           'token-counter',
+    name:           'AI Token Counter & Visualizer',
+    tagline:        'Exact GPT tokenization with per-token visualization',
+    description:    'Exact tiktoken counts for GPT-5/4o/o1 with per-token colored visualization, ChatML chat template mode, plus estimates for Claude 4.x, Gemini 2.5, DeepSeek. 100% browser-based.',
+    seoTitle:       'AI Token Counter & Tokenizer Visualizer — GPT, Claude, Gemini | ToolKit',
+    seoH1:          'Free AI Token Counter & Tokenizer Visualizer',
+    seoDescription: 'See how GPT tokenizes your prompt with colored per-token visualization (exact tiktoken o200k/cl100k). Supports GPT-5, GPT-4o, o1, Claude 4.x, Gemini 2.5, DeepSeek. ChatML chat template mode, token IDs, context-window usage. 100% browser-based — your prompt never leaves your device.',
+    category:       'AI',
+    keywords:       ['token counter', 'tokenizer', 'gpt tokenizer', 'openai tokenizer', 'tiktoken online', 'tiktokenizer', 'claude tokenizer', 'gemini token counter', 'llm token counter', 'chatml tokenizer'],
+    live:           true,
+  },
 ];
 
 /* ── Helpers ──────────────────────────────────────────── */
@@ -1295,6 +1307,7 @@ export const CATEGORY_SLUGS: Record<string, string> = {
   'Text & Writing':  '/tools/text',
   'Design':          '/tools/design',
   'Value Converter': '/tools/value-converter',
+  'AI':              '/tools/ai',
 };
 
 export const getCategories = (): { href: string; label: string }[] => {

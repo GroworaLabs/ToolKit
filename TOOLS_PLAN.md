@@ -15,8 +15,8 @@ Rationale: dev audience is flooded with LLM usage; tooling *around* prompts, tok
 Requires adding `'AI'` to `ToolCategory` in `lib/types.ts` (currently: Security / Text & Writing / Developer Tools / Design / Value Converter).
 
 ### Tier 1 — ship first
-1. **Token Counter** — tiktoken (GPT-4o/5) + Claude tokenizer via WASM. Show token count, char/word count, approximate cost per model. Search volume: very high ("gpt token counter", "claude tokenizer", "openai tokenizer"). Affiliate hook: "Try this on Anthropic/OpenRouter".
-2. **AI API Cost Calculator** — input/output tokens × model → $ cost. Side-by-side comparison across GPT-5, Claude Opus/Sonnet/Haiku 4.x, Gemini, Grok, DeepSeek. Commercial intent = strong affiliate surface. Pairs with Token Counter.
+1. ~~**Token Counter**~~ — **shipped 2026-04-21** (see Shipped section below).
+2. **AI API Cost Calculator** — input/output tokens × model → $ cost. Side-by-side comparison across GPT-5, Claude Opus/Sonnet/Haiku 4.x, Gemini, Grok, DeepSeek. Commercial intent = strong affiliate surface. Pairs with Token Counter. Reuses `AI_MODELS` + tokenizer routing from `lib/ai-pricing.ts`.
 
 ### Tier 2 — ship after Tier 1 validates traffic
 3. **CLAUDE.md / .cursorrules / AGENTS.md Generator** — form-based builder. Hot trend; every dev writing agent rules now.
@@ -92,11 +92,11 @@ Prioritized by demand + strategic value. Each entry = slug, category, one-line r
 - **Icon is mandatory.** Every new tool must have an icon mapped in `TOOL_ICONS` (`components/icons/index.tsx`) by its slug. Reuse an existing `Ico*` component if one fits, otherwise add a new 24×24 stroked SVG in the same visual style (stroke-width 2, round caps/joins, `currentColor`) and wire it into `TOOL_ICONS`. A missing entry falls back to an empty placeholder, which leaves a blank square on tool cards and in the header — not acceptable, including for `live: false` tools (they render on `/tools` and in the home grid).
 - When a tool referenced by a live guide ships, update the guide's "Related tools" block and verify the link renders (no 404).
 - If a tool requires a large client-side dependency (tiktoken WASM ~1–2 MB, SQL formatter, etc.), lazy-load the widget, not the whole page.
-- When adding the AI category: extend `ToolCategory` in `lib/types.ts`, add nav/filter support wherever categories are iterated, and seed at least 2 tools before exposing the category tab.
+- For a **new category** (AI category was the first since launch): follow the 8-touchpoint algorithm in [`CATEGORIES_GUIDE.md`](./CATEGORIES_GUIDE.md). Skipping any step silently half-ships — the category shows up in some places and not others.
 - Keep the "100% client-side, no data sent anywhere" promise visible on AI tool pages — it's a key differentiator vs online prompt tools that log everything.
 
 ---
 
 ## Shipped
 
-_(none yet — move entries here with date as tools go live)_
+- `2026-04-21` **Token Counter** (`token-counter`, AI category) — counts tokens across 10 major LLMs (GPT-5/4o/4o-mini/o1, Claude Opus/Sonnet/Haiku 4.x, Gemini 2.5 Pro/2.0 Flash, DeepSeek V3) with context-window % usage bar per model. Empirical per-tokenizer ratios with code/non-ASCII/word-length adjustments — ~±5% vs official tokenizers on English prose, wider on CJK/minified code. No external deps (pure JS). Model list + tokenizer routing lives in `lib/ai-pricing.ts` (reusable by AI Cost Calculator). AI category added to `ToolCategory` type but intentionally not exposed as a nav tab (no `CATEGORY_SLUGS` entry, no `lib/categories.ts` config) — waiting on Cost Calculator per "2+ tools before exposing tab" rule.

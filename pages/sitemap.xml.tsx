@@ -27,6 +27,7 @@ function buildSitemap(baseUrl: string): string {
     { url: '/tools/text',      priority: '0.9', changefreq: 'weekly',  lastmod: today },
     { url: '/tools/design',    priority: '0.9', changefreq: 'weekly',  lastmod: today },
     { url: '/tools/value-converter',    priority: '0.9', changefreq: 'weekly',  lastmod: today },
+    { url: '/tools/ai',                 priority: '0.9', changefreq: 'weekly',  lastmod: today },
     // Individual tool pages
     ...getLiveTools().map(tool => ({
       url:        `/tools/${tool.slug}`,

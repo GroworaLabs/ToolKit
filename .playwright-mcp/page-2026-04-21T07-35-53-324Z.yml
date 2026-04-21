@@ -1,0 +1,772 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - banner [ref=e4]:
+        - generic [ref=e5]:
+          - link "ToolKit" [ref=e6] [cursor=pointer]:
+            - /url: /
+            - img "ToolKit" [ref=e7]
+          - navigation "Main navigation" [ref=e8]:
+            - link "Home" [ref=e9] [cursor=pointer]:
+              - /url: /
+            - button "Tools" [ref=e11] [cursor=pointer]:
+              - text: Tools
+              - img [ref=e12]
+            - link "Guides" [ref=e14] [cursor=pointer]:
+              - /url: /guides
+          - generic [ref=e15]:
+            - img
+            - searchbox "Search tools…" [ref=e16]
+          - 'button "Theme: system" [ref=e18] [cursor=pointer]':
+            - img [ref=e19]
+      - main [ref=e21]:
+        - generic [ref=e22]:
+          - navigation "Breadcrumb" [ref=e23]:
+            - list [ref=e24]:
+              - listitem [ref=e25]:
+                - link "Home" [ref=e26] [cursor=pointer]:
+                  - /url: /
+              - listitem [ref=e27]: ›
+              - listitem [ref=e28]: All Tools
+          - generic [ref=e29]:
+            - paragraph [ref=e30]: Tools directory
+            - heading "All Free Online Tools" [level=1] [ref=e31]
+            - paragraph [ref=e32]: Browser-based utilities — no signup, no tracking, no limits.
+          - generic [ref=e33]:
+            - generic [ref=e36]: 51 live
+            - generic [ref=e40]: 56 coming soon
+          - generic [ref=e41]:
+            - generic [ref=e42]:
+              - paragraph [ref=e43]: Security
+              - link "All Security tools →" [ref=e44] [cursor=pointer]:
+                - /url: /tools/security
+            - generic [ref=e45]:
+              - link "Password Generator Strong random passwords with custom settings Live" [ref=e46] [cursor=pointer]:
+                - /url: /tools/password-generator
+                - img [ref=e48]
+                - generic [ref=e50]:
+                  - generic [ref=e51]: Password Generator
+                  - generic [ref=e52]: Strong random passwords with custom settings
+                - generic [ref=e53]: Live
+              - link "Hash Generator SHA-1, SHA-256, SHA-384, SHA-512 hashes Live" [ref=e54] [cursor=pointer]:
+                - /url: /tools/hash-generator
+                - img [ref=e56]
+                - generic [ref=e59]:
+                  - generic [ref=e60]: Hash Generator
+                  - generic [ref=e61]: SHA-1, SHA-256, SHA-384, SHA-512 hashes
+                - generic [ref=e62]: Live
+              - link "Bcrypt Generator Hash and verify passwords with bcrypt Live" [ref=e63] [cursor=pointer]:
+                - /url: /tools/bcrypt-generator
+                - img [ref=e65]
+                - generic [ref=e69]:
+                  - generic [ref=e70]: Bcrypt Generator
+                  - generic [ref=e71]: Hash and verify passwords with bcrypt
+                - generic [ref=e72]: Live
+              - link "JWT Decoder Decode and inspect JWT tokens Live" [ref=e73] [cursor=pointer]:
+                - /url: /tools/jwt-decoder
+                - img [ref=e75]
+                - generic [ref=e77]:
+                  - generic [ref=e78]: JWT Decoder
+                  - generic [ref=e79]: Decode and inspect JWT tokens
+                - generic [ref=e80]: Live
+              - link "Password Strength Checker Analyse password strength and entropy Live" [ref=e81] [cursor=pointer]:
+                - /url: /tools/password-strength-checker
+                - img [ref=e83]
+                - generic [ref=e87]:
+                  - generic [ref=e88]: Password Strength Checker
+                  - generic [ref=e89]: Analyse password strength and entropy
+                - generic [ref=e90]: Live
+              - link "HMAC Generator Generate HMAC signatures with SHA-256 or SHA-512 Live" [ref=e91] [cursor=pointer]:
+                - /url: /tools/hmac-generator
+                - img [ref=e93]
+                - generic [ref=e99]:
+                  - generic [ref=e100]: HMAC Generator
+                  - generic [ref=e101]: Generate HMAC signatures with SHA-256 or SHA-512
+                - generic [ref=e102]: Live
+              - link "Random Token Generator Cryptographically secure random tokens and secrets Live" [ref=e103] [cursor=pointer]:
+                - /url: /tools/random-token-generator
+                - img [ref=e105]
+                - generic [ref=e112]:
+                  - generic [ref=e113]: Random Token Generator
+                  - generic [ref=e114]: Cryptographically secure random tokens and secrets
+                - generic [ref=e115]: Live
+              - link "API Key Generator Generate formatted API keys instantly Live" [ref=e116] [cursor=pointer]:
+                - /url: /tools/api-key-generator
+                - img [ref=e118]
+                - generic [ref=e121]:
+                  - generic [ref=e122]: API Key Generator
+                  - generic [ref=e123]: Generate formatted API keys instantly
+                - generic [ref=e124]: Live
+              - link "QR Code Generator Generate QR codes for URLs and text Live" [ref=e125] [cursor=pointer]:
+                - /url: /tools/qr-code-generator
+                - img [ref=e127]
+                - generic [ref=e133]:
+                  - generic [ref=e134]: QR Code Generator
+                  - generic [ref=e135]: Generate QR codes for URLs and text
+                - generic [ref=e136]: Live
+              - generic "Coming soon":
+                - generic:
+                  - generic: Text Encryption Tool
+                  - generic: AES-256 encrypt and decrypt text in browser
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: TOTP Code Generator
+                  - generic: Generate time-based one-time passwords
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: SSL Certificate Decoder
+                  - generic: Decode and inspect PEM SSL certificates
+                - generic: Soon
+          - generic [ref=e137]:
+            - generic [ref=e138]:
+              - paragraph [ref=e139]: Text & Writing
+              - link "All Text & Writing tools →" [ref=e140] [cursor=pointer]:
+                - /url: /tools/text
+            - generic [ref=e141]:
+              - link "Word Counter Words, characters, sentences & reading time Live" [ref=e142] [cursor=pointer]:
+                - /url: /tools/word-counter
+                - img [ref=e144]
+                - generic [ref=e145]:
+                  - generic [ref=e146]: Word Counter
+                  - generic [ref=e147]: Words, characters, sentences & reading time
+                - generic [ref=e148]: Live
+              - link "Lorem Ipsum Generator Placeholder text for mockups & design Live" [ref=e149] [cursor=pointer]:
+                - /url: /tools/lorem-ipsum
+                - img [ref=e151]
+                - generic [ref=e153]:
+                  - generic [ref=e154]: Lorem Ipsum Generator
+                  - generic [ref=e155]: Placeholder text for mockups & design
+                - generic [ref=e156]: Live
+              - link "Case Converter UPPER, lower, Title, camelCase, snake_case & more Live" [ref=e157] [cursor=pointer]:
+                - /url: /tools/case-converter
+                - img [ref=e159]
+                - generic [ref=e161]:
+                  - generic [ref=e162]: Case Converter
+                  - generic [ref=e163]: UPPER, lower, Title, camelCase, snake_case & more
+                - generic [ref=e164]: Live
+              - link "Markdown Editor Write and preview Markdown live Live" [ref=e165] [cursor=pointer]:
+                - /url: /tools/markdown-editor
+                - img [ref=e167]
+                - generic [ref=e170]:
+                  - generic [ref=e171]: Markdown Editor
+                  - generic [ref=e172]: Write and preview Markdown live
+                - generic [ref=e173]: Live
+              - link "Text to Slug Converter Convert text to URL-friendly slugs Live" [ref=e174] [cursor=pointer]:
+                - /url: /tools/text-to-slug
+                - img [ref=e176]
+                - generic [ref=e180]:
+                  - generic [ref=e181]: Text to Slug Converter
+                  - generic [ref=e182]: Convert text to URL-friendly slugs
+                - generic [ref=e183]: Live
+              - link "Duplicate Line Remover Remove duplicate lines from any text Live" [ref=e184] [cursor=pointer]:
+                - /url: /tools/duplicate-line-remover
+                - img [ref=e186]
+                - generic [ref=e189]:
+                  - generic [ref=e190]: Duplicate Line Remover
+                  - generic [ref=e191]: Remove duplicate lines from any text
+                - generic [ref=e192]: Live
+              - link "Sort Lines Sort text lines alphabetically or by length Live" [ref=e193] [cursor=pointer]:
+                - /url: /tools/sort-lines
+                - img [ref=e195]
+                - generic [ref=e198]:
+                  - generic [ref=e199]: Sort Lines
+                  - generic [ref=e200]: Sort text lines alphabetically or by length
+                - generic [ref=e201]: Live
+              - link "Reverse Text Reverse text, words or lines instantly Live" [ref=e202] [cursor=pointer]:
+                - /url: /tools/reverse-text
+                - img [ref=e204]
+                - generic [ref=e209]:
+                  - generic [ref=e210]: Reverse Text
+                  - generic [ref=e211]: Reverse text, words or lines instantly
+                - generic [ref=e212]: Live
+              - link "Text Repeater Repeat any text N times with a separator Live" [ref=e213] [cursor=pointer]:
+                - /url: /tools/text-repeater
+                - img [ref=e215]
+                - generic [ref=e220]:
+                  - generic [ref=e221]: Text Repeater
+                  - generic [ref=e222]: Repeat any text N times with a separator
+                - generic [ref=e223]: Live
+              - link "Find and Replace Find and replace text with regex support Live" [ref=e224] [cursor=pointer]:
+                - /url: /tools/find-and-replace
+                - img [ref=e226]
+                - generic [ref=e229]:
+                  - generic [ref=e230]: Find and Replace
+                  - generic [ref=e231]: Find and replace text with regex support
+                - generic [ref=e232]: Live
+              - link "Whitespace Remover Strip extra spaces, tabs and blank lines Live" [ref=e233] [cursor=pointer]:
+                - /url: /tools/remove-whitespace
+                - img [ref=e235]
+                - generic [ref=e241]:
+                  - generic [ref=e242]: Whitespace Remover
+                  - generic [ref=e243]: Strip extra spaces, tabs and blank lines
+                - generic [ref=e244]: Live
+              - link "Morse Code Translator Convert text to Morse code and back Live" [ref=e245] [cursor=pointer]:
+                - /url: /tools/text-to-morse
+                - img [ref=e247]
+                - generic [ref=e255]:
+                  - generic [ref=e256]: Morse Code Translator
+                  - generic [ref=e257]: Convert text to Morse code and back
+                - generic [ref=e258]: Live
+              - link "NATO Alphabet Converter Convert text to NATO phonetic alphabet Live" [ref=e259] [cursor=pointer]:
+                - /url: /tools/nato-alphabet
+                - img [ref=e261]
+                - generic [ref=e264]:
+                  - generic [ref=e265]: NATO Alphabet Converter
+                  - generic [ref=e266]: Convert text to NATO phonetic alphabet
+                - generic [ref=e267]: Live
+              - link "ROT13 Encoder / Decoder Encode and decode text with ROT13 cipher Live" [ref=e268] [cursor=pointer]:
+                - /url: /tools/rot13-encoder
+                - img [ref=e270]
+                - generic [ref=e274]:
+                  - generic [ref=e275]: ROT13 Encoder / Decoder
+                  - generic [ref=e276]: Encode and decode text with ROT13 cipher
+                - generic [ref=e277]: Live
+              - link "Text Diff Checker Compare two texts and highlight differences Live" [ref=e278] [cursor=pointer]:
+                - /url: /tools/text-diff
+                - img [ref=e280]
+                - generic [ref=e283]:
+                  - generic [ref=e284]: Text Diff Checker
+                  - generic [ref=e285]: Compare two texts and highlight differences
+                - generic [ref=e286]: Live
+              - link "Reading Time Calculator Estimate reading time from word count Live" [ref=e287] [cursor=pointer]:
+                - /url: /tools/reading-time-calculator
+                - img [ref=e289]
+                - generic [ref=e292]:
+                  - generic [ref=e293]: Reading Time Calculator
+                  - generic [ref=e294]: Estimate reading time from word count
+                - generic [ref=e295]: Live
+              - link "Random Text Generator Generate random words, sentences and paragraphs Live" [ref=e296] [cursor=pointer]:
+                - /url: /tools/random-text-generator
+                - img [ref=e298]
+                - generic [ref=e304]:
+                  - generic [ref=e305]: Random Text Generator
+                  - generic [ref=e306]: Generate random words, sentences and paragraphs
+                - generic [ref=e307]: Live
+              - generic "Coming soon":
+                - generic:
+                  - generic: Text to Binary Converter
+                  - generic: Convert text to binary and binary to text
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Palindrome Checker
+                  - generic: Check if text is a palindrome
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Text Readability Analyser
+                  - generic: Flesch–Kincaid, Gunning Fog and more
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Emoji Picker
+                  - generic: Search and copy any emoji instantly
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Superscript & Subscript Generator
+                  - generic: Convert text to superscript or subscript Unicode
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Plain Text to HTML Converter
+                  - generic: Convert plain text to formatted HTML
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Zalgo Text Generator
+                  - generic: Generate glitchy corrupted-looking text
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Fancy Text Generator
+                  - generic: Stylish Unicode fonts for social media bios
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Number to Words Converter
+                  - generic: Convert numbers to English words
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: HTML to Markdown Converter
+                  - generic: Convert HTML to clean Markdown
+                - generic: Soon
+          - generic [ref=e308]:
+            - generic [ref=e309]:
+              - paragraph [ref=e310]: Developer Tools
+              - link "All Developer Tools tools →" [ref=e311] [cursor=pointer]:
+                - /url: /tools/developer
+            - generic [ref=e312]:
+              - link "UUID Generator Generate v4 UUIDs instantly Live" [ref=e313] [cursor=pointer]:
+                - /url: /tools/uuid-generator
+                - img [ref=e315]
+                - generic [ref=e318]:
+                  - generic [ref=e319]: UUID Generator
+                  - generic [ref=e320]: Generate v4 UUIDs instantly
+                - generic [ref=e321]: Live
+              - link "Base64 Encoder / Decoder Encode or decode Base64 strings instantly Live" [ref=e322] [cursor=pointer]:
+                - /url: /tools/base64
+                - img [ref=e324]
+                - generic [ref=e327]:
+                  - generic [ref=e328]: Base64 Encoder / Decoder
+                  - generic [ref=e329]: Encode or decode Base64 strings instantly
+                - generic [ref=e330]: Live
+              - link "CSV to JSON Convert CSV data to JSON instantly Live" [ref=e331] [cursor=pointer]:
+                - /url: /tools/csv-to-json
+                - img [ref=e333]
+                - generic [ref=e335]:
+                  - generic [ref=e336]: CSV to JSON
+                  - generic [ref=e337]: Convert CSV data to JSON instantly
+                - generic [ref=e338]: Live
+              - link "JSON Formatter Prettify, minify & validate JSON Live" [ref=e339] [cursor=pointer]:
+                - /url: /tools/json-formatter
+                - img [ref=e341]
+                - generic [ref=e344]:
+                  - generic [ref=e345]: JSON Formatter
+                  - generic [ref=e346]: Prettify, minify & validate JSON
+                - generic [ref=e347]: Live
+              - link "URL Encoder / Decoder Encode and decode URLs instantly Live" [ref=e348] [cursor=pointer]:
+                - /url: /tools/url-encoder
+                - img [ref=e350]
+                - generic [ref=e353]:
+                  - generic [ref=e354]: URL Encoder / Decoder
+                  - generic [ref=e355]: Encode and decode URLs instantly
+                - generic [ref=e356]: Live
+              - link "JSON to YAML Converter Convert JSON to YAML and YAML to JSON Live" [ref=e357] [cursor=pointer]:
+                - /url: /tools/json-to-yaml
+                - img [ref=e359]
+                - generic [ref=e362]:
+                  - generic [ref=e363]: JSON to YAML Converter
+                  - generic [ref=e364]: Convert JSON to YAML and YAML to JSON
+                - generic [ref=e365]: Live
+              - link "HTTP Status Code Reference Quick reference for all HTTP status codes Live" [ref=e366] [cursor=pointer]:
+                - /url: /tools/http-status-codes
+                - img [ref=e368]
+                - generic [ref=e373]:
+                  - generic [ref=e374]: HTTP Status Code Reference
+                  - generic [ref=e375]: Quick reference for all HTTP status codes
+                - generic [ref=e376]: Live
+              - link "CSS Unit Converter Convert px, rem, em, vw, vh and more Live" [ref=e377] [cursor=pointer]:
+                - /url: /tools/css-unit-converter
+                - img [ref=e379]
+                - generic [ref=e385]:
+                  - generic [ref=e386]: CSS Unit Converter
+                  - generic [ref=e387]: Convert px, rem, em, vw, vh and more
+                - generic [ref=e388]: Live
+              - link "Semver Comparator Compare semantic version strings Live" [ref=e389] [cursor=pointer]:
+                - /url: /tools/semver-comparator
+                - img [ref=e391]
+                - generic [ref=e395]:
+                  - generic [ref=e396]: Semver Comparator
+                  - generic [ref=e397]: Compare semantic version strings
+                - generic [ref=e398]: Live
+              - link "Regex Tester Test and debug regular expressions live Live" [ref=e399] [cursor=pointer]:
+                - /url: /tools/regex-tester
+                - img [ref=e401]
+                - generic [ref=e404]:
+                  - generic [ref=e405]: Regex Tester
+                  - generic [ref=e406]: Test and debug regular expressions live
+                - generic [ref=e407]: Live
+              - link "Timestamp Converter Convert Unix timestamps to human-readable dates Live" [ref=e408] [cursor=pointer]:
+                - /url: /tools/timestamp-converter
+                - img [ref=e410]
+                - generic [ref=e412]:
+                  - generic [ref=e413]: Timestamp Converter
+                  - generic [ref=e414]: Convert Unix timestamps to human-readable dates
+                - generic [ref=e415]: Live
+              - link "Cron Expression Generator Build and validate cron job schedules Live" [ref=e416] [cursor=pointer]:
+                - /url: /tools/cron-generator
+                - img [ref=e418]
+                - generic [ref=e423]:
+                  - generic [ref=e424]: Cron Expression Generator
+                  - generic [ref=e425]: Build and validate cron job schedules
+                - generic [ref=e426]: Live
+              - link "HTML Entities Encoder Encode and decode HTML entities Live" [ref=e427] [cursor=pointer]:
+                - /url: /tools/html-entities
+                - img [ref=e429]
+                - generic [ref=e431]:
+                  - generic [ref=e432]: HTML Entities Encoder
+                  - generic [ref=e433]: Encode and decode HTML entities
+                - generic [ref=e434]: Live
+              - generic "Coming soon":
+                - generic:
+                  - generic: JSON to CSV Converter
+                  - generic: Convert JSON arrays to CSV format
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: XML to JSON Converter
+                  - generic: Convert XML to JSON and JSON to XML
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: HTML Minifier
+                  - generic: Minify and beautify HTML markup
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: JavaScript Minifier
+                  - generic: Minify and compress JavaScript code
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: SQL Formatter
+                  - generic: Format and beautify SQL queries
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: HTML Beautifier
+                  - generic: Format and indent HTML markup
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: MIME Types Reference
+                  - generic: Searchable MIME type and file extension lookup
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: ASCII Table
+                  - generic: Complete ASCII and Unicode character reference
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Color Name Finder
+                  - generic: Find the nearest CSS color name for any hex
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Unicode Character Lookup
+                  - generic: Search Unicode code points, names and blocks
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: .gitignore Generator
+                  - generic: Generate .gitignore files for any stack
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Robots.txt Generator
+                  - generic: Generate robots.txt files for your site
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Image to Base64 Converter
+                  - generic: Convert images to Base64 data URLs
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: JSON Schema Generator
+                  - generic: Generate JSON Schema from any JSON sample
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Mock Data Generator
+                  - generic: Generate realistic fake data for testing
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: TOML to JSON Converter
+                  - generic: Convert TOML config files to JSON
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: CSV Viewer & Editor
+                  - generic: Preview and edit CSV data in a table
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: User-Agent Parser
+                  - generic: Parse and decode browser user-agent strings
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: IP / CIDR Calculator
+                  - generic: Calculate subnet ranges, masks and hosts
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: JWT Generator
+                  - generic: Generate and sign JWT tokens
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: .htaccess Generator
+                  - generic: Generate Apache .htaccess rules
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: SVG Optimizer
+                  - generic: Optimize and compress SVG files
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Color Contrast Checker
+                  - generic: WCAG 2.1 AA/AAA contrast ratio checker
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Markdown to HTML Exporter
+                  - generic: Export Markdown as clean HTML
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Lorem JSON Generator
+                  - generic: Generate JSON with realistic random data
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: CSS Minifier
+                  - generic: Minify and beautify CSS code
+                - generic: Soon
+          - generic [ref=e435]:
+            - generic [ref=e436]:
+              - paragraph [ref=e437]: Design
+              - link "All Design tools →" [ref=e438] [cursor=pointer]:
+                - /url: /tools/design
+            - generic [ref=e439]:
+              - link "Color Palette Generator Generate harmonious color palettes Live" [ref=e440] [cursor=pointer]:
+                - /url: /tools/color-palette
+                - img [ref=e442]
+                - generic [ref=e448]:
+                  - generic [ref=e449]: Color Palette Generator
+                  - generic [ref=e450]: Generate harmonious color palettes
+                - generic [ref=e451]: Live
+              - link "Username Generator Creative usernames for social media & gaming Live" [ref=e452] [cursor=pointer]:
+                - /url: /tools/username-generator
+                - img [ref=e454]
+                - generic [ref=e457]:
+                  - generic [ref=e458]: Username Generator
+                  - generic [ref=e459]: Creative usernames for social media & gaming
+                - generic [ref=e460]: Live
+              - link "Color Converter Convert between HEX, RGB, HSL, HSV and CMYK Live" [ref=e461] [cursor=pointer]:
+                - /url: /tools/color-converter
+                - img [ref=e463]
+                - generic [ref=e467]:
+                  - generic [ref=e468]: Color Converter
+                  - generic [ref=e469]: Convert between HEX, RGB, HSL, HSV and CMYK
+                - generic [ref=e470]: Live
+              - link "Favicon Generator Generate favicons from text or emoji Live" [ref=e471] [cursor=pointer]:
+                - /url: /tools/favicon-generator
+                - img [ref=e473]
+                - generic [ref=e477]:
+                  - generic [ref=e478]: Favicon Generator
+                  - generic [ref=e479]: Generate favicons from text or emoji
+                - generic [ref=e480]: Live
+              - generic "Coming soon":
+                - generic:
+                  - generic: CSS Gradient Generator
+                  - generic: Create CSS gradients with live preview
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Box Shadow Generator
+                  - generic: Create CSS box shadows with live preview
+                - generic: Soon
+          - generic [ref=e481]:
+            - generic [ref=e482]:
+              - paragraph [ref=e483]: Value Converter
+              - link "All Value Converter tools →" [ref=e484] [cursor=pointer]:
+                - /url: /tools/value-converter
+            - generic [ref=e485]:
+              - link "Energy Converter Convert joules, calories, kWh, BTU and more Live" [ref=e486] [cursor=pointer]:
+                - /url: /tools/energy-converter
+                - img [ref=e488]
+                - generic [ref=e491]:
+                  - generic [ref=e492]: Energy Converter
+                  - generic [ref=e493]: Convert joules, calories, kWh, BTU and more
+                - generic [ref=e494]: Live
+              - link "Time Converter Convert seconds, minutes, hours, days, weeks, years Live" [ref=e495] [cursor=pointer]:
+                - /url: /tools/time-converter
+                - img [ref=e497]
+                - generic [ref=e500]:
+                  - generic [ref=e501]: Time Converter
+                  - generic [ref=e502]: Convert seconds, minutes, hours, days, weeks, years
+                - generic [ref=e503]: Live
+              - link "Number Base Converter Convert binary, octal, decimal and hexadecimal Live" [ref=e504] [cursor=pointer]:
+                - /url: /tools/number-base-converter
+                - img [ref=e506]
+                - generic [ref=e512]:
+                  - generic [ref=e513]: Number Base Converter
+                  - generic [ref=e514]: Convert binary, octal, decimal and hexadecimal
+                - generic [ref=e515]: Live
+              - link "Power Converter Convert watts, kilowatts, horsepower and BTU/hr Live" [ref=e516] [cursor=pointer]:
+                - /url: /tools/power-converter
+                - img [ref=e518]
+                - generic [ref=e520]:
+                  - generic [ref=e521]: Power Converter
+                  - generic [ref=e522]: Convert watts, kilowatts, horsepower and BTU/hr
+                - generic [ref=e523]: Live
+              - link "Torque Converter Convert Newton-metres, foot-pounds and inch-pounds Live" [ref=e524] [cursor=pointer]:
+                - /url: /tools/torque-converter
+                - img [ref=e526]
+                - generic [ref=e528]:
+                  - generic [ref=e529]: Torque Converter
+                  - generic [ref=e530]: Convert Newton-metres, foot-pounds and inch-pounds
+                - generic [ref=e531]: Live
+              - link "Running Pace Converter Convert min/km, min/mile, km/h and mph Live" [ref=e532] [cursor=pointer]:
+                - /url: /tools/pace-converter
+                - img [ref=e534]
+                - generic [ref=e537]:
+                  - generic [ref=e538]: Running Pace Converter
+                  - generic [ref=e539]: Convert min/km, min/mile, km/h and mph
+                - generic [ref=e540]: Live
+              - link "Bitrate Converter Convert bps, kbps, Mbps, Gbps and more Live" [ref=e541] [cursor=pointer]:
+                - /url: /tools/bitrate-converter
+                - img [ref=e543]
+                - generic [ref=e548]:
+                  - generic [ref=e549]: Bitrate Converter
+                  - generic [ref=e550]: Convert bps, kbps, Mbps, Gbps and more
+                - generic [ref=e551]: Live
+              - generic "Coming soon":
+                - generic:
+                  - generic: Length Converter
+                  - generic: Convert metres, feet, inches, miles and more
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Weight Converter
+                  - generic: Convert kg, lbs, grams, ounces and more
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Temperature Converter
+                  - generic: Convert Celsius, Fahrenheit and Kelvin
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Area Converter
+                  - generic: Convert m², ft², acres, hectares and more
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Volume Converter
+                  - generic: Convert litres, gallons, cups, ml and more
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Speed Converter
+                  - generic: Convert km/h, mph, m/s, knots and more
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Data Storage Converter
+                  - generic: Convert bytes, KB, MB, GB, TB and more
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Pressure Converter
+                  - generic: Convert Pascal, bar, PSI, atm and mmHg
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Frequency Converter
+                  - generic: Convert Hz, kHz, MHz, GHz and RPM
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Angle Converter
+                  - generic: Convert degrees, radians and gradians
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Fuel Economy Converter
+                  - generic: Convert MPG, L/100km and km/L
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Pixel ↔ REM Converter
+                  - generic: Convert px to rem and rem to px
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Roman Numeral Converter
+                  - generic: Convert numbers to Roman numerals and back
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Cooking Measurement Converter
+                  - generic: Convert cups, tablespoons, grams and ml
+                - generic: Soon
+              - generic "Coming soon":
+                - generic:
+                  - generic: Currency Converter
+                  - generic: Convert between world currencies with live rates
+                - generic: Soon
+          - generic [ref=e552]:
+            - generic [ref=e553]:
+              - paragraph [ref=e554]: AI
+              - link "All AI tools →" [ref=e555] [cursor=pointer]:
+                - /url: /tools
+            - link "AI Token Counter Count tokens for GPT, Claude, Gemini & more Live" [ref=e557] [cursor=pointer]:
+              - /url: /tools/token-counter
+              - img [ref=e559]
+              - generic [ref=e563]:
+                - generic [ref=e564]: AI Token Counter
+                - generic [ref=e565]: Count tokens for GPT, Claude, Gemini & more
+              - generic [ref=e566]: Live
+      - contentinfo [ref=e567]:
+        - generic [ref=e568]:
+          - generic [ref=e569]:
+            - generic [ref=e570]:
+              - link "ToolKit" [ref=e571] [cursor=pointer]:
+                - /url: /
+                - img "ToolKit" [ref=e572]
+              - paragraph [ref=e573]:
+                - text: Free browser-based tools.
+                - text: No signup. No tracking. No server calls.
+            - generic [ref=e574]:
+              - generic [ref=e575]:
+                - paragraph [ref=e576]: Tools
+                - generic [ref=e577]:
+                  - link "All Tools" [ref=e578] [cursor=pointer]:
+                    - /url: /tools
+                  - link "Security" [ref=e579] [cursor=pointer]:
+                    - /url: /tools/security
+                  - link "Text & Writing" [ref=e580] [cursor=pointer]:
+                    - /url: /tools/text
+                  - link "Developer Tools" [ref=e581] [cursor=pointer]:
+                    - /url: /tools/developer
+                  - link "Design" [ref=e582] [cursor=pointer]:
+                    - /url: /tools/design
+                  - link "Value Converter" [ref=e583] [cursor=pointer]:
+                    - /url: /tools/value-converter
+              - generic [ref=e584]:
+                - paragraph [ref=e585]: Company
+                - generic [ref=e586]:
+                  - link "Guides" [ref=e587] [cursor=pointer]:
+                    - /url: /guides
+                  - link "About" [ref=e588] [cursor=pointer]:
+                    - /url: /about
+                  - link "Contact" [ref=e589] [cursor=pointer]:
+                    - /url: /contact
+              - generic [ref=e590]:
+                - paragraph [ref=e591]: Legal
+                - generic [ref=e592]:
+                  - link "Privacy" [ref=e593] [cursor=pointer]:
+                    - /url: /privacy
+                  - link "Terms" [ref=e594] [cursor=pointer]:
+                    - /url: /terms
+                  - link "Cookies" [ref=e595] [cursor=pointer]:
+                    - /url: /cookies
+                  - button "Cookie preferences" [ref=e596] [cursor=pointer]
+          - generic [ref=e597]:
+            - paragraph [ref=e598]: © 2026 ToolKit. All rights reserved.
+            - paragraph [ref=e599]: Built with Next.js · Deployed on Vercel
+    - dialog "Cookie preferences" [ref=e600]:
+      - generic [ref=e601]:
+        - paragraph [ref=e602]: We respect your privacy
+        - paragraph [ref=e603]:
+          - text: Tools on ToolKit run entirely in your browser — we never see your data. We'd like to use optional cookies for anonymous analytics and (in future) affiliate tracking. You choose.
+          - link "Learn more" [ref=e604] [cursor=pointer]:
+            - /url: /cookies
+          - text: ·
+          - link "Privacy" [ref=e605] [cursor=pointer]:
+            - /url: /privacy
+        - generic [ref=e606]:
+          - button "Customize" [ref=e607] [cursor=pointer]
+          - button "Reject all" [ref=e608] [cursor=pointer]
+          - button "Accept all" [ref=e609] [cursor=pointer]
+  - alert [ref=e610]

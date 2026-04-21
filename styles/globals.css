@@ -167,6 +167,12 @@ html, body { overflow-x: hidden; }
     gap: 48px;
   }
 }
+/* Wide variant — widget spans full width, sidebar drops below */
+@media (min-width: 768px) {
+  .tool-grid--wide { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .tool-grid--wide .sidebar-col { padding-top: 0; }
+  .tool-grid--wide .tool-sidebar { padding-top: 0; }
+}
 
 /* ─── Sidebar: below widget on mobile, right col on desktop ── */
 .tool-sidebar {
@@ -232,6 +238,16 @@ html, body { overflow-x: hidden; }
 }
 @media (min-width: 640px) {
   .md-panels-split { grid-template-columns: 1fr 1fr; }
+}
+
+/* ─── Token Counter split view ───────────────── */
+.tk-token-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+@media (min-width: 820px) {
+  .tk-token-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
 
 /* ─── Animations ─────────────────────────────── */

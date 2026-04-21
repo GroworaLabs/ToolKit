@@ -49,6 +49,7 @@ export const CATEGORIES: CategoryMeta[] = [
             { href: '/tools/text',            label: 'Text & Writing'   },
             { href: '/tools/design',          label: 'Design'           },
             { href: '/tools/value-converter', label: 'Value Converter'  },
+            { href: '/tools/ai',              label: 'AI'               },
         ],
     },
 
@@ -85,6 +86,7 @@ export const CATEGORIES: CategoryMeta[] = [
             { href: '/tools/text',            label: 'Text & Writing'  },
             { href: '/tools/design',          label: 'Design'          },
             { href: '/tools/value-converter', label: 'Value Converter' },
+            { href: '/tools/ai',              label: 'AI'              },
         ],
     },
 
@@ -121,6 +123,7 @@ export const CATEGORIES: CategoryMeta[] = [
             { href: '/tools/developer',       label: 'Developer Tools' },
             { href: '/tools/design',          label: 'Design'          },
             { href: '/tools/value-converter', label: 'Value Converter' },
+            { href: '/tools/ai',              label: 'AI'              },
         ],
     },
 
@@ -157,6 +160,7 @@ export const CATEGORIES: CategoryMeta[] = [
             { href: '/tools/developer',         label: 'Developer Tools'  },
             { href: '/tools/text',              label: 'Text & Writing'   },
             { href: '/tools/value-converter',   label: 'Value Converter'  },
+            { href: '/tools/ai',                label: 'AI'               },
         ],
     },
 
@@ -193,6 +197,44 @@ export const CATEGORIES: CategoryMeta[] = [
             { href: '/tools/developer', label: 'Developer Tools' },
             { href: '/tools/text',      label: 'Text & Writing'  },
             { href: '/tools/design',    label: 'Design'          },
+            { href: '/tools/ai',        label: 'AI'              },
+        ],
+    },
+
+    /* ── AI ───────────────────────────────────────────────── */
+    {
+        slug:        'ai',
+        name:        'AI',
+        registryKey: 'AI',
+        seoTitle:    'Free AI Tools for Developers — Token Counter, Prompt Utilities | ToolKit',
+        seoH1:       'Free AI Tools for Developers',
+        seoDescription: 'Browser-based utilities for LLM workflows: real tiktoken token counter with per-token visualization, context-window math, prompt tooling. Supports GPT-5, GPT-4o, o1, Claude 4.x, Gemini 2.5, DeepSeek. 100% client-side.',
+        intro: 'Client-side utilities for working with large language models. Count tokens exactly for OpenAI models, visualize how GPT splits your prompt, estimate context-window usage across Claude, Gemini and DeepSeek — without sending your prompt to a server.',
+        contentH2: 'Why AI tools should run in the browser',
+        contentBody: [
+            'Most online AI tools proxy your prompt through their own server before returning a result. For token counting, prompt templating, or export cleanup, that\'s unnecessary — and risky. System prompts often contain proprietary instructions, customer data, internal URLs, or API keys embedded in examples. Pasting them into a server-side tool means trusting a third party not to log or train on that content.',
+            'Every AI tool on ToolKit runs entirely in your browser. For OpenAI models we load the real tiktoken BPE ranks (o200k_base and cl100k_base) locally and tokenize client-side — counts are exact, identical to what the OpenAI API bills. For Anthropic, Google, and DeepSeek, we fall back to empirical per-tokenizer ratios with adjustments for code and non-Latin scripts, and we label those counts as estimates rather than pretending they\'re exact.',
+            'No analytics pings your prompt. No server logs capture your system message. You can verify by opening DevTools → Network tab and confirming zero requests while using the tools.',
+        ],
+        tips: [
+            { title: 'Count before you send',     desc: 'API pricing is per token. A workflow processing 10k tickets at 4k tokens each is 40M tokens — the gap between GPT-4o and GPT-4o mini is thousands of dollars per month. Count the prompt template once, multiply by volume.' },
+            { title: 'Reserve output headroom',   desc: 'The context window covers input + output. GPT-4o has 128k total; if your history is at 120k, the model can generate only 8k before hitting the ceiling. Leave 4–16k for responses depending on use case.' },
+            { title: 'Chat templates cost tokens',desc: 'ChatML wrappers (<|im_start|>, role, <|im_end|>) add ~3–5 tokens per message before your content. Use Chat mode in the Token Counter to see the real billed count, not just raw text length.' },
+            { title: 'Non-Latin text is expensive',desc: 'Most tokenizers are English-biased. CJK, Cyrillic, Arabic, and Hindi tokenize 2–3× less efficiently per character. A 1,000-char Chinese prompt can cost more tokens than 4,000 chars of English.' },
+        ],
+        faq: [
+            { q: 'Are my prompts sent anywhere?', a: 'No. These tools run 100% in your browser using WebAssembly and pure JavaScript. Prompts, system messages, and conversation history never leave your device. Verify in DevTools → Network.' },
+            { q: 'Why exact counts only for OpenAI?', a: 'OpenAI open-sourced their tokenizer (tiktoken) with the vocabulary files. Anthropic, Google, and DeepSeek keep their tokenizers closed — there is no published client-side library, so we show an empirical estimate with a visible ~ prefix instead of drawing fabricated token boundaries.' },
+            { q: 'How accurate are the estimates for Claude / Gemini / DeepSeek?', a: 'Typically ±5–10% of the official tokenizer for English prose, with wider variance on code, minified JSON, and non-Latin scripts. Good enough for cost planning, context-window sanity checks, and rough budgeting. For production billing accuracy, call each vendor\'s count_tokens endpoint.' },
+            { q: 'Do these tools work offline?', a: 'After the page loads once, all tokenization runs locally. The BPE ranks file (~500–700 KB gzipped) is cached on first use, then works offline.' },
+            { q: 'Which models are supported?', a: 'GPT-5, GPT-4o, GPT-4o mini, o1, Claude Opus / Sonnet / Haiku 4.x, Gemini 2.5 Pro, Gemini 2.0 Flash, and DeepSeek V3. OpenAI models get exact counts and per-token visualization; the rest use estimates.' },
+        ],
+        otherCategories: [
+            { href: '/tools/security',        label: 'Security'        },
+            { href: '/tools/developer',       label: 'Developer Tools' },
+            { href: '/tools/text',            label: 'Text & Writing'  },
+            { href: '/tools/design',          label: 'Design'          },
+            { href: '/tools/value-converter', label: 'Value Converter' },
         ],
     },
 ];
