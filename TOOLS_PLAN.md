@@ -1,0 +1,102 @@
+# ToolKit — tools roadmap
+
+Prioritized plan for the ~57 `live: false` tools in `lib/registry.ts` plus a new **AI** category. Priority is driven by search volume, dev-audience relevance, monetization potential (affiliate/commercial intent), and whether the tool unblocks existing guides that currently link to 404 pages.
+
+**Hard constraint:** every tool must run 100% client-side. No server-side inference, no API key handling on our backend.
+
+Update this file as tools ship: move items from **Planned** → **Shipped** with the date, or delete them from the plan once live.
+
+---
+
+## NEW category: AI
+
+Rationale: dev audience is flooded with LLM usage; tooling *around* prompts, tokens, and costs is in high demand and monetizable via affiliate links to API providers (Anthropic, OpenAI via OpenRouter, etc.). None of these require actual inference — all are metadata, math, or formatting on text the user pastes in.
+
+Requires adding `'AI'` to `ToolCategory` in `lib/types.ts` (currently: Security / Text & Writing / Developer Tools / Design / Value Converter).
+
+### Tier 1 — ship first
+1. **Token Counter** — tiktoken (GPT-4o/5) + Claude tokenizer via WASM. Show token count, char/word count, approximate cost per model. Search volume: very high ("gpt token counter", "claude tokenizer", "openai tokenizer"). Affiliate hook: "Try this on Anthropic/OpenRouter".
+2. **AI API Cost Calculator** — input/output tokens × model → $ cost. Side-by-side comparison across GPT-5, Claude Opus/Sonnet/Haiku 4.x, Gemini, Grok, DeepSeek. Commercial intent = strong affiliate surface. Pairs with Token Counter.
+
+### Tier 2 — ship after Tier 1 validates traffic
+3. **CLAUDE.md / .cursorrules / AGENTS.md Generator** — form-based builder. Hot trend; every dev writing agent rules now.
+4. **Prompt Template Builder** — `{{variable}}` interpolation + export as JSON/text. Useful for devs testing prompts.
+5. **ChatGPT / Claude Export Cleaner** — paste exported JSON → clean Markdown transcript. Real search demand ("clean chatgpt export", "chatgpt json to markdown").
+6. **Context Window Visualizer** — paste text, show "X / 200k tokens used" per model with visual bar.
+7. **Prompt Diff** — two prompts side-by-side with highlighted differences. Specialized text-diff for prompt engineering A/B tests.
+
+---
+
+## Coming-soon tools (already in registry as `live: false`)
+
+Prioritized by demand + strategic value. Each entry = slug, category, one-line rationale.
+
+### Tier 1 — HIGH priority (ship these first)
+
+**Unblocks existing guides / fixes current 404s from guide links:**
+- `totp-generator` (Security) — **referenced by live guide** `totp-and-2fa-explained`, currently 404s
+- `ip-cidr-calculator` (Developer Tools) — **referenced by live guide** `cidr-and-subnetting-explained`, currently 404s
+- `bcrypt-generator` (not yet in registry) — **referenced by live guide** `bcrypt-vs-argon2-vs-scrypt`, currently 404s. Add to registry first.
+
+**High-volume dev tools (strong SEO, low friction):**
+- `jwt-generator` (Developer Tools) — pairs with existing jwt-decoder; high search volume
+- `sql-formatter` (Developer Tools) — massive dev audience, commoditized but expected
+- `gitignore-generator` (Developer Tools) — high SEO volume (gitignore.io competitor)
+- `json-to-csv` (Developer Tools) — very common conversion need
+- `color-contrast-checker` (Developer Tools) — strong a11y/WCAG keyword traffic
+- `mock-data-generator` (Developer Tools) — devs use this constantly for testing
+
+### Tier 2 — MEDIUM priority (solid SEO, ship after Tier 1)
+
+**Dev / code tools:**
+- `javascript-minifier`, `css-minifier`, `html-minifier` (Developer Tools) — popular triad, ship together
+- `html-beautifier` (Developer Tools) — pairs with minifiers
+- `xml-to-json` (Developer Tools)
+- `json-schema-generator` (Developer Tools)
+- `markdown-to-html` (Developer Tools)
+- `html-to-markdown` (Text & Writing)
+- `svg-optimizer` (Developer Tools)
+- `image-to-base64` (Developer Tools)
+- `encryption-tool` (Security) — AES-256-GCM, complements existing hash tools
+- `ssl-certificate-decoder` (Security)
+
+**Converters with real dev/design use:**
+- `pixel-rem-converter` (Value Converter) — frontend dev staple
+- `currency-converter` (Value Converter) — very high search volume, but needs live rates (pick a free API or cache daily; static fallback OK)
+
+### Tier 3 — LOWER priority (fillers, ship opportunistically)
+
+**Reference lookups:**
+- `user-agent-parser`, `mime-types`, `ascii-table`, `unicode-lookup` (Developer Tools)
+- `csv-viewer`, `toml-to-json`, `robots-txt-generator`, `htaccess-generator`, `lorem-json` (Developer Tools)
+
+**Text utilities:**
+- `text-statistics`, `text-to-html`, `palindrome-checker`, `emoji-picker`, `number-to-words` (Text & Writing)
+
+**Converters (moderate demand, low monetization):**
+- `length-converter`, `weight-converter`, `temperature-converter`, `area-converter`, `volume-converter`, `speed-converter`, `data-storage-converter`, `pressure-converter`, `frequency-converter`, `angle-converter`, `fuel-economy-converter`, `cooking-converter`, `roman-numeral-converter` (Value Converter) — decent SEO but low dev relevance; batch-ship as one sprint
+
+**Design:**
+- `gradient-generator`, `box-shadow-generator` (Design) — popular but commoditized
+
+### Tier 4 — LOWEST priority (fun/niche, low strategic value)
+
+- `text-to-binary`, `superscript-converter`, `zalgo-generator`, `fancy-text-generator` (Text & Writing) — novelty, low dev relevance
+- `color-name-finder` (Developer Tools) — niche
+
+---
+
+## Implementation notes
+
+- Every new tool needs: widget + FAQ (≥8 Q&A) + SEO description (≥500 words in initial HTML, not `ssr: false`-gated). Pattern established during the 2026-04-14 SSR uplift.
+- **Icon is mandatory.** Every new tool must have an icon mapped in `TOOL_ICONS` (`components/icons/index.tsx`) by its slug. Reuse an existing `Ico*` component if one fits, otherwise add a new 24×24 stroked SVG in the same visual style (stroke-width 2, round caps/joins, `currentColor`) and wire it into `TOOL_ICONS`. A missing entry falls back to an empty placeholder, which leaves a blank square on tool cards and in the header — not acceptable, including for `live: false` tools (they render on `/tools` and in the home grid).
+- When a tool referenced by a live guide ships, update the guide's "Related tools" block and verify the link renders (no 404).
+- If a tool requires a large client-side dependency (tiktoken WASM ~1–2 MB, SQL formatter, etc.), lazy-load the widget, not the whole page.
+- When adding the AI category: extend `ToolCategory` in `lib/types.ts`, add nav/filter support wherever categories are iterated, and seed at least 2 tools before exposing the category tab.
+- Keep the "100% client-side, no data sent anywhere" promise visible on AI tool pages — it's a key differentiator vs online prompt tools that log everything.
+
+---
+
+## Shipped
+
+_(none yet — move entries here with date as tools go live)_
