@@ -1310,6 +1310,18 @@ export const TOOLS: ToolMeta[] = [
     keywords:       ['ai api cost calculator', 'llm pricing calculator', 'openai api cost', 'claude api cost', 'gemini pricing', 'gpt-5 cost', 'token cost calculator', 'ai cost comparison', 'llm cost estimator', 'anthropic pricing calculator'],
     live:           true,
   },
+  {
+    slug:           'agent-rules-generator',
+    name:           'Agent Rules Generator',
+    tagline:        'Generate CLAUDE.md, AGENTS.md, .cursorrules from one form',
+    description:    'Generate CLAUDE.md, AGENTS.md, .cursorrules, .windsurfrules, .clinerules from a single form. Web app, CLI, library, and data-pipeline presets. Live preview, copy or download. 100% browser-based.',
+    seoTitle:       'CLAUDE.md / AGENTS.md / .cursorrules Generator — AI Agent Rules | ToolKit',
+    seoH1:          'Free AI Agent Rules File Generator',
+    seoDescription: 'Generate CLAUDE.md (Claude Code), AGENTS.md (Codex, Aider, Goose), .cursorrules (Cursor), .windsurfrules (Windsurf), and .clinerules (Cline) from one form. Presets for web apps, CLIs, libraries, and data pipelines. Live preview, copy or download. 100% browser-based — your project details never leave your device.',
+    category:       'AI',
+    keywords:       ['claude.md generator', 'agents.md generator', 'cursorrules generator', 'ai agent rules', 'cursor rules', 'claude code rules', 'windsurfrules', 'clinerules', 'ai coding conventions', 'agent context file'],
+    live:           true,
+  },
 ];
 
 /* ── Helpers ──────────────────────────────────────────── */
