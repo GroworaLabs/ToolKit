@@ -8,9 +8,11 @@ export interface Token {
 }
 
 export interface TokenizeResult {
-  tokens:  Token[];
-  count:   number;
-  isExact: boolean;
+  tokens:    Token[];
+  ids:       number[];
+  count:     number;
+  isExact:   boolean;
+  truncated: boolean;
 }
 
 const CL100K_SPECIAL: Record<string, number> = {
@@ -70,31 +72,39 @@ export async function tokenize(
   text:       string,
   modelId:    string,
   allowSpecial = false,
+  maxTokens:  number = Infinity,
 ): Promise<TokenizeResult> {
   const model = getModelById(modelId);
 
   if (!hasExactTokenizer(model.tokenizer)) {
     return {
-      tokens:  [],
-      count:   estimateTokens(text, model.tokenizer),
-      isExact: false,
+      tokens:    [],
+      ids:       [],
+      count:     estimateTokens(text, model.tokenizer),
+      isExact:   false,
+      truncated: false,
     };
   }
 
-  if (!text) return { tokens: [], count: 0, isExact: true };
+  if (!text) return { tokens: [], ids: [], count: 0, isExact: true, truncated: false };
 
   const enc = await getEncoder(model.tokenizer);
-  if (!enc) return { tokens: [], count: estimateTokens(text, model.tokenizer), isExact: false };
+  if (!enc) return { tokens: [], ids: [], count: estimateTokens(text, model.tokenizer), isExact: false, truncated: false };
 
-  const ids = enc.encode(text, allowSpecial ? 'all' : []);
+  const ids   = enc.encode(text, allowSpecial ? 'all' : [], []);
+  const total = ids.length;
+  const limit = Math.min(total, maxTokens);
 
-  const tokens: Token[] = ids.map(id => {
+  const tokens: Token[] = new Array(limit);
+  for (let i = 0; i < limit; i++) {
+    const id = ids[i];
     const specialText = SPECIAL_ID_TO_TEXT[id];
-    if (specialText) return { id, text: specialText, special: true };
-    return { id, text: enc.decode([id]), special: false };
-  });
+    tokens[i] = specialText
+      ? { id, text: specialText, special: true }
+      : { id, text: enc.decode([id]), special: false };
+  }
 
-  return { tokens, count: ids.length, isExact: true };
+  return { tokens, ids, count: total, isExact: true, truncated: total > maxTokens };
 }
 
 export async function countTokens(text: string, modelId: string, allowSpecial = false): Promise<{ count: number; isExact: boolean }> {
@@ -105,7 +115,7 @@ export async function countTokens(text: string, modelId: string, allowSpecial = 
   if (!text) return { count: 0, isExact: true };
   const enc = await getEncoder(model.tokenizer);
   if (!enc) return { count: estimateTokens(text, model.tokenizer), isExact: false };
-  return { count: enc.encode(text, allowSpecial ? 'all' : []).length, isExact: true };
+  return { count: enc.encode(text, allowSpecial ? 'all' : [], []).length, isExact: true };
 }
 
 export function composeChatML(system: string, user: string, assistant: string): string {
