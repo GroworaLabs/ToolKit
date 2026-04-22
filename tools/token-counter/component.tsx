@@ -38,6 +38,8 @@ const PROVIDER_COLORS: Record<AiModel['provider'], { fg: string; bg: string }> =
 };
 
 const PANEL_HEIGHT = 380;
+const MAX_VIZ_TOKENS = 2000;
+const MAX_VIZ_IDS    = 5000;
 
 function formatNum(n: number): string {
   return n.toLocaleString('en-US');
@@ -71,22 +73,27 @@ export default function TokenCounterWidget() {
   const [idsOpen,   setIdsOpen]   = useState<boolean>(false);
   const [compareOpen, setCompareOpen] = useState<boolean>(false);
   const [copied,    setCopied]    = useState<string | null>(null);
-  const [result,    setResult]    = useState<{ tokens: Token[]; count: number; isExact: boolean } | null>(null);
+  const [result,    setResult]    = useState<{ tokens: Token[]; ids: number[]; count: number; isExact: boolean; truncated: boolean } | null>(null);
   const [loading,   setLoading]   = useState<boolean>(false);
-  const [hoverIdx,  setHoverIdx]  = useState<number | null>(null);
+  const [hoverIdx,    setHoverIdx]    = useState<number | null>(null);
+  const [hoverSource, setHoverSource] = useState<'viz' | 'ids' | null>(null);
   const idsContainerRef = useRef<HTMLDivElement | null>(null);
   const activeIdRef     = useRef<HTMLSpanElement | null>(null);
+  const vizContainerRef = useRef<HTMLDivElement | null>(null);
+  const activeTokenRef  = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
-    if (hoverIdx === null || !idsOpen) return;
-    const el = activeIdRef.current;
-    const container = idsContainerRef.current;
-    if (!el || !container) return;
-    const eTop = el.offsetTop, eBot = eTop + el.offsetHeight;
-    const cTop = container.scrollTop, cBot = cTop + container.clientHeight;
-    if (eTop < cTop)      container.scrollTop = eTop - 12;
-    else if (eBot > cBot) container.scrollTop = eBot - container.clientHeight + 12;
-  }, [hoverIdx, idsOpen]);
+    if (hoverIdx === null) return;
+    const scrollInto = (el: HTMLElement | null, container: HTMLElement | null) => {
+      if (!el || !container) return;
+      const elRect = el.getBoundingClientRect();
+      const cRect  = container.getBoundingClientRect();
+      if (elRect.top < cRect.top)         container.scrollTop -= (cRect.top - elRect.top) + 12;
+      else if (elRect.bottom > cRect.bottom) container.scrollTop += (elRect.bottom - cRect.bottom) + 12;
+    };
+    if (hoverSource === 'viz' && idsOpen) scrollInto(activeIdRef.current,    idsContainerRef.current);
+    if (hoverSource === 'ids')            scrollInto(activeTokenRef.current, vizContainerRef.current);
+  }, [hoverIdx, hoverSource, idsOpen]);
 
   useEffect(() => {
     if (typeof document === 'undefined') return;
@@ -114,7 +121,7 @@ export default function TokenCounterWidget() {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    tokenize(deferredText, deferredModelId, deferredMode === 'chat').then(r => {
+    tokenize(deferredText, deferredModelId, deferredMode === 'chat', MAX_VIZ_TOKENS).then(r => {
       if (!cancelled) {
         setResult(r);
         setLoading(false);
@@ -124,7 +131,7 @@ export default function TokenCounterWidget() {
   }, [deferredText, deferredModelId, deferredMode]);
 
   const chars = composed.length;
-  const words = composed.trim().split(/\s+/).filter(Boolean).length;
+  const words = useMemo(() => (composed.match(/\S+/g) || []).length, [composed]);
   const activeModel = AI_MODELS.find(m => m.id === modelId) ?? AI_MODELS[0];
 
   const multiModel = useMemo(() => {
@@ -132,9 +139,9 @@ export default function TokenCounterWidget() {
       model: m,
       count: hasExactTokenizer(m.tokenizer) && m.id === modelId && result?.isExact
         ? result.count
-        : estimateTokens(composed, m.tokenizer),
+        : estimateTokens(deferredText, m.tokenizer),
     }));
-  }, [composed, modelId, result]);
+  }, [deferredText, modelId, result]);
 
   const copy = (value: string, key: string) => {
     navigator.clipboard.writeText(value);
@@ -148,12 +155,14 @@ export default function TokenCounterWidget() {
   const specialBg   = '#ef4444';
 
   const tokens      = result?.tokens ?? [];
-  const tokenIds    = tokens.map(t => t.id);
+  const tokenIds    = result?.ids    ?? [];
   const supportsViz = hasExactTokenizer(activeModel.tokenizer);
   const count       = result?.count ?? 0;
   const isExact     = result?.isExact ?? false;
+  const truncated   = result?.truncated ?? false;
   const pct         = (count / activeModel.contextWindow) * 100;
   const activeCol   = PROVIDER_COLORS[activeModel.provider];
+  const idsToShow   = Math.min(tokenIds.length, MAX_VIZ_IDS);
 
   const providerGroups: Record<AiModel['provider'], AiModel[]> = {
     OpenAI: [], Anthropic: [], Google: [], xAI: [], DeepSeek: [],
@@ -342,7 +351,7 @@ export default function TokenCounterWidget() {
             )}
           </div>
 
-          <div style={{
+          <div ref={vizContainerRef} style={{
             flex: 1, padding: '12px 14px', overflow: 'auto',
             fontSize: 13, fontFamily: 'JetBrains Mono, monospace',
             lineHeight: 1.9, whiteSpace: 'pre-wrap', wordBreak: 'break-word',
@@ -369,12 +378,13 @@ export default function TokenCounterWidget() {
             ) : (
               tokens.map((tok, i) => {
                 const isHover = hoverIdx === i;
-                const onEnter = () => setHoverIdx(i);
-                const onLeave = () => setHoverIdx(null);
+                const onEnter = () => { setHoverIdx(i); setHoverSource('viz'); };
+                const onLeave = () => { setHoverIdx(null); setHoverSource(null); };
                 if (tok.special) {
                   return (
                     <span
                       key={i}
+                      ref={isHover ? activeTokenRef : undefined}
                       title={`id ${tok.id} · special`}
                       onMouseEnter={onEnter}
                       onMouseLeave={onLeave}
@@ -395,6 +405,7 @@ export default function TokenCounterWidget() {
                 return (
                   <span
                     key={i}
+                    ref={isHover ? activeTokenRef : undefined}
                     title={`id ${tok.id}`}
                     onMouseEnter={onEnter}
                     onMouseLeave={onLeave}
@@ -409,6 +420,17 @@ export default function TokenCounterWidget() {
                   />
                 );
               })
+            )}
+            {truncated && (
+              <div style={{
+                marginTop: 12, padding: '8px 10px',
+                border: '1px dashed var(--border)', borderRadius: 'var(--r-s)',
+                background: 'var(--white)',
+                fontFamily: 'inherit', fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.5,
+              }}>
+                Showing first <strong style={{ color: 'var(--ink)' }}>{formatNum(MAX_VIZ_TOKENS)}</strong> of <strong style={{ color: 'var(--ink)' }}>{formatNum(count)}</strong> tokens.
+                The total count above is exact — visualization is capped to keep the page responsive on huge inputs.
+              </div>
             )}
           </div>
         </div>
@@ -513,14 +535,14 @@ export default function TokenCounterWidget() {
               }}
             >
               <span style={{ color: 'var(--ink-4)' }}>[ </span>
-              {tokenIds.map((id, i) => {
+              {tokenIds.slice(0, idsToShow).map((id, i) => {
                 const isHover = hoverIdx === i;
                 return (
                   <span key={i}>
                     <span
                       ref={isHover ? activeIdRef : undefined}
-                      onMouseEnter={() => setHoverIdx(i)}
-                      onMouseLeave={() => setHoverIdx(null)}
+                      onMouseEnter={() => { setHoverIdx(i); setHoverSource('ids'); }}
+                      onMouseLeave={() => { setHoverIdx(null); setHoverSource(null); }}
                       style={{
                         padding: '1px 4px', borderRadius: 3,
                         background: isHover ? 'var(--ink)'  : 'transparent',
@@ -530,10 +552,13 @@ export default function TokenCounterWidget() {
                         transition: 'background 0.1s, color 0.1s',
                       }}
                     >{id}</span>
-                    {i < tokenIds.length - 1 && <span style={{ color: 'var(--ink-4)' }}>, </span>}
+                    {i < idsToShow - 1 && <span style={{ color: 'var(--ink-4)' }}>, </span>}
                   </span>
                 );
               })}
+              {tokenIds.length > idsToShow && (
+                <span style={{ color: 'var(--ink-4)' }}>, <em style={{ fontStyle: 'normal', color: 'var(--ink-3)' }}>…+{formatNum(tokenIds.length - idsToShow)} more</em></span>
+              )}
               <span style={{ color: 'var(--ink-4)' }}> ]</span>
             </div>
           )}
