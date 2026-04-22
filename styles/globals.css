@@ -250,6 +250,30 @@ html, body { overflow-x: hidden; }
   .tk-token-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
 
+/* ─── AI Cost Calculator: responsive comparison row ── */
+.tk-cost-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "model month"
+    "call  bar";
+  column-gap: 12px;
+  row-gap: 10px;
+  align-items: center;
+}
+.tk-cost-row > .tk-cost-model { grid-area: model; min-width: 0; }
+.tk-cost-row > .tk-cost-call  { grid-area: call;  text-align: left; }
+.tk-cost-row > .tk-cost-month { grid-area: month; text-align: right; }
+.tk-cost-row > .tk-cost-bar   { grid-area: bar; min-width: 0; }
+@media (min-width: 640px) {
+  .tk-cost-row {
+    grid-template-columns: minmax(0, 1.6fr) minmax(80px, 0.7fr) minmax(80px, 0.7fr) minmax(0, 1.4fr);
+    grid-template-areas: "model call month bar";
+    row-gap: 0;
+  }
+  .tk-cost-row > .tk-cost-call { text-align: right; }
+}
+
 /* ─── Animations ─────────────────────────────── */
 @keyframes up   { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes ping { 0%,100% { box-shadow: 0 0 0 0 rgba(5,150,105,.4); } 50% { box-shadow: 0 0 0 7px rgba(5,150,105,0); } }

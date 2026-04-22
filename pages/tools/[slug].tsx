@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 /* ── Tools that use a wide single-column layout (sidebar drops below) ── */
-const WIDE_TOOLS = new Set<string>(['token-counter']);
+const WIDE_TOOLS = new Set<string>(['token-counter', 'ai-cost-calculator']);
 
 /* ── Dynamic tool loader ───────────────────────────────── */
 
@@ -86,6 +86,7 @@ const TOOL_DATA: Record<string, () => Promise<{ faq: FaqItem[]; [key: string]: u
     'energy-converter':   () => import('@/tools/energy-converter'),
     'bcrypt-generator':   () => import('@/tools/bcrypt-generator'),
     'token-counter':      () => import('@/tools/token-counter'),
+    'ai-cost-calculator': () => import('@/tools/ai-cost-calculator'),
 };
 
 const TOOL_WIDGETS: Record<string, React.ComponentType> = {
@@ -140,6 +141,7 @@ const TOOL_WIDGETS: Record<string, React.ComponentType> = {
     'energy-converter':   dynamic(() => import('@/tools/energy-converter/component'),   { ssr: false }) as React.ComponentType,
     'bcrypt-generator':   dynamic(() => import('@/tools/bcrypt-generator/component'),   { ssr: false }) as React.ComponentType,
     'token-counter':      dynamic(() => import('@/tools/token-counter/component'),      { ssr: false }) as React.ComponentType,
+    'ai-cost-calculator': dynamic(() => import('@/tools/ai-cost-calculator/component'), { ssr: false }) as React.ComponentType,
 };
 
 /* ── Password generator sidebar ────────────────────────── */
@@ -1393,6 +1395,7 @@ const TOOL_CONTENT: Record<string, React.ComponentType> = {
     'energy-converter':          dynamic(() => import('@/tools/energy-converter/content')) as React.ComponentType,
     'bcrypt-generator':          dynamic(() => import('@/tools/bcrypt-generator/content')) as React.ComponentType,
     'token-counter':             dynamic(() => import('@/tools/token-counter/content')) as React.ComponentType,
+    'ai-cost-calculator':        dynamic(() => import('@/tools/ai-cost-calculator/content')) as React.ComponentType,
 };
 
 function ToolContent({ slug }: { slug: string }) {

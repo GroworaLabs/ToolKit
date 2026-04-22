@@ -1298,6 +1298,18 @@ export const TOOLS: ToolMeta[] = [
     keywords:       ['token counter', 'tokenizer', 'gpt tokenizer', 'openai tokenizer', 'tiktoken online', 'tiktokenizer', 'claude tokenizer', 'gemini token counter', 'llm token counter', 'chatml tokenizer'],
     live:           true,
   },
+  {
+    slug:           'ai-cost-calculator',
+    name:           'AI API Cost Calculator',
+    tagline:        'Compare GPT, Claude, Gemini, DeepSeek API costs side-by-side',
+    description:    'Calculate per-call and monthly cost across GPT-5/4o/o1, Claude Opus/Sonnet/Haiku 4.x, Gemini 2.5/2.0, DeepSeek V3. Models prompt caching and Batch API discounts. 100% browser-based.',
+    seoTitle:       'AI API Cost Calculator — GPT, Claude, Gemini Pricing Side-by-Side | ToolKit',
+    seoH1:          'Free AI API Cost Calculator',
+    seoDescription: 'Compare LLM API pricing across GPT-5, GPT-4o, o1, Claude Opus/Sonnet/Haiku 4.x, Gemini 2.5/2.0 Flash, DeepSeek V3. Per-call and monthly cost. Models prompt caching (90% off) and Batch API (50% off) discounts. Workload presets: chatbot, RAG, codegen, agent loop. 100% browser-based.',
+    category:       'AI',
+    keywords:       ['ai api cost calculator', 'llm pricing calculator', 'openai api cost', 'claude api cost', 'gemini pricing', 'gpt-5 cost', 'token cost calculator', 'ai cost comparison', 'llm cost estimator', 'anthropic pricing calculator'],
+    live:           true,
+  },
 ];
 
 /* ── Helpers ──────────────────────────────────────────── */

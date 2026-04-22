@@ -16,7 +16,7 @@ Requires adding `'AI'` to `ToolCategory` in `lib/types.ts` (currently: Security 
 
 ### Tier 1 — ship first
 1. ~~**Token Counter**~~ — **shipped 2026-04-21** (see Shipped section below).
-2. **AI API Cost Calculator** — input/output tokens × model → $ cost. Side-by-side comparison across GPT-5, Claude Opus/Sonnet/Haiku 4.x, Gemini, Grok, DeepSeek. Commercial intent = strong affiliate surface. Pairs with Token Counter. Reuses `AI_MODELS` + tokenizer routing from `lib/ai-pricing.ts`.
+2. ~~**AI API Cost Calculator**~~ — **shipped 2026-04-22** (see Shipped section below).
 
 ### Tier 2 — ship after Tier 1 validates traffic
 3. **CLAUDE.md / .cursorrules / AGENTS.md Generator** — form-based builder. Hot trend; every dev writing agent rules now.
@@ -100,3 +100,4 @@ Prioritized by demand + strategic value. Each entry = slug, category, one-line r
 ## Shipped
 
 - `2026-04-21` **Token Counter** (`token-counter`, AI category) — counts tokens across 10 major LLMs (GPT-5/4o/4o-mini/o1, Claude Opus/Sonnet/Haiku 4.x, Gemini 2.5 Pro/2.0 Flash, DeepSeek V3) with context-window % usage bar per model. Empirical per-tokenizer ratios with code/non-ASCII/word-length adjustments — ~±5% vs official tokenizers on English prose, wider on CJK/minified code. No external deps (pure JS). Model list + tokenizer routing lives in `lib/ai-pricing.ts` (reusable by AI Cost Calculator). AI category added to `ToolCategory` type but intentionally not exposed as a nav tab (no `CATEGORY_SLUGS` entry, no `lib/categories.ts` config) — waiting on Cost Calculator per "2+ tools before exposing tab" rule.
+- `2026-04-22` **AI API Cost Calculator** (`ai-cost-calculator`, AI category) — per-call + monthly cost across all 10 models in `AI_MODELS`, sorted cheapest first with multiplier vs cheapest. Inputs: input tokens / call, output tokens / call, calls per day, pricing mode (Standard / Prompt cache hit / Batch API 50%-off). Six workload presets (chatbot, summarizer, RAG, codegen, batch, agent loop). `lib/ai-pricing.ts` extended with `ModelPricing` (input/output/cached/batch $/1M) and `computeCost(model, inTok, outTok, mode)` helper — reusable by future AI tools. Wide layout (`WIDE_TOOLS`) for the comparison table. WIDE layout, no custom sidebar (consistent with Token Counter). 100% client-side; pricing is a static snapshot dated `PRICING_UPDATED`.
