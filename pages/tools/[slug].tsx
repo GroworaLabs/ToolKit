@@ -92,6 +92,12 @@ const TOOL_DATA: Record<string, () => Promise<{ faq: FaqItem[]; [key: string]: u
     'data-storage-converter':  () => import('@/tools/data-storage-converter'),
     'ip-cidr-calculator':      () => import('@/tools/ip-cidr-calculator'),
     'totp-generator':          () => import('@/tools/totp-generator'),
+    'jwt-generator':           () => import('@/tools/jwt-generator'),
+    'sql-formatter':           () => import('@/tools/sql-formatter'),
+    'gitignore-generator':     () => import('@/tools/gitignore-generator'),
+    'json-to-csv':             () => import('@/tools/json-to-csv'),
+    'color-contrast-checker':  () => import('@/tools/color-contrast-checker'),
+    'mock-data-generator':     () => import('@/tools/mock-data-generator'),
 };
 
 const TOOL_WIDGETS: Record<string, React.ComponentType> = {
@@ -152,6 +158,12 @@ const TOOL_WIDGETS: Record<string, React.ComponentType> = {
     'data-storage-converter': dynamic(() => import('@/tools/data-storage-converter/component'), { ssr: false }) as React.ComponentType,
     'ip-cidr-calculator':     dynamic(() => import('@/tools/ip-cidr-calculator/component'),     { ssr: false }) as React.ComponentType,
     'totp-generator':         dynamic(() => import('@/tools/totp-generator/component'),         { ssr: false }) as React.ComponentType,
+    'jwt-generator':          dynamic(() => import('@/tools/jwt-generator/component'),          { ssr: false }) as React.ComponentType,
+    'sql-formatter':          dynamic(() => import('@/tools/sql-formatter/component'),          { ssr: false }) as React.ComponentType,
+    'gitignore-generator':    dynamic(() => import('@/tools/gitignore-generator/component'),    { ssr: false }) as React.ComponentType,
+    'json-to-csv':            dynamic(() => import('@/tools/json-to-csv/component'),            { ssr: false }) as React.ComponentType,
+    'color-contrast-checker': dynamic(() => import('@/tools/color-contrast-checker/component'), { ssr: false }) as React.ComponentType,
+    'mock-data-generator':    dynamic(() => import('@/tools/mock-data-generator/component'),    { ssr: false }) as React.ComponentType,
 };
 
 /* ── Password generator sidebar ────────────────────────── */
@@ -821,8 +833,10 @@ function ToolSidebar({ slug }: { slug: string }) {
     if (slug === 'text-to-morse')      return <TextToMorseSidebar />;
     if (slug === 'nato-alphabet')      return <NatoAlphabetSidebar />;
     if (slug === 'rot13-encoder')      return <Rot13Sidebar />;
-    if (slug === 'ip-cidr-calculator') return <IpCidrSidebar />;
-    if (slug === 'totp-generator')     return <TotpSidebar />;
+    if (slug === 'ip-cidr-calculator')    return <IpCidrSidebar />;
+    if (slug === 'totp-generator')        return <TotpSidebar />;
+    if (slug === 'gitignore-generator')   return <GitignoreSidebar />;
+    if (slug === 'color-contrast-checker') return <ContrastSidebar />;
     if (SIDEBAR_INFO_LOADERS[slug])        return <GenericInfoSidebar slug={slug} />;
     return null;
 }
@@ -879,6 +893,52 @@ const TotpSidebar = dynamic(
         };
     }), { ssr: false }
 ) as React.ComponentType;
+
+const GitignoreSidebar = dynamic(
+    () => import('@/tools/gitignore-generator').then(m => {
+        const { sidebarTips } = m as { sidebarTips: { tip: string; desc: string }[] };
+        return function Sidebar() {
+            return (
+                <div className="tool-sidebar">
+                    <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 16 }}>Pro tips</p>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        {sidebarTips.map(({ tip, desc }) => (
+                            <div key={tip} style={{ padding: '11px 0', borderBottom: '1px solid var(--border)' }}>
+                                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 3 }}>{tip}</div>
+                                <div style={{ fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.55 }}>{desc}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+    }), { ssr: false }
+) as React.ComponentType;
+
+function ContrastSidebar() {
+    return (
+        <div className="tool-sidebar">
+            <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 14 }}>WCAG thresholds</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+                {[
+                    { label: 'AA normal text',   ratio: '4.5:1', pass: true },
+                    { label: 'AA large text',    ratio: '3:1',   pass: true },
+                    { label: 'AA UI components', ratio: '3:1',   pass: true },
+                    { label: 'AAA normal text',  ratio: '7:1',   pass: true },
+                    { label: 'AAA large text',   ratio: '4.5:1', pass: true },
+                ].map(({ label, ratio }) => (
+                    <div key={label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '9px 0', borderBottom: '1px solid var(--border)' }}>
+                        <span style={{ fontSize: 12, color: 'var(--ink-2)' }}>{label}</span>
+                        <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, fontWeight: 700, color: 'var(--blue)' }}>{ratio}</span>
+                    </div>
+                ))}
+            </div>
+            <p style={{ fontSize: 12, color: 'var(--ink-3)', marginTop: 14, lineHeight: 1.55 }}>
+                Large text: ≥18pt (24px) regular or ≥14pt (19px) bold.
+            </p>
+        </div>
+    );
+}
 
 function ColorConverterSidebar() {
     return (
@@ -1161,6 +1221,10 @@ const SIDEBAR_INFO_LOADERS: Record<string, () => Promise<{ label: string; value:
     'bitrate-converter':     () => import('@/tools/bitrate-converter').then(m => (m as any).sidebarInfo),
     'length-converter':      () => import('@/tools/length-converter').then(m => (m as any).sidebarInfo),
     'data-storage-converter':() => import('@/tools/data-storage-converter').then(m => (m as any).sidebarInfo),
+    'jwt-generator':         () => import('@/tools/jwt-generator').then(m => (m as any).sidebarInfo),
+    'sql-formatter':         () => import('@/tools/sql-formatter').then(m => (m as any).sidebarInfo),
+    'json-to-csv':           () => import('@/tools/json-to-csv').then(m => (m as any).sidebarInfo),
+    'mock-data-generator':   () => import('@/tools/mock-data-generator').then(m => (m as any).sidebarInfo),
 };
 
 function GenericInfoSidebar({ slug }: { slug: string }) {
@@ -1468,6 +1532,12 @@ const TOOL_CONTENT: Record<string, React.ComponentType> = {
     'data-storage-converter':    dynamic(() => import('@/tools/data-storage-converter/content')) as React.ComponentType,
     'ip-cidr-calculator':        dynamic(() => import('@/tools/ip-cidr-calculator/content')) as React.ComponentType,
     'totp-generator':            dynamic(() => import('@/tools/totp-generator/content')) as React.ComponentType,
+    'jwt-generator':             dynamic(() => import('@/tools/jwt-generator/content')) as React.ComponentType,
+    'sql-formatter':             dynamic(() => import('@/tools/sql-formatter/content')) as React.ComponentType,
+    'gitignore-generator':       dynamic(() => import('@/tools/gitignore-generator/content')) as React.ComponentType,
+    'json-to-csv':               dynamic(() => import('@/tools/json-to-csv/content')) as React.ComponentType,
+    'color-contrast-checker':    dynamic(() => import('@/tools/color-contrast-checker/content')) as React.ComponentType,
+    'mock-data-generator':       dynamic(() => import('@/tools/mock-data-generator/content')) as React.ComponentType,
 };
 
 function ToolContent({ slug }: { slug: string }) {

@@ -571,7 +571,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Convert JSON arrays to CSV format instantly. Flatten nested objects, choose delimiter and download the result as a .csv file. Free, no signup, browser-based.',
     category:       'Developer Tools',
     keywords:       ['json to csv converter', 'convert json to csv', 'json csv online', 'export json as csv'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'json-to-yaml',
@@ -631,7 +631,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Format and beautify SQL queries instantly. Supports MySQL, PostgreSQL, SQLite and standard SQL. Proper indentation and keyword capitalisation. Free, no signup.',
     category:       'Developer Tools',
     keywords:       ['sql formatter', 'sql formatter online', 'format sql query', 'sql beautifier', 'sql pretty printer'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'html-beautifier',
@@ -715,7 +715,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Generate .gitignore files for any combination of programming languages, frameworks and IDEs. Node.js, Python, Java, macOS, VS Code and more. Free, no signup.',
     category:       'Developer Tools',
     keywords:       ['gitignore generator', 'gitignore file generator', 'create gitignore online', '.gitignore template'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'robots-txt-generator',
@@ -787,7 +787,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Generate realistic fake data for testing — names, emails, phone numbers, addresses, dates and UUIDs. Export as JSON or CSV. Free, browser-based, no signup.',
     category:       'Developer Tools',
     keywords:       ['mock data generator', 'fake data generator', 'test data generator', 'dummy data generator', 'random data generator'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'toml-to-json',
@@ -847,7 +847,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Generate and sign JWT tokens with HS256, HS384 or HS512. Set custom payload claims, issue time and expiry. Free online JWT generator — no signup.',
     category:       'Developer Tools',
     keywords:       ['jwt generator', 'generate jwt token online', 'jwt token creator', 'sign jwt online', 'json web token generator'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'htaccess-generator',
@@ -883,7 +883,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Check color contrast ratio for WCAG 2.1 AA and AAA accessibility compliance. Enter foreground and background colors. Get pass/fail result and suggestions. Free.',
     category:       'Developer Tools',
     keywords:       ['color contrast checker', 'wcag contrast checker', 'accessibility contrast ratio', 'aa contrast checker', 'web accessibility color tool'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'markdown-to-html',
