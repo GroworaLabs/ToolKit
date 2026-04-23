@@ -72,6 +72,7 @@ export const IcoGitBranch  = ({ size = 16 }: IconProps) => <svg width={size} hei
 export const IcoTableArrow = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="14" height="14" rx="2"/><path d="M2 9h14"/><path d="M2 15h14"/><path d="M8 3v14"/><path d="M19 10l3 3-3 3"/><line x1="22" y1="13" x2="16" y2="13"/></svg>;
 export const IcoContrast   = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z" fill="currentColor" stroke="none"/></svg>;
 export const IcoPersonCard = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="8" cy="12" r="3"/><path d="M14 10h5"/><path d="M14 14h5"/><path d="M3 20c0-2.76 2.24-5 5-5"/></svg>;
+export const IcoModelCompare = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="9" height="18" rx="2"/><rect x="13" y="3" width="9" height="18" rx="2"/><line x1="6" y1="8" x2="6" y2="8.01"/><line x1="6" y1="12" x2="8" y2="12"/><line x1="6" y1="16" x2="8" y2="16"/><line x1="17" y1="8" x2="17" y2="8.01"/><line x1="17" y1="12" x2="19" y2="12"/><line x1="17" y1="16" x2="19" y2="16"/></svg>;
 
 /* ── Map: tool slug → icon component ─────────────────── */
 import type { ComponentType } from 'react';
@@ -140,4 +141,5 @@ export const TOOL_ICONS: Record<string, ComponentType<IconProps>> = {
   'json-to-csv':               IcoTableArrow,
   'color-contrast-checker':    IcoContrast,
   'mock-data-generator':       IcoPersonCard,
+  'ai-model-comparison':       IcoModelCompare,
 };
