@@ -352,7 +352,7 @@ export default function AiModelComparison() {
       if (sort === 'ctxK') return b.ctxK - a.ctxK;
       return a[sort] - b[sort];
     });
-  }, [filter, sort]);
+  }, [filter, sort, models]);
 
   const compareModels = useMemo(() => models.filter(m => selected.has(m.id)), [models, selected]);
 
