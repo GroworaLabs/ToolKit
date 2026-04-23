@@ -88,6 +88,10 @@ const TOOL_DATA: Record<string, () => Promise<{ faq: FaqItem[]; [key: string]: u
     'token-counter':          () => import('@/tools/token-counter'),
     'ai-cost-calculator':     () => import('@/tools/ai-cost-calculator'),
     'agent-rules-generator':  () => import('@/tools/agent-rules-generator'),
+    'length-converter':        () => import('@/tools/length-converter'),
+    'data-storage-converter':  () => import('@/tools/data-storage-converter'),
+    'ip-cidr-calculator':      () => import('@/tools/ip-cidr-calculator'),
+    'totp-generator':          () => import('@/tools/totp-generator'),
 };
 
 const TOOL_WIDGETS: Record<string, React.ComponentType> = {
@@ -144,6 +148,10 @@ const TOOL_WIDGETS: Record<string, React.ComponentType> = {
     'token-counter':         dynamic(() => import('@/tools/token-counter/component'),         { ssr: false }) as React.ComponentType,
     'ai-cost-calculator':    dynamic(() => import('@/tools/ai-cost-calculator/component'),    { ssr: false }) as React.ComponentType,
     'agent-rules-generator': dynamic(() => import('@/tools/agent-rules-generator/component'), { ssr: false }) as React.ComponentType,
+    'length-converter':       dynamic(() => import('@/tools/length-converter/component'),       { ssr: false }) as React.ComponentType,
+    'data-storage-converter': dynamic(() => import('@/tools/data-storage-converter/component'), { ssr: false }) as React.ComponentType,
+    'ip-cidr-calculator':     dynamic(() => import('@/tools/ip-cidr-calculator/component'),     { ssr: false }) as React.ComponentType,
+    'totp-generator':         dynamic(() => import('@/tools/totp-generator/component'),         { ssr: false }) as React.ComponentType,
 };
 
 /* ── Password generator sidebar ────────────────────────── */
@@ -813,9 +821,64 @@ function ToolSidebar({ slug }: { slug: string }) {
     if (slug === 'text-to-morse')      return <TextToMorseSidebar />;
     if (slug === 'nato-alphabet')      return <NatoAlphabetSidebar />;
     if (slug === 'rot13-encoder')      return <Rot13Sidebar />;
+    if (slug === 'ip-cidr-calculator') return <IpCidrSidebar />;
+    if (slug === 'totp-generator')     return <TotpSidebar />;
     if (SIDEBAR_INFO_LOADERS[slug])        return <GenericInfoSidebar slug={slug} />;
     return null;
 }
+
+/* ── IP/CIDR sidebar ────────────────────────────────────── */
+function IpCidrSidebar() {
+    return (
+        <div className="tool-sidebar">
+            <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 14 }}>Common subnet sizes</p>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {[
+                    { cidr: '/24', hosts: '254',        use: 'Typical LAN'    },
+                    { cidr: '/25', hosts: '126',        use: 'Half subnet'    },
+                    { cidr: '/26', hosts: '62',         use: 'Small VLAN'     },
+                    { cidr: '/28', hosts: '14',         use: 'Small segment'  },
+                    { cidr: '/30', hosts: '2',          use: 'WAN P2P link'   },
+                    { cidr: '/16', hosts: '65,534',     use: 'Large LAN'      },
+                    { cidr: '/8',  hosts: '16,777,214', use: 'Class A block'  },
+                ].map(({ cidr, hosts, use }) => (
+                    <div key={cidr} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '9px 0', borderBottom: '1px solid var(--border)' }}>
+                        <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 13, fontWeight: 700, color: 'var(--green)', minWidth: 36 }}>{cidr}</code>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                            <div style={{ fontSize: 12, color: 'var(--ink)', fontWeight: 600 }}>{hosts} hosts</div>
+                            <div style={{ fontSize: 11, color: 'var(--ink-4)' }}>{use}</div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+/* ── TOTP sidebar ───────────────────────────────────────── */
+const TotpSidebar = dynamic(
+    () => import('@/tools/totp-generator').then(m => {
+        const { sidebarFeatures } = m as { sidebarFeatures: { label: string; desc: string; color: string; bg: string }[] };
+        return function Sidebar() {
+            return (
+                <div className="tool-sidebar">
+                    <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 16 }}>About this tool</p>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        {sidebarFeatures.map(({ label, desc, color, bg }) => (
+                            <div key={label} style={{ display: 'flex', gap: 12, padding: '12px 0', borderBottom: '1px solid var(--border)' }}>
+                                <div style={{ width: 28, height: 28, borderRadius: 7, background: bg, color, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13 }}>✓</div>
+                                <div>
+                                    <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 3 }}>{label}</div>
+                                    <div style={{ fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.55 }}>{desc}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+    }), { ssr: false }
+) as React.ComponentType;
 
 function ColorConverterSidebar() {
     return (
@@ -1096,6 +1159,8 @@ const SIDEBAR_INFO_LOADERS: Record<string, () => Promise<{ label: string; value:
     'torque-converter':      () => import('@/tools/torque-converter').then(m => (m as any).sidebarInfo),
     'pace-converter':        () => import('@/tools/pace-converter').then(m => (m as any).sidebarInfo),
     'bitrate-converter':     () => import('@/tools/bitrate-converter').then(m => (m as any).sidebarInfo),
+    'length-converter':      () => import('@/tools/length-converter').then(m => (m as any).sidebarInfo),
+    'data-storage-converter':() => import('@/tools/data-storage-converter').then(m => (m as any).sidebarInfo),
 };
 
 function GenericInfoSidebar({ slug }: { slug: string }) {
@@ -1399,6 +1464,10 @@ const TOOL_CONTENT: Record<string, React.ComponentType> = {
     'token-counter':             dynamic(() => import('@/tools/token-counter/content')) as React.ComponentType,
     'ai-cost-calculator':        dynamic(() => import('@/tools/ai-cost-calculator/content')) as React.ComponentType,
     'agent-rules-generator':     dynamic(() => import('@/tools/agent-rules-generator/content')) as React.ComponentType,
+    'length-converter':          dynamic(() => import('@/tools/length-converter/content')) as React.ComponentType,
+    'data-storage-converter':    dynamic(() => import('@/tools/data-storage-converter/content')) as React.ComponentType,
+    'ip-cidr-calculator':        dynamic(() => import('@/tools/ip-cidr-calculator/content')) as React.ComponentType,
+    'totp-generator':            dynamic(() => import('@/tools/totp-generator/content')) as React.ComponentType,
 };
 
 function ToolContent({ slug }: { slug: string }) {
