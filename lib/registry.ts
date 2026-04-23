@@ -232,7 +232,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Generate TOTP one-time codes from any TOTP secret key. Compatible with Google Authenticator, Authy, and RFC 6238. Free, browser-based, no signup.',
     category:       'Security',
     keywords:       ['totp generator', 'otp generator online', 'google authenticator code generator', 'totp code', 'time-based otp'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'random-token-generator',
@@ -835,7 +835,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Calculate subnet information from any IP/CIDR notation. Get network address, broadcast, subnet mask, range and usable host count. Free online subnet calculator.',
     category:       'Developer Tools',
     keywords:       ['cidr calculator', 'subnet calculator online', 'ip cidr calculator', 'network range calculator', 'ip subnet mask calculator'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'jwt-generator',
@@ -981,7 +981,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Convert length between metres, kilometres, miles, feet, inches, centimetres and yards instantly. All units update as you type. Free length unit converter.',
     category:       'Value Converter',
     keywords:       ['length converter', 'metres to feet', 'km to miles', 'inches to cm', 'unit of length converter', 'distance converter'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'weight-converter',
@@ -1053,7 +1053,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Convert data storage units between bits, bytes, KB, MB, GB, TB and PB. Supports both SI (1000-based) and binary (1024-based) units. Free, no signup.',
     category:       'Value Converter',
     keywords:       ['data storage converter', 'bytes to megabytes', 'mb to gb converter', 'gigabyte converter', 'file size converter'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'pressure-converter',

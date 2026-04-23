@@ -34,8 +34,8 @@ Prioritized by demand + strategic value. Each entry = slug, category, one-line r
 ### Tier 1 — HIGH priority (ship these first)
 
 **Unblocks existing guides / fixes current 404s from guide links:**
-- `totp-generator` (Security) — **referenced by live guide** `totp-and-2fa-explained`, currently 404s
-- `ip-cidr-calculator` (Developer Tools) — **referenced by live guide** `cidr-and-subnetting-explained`, currently 404s
+- ~~`totp-generator`~~ — **shipped 2026-04-23**
+- ~~`ip-cidr-calculator`~~ — **shipped 2026-04-23**
 - `bcrypt-generator` (not yet in registry) — **referenced by live guide** `bcrypt-vs-argon2-vs-scrypt`, currently 404s. Add to registry first.
 
 **High-volume dev tools (strong SEO, low friction):**
@@ -74,7 +74,7 @@ Prioritized by demand + strategic value. Each entry = slug, category, one-line r
 - `text-statistics`, `text-to-html`, `palindrome-checker`, `emoji-picker`, `number-to-words` (Text & Writing)
 
 **Converters (moderate demand, low monetization):**
-- `length-converter`, `weight-converter`, `temperature-converter`, `area-converter`, `volume-converter`, `speed-converter`, `data-storage-converter`, `pressure-converter`, `frequency-converter`, `angle-converter`, `fuel-economy-converter`, `cooking-converter`, `roman-numeral-converter` (Value Converter) — decent SEO but low dev relevance; batch-ship as one sprint
+- ~~`length-converter`~~ — **shipped 2026-04-23**; ~~`data-storage-converter`~~ — **shipped 2026-04-23**; `weight-converter`, `temperature-converter`, `area-converter`, `volume-converter`, `speed-converter`, `pressure-converter`, `frequency-converter`, `angle-converter`, `fuel-economy-converter`, `cooking-converter`, `roman-numeral-converter` (Value Converter) — decent SEO but low dev relevance; batch-ship as one sprint
 
 **Design:**
 - `gradient-generator`, `box-shadow-generator` (Design) — popular but commoditized
