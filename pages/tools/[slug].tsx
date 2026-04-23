@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 /* ── Tools that use a wide single-column layout (sidebar drops below) ── */
-const WIDE_TOOLS = new Set<string>(['token-counter', 'ai-cost-calculator', 'agent-rules-generator']);
+const WIDE_TOOLS = new Set<string>(['token-counter', 'ai-cost-calculator', 'agent-rules-generator', 'ai-model-comparison']);
 
 /* ── Dynamic tool loader ───────────────────────────────── */
 
@@ -98,6 +98,7 @@ const TOOL_DATA: Record<string, () => Promise<{ faq: FaqItem[]; [key: string]: u
     'json-to-csv':             () => import('@/tools/json-to-csv'),
     'color-contrast-checker':  () => import('@/tools/color-contrast-checker'),
     'mock-data-generator':     () => import('@/tools/mock-data-generator'),
+    'ai-model-comparison':     () => import('@/tools/ai-model-comparison'),
 };
 
 const TOOL_WIDGETS: Record<string, React.ComponentType> = {
@@ -164,6 +165,7 @@ const TOOL_WIDGETS: Record<string, React.ComponentType> = {
     'json-to-csv':            dynamic(() => import('@/tools/json-to-csv/component'),            { ssr: false }) as React.ComponentType,
     'color-contrast-checker': dynamic(() => import('@/tools/color-contrast-checker/component'), { ssr: false }) as React.ComponentType,
     'mock-data-generator':    dynamic(() => import('@/tools/mock-data-generator/component'),    { ssr: false }) as React.ComponentType,
+    'ai-model-comparison':    dynamic(() => import('@/tools/ai-model-comparison/component'),    { ssr: false }) as React.ComponentType,
 };
 
 /* ── Password generator sidebar ────────────────────────── */
@@ -1538,6 +1540,7 @@ const TOOL_CONTENT: Record<string, React.ComponentType> = {
     'json-to-csv':               dynamic(() => import('@/tools/json-to-csv/content')) as React.ComponentType,
     'color-contrast-checker':    dynamic(() => import('@/tools/color-contrast-checker/content')) as React.ComponentType,
     'mock-data-generator':       dynamic(() => import('@/tools/mock-data-generator/content')) as React.ComponentType,
+    'ai-model-comparison':       dynamic(() => import('@/tools/ai-model-comparison/content')) as React.ComponentType,
 };
 
 function ToolContent({ slug }: { slug: string }) {

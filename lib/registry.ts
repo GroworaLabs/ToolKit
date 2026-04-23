@@ -1322,6 +1322,18 @@ export const TOOLS: ToolMeta[] = [
     keywords:       ['claude.md generator', 'agents.md generator', 'cursorrules generator', 'ai agent rules', 'cursor rules', 'claude code rules', 'windsurfrules', 'clinerules', 'ai coding conventions', 'agent context file'],
     live:           true,
   },
+  {
+    slug:           'ai-model-comparison',
+    name:           'AI Model Comparison',
+    tagline:        'Compare GPT, Claude, Gemini, Llama, Mistral, DeepSeek side-by-side',
+    description:    'Compare 19 LLMs across 7 providers — pricing, context windows, capabilities (vision, tool use, thinking, batch API), and open-weights status. Filter by tier, sort by cost, select up to 3 models for side-by-side breakdown.',
+    seoTitle:       'AI Model Comparison 2026 — GPT vs Claude vs Gemini vs Llama | ToolKit',
+    seoH1:          'AI Model Comparison: GPT, Claude, Gemini, Llama & More',
+    seoDescription: 'Compare 19 LLMs: GPT-5/4o/o3, Claude Opus/Sonnet/Haiku 4.x, Gemini 2.5 Pro/Flash, Grok 3, DeepSeek V3/R1, Llama 4, Mistral. Pricing, context windows, vision, tool use, thinking mode, batch API, open weights. Filter, sort, and compare side-by-side. 100% browser-based.',
+    category:       'AI',
+    keywords:       ['ai model comparison', 'llm comparison', 'gpt vs claude', 'claude vs gemini', 'best llm 2026', 'openai vs anthropic', 'llm pricing comparison', 'gpt-5 vs claude opus', 'gemini vs gpt', 'llm benchmark comparison'],
+    live:           true,
+  },
 ];
 
 /* ── Helpers ──────────────────────────────────────────── */
