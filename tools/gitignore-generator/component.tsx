@@ -1,0 +1,374 @@
+'use client';
+import { useState, useMemo } from 'react';
+
+type Template = { id: string; label: string; group: string; content: string };
+
+const TEMPLATES: Template[] = [
+  { id: 'node', label: 'Node.js', group: 'Languages & Runtimes', content: `# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+lerna-debug.log*
+.npm
+.node_repl_history
+*.tgz
+.yarn-integrity
+.env
+.env.local
+.env.*.local
+.cache
+dist/
+build/
+.turbo/
+` },
+  { id: 'python', label: 'Python', group: 'Languages & Runtimes', content: `# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+*.log
+` },
+  { id: 'java', label: 'Java', group: 'Languages & Runtimes', content: `# Java
+*.class
+*.log
+*.ctxt
+.mtj.tmp/
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+target/
+.gradle/
+build/
+out/
+.idea/
+*.iml
+` },
+  { id: 'go', label: 'Go', group: 'Languages & Runtimes', content: `# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+vendor/
+` },
+  { id: 'rust', label: 'Rust', group: 'Languages & Runtimes', content: `# Rust
+debug/
+target/
+Cargo.lock
+**/*.rs.bk
+*.pdb
+` },
+  { id: 'php', label: 'PHP', group: 'Languages & Runtimes', content: `# PHP
+vendor/
+composer.phar
+.env
+.env.local
+.env.*.local
+storage/logs/
+storage/framework/cache/
+storage/framework/sessions/
+storage/framework/views/
+bootstrap/cache/
+public/hot
+public/storage
+` },
+  { id: 'react', label: 'React / Next.js', group: 'Frameworks', content: `# React / Next.js
+.next/
+out/
+build/
+.vercel/
+.env*.local
+` },
+  { id: 'vue', label: 'Vue.js', group: 'Frameworks', content: `# Vue.js
+dist/
+.nuxt/
+.output/
+.env*.local
+*.local
+` },
+  { id: 'svelte', label: 'Svelte / SvelteKit', group: 'Frameworks', content: `# Svelte / SvelteKit
+.svelte-kit/
+build/
+.env
+.env.*
+!.env.example
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+` },
+  { id: 'django', label: 'Django', group: 'Frameworks', content: `# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+.env
+` },
+  { id: 'vscode', label: 'VS Code', group: 'Editors & IDEs', content: `# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history/
+*.vsix
+` },
+  { id: 'jetbrains', label: 'JetBrains IDEs', group: 'Editors & IDEs', content: `# JetBrains IDEs
+.idea/
+*.iws
+out/
+.idea_modules/
+atlassian-ide-plugin.xml
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+` },
+  { id: 'vim', label: 'Vim / Neovim', group: 'Editors & IDEs', content: `# Vim / Neovim
+[._]*.s[a-v][a-z]
+!*.svg
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+Session.vim
+Sessionx.vim
+.netrwhist
+*~
+tags
+[._]*.un~
+` },
+  { id: 'macos', label: 'macOS', group: 'Operating Systems', content: `# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+` },
+  { id: 'windows', label: 'Windows', group: 'Operating Systems', content: `# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+` },
+  { id: 'linux', label: 'Linux', group: 'Operating Systems', content: `# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+` },
+  { id: 'docker', label: 'Docker', group: 'Tools', content: `# Docker
+.dockerignore
+docker-compose.override.yml
+.docker/
+` },
+  { id: 'terraform', label: 'Terraform', group: 'Tools', content: `# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+` },
+  { id: 'env', label: '.env files', group: 'Tools', content: `# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.staging
+.env.*
+!.env.example
+!.env.sample
+` },
+  { id: 'logs', label: 'Logs & temp', group: 'Tools', content: `# Logs and temp files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pids/
+*.pid
+*.seed
+*.pid.lock
+.tmp/
+tmp/
+temp/
+` },
+];
+
+const GROUPS = [...new Set(TEMPLATES.map(t => t.group))];
+
+export default function GitignoreGenerator() {
+  const [selected, setSelected] = useState<Set<string>>(new Set(['node', 'vscode', 'macos', 'env']));
+  const [copied,   setCopied]   = useState(false);
+
+  const toggle = (id: string) => {
+    setSelected(prev => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  };
+
+  const output = useMemo(() => {
+    const parts: string[] = ['# Generated by ToolKit — webtoolkit.tech', '# .gitignore', ''];
+    const seen = new Set<string>();
+    for (const id of TEMPLATES.filter(t => selected.has(t.id)).map(t => t.id)) {
+      const tpl = TEMPLATES.find(t => t.id === id)!;
+      const lines: string[] = [];
+      for (const line of tpl.content.split('\n')) {
+        if (!seen.has(line) || line === '' || line.startsWith('#')) {
+          seen.add(line);
+          lines.push(line);
+        }
+      }
+      parts.push(lines.join('\n'));
+    }
+    return parts.join('\n').replace(/\n{3,}/g, '\n\n').trim() + '\n';
+  }, [selected]);
+
+  const copy = () => {
+    navigator.clipboard.writeText(output).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    });
+  };
+
+  const download = () => {
+    const blob = new Blob([output], { type: 'text/plain' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = '.gitignore'; a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      {/* Template selector */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        {GROUPS.map(group => (
+          <div key={group}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.06em', margin: '0 0 8px' }}>{group}</p>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              {TEMPLATES.filter(t => t.group === group).map(t => (
+                <button key={t.id} onClick={() => toggle(t.id)}
+                  style={{ padding: '6px 14px', borderRadius: 20, fontSize: 13, cursor: 'pointer',
+                    border: '1.5px solid', borderColor: selected.has(t.id) ? 'var(--green)' : 'var(--border)',
+                    background: selected.has(t.id) ? 'var(--green-lt)' : 'var(--white)',
+                    color: selected.has(t.id) ? 'var(--green)' : 'var(--ink-2)',
+                    fontWeight: selected.has(t.id) ? 600 : 400 }}>
+                  {t.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Output */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <label style={{ fontSize: 12, fontWeight: 600, color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            .gitignore — {selected.size} template{selected.size !== 1 ? 's' : ''} selected
+          </label>
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button onClick={copy}
+              style={{ padding: '6px 14px', borderRadius: 6, border: '1.5px solid var(--border)',
+                background: 'var(--white)', color: 'var(--ink-2)', fontSize: 13, fontWeight: 500, cursor: 'pointer' }}>
+              {copied ? 'Copied!' : 'Copy'}
+            </button>
+            <button onClick={download}
+              style={{ padding: '6px 14px', borderRadius: 6, background: 'var(--bg-accent)', color: '#fff',
+                border: 'none', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
+              Download .gitignore
+            </button>
+          </div>
+        </div>
+        <textarea readOnly value={output}
+          spellCheck={false}
+          style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, lineHeight: 1.6, padding: 14,
+            border: '1.5px solid var(--border)', borderRadius: 8, resize: 'vertical', minHeight: 320,
+            background: 'var(--surface)', color: 'var(--ink)', outline: 'none' }} />
+      </div>
+    </div>
+  );
+}

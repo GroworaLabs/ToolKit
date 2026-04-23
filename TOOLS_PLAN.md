@@ -39,12 +39,12 @@ Prioritized by demand + strategic value. Each entry = slug, category, one-line r
 - `bcrypt-generator` (not yet in registry) — **referenced by live guide** `bcrypt-vs-argon2-vs-scrypt`, currently 404s. Add to registry first.
 
 **High-volume dev tools (strong SEO, low friction):**
-- `jwt-generator` (Developer Tools) — pairs with existing jwt-decoder; high search volume
-- `sql-formatter` (Developer Tools) — massive dev audience, commoditized but expected
-- `gitignore-generator` (Developer Tools) — high SEO volume (gitignore.io competitor)
-- `json-to-csv` (Developer Tools) — very common conversion need
-- `color-contrast-checker` (Developer Tools) — strong a11y/WCAG keyword traffic
-- `mock-data-generator` (Developer Tools) — devs use this constantly for testing
+- ~~`jwt-generator`~~ — **shipped 2026-04-23**
+- ~~`sql-formatter`~~ — **shipped 2026-04-23**
+- ~~`gitignore-generator`~~ — **shipped 2026-04-23**
+- ~~`json-to-csv`~~ — **shipped 2026-04-23**
+- ~~`color-contrast-checker`~~ — **shipped 2026-04-23**
+- ~~`mock-data-generator`~~ — **shipped 2026-04-23**
 
 ### Tier 2 — MEDIUM priority (solid SEO, ship after Tier 1)
 
