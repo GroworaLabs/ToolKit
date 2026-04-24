@@ -6,6 +6,7 @@ export default function Document() {
     return (
         <Html lang="en">
             <Head>
+                <meta name="google-site-verification" content="PN-2TYCsAwTEBdNWnk2Llr-uMkVUoAo_0hLfCk9S1R4" />
                 <meta name="google-adsense-account" content="ca-pub-1948452989342011" />
                 <script
                     async
