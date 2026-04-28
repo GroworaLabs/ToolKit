@@ -99,6 +99,7 @@ const TOOL_DATA: Record<string, () => Promise<{ faq: FaqItem[]; [key: string]: u
     'color-contrast-checker':  () => import('@/tools/color-contrast-checker'),
     'mock-data-generator':     () => import('@/tools/mock-data-generator'),
     'ai-model-comparison':     () => import('@/tools/ai-model-comparison'),
+    'keyboard-layout-converter': () => import('@/tools/keyboard-layout-converter'),
 };
 
 const TOOL_WIDGETS: Record<string, React.ComponentType> = {
@@ -166,6 +167,7 @@ const TOOL_WIDGETS: Record<string, React.ComponentType> = {
     'color-contrast-checker': dynamic(() => import('@/tools/color-contrast-checker/component'), { ssr: false }) as React.ComponentType,
     'mock-data-generator':    dynamic(() => import('@/tools/mock-data-generator/component'),    { ssr: false }) as React.ComponentType,
     'ai-model-comparison':    dynamic(() => import('@/tools/ai-model-comparison/component'),    { ssr: false }) as React.ComponentType,
+    'keyboard-layout-converter': dynamic(() => import('@/tools/keyboard-layout-converter/component'), { ssr: false }) as React.ComponentType,
 };
 
 /* ── Password generator sidebar ────────────────────────── */
@@ -1541,6 +1543,7 @@ const TOOL_CONTENT: Record<string, React.ComponentType> = {
     'color-contrast-checker':    dynamic(() => import('@/tools/color-contrast-checker/content')) as React.ComponentType,
     'mock-data-generator':       dynamic(() => import('@/tools/mock-data-generator/content')) as React.ComponentType,
     'ai-model-comparison':       dynamic(() => import('@/tools/ai-model-comparison/content')) as React.ComponentType,
+    'keyboard-layout-converter': dynamic(() => import('@/tools/keyboard-layout-converter/content')) as React.ComponentType,
 };
 
 function ToolContent({ slug }: { slug: string }) {

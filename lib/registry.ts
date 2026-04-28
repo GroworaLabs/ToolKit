@@ -1334,6 +1334,18 @@ export const TOOLS: ToolMeta[] = [
     keywords:       ['ai model comparison', 'llm comparison', 'gpt vs claude', 'claude vs gemini', 'best llm 2026', 'openai vs anthropic', 'llm pricing comparison', 'gpt-5 vs claude opus', 'gemini vs gpt', 'llm benchmark comparison'],
     live:           true,
   },
+  {
+    slug:           'keyboard-layout-converter',
+    name:           'Keyboard Layout Converter',
+    tagline:        'Fix text typed in the wrong keyboard layout',
+    description:    'Convert text between keyboard layouts when you forget to switch. Supports English ↔ Ukrainian and English ↔ Russian (QWERTY ↔ ЙЦУКЕН).',
+    seoTitle:       'Keyboard Layout Converter — Fix Wrong Layout Text Online | ToolKit',
+    seoH1:          'Free Keyboard Layout Converter Online',
+    seoDescription: 'Fix text typed in the wrong keyboard layout instantly. Convert between English, Ukrainian, and Russian QWERTY/ЙЦУКЕН layouts. Paste mistyped text and get the correct version. 100% browser-based, free, no signup.',
+    category:       'Text & Writing',
+    keywords:       ['keyboard layout converter', 'wrong keyboard layout fix', 'layout converter online', 'qwerty to cyrillic', 'english to ukrainian keyboard', 'english to russian keyboard', 'розкладка клавіатури', 'конвертер розкладки', 'переключить раскладку'],
+    live:           true,
+  },
 ];
 
 /* ── Helpers ──────────────────────────────────────────── */
