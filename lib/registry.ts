@@ -862,6 +862,18 @@ export const TOOLS: ToolMeta[] = [
     live:           false,
   },
   {
+    slug:           'nginx-redirect-generator',
+    name:           'Nginx Redirect Generator',
+    tagline:        'Generate Nginx redirect configs instantly',
+    description:    'Generate Nginx redirect rules with return, rewrite or location blocks. Supports 301/302/307/308, domain matching, query string handling and regex patterns.',
+    seoTitle:       'Free Nginx Redirect Generator Online — 301, 302, Rewrite & Location | ToolKit',
+    seoH1:          'Free Nginx Redirect Generator Online',
+    seoDescription: 'Generate Nginx redirect configurations instantly. Choose return, rewrite or location block method. Supports 301/302/307/308 status codes, domain matching, query parameter handling and regex patterns. Free, browser-based, no signup.',
+    category:       'Developer Tools',
+    keywords:       ['nginx redirect generator', 'nginx redirect', 'nginx 301 redirect', 'nginx rewrite generator', 'nginx redirect config', 'nginx location redirect', 'nginx url redirect', 'nginx redirect tool'],
+    live:           true,
+  },
+  {
     slug:           'svg-optimizer',
     name:           'SVG Optimizer',
     tagline:        'Optimize and compress SVG files',

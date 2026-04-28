@@ -74,6 +74,7 @@ export const IcoContrast   = ({ size = 16 }: IconProps) => <svg width={size} hei
 export const IcoPersonCard = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="8" cy="12" r="3"/><path d="M14 10h5"/><path d="M14 14h5"/><path d="M3 20c0-2.76 2.24-5 5-5"/></svg>;
 export const IcoKeyboard     = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="6" y1="8" x2="6" y2="8.01"/><line x1="10" y1="8" x2="10" y2="8.01"/><line x1="14" y1="8" x2="14" y2="8.01"/><line x1="18" y1="8" x2="18" y2="8.01"/><line x1="6" y1="12" x2="6" y2="12.01"/><line x1="10" y1="12" x2="10" y2="12.01"/><line x1="14" y1="12" x2="14" y2="12.01"/><line x1="18" y1="12" x2="18" y2="12.01"/><line x1="8" y1="16" x2="16" y2="16"/></svg>;
 export const IcoModelCompare = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="9" height="18" rx="2"/><rect x="13" y="3" width="9" height="18" rx="2"/><line x1="6" y1="8" x2="6" y2="8.01"/><line x1="6" y1="12" x2="8" y2="12"/><line x1="6" y1="16" x2="8" y2="16"/><line x1="17" y1="8" x2="17" y2="8.01"/><line x1="17" y1="12" x2="19" y2="12"/><line x1="17" y1="16" x2="19" y2="16"/></svg>;
+export const IcoNginx        = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-12"/><polyline points="15 6 19 6"/><polyline points="5 18 9 18"/><path d="M4 4l16 16"/><line x1="3" y1="12" x2="7" y2="12"/><line x1="17" y1="12" x2="21" y2="12"/></svg>;
 
 /* ── Map: tool slug → icon component ─────────────────── */
 import type { ComponentType } from 'react';
@@ -144,4 +145,5 @@ export const TOOL_ICONS: Record<string, ComponentType<IconProps>> = {
   'mock-data-generator':       IcoPersonCard,
   'ai-model-comparison':       IcoModelCompare,
   'keyboard-layout-converter': IcoKeyboard,
+  'nginx-redirect-generator':  IcoNginx,
 };
