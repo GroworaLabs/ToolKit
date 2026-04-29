@@ -36,7 +36,7 @@ Prioritized by demand + strategic value. Each entry = slug, category, one-line r
 **Unblocks existing guides / fixes current 404s from guide links:**
 - ~~`totp-generator`~~ — **shipped 2026-04-23**
 - ~~`ip-cidr-calculator`~~ — **shipped 2026-04-23**
-- `bcrypt-generator` (not yet in registry) — **referenced by live guide** `bcrypt-vs-argon2-vs-scrypt`, currently 404s. Add to registry first.
+- ~~`bcrypt-generator`~~ — **already live** (was incorrectly flagged as missing from registry)
 
 **High-volume dev tools (strong SEO, low friction):**
 - ~~`jwt-generator`~~ — **shipped 2026-04-23**
@@ -49,8 +49,10 @@ Prioritized by demand + strategic value. Each entry = slug, category, one-line r
 ### Tier 2 — MEDIUM priority (solid SEO, ship after Tier 1)
 
 **Dev / code tools:**
-- `javascript-minifier`, `css-minifier`, `html-minifier` (Developer Tools) — popular triad, ship together
-- `html-beautifier` (Developer Tools) — pairs with minifiers
+- ~~`javascript-minifier`~~ — **shipped 2026-04-29**
+- ~~`css-minifier`~~ — **shipped 2026-04-29** (includes beautify mode)
+- `html-minifier` (Developer Tools) — next in the minifier trio
+- `html-beautifier` (Developer Tools) — pairs with html-minifier
 - `xml-to-json` (Developer Tools)
 - `json-schema-generator` (Developer Tools)
 - `markdown-to-html` (Developer Tools)
@@ -102,3 +104,4 @@ Prioritized by demand + strategic value. Each entry = slug, category, one-line r
 - `2026-04-21` **Token Counter** (`token-counter`, AI category) — counts tokens across 10 major LLMs (GPT-5/4o/4o-mini/o1, Claude Opus/Sonnet/Haiku 4.x, Gemini 2.5 Pro/2.0 Flash, DeepSeek V3) with context-window % usage bar per model. Empirical per-tokenizer ratios with code/non-ASCII/word-length adjustments — ~±5% vs official tokenizers on English prose, wider on CJK/minified code. No external deps (pure JS). Model list + tokenizer routing lives in `lib/ai-pricing.ts` (reusable by AI Cost Calculator). AI category added to `ToolCategory` type but intentionally not exposed as a nav tab (no `CATEGORY_SLUGS` entry, no `lib/categories.ts` config) — waiting on Cost Calculator per "2+ tools before exposing tab" rule.
 - `2026-04-22` **AI API Cost Calculator** (`ai-cost-calculator`, AI category) — per-call + monthly cost across all 10 models in `AI_MODELS`, sorted cheapest first with multiplier vs cheapest. Inputs: input tokens / call, output tokens / call, calls per day, pricing mode (Standard / Prompt cache hit / Batch API 50%-off). Six workload presets (chatbot, summarizer, RAG, codegen, batch, agent loop). `lib/ai-pricing.ts` extended with `ModelPricing` (input/output/cached/batch $/1M) and `computeCost(model, inTok, outTok, mode)` helper — reusable by future AI tools. Wide layout (`WIDE_TOOLS`) for the comparison table. WIDE layout, no custom sidebar (consistent with Token Counter). 100% client-side; pricing is a static snapshot dated `PRICING_UPDATED`.
 - `2026-04-22` **Agent Rules Generator** (`agent-rules-generator`, AI category) — form-based builder that emits `CLAUDE.md`, `AGENTS.md`, `.cursorrules`, `.windsurfrules`, and `.clinerules` from a single source of truth. Five format chips (one per target tool) adapt the file header; body sections (Stack / Run commands / Conventions / Architecture / Do / Don't / Never touch / Notes) are format-agnostic. Four starter presets: web app (Next.js + Drizzle + Clerk), CLI tool (Node + Commander), library/SDK (tsup + changesets), data/ML (Python + Polars + DuckDB + uv). Live markdown preview with line + char count, Copy to clipboard, Download with the right filename per format. Uses existing `.tk-token-split` class for side-by-side form + preview, `WIDE_TOOLS` layout so the preview has room. 100% client-side.
+- **Live tools confirmed in registry (not previously logged):** `bcrypt-generator` (Security), `keyboard-layout-converter` (Developer Tools), `energy-converter`, `time-converter`, `power-converter`, `torque-converter`, `pace-converter`, `bitrate-converter` (Value Converter), `color-converter` (Design), `nginx-redirect-generator` (Developer Tools), `semver-comparator` (Developer Tools), `json-to-yaml` (Developer Tools), `http-status-codes` (Developer Tools), `html-entities` (Developer Tools), `random-text-generator` (Text & Writing), `reading-time-calculator` (Text & Writing).
