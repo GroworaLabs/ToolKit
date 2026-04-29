@@ -101,6 +101,8 @@ const TOOL_DATA: Record<string, () => Promise<{ faq: FaqItem[]; [key: string]: u
     'ai-model-comparison':     () => import('@/tools/ai-model-comparison'),
     'keyboard-layout-converter': () => import('@/tools/keyboard-layout-converter'),
     'nginx-redirect-generator':  () => import('@/tools/nginx-redirect-generator'),
+    'javascript-minifier':       () => import('@/tools/javascript-minifier'),
+    'css-minifier':              () => import('@/tools/css-minifier'),
 };
 
 const TOOL_WIDGETS: Record<string, React.ComponentType> = {
@@ -170,6 +172,8 @@ const TOOL_WIDGETS: Record<string, React.ComponentType> = {
     'ai-model-comparison':    dynamic(() => import('@/tools/ai-model-comparison/component'),    { ssr: false }) as React.ComponentType,
     'keyboard-layout-converter': dynamic(() => import('@/tools/keyboard-layout-converter/component'), { ssr: false }) as React.ComponentType,
     'nginx-redirect-generator':  dynamic(() => import('@/tools/nginx-redirect-generator/component'),  { ssr: false }) as React.ComponentType,
+    'javascript-minifier':       dynamic(() => import('@/tools/javascript-minifier/component'),       { ssr: false }) as React.ComponentType,
+    'css-minifier':              dynamic(() => import('@/tools/css-minifier/component'),              { ssr: false }) as React.ComponentType,
 };
 
 /* ── Password generator sidebar ────────────────────────── */
@@ -1232,6 +1236,8 @@ const SIDEBAR_INFO_LOADERS: Record<string, () => Promise<{ label: string; value:
     'json-to-csv':           () => import('@/tools/json-to-csv').then(m => (m as any).sidebarInfo),
     'mock-data-generator':   () => import('@/tools/mock-data-generator').then(m => (m as any).sidebarInfo),
     'nginx-redirect-generator': () => import('@/tools/nginx-redirect-generator').then(m => (m as any).sidebarInfo),
+    'javascript-minifier':      () => import('@/tools/javascript-minifier').then(m => (m as any).sidebarInfo),
+    'css-minifier':             () => import('@/tools/css-minifier').then(m => (m as any).sidebarInfo),
 };
 
 function GenericInfoSidebar({ slug }: { slug: string }) {
@@ -1548,6 +1554,8 @@ const TOOL_CONTENT: Record<string, React.ComponentType> = {
     'ai-model-comparison':       dynamic(() => import('@/tools/ai-model-comparison/content')) as React.ComponentType,
     'keyboard-layout-converter': dynamic(() => import('@/tools/keyboard-layout-converter/content')) as React.ComponentType,
     'nginx-redirect-generator':  dynamic(() => import('@/tools/nginx-redirect-generator/content')) as React.ComponentType,
+    'javascript-minifier':       dynamic(() => import('@/tools/javascript-minifier/content')) as React.ComponentType,
+    'css-minifier':              dynamic(() => import('@/tools/css-minifier/content')) as React.ComponentType,
 };
 
 function ToolContent({ slug }: { slug: string }) {

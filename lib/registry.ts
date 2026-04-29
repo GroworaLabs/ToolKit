@@ -619,7 +619,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Minify JavaScript code to reduce file size. Removes whitespace, comments and unnecessary characters. Free online JS minifier — no signup, works in browser.',
     category:       'Developer Tools',
     keywords:       ['javascript minifier', 'js minifier online', 'minify javascript online', 'compress js', 'js compressor'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'sql-formatter',
@@ -967,7 +967,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Minify CSS to reduce file size or beautify compressed CSS for readability. Removes comments and whitespace. Free online CSS minifier — no signup.',
     category:       'Developer Tools',
     keywords:       ['css minifier', 'css minifier online', 'minify css', 'css compressor', 'css beautifier online'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'html-entities',
