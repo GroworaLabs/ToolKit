@@ -228,7 +228,6 @@ const ContactPage: NextPage = () => {
                 <title>Contact — ToolKit</title>
                 <meta name="description" content="Get in touch with the ToolKit team. Report bugs, suggest tools, or just say hello." />
                 <link rel="canonical" href={`${BASE_URL}/contact`} />
-                <meta name="robots" content="noindex" />
             </Head>
 
             <Layout>
