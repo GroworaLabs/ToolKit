@@ -103,6 +103,8 @@ const TOOL_DATA: Record<string, () => Promise<{ faq: FaqItem[]; [key: string]: u
     'nginx-redirect-generator':  () => import('@/tools/nginx-redirect-generator'),
     'javascript-minifier':       () => import('@/tools/javascript-minifier'),
     'css-minifier':              () => import('@/tools/css-minifier'),
+    'html-minifier':             () => import('@/tools/html-minifier'),
+    'html-beautifier':           () => import('@/tools/html-beautifier'),
 };
 
 const TOOL_WIDGETS: Record<string, React.ComponentType> = {
@@ -174,6 +176,8 @@ const TOOL_WIDGETS: Record<string, React.ComponentType> = {
     'nginx-redirect-generator':  dynamic(() => import('@/tools/nginx-redirect-generator/component'),  { ssr: false }) as React.ComponentType,
     'javascript-minifier':       dynamic(() => import('@/tools/javascript-minifier/component'),       { ssr: false }) as React.ComponentType,
     'css-minifier':              dynamic(() => import('@/tools/css-minifier/component'),              { ssr: false }) as React.ComponentType,
+    'html-minifier':             dynamic(() => import('@/tools/html-minifier/component'),             { ssr: false }) as React.ComponentType,
+    'html-beautifier':           dynamic(() => import('@/tools/html-beautifier/component'),           { ssr: false }) as React.ComponentType,
 };
 
 /* ── Password generator sidebar ────────────────────────── */
@@ -1238,6 +1242,8 @@ const SIDEBAR_INFO_LOADERS: Record<string, () => Promise<{ label: string; value:
     'nginx-redirect-generator': () => import('@/tools/nginx-redirect-generator').then(m => (m as any).sidebarInfo),
     'javascript-minifier':      () => import('@/tools/javascript-minifier').then(m => (m as any).sidebarInfo),
     'css-minifier':             () => import('@/tools/css-minifier').then(m => (m as any).sidebarInfo),
+    'html-minifier':            () => import('@/tools/html-minifier').then(m => (m as any).sidebarInfo),
+    'html-beautifier':          () => import('@/tools/html-beautifier').then(m => (m as any).sidebarInfo),
 };
 
 function GenericInfoSidebar({ slug }: { slug: string }) {
@@ -1556,6 +1562,8 @@ const TOOL_CONTENT: Record<string, React.ComponentType> = {
     'nginx-redirect-generator':  dynamic(() => import('@/tools/nginx-redirect-generator/content')) as React.ComponentType,
     'javascript-minifier':       dynamic(() => import('@/tools/javascript-minifier/content')) as React.ComponentType,
     'css-minifier':              dynamic(() => import('@/tools/css-minifier/content')) as React.ComponentType,
+    'html-minifier':             dynamic(() => import('@/tools/html-minifier/content')) as React.ComponentType,
+    'html-beautifier':           dynamic(() => import('@/tools/html-beautifier/content')) as React.ComponentType,
 };
 
 function ToolContent({ slug }: { slug: string }) {
