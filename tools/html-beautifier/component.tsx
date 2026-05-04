@@ -1,0 +1,218 @@
+'use client';
+import { useState, useCallback } from 'react';
+
+// ── Tokenizer (shared logic) ─────────────────────────────────────────
+type TokType = 'doctype' | 'comment' | 'open' | 'close' | 'selfclose' | 'text' | 'rawcontent';
+interface Tok { type: TokType; val: string; tag: string }
+
+const VOID  = new Set(['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr']);
+const RAW   = new Set(['script','style','pre','textarea','xmp']);
+const BLOCK = new Set(['address','article','aside','blockquote','body','caption','col','colgroup','dd','details','dialog','div','dl','dt','fieldset','figcaption','figure','footer','form','h1','h2','h3','h4','h5','h6','head','header','hgroup','html','hr','legend','li','link','main','meta','nav','noscript','ol','p','pre','script','section','style','summary','table','tbody','td','template','tfoot','th','thead','title','tr','ul']);
+
+function tagName(raw: string): string {
+  const m = raw.match(/^<\/?([a-zA-Z][a-zA-Z0-9:-]*)/);
+  return m ? m[1].toLowerCase() : '';
+}
+
+function tokenize(html: string): Tok[] {
+  const toks: Tok[] = [];
+  let i = 0;
+
+  while (i < html.length) {
+    if (html.startsWith('<!--', i)) {
+      const e = html.indexOf('-->', i + 4);
+      const end = e < 0 ? html.length : e + 3;
+      toks.push({ type: 'comment', val: html.slice(i, end), tag: '' });
+      i = end; continue;
+    }
+    if (html.startsWith('<!', i) || html.startsWith('<?', i)) {
+      const e = html.indexOf('>', i);
+      const end = e < 0 ? html.length : e + 1;
+      toks.push({ type: 'doctype', val: html.slice(i, end), tag: '' });
+      i = end; continue;
+    }
+    if (html.startsWith('</', i)) {
+      const e = html.indexOf('>', i);
+      const end = e < 0 ? html.length : e + 1;
+      const raw = html.slice(i, end);
+      toks.push({ type: 'close', val: raw, tag: tagName(raw) });
+      i = end; continue;
+    }
+    if (html[i] === '<' && /[a-zA-Z]/.test(html[i + 1] ?? '')) {
+      let j = i + 1;
+      while (j < html.length && html[j] !== '>') {
+        const c = html[j];
+        if (c === '"') { j++; while (j < html.length && html[j] !== '"') j++; }
+        else if (c === "'") { j++; while (j < html.length && html[j] !== "'") j++; }
+        j++;
+      }
+      const end = j < html.length ? j + 1 : j;
+      const raw = html.slice(i, end);
+      const tag = tagName(raw);
+      const isSelf = raw.endsWith('/>') || VOID.has(tag);
+      toks.push({ type: isSelf ? 'selfclose' : 'open', val: raw, tag });
+      i = end;
+      if (!isSelf && RAW.has(tag)) {
+        const closeStr = '</' + tag;
+        const ci = html.toLowerCase().indexOf(closeStr, i);
+        if (ci < 0) {
+          toks.push({ type: 'rawcontent', val: html.slice(i), tag });
+          i = html.length;
+        } else {
+          toks.push({ type: 'rawcontent', val: html.slice(i, ci), tag });
+          i = ci;
+        }
+      }
+      continue;
+    }
+    const ni = html.indexOf('<', i);
+    const end = ni < 0 ? html.length : ni;
+    if (end > i) toks.push({ type: 'text', val: html.slice(i, end), tag: '' });
+    i = end === i ? i + 1 : end;
+  }
+
+  return toks;
+}
+
+// ── Beautify ─────────────────────────────────────────────────────────
+function beautifyHTML(html: string, indentStr: string): string {
+  const toks = tokenize(html);
+  let depth = 0;
+  const parts: string[] = [];
+  const ind = () => indentStr.repeat(depth);
+  const newline = (s: string) => parts.push('\n' + ind() + s);
+  const inline  = (s: string) => parts.push(s);
+
+  for (const { type, val, tag } of toks) {
+    switch (type) {
+      case 'doctype':
+        newline(val); break;
+      case 'comment':
+        newline(val.replace(/\n/g, '\n' + ind())); break;
+      case 'open':
+        if (BLOCK.has(tag)) { newline(val); depth++; }
+        else inline(val);
+        break;
+      case 'close':
+        if (BLOCK.has(tag)) { depth = Math.max(0, depth - 1); newline(val); }
+        else inline(val);
+        break;
+      case 'selfclose':
+        if (BLOCK.has(tag)) newline(val);
+        else inline(val);
+        break;
+      case 'rawcontent': {
+        const lines = val.split('\n').map(l => l.trim()).filter(l => l);
+        for (const l of lines) newline(l);
+        break;
+      }
+      case 'text': {
+        const t = val.replace(/\s+/g, ' ').trim();
+        if (t) newline(t);
+        break;
+      }
+    }
+  }
+
+  return parts.join('').trim();
+}
+
+// ── Sample (minified HTML to demonstrate beautification) ─────────────
+const SAMPLE = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>My Page</title><link rel="stylesheet" href="styles.css"></head><body><header class="site-header"><nav><a href="/">Home</a><a href="/about">About</a><a href="/contact">Contact</a></nav></header><main><h1>Welcome</h1><p>This is a <strong>sample</strong> HTML document. Paste your minified or messy HTML above to beautify it.</p><ul><li>First item</li><li>Second item</li><li>Third item</li></ul></main><footer><p>&copy; 2025 My Site</p></footer></body></html>`;
+
+type IndentStyle = '2' | '4' | 'tab';
+
+export default function HtmlBeautifier() {
+  const [input,  setInput]  = useState(SAMPLE);
+  const [output, setOutput] = useState('');
+  const [indent, setIndent] = useState<IndentStyle>('2');
+  const [copied, setCopied] = useState(false);
+
+  const indentStr = indent === 'tab' ? '\t' : ' '.repeat(Number(indent));
+
+  const run = useCallback(() => {
+    setOutput(beautifyHTML(input, indentStr));
+  }, [input, indentStr]);
+
+  const copy = () => {
+    if (!output) return;
+    navigator.clipboard.writeText(output).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    });
+  };
+
+  const clear = () => { setInput(''); setOutput(''); };
+
+  const INDENT_OPTS: { value: IndentStyle; label: string }[] = [
+    { value: '2',   label: '2 spaces' },
+    { value: '4',   label: '4 spaces' },
+    { value: 'tab', label: 'Tab' },
+  ];
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+
+      <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+        <label style={{ fontSize: 13, color: 'var(--ink-2)', whiteSpace: 'nowrap' }}>Indent</label>
+        {INDENT_OPTS.map(opt => (
+          <button key={opt.value} onClick={() => setIndent(opt.value)}
+            style={{ padding: '5px 16px', borderRadius: 6, fontSize: 13, cursor: 'pointer',
+              border: '1.5px solid', borderColor: indent === opt.value ? 'var(--green)' : 'var(--border)',
+              background: indent === opt.value ? 'var(--green-lt)' : 'var(--white)',
+              color: indent === opt.value ? 'var(--green)' : 'var(--ink-2)',
+              fontWeight: indent === opt.value ? 600 : 400, minHeight: 36 }}>
+            {opt.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="tk-token-split">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <label style={{ fontSize: 12, fontWeight: 600, color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Input HTML</label>
+          <textarea
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            spellCheck={false}
+            placeholder="Paste your HTML here…"
+            style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, lineHeight: 1.6,
+              padding: 12, border: '1.5px solid var(--border)', borderRadius: 8,
+              resize: 'vertical', minHeight: 280, background: 'var(--surface)',
+              color: 'var(--ink)', outline: 'none', width: '100%', boxSizing: 'border-box' }} />
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <label style={{ fontSize: 12, fontWeight: 600, color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Formatted Output</label>
+          <textarea
+            readOnly
+            value={output}
+            spellCheck={false}
+            placeholder="Formatted HTML appears here…"
+            style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, lineHeight: 1.6,
+              padding: 12, border: '1.5px solid var(--border)', borderRadius: 8,
+              resize: 'vertical', minHeight: 280, background: 'var(--surface)',
+              color: 'var(--ink)', outline: 'none', width: '100%', boxSizing: 'border-box' }} />
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+        <button onClick={run}
+          style={{ padding: '9px 22px', borderRadius: 8, background: 'var(--bg-accent)', color: '#fff',
+            border: 'none', fontWeight: 600, fontSize: 14, cursor: 'pointer', minHeight: 44 }}>
+          Beautify →
+        </button>
+        <button onClick={copy} disabled={!output}
+          style={{ padding: '9px 18px', borderRadius: 8, border: '1.5px solid var(--border)',
+            background: 'var(--white)', color: 'var(--ink-2)', fontWeight: 500, fontSize: 13,
+            cursor: output ? 'pointer' : 'not-allowed', opacity: output ? 1 : 0.5, minHeight: 44 }}>
+          {copied ? 'Copied!' : 'Copy HTML'}
+        </button>
+        <button onClick={clear}
+          style={{ padding: '9px 18px', borderRadius: 8, border: '1.5px solid var(--border)',
+            background: 'var(--white)', color: 'var(--ink-2)', fontWeight: 500, fontSize: 13,
+            cursor: 'pointer', minHeight: 44 }}>
+          Clear
+        </button>
+      </div>
+    </div>
+  );
+}

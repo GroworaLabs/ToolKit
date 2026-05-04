@@ -77,6 +77,8 @@ export const IcoModelCompare = ({ size = 16 }: IconProps) => <svg width={size} h
 export const IcoNginx        = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-12"/><polyline points="15 6 19 6"/><polyline points="5 18 9 18"/><path d="M4 4l16 16"/><line x1="3" y1="12" x2="7" y2="12"/><line x1="17" y1="12" x2="21" y2="12"/></svg>;
 export const IcoJsMinify     = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="12" y1="5" x2="10" y2="19"/></svg>;
 export const IcoCssMinify    = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16v4H4z"/><path d="M4 12h10"/><path d="M4 16h7"/><path d="M18 14l3 3-3 3"/><line x1="21" y1="17" x2="15" y2="17"/></svg>;
+export const IcoHtmlMinify   = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 5L3 12l5 7"/><path d="M16 5l5 7-5 7"/><line x1="11" y1="10" x2="13" y2="10"/><line x1="11" y1="12" x2="13" y2="12"/><line x1="11" y1="14" x2="13" y2="14"/></svg>;
+export const IcoHtmlBeautify = ({ size = 16 }: IconProps) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 5L3 12l5 7"/><path d="M16 5l5 7-5 7"/><line x1="11" y1="9" x2="15" y2="9"/><line x1="12" y1="12" x2="15" y2="12"/><line x1="13" y1="15" x2="15" y2="15"/></svg>;
 
 /* ── Map: tool slug → icon component ─────────────────── */
 import type { ComponentType } from 'react';
@@ -150,4 +152,6 @@ export const TOOL_ICONS: Record<string, ComponentType<IconProps>> = {
   'nginx-redirect-generator':  IcoNginx,
   'javascript-minifier':       IcoJsMinify,
   'css-minifier':              IcoCssMinify,
+  'html-minifier':             IcoHtmlMinify,
+  'html-beautifier':           IcoHtmlBeautify,
 };

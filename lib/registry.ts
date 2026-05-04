@@ -607,7 +607,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Minify HTML to reduce page weight or beautify compressed HTML for readability. Removes comments and optional whitespace. Free online HTML minifier — no signup.',
     category:       'Developer Tools',
     keywords:       ['html minifier', 'minify html online', 'html compressor', 'html beautifier online', 'compress html'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'javascript-minifier',
@@ -643,7 +643,7 @@ export const TOOLS: ToolMeta[] = [
     seoDescription: 'Beautify and format HTML markup with proper indentation. Paste compressed or messy HTML and get clean, readable output instantly. Free, no signup.',
     category:       'Developer Tools',
     keywords:       ['html beautifier', 'html formatter online', 'format html code', 'html pretty printer', 'html indenter'],
-    live:           false,
+    live:           true,
   },
   {
     slug:           'http-status-codes',
