@@ -191,6 +191,74 @@ export default function CronContent() {
                     </div>
                 </section>
 
+                {/* ── How to test and validate ─────────────────── */}
+                <section style={sectionStyle}>
+                    <h2 style={h2Style}>How to test and validate a cron expression</h2>
+                    <p style={pStyle}>
+                        A cron expression that looks correct can still fire at the wrong time. Validating before you deploy saves the kind of incident where a nightly backup runs every minute at 3 AM. There are three layers to check:
+                    </p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                        {[
+                            {
+                                title: '1. Syntax validation',
+                                desc: 'Confirm the expression parses without errors on the target platform. A five-field expression valid in Unix cron will be rejected by AWS EventBridge (which requires six fields with a ? placeholder). Use this generator — it validates as you type and flags field-range errors in real time.',
+                            },
+                            {
+                                title: '2. Next-run preview',
+                                desc: 'Calculate the next 5–10 scheduled fire times from now. If "every weekday at 9 AM" shows a Saturday, the day-of-week field is wrong. This tool shows the next 10 fire times in plain English so you can visually confirm the schedule before committing it to a config file.',
+                            },
+                            {
+                                title: '3. Timezone sanity check',
+                                desc: 'Verify the fire times in the timezone the scheduler actually uses, not your local clock. Most cloud schedulers default to UTC. Convert "next run at 2026-05-12 09:00 UTC" to your local time with the Timestamp Converter to confirm it lands in the right window.',
+                            },
+                        ].map(({ title, desc }) => (
+                            <div key={title} style={{ ...cardStyle, display: 'flex', gap: 14 }}>
+                                <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--green)', flexShrink: 0, marginTop: 6 }} />
+                                <div>
+                                    <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--ink)', marginBottom: 6 }}>{title}</div>
+                                    <p style={{ fontSize: 14, color: 'var(--ink-3)', lineHeight: 1.65, margin: 0 }}>{desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* ── Quartz and Spring cron syntax ────────────── */}
+                <section style={sectionStyle}>
+                    <h2 style={h2Style}>Quartz and Spring cron syntax</h2>
+                    <p style={pStyle}>
+                        Quartz Scheduler (widely used in Java applications) and Spring's <code style={codeStyle}>@Scheduled</code> annotation both extend standard Unix cron with a mandatory <strong style={{ color: 'var(--ink)' }}>seconds field</strong>, giving six or seven total fields. This is the most common source of confusion when moving expressions between Unix cron and a Java stack.
+                    </p>
+                    <div style={{ overflowX: 'auto', width: '100%', marginBottom: 16 }}>
+                        <table style={{ minWidth: 480, borderCollapse: 'collapse', fontSize: 14 }}>
+                            <thead>
+                                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
+                                    {['Format', 'Field order', 'Example', 'Meaning'].map(h => (
+                                        <th key={h} style={thStyle}>{h}</th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {[
+                                    { fmt: 'Unix cron',         fields: 'min hr dom mon dow',             ex: '0 9 * * 1-5',       meaning: 'At 09:00 every weekday' },
+                                    { fmt: 'Quartz / Spring',   fields: 'sec min hr dom mon dow [year]',  ex: '0 0 9 * * MON-FRI', meaning: 'At 09:00:00 every weekday' },
+                                    { fmt: 'AWS EventBridge',   fields: 'min hr dom mon dow year',        ex: '0 9 ? * MON-FRI *', meaning: 'At 09:00 every weekday (? required)' },
+                                ].map(({ fmt, fields, ex, meaning }, i) => (
+                                    <tr key={fmt} style={{ background: i % 2 === 0 ? 'var(--white)' : 'var(--page-bg)', borderBottom: '1px solid var(--border)' }}>
+                                        <td style={{ ...tdStyle, fontWeight: 600, color: 'var(--ink)' }}>{fmt}</td>
+                                        <td style={{ ...tdStyle, fontFamily: 'JetBrains Mono, monospace', fontSize: 12 }}>{fields}</td>
+                                        <td style={{ ...tdStyle, fontFamily: 'JetBrains Mono, monospace', fontSize: 13, color: 'var(--green)', fontWeight: 600 }}>{ex}</td>
+                                        <td style={tdStyle}>{meaning}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style={pStyle}>
+                        Quartz also uses <code style={codeStyle}>?</code> as a "no specific value" placeholder — required in either the day-of-month or day-of-week field when the other is constrained (since Quartz treats them as AND, not OR). Spring's <code style={codeStyle}>@Scheduled(cron = "...")</code> follows Quartz syntax but drops the optional year field. If your Spring job isn't firing when expected, check whether you accidentally used a five-field Unix expression instead of the required six-field Quartz format.
+                    </p>
+                </section>
+
                 {/* ── Cron vs other approaches ─────────────────── */}
                 <section style={sectionStyle}>
                     <h2 style={h2Style}>Cron vs other scheduling approaches</h2>
