@@ -101,6 +101,34 @@ Before deploying a cron job, answer these:
 4. **Where does the output go?** System cron emails stdout to the user by default — usually unread. Redirect to a log file.
 5. **What monitors it?** A scheduled job that silently fails is worse than no job at all. Use a dead-man's-switch service (Healthchecks, Cronitor) or alerting on missed runs.
 
+## Platform-Specific Syntax Differences
+
+The five-field Unix standard is a baseline, but every platform adds its own twists:
+
+| Platform | Format | Notes |
+|---|---|---|
+| Unix / Linux cron | `* * * * *` | 5 fields. No seconds. Timezone = server local. |
+| GitHub Actions | `* * * * *` | 5 fields, UTC only. Minimum interval: every 5 minutes. |
+| AWS EventBridge | `* * * * ? *` or `rate(...)` | 6 fields (adds Year). `?` required in either day-of-month or day-of-week. Months are 1-based. |
+| Quartz Scheduler (Java) | `* * * * * ? *` | 6–7 fields (Seconds + optional Year). Day-of-week uses `?` when day-of-month is set. SUN=1, not 0. |
+| Spring `@Scheduled` | `* * * * * *` | 6 fields with Seconds as the first field. |
+| Kubernetes CronJob | `* * * * *` | Standard 5 fields. Use `timeZone` field (K8s ≥ 1.27) for non-UTC. |
+| GCP Cloud Scheduler | `* * * * *` | Standard 5 fields. Timezone configurable per job. |
+
+The single most common porting mistake: copying a Spring expression (`0 0 9 * * MON-FRI`) directly into a Unix crontab — the seconds field shifts everything and the job runs on a completely wrong schedule.
+
+## Common Mistakes When Writing Cron Expressions
+
+**Running "every X minutes" with the wrong syntax.** `*/5 * * * *` means every 5 minutes. `5 * * * *` means "at minute 5 of every hour" — once per hour, not every 5 minutes.
+
+**Forgetting that `0` and `7` both mean Sunday** in standard Unix cron. Most implementations accept both, but some cloud schedulers do not — check the docs before relying on `7`.
+
+**Mixing day-of-month and day-of-week.** As covered above, Vixie cron ORs both fields when both are non-`*`. If you only want "the 1st of the month on a Monday", you cannot express this in standard cron — handle it inside the job itself.
+
+**Not accounting for timezone in CI/CD.** GitHub Actions `schedule:` always runs in UTC. A job set to `0 9 * * *` fires at 9 AM UTC — which may be outside business hours in your timezone.
+
+**Expecting second-level precision.** Standard cron resolves to one-minute granularity. For sub-minute scheduling, use a message queue with delayed delivery or a platform like Kubernetes with a `Job` + a tight loop inside the container.
+
 ## Try It Now
 
-Build and decode any cron expression visually with the [Cron Expression Generator](/tools/cron-generator) — it explains each field in plain English and previews the next 10 fire times. For debugging timezone issues, convert timestamps across zones with the [Timestamp Converter](/tools/timestamp-converter).
+Build and decode any cron expression visually with the [Cron Expression Generator](/tools/cron-generator) — it explains each field in plain English, highlights platform differences, and previews the next 10 fire times. For debugging timezone issues, convert timestamps across zones with the [Timestamp Converter](/tools/timestamp-converter).
