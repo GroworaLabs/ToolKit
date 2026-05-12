@@ -4,6 +4,89 @@ Prioritized plan for the ~57 `live: false` tools in `lib/registry.ts` plus a new
 
 **Hard constraint:** every tool must run 100% client-side. No server-side inference, no API key handling on our backend.
 
+---
+
+## STRATEGIC TRACK — team call decisions 2026-05-12
+
+These are structural/strategic items that must be resolved **before or alongside** new tool shipments. They are not tools — they are improvements to the platform itself.
+
+### Phase A — Foundation (do in order)
+
+**A1. Category revision** ← do first, before any code changes
+Current categories are too coarse — "Developer Tools" is a catch-all with 20+ tools. Proposed new structure (finalize before implementing):
+
+| New category | What moves there |
+|---|---|
+| Security & Crypto | hashes, passwords, JWT, TOTP, HMAC, bcrypt, AES |
+| Code & Dev | formatters, minifiers, linters, generators (gitignore, nginx, robots.txt) |
+| Network & Web | IP/CIDR, URL encoder/decoder, HTTP status codes, user-agent parser |
+| Data & Format | JSON, CSV, XML, YAML, Base64, image-to-base64 |
+| Text | slug, case converter, diff, markdown, lorem ipsum |
+| Design & Media | colors, contrast, favicon — and future image/video/GIF tools |
+| AI | already live |
+| Converters | units, numbers, timestamps — or dissolve into relevant categories above |
+
+Decision: finalize the category list as a separate doc/discussion, then implement.
+
+**A2. Multi-category support** ← implement after A1 is decided
+Change `category: ToolCategory` → `categories: ToolCategory[]` in `lib/registry.ts`. One is designated `primary` (for breadcrumbs, canonical URL, og tags). All listed categories receive the tool on their listing pages.
+
+Rules to enforce:
+- Maximum 2 categories per tool (avoid dilution)
+- `categories[0]` = primary
+- Update: registry schema, `getStaticProps` on category pages, sitemap, breadcrumbs, tool cards
+
+**A3. Internal linking** ← implement alongside A2 or as a small standalone sprint
+Add `relatedGuides: string[]` to registry entries (mirrors existing `relatedTools`). Wire it into tool `content.tsx` pages as a "Related guides" inline link block — not just the sidebar. Google treats in-body links more heavily than navigation links.
+
+Benefit: every tool page passes authority to guides; every guide already links back to tools. Creates a closed loop.
+
+---
+
+### Phase B — SEO cycle (ongoing, every 1–2 weeks)
+
+Framework proven by cron-generator uplift (2026-05-11). Process:
+
+1. Open GSC → filter by tool pages → sort by impressions → focus on **positions 10–60 with growing trend**
+2. Update `seoTitle`, `seoDescription`, `keywords` in registry
+3. Add 1–2 new H2 sections to `content.tsx` (comparison tables, platform-specific notes, how-to steps)
+4. Expand or create the linked guide to 1200+ words with matching H2s
+5. Log result in CLAUDE.md after 2–3 weeks of GSC data
+
+Priority tiers for GSC work:
+- **Positions 10–30, >100 impressions/week** = highest ROI (one nudge can hit page 1)
+- **Positions 30–60, growing trend** = next in queue
+
+---
+
+### Phase C — New tool vertical: Image & Media
+
+**C1. Image tools** ← ship after A1/A2, before video
+All Canvas API — no heavy deps, consistent with 100% client-side promise.
+
+Prioritized by dev relevance (not general audience):
+1. `image-converter` — PNG/JPG/WebP/AVIF conversion + quality slider, size before/after. Dev use: web perf optimization.
+2. `image-resizer` — resize by px or %, preserve aspect ratio, download. Dev use: thumbnails, avatars.
+3. `svg-optimizer` — SVGO WASM in browser. Dev use: clean up exported SVGs from Figma/Illustrator.
+4. `exif-viewer` + `exif-stripper` — view/remove EXIF metadata from images. Dev use: privacy, file size.
+5. `image-to-base64` — already in Tier 2 list, promote here.
+
+Category: `Design & Media` (post-revision). These tools naturally group with favicon-generator and color tools.
+
+**C2. Video & GIF tools** ← defer, plan first
+High strategic value: video processing = long session time = ideal for display ads (future Mediavine/AdSense). This is one of the strongest ad-revenue surfaces on the roadmap.
+
+Deferred because:
+- FFmpeg WASM = 30MB cold load — conflicts with fast/lightweight positioning
+- Needs lazy loading strategy + loading UX (progress bar, cancel)
+- Legal/privacy copy must be explicit ("video never leaves your browser")
+
+When ready to plan: decide scope first (video→GIF only? trim? compress? format convert?). Start with the lightest path: `video-to-gif` using MediaRecorder API or a <2MB WASM slice — not full FFmpeg.
+
+**Do not forget:** video tools = high time-on-page = the best surface for display ads when AdSense/Mediavine is live. Prioritize this vertical once the ad revenue channel is confirmed.
+
+---
+
 Update this file as tools ship: move items from **Planned** → **Shipped** with the date, or delete them from the plan once live.
 
 ---
