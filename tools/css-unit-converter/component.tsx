@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import Select from '@/components/ui/Select';
 
 type Unit = 'px' | 'rem' | 'em' | '%' | 'vw' | 'vh' | 'pt' | 'cm' | 'mm' | 'in';
 
@@ -79,8 +80,8 @@ export default function CssUnitConverterWidget() {
     };
 
     const selectStyle: React.CSSProperties = {
-        padding: '8px 10px', border: '1.5px solid var(--border)', borderRadius: 'var(--r-s)',
-        fontSize: 13, color: 'var(--ink)', background: 'var(--page-bg)', outline: 'none',
+        padding: '8px 10px 8px 10px', paddingRight: 32, border: '1.5px solid var(--border)', borderRadius: 'var(--r-s)',
+        fontSize: 13, color: 'var(--ink)', backgroundColor: 'var(--page-bg)', outline: 'none',
         fontFamily: 'JetBrains Mono, monospace', cursor: 'pointer',
     };
 
@@ -98,9 +99,12 @@ export default function CssUnitConverterWidget() {
                 </div>
                 <div>
                     <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--ink-3)', display: 'block', marginBottom: 4 }}>FROM UNIT</label>
-                    <select value={fromUnit} onChange={e => setFromUnit(e.target.value as Unit)} style={selectStyle}>
-                        {UNITS.map(u => <option key={u} value={u}>{u}</option>)}
-                    </select>
+                    <Select
+                        value={fromUnit}
+                        onChange={v => setFromUnit(v as Unit)}
+                        items={UNITS.map(u => ({ value: u, label: u }))}
+                        style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace' }}
+                    />
                 </div>
             </div>
 

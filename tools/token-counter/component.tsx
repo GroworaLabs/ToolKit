@@ -1,4 +1,5 @@
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
+import Select from '@/components/ui/Select';
 import { AI_MODELS, estimateTokens, type AiModel } from '@/lib/ai-pricing';
 import { tokenize, composeChatML, hasExactTokenizer, type Token } from '@/lib/tokenizers';
 
@@ -178,27 +179,17 @@ export default function TokenCounterWidget() {
         background: 'var(--white)', border: '1.5px solid var(--border)',
         borderRadius: 'var(--r-m)',
       }}>
-        <select
+        <Select
           value={modelId}
-          onChange={e => setModelId(e.target.value)}
-          aria-label="Model"
-          style={{
-            padding: '7px 10px', fontSize: 13, fontWeight: 700,
-            border: '1.5px solid var(--border)', borderRadius: 'var(--r-s)',
-            background: 'var(--white)', color: 'var(--ink)', outline: 'none',
-            fontFamily: 'inherit', cursor: 'pointer',
-          }}
-        >
-          {(Object.keys(providerGroups) as AiModel['provider'][]).map(prov => (
-            providerGroups[prov].length > 0 && (
-              <optgroup key={prov} label={prov}>
-                {providerGroups[prov].map(m => (
-                  <option key={m.id} value={m.id}>{m.name}</option>
-                ))}
-              </optgroup>
-            )
-          ))}
-        </select>
+          onChange={setModelId}
+          items={(Object.keys(providerGroups) as AiModel['provider'][])
+            .filter(prov => providerGroups[prov].length > 0)
+            .map(prov => ({
+              group: prov,
+              options: providerGroups[prov].map(m => ({ value: m.id, label: m.name })),
+            }))}
+          style={{ fontSize: 13, fontWeight: 700, minWidth: 200 }}
+        />
 
         <div style={{
           display: 'inline-flex', padding: 2,

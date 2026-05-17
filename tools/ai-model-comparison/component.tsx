@@ -1,5 +1,6 @@
 'use client';
 import { useState, useMemo, useEffect } from 'react';
+import Select from '@/components/ui/Select';
 
 type Provider = 'OpenAI' | 'Anthropic' | 'Google' | 'Meta' | 'Mistral' | 'DeepSeek' | 'xAI';
 type Tier     = 'frontier' | 'mid' | 'fast';
@@ -390,11 +391,12 @@ export default function AiModelComparison() {
               </button>
             ))}
             <div style={{ flex: 1 }} />
-            <select value={sort} onChange={e => setSort(e.target.value as SortKey)}
-              style={{ padding: '5px 10px', borderRadius: 8, border: '1.5px solid var(--border)',
-                background: 'var(--white)', color: 'var(--ink-2)', fontSize: 13, cursor: 'pointer' }}>
-              {SORTS.map(s => <option key={s.id} value={s.id}>Sort: {s.label}</option>)}
-            </select>
+            <Select
+              value={sort}
+              onChange={v => setSort(v as SortKey)}
+              items={SORTS.map(s => ({ value: s.id, label: `Sort: ${s.label}` }))}
+              style={{ width: 'auto', minWidth: 160, fontSize: 13 }}
+            />
             {(['cards', 'table'] as const).map(v => (
               <button key={v} onClick={() => setView(v)}
                 style={{ padding: '5px 13px', borderRadius: 8, fontSize: 13, cursor: 'pointer', border: '1.5px solid',

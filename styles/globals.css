@@ -350,6 +350,58 @@ html, body { overflow-x: hidden; }
 }
 .tog.on .tog-box { background: var(--green); border-color: var(--green); }
 
+/* ─── FormTestDataGenerator FieldRow ────────── */
+.ftdg-row {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  grid-template-columns: 1fr 116px 34px;
+  grid-template-areas: "name type rm" "con con con";
+  align-items: center;
+}
+@media (min-width: 600px) {
+  .ftdg-row {
+    grid-template-columns: 130px 116px 1fr 34px;
+    grid-template-areas: "name type con rm";
+  }
+}
+.ftdg-name { grid-area: name; min-width: 0; }
+.ftdg-type { grid-area: type; }
+.ftdg-con  { grid-area: con;  min-width: 0; }
+.ftdg-rm   { grid-area: rm;   justify-self: end; }
+
+/* ─── Select — site-styled, no OS chrome ─────── */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-s);
+  background-color: var(--white);
+  color: var(--ink);
+  padding: 9px 12px;
+  padding-right: 32px;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+  box-sizing: border-box;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%237a7769' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px;
+}
+html.dark select {
+  background-color: var(--surface);
+  color: var(--ink);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238e8b7f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+}
+select:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(5,150,105,.09); outline: none; }
+
 /* ─── Buttons ────────────────────────────────── */
 .btn-main {
   display: flex; align-items: center; justify-content: center;

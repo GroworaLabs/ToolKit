@@ -36,6 +36,9 @@ Rules to enforce:
 - `categories[0]` = primary
 - Update: registry schema, `getStaticProps` on category pages, sitemap, breadcrumbs, tool cards
 
+**Known re-assignments to make when A2 ships:**
+- `form-test-data-generator` → primary: `Developer Tools`, secondary: new `Testing` category (or `QA & Testing`). This tool is the seed for the Testing vertical — plan additional QA tools around it (test case manager, API response validator, regex test runner, etc.)
+
 **A3. Internal linking** ← implement alongside A2 or as a small standalone sprint
 Add `relatedGuides: string[]` to registry entries (mirrors existing `relatedTools`). Wire it into tool `content.tsx` pages as a "Related guides" inline link block — not just the sidebar. Google treats in-body links more heavily than navigation links.
 
@@ -135,6 +138,8 @@ Update this file as tools ship: move items from **Planned** → **Shipped** with
 ---
 
 ## NEW tool: Form Test Data Generator
+
+**Status: SHIPPED 2026-05-17**
 
 **Slug:** `form-test-data-generator`
 **Category:** Developer Tools (or future Testing subcategory)

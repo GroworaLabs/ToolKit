@@ -1,6 +1,7 @@
 import { useState, CSSProperties } from 'react';
 import { useQrGenerator } from './use-qr-generator';
 import type { QrErrorLevel } from './use-qr-generator';
+import Select from '@/components/ui/Select';
 
 const IcoDownload = () => (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -50,7 +51,7 @@ export default function QrCodeGeneratorWidget() {
     const inputStyle: CSSProperties = {
         width: '100%', padding: '9px 12px',
         border: '1.5px solid var(--border)', borderRadius: 'var(--r-s)',
-        fontSize: 14, color: 'var(--ink)', background: 'var(--white)',
+        fontSize: 14, color: 'var(--ink)', backgroundColor: 'var(--white)',
         outline: 'none', boxSizing: 'border-box',
     };
 
@@ -154,20 +155,20 @@ export default function QrCodeGeneratorWidget() {
 
                 <div>
                     <label style={labelStyle}>Output size</label>
-                    <select value={options.size} onChange={e => update('size', Number(e.target.value))} style={{ ...inputStyle }}>
-                        {SIZES.map(s => (
-                            <option key={s} value={s}>{s} × {s}px{s >= 512 ? ' (print)' : s <= 192 ? ' (web)' : ''}</option>
-                        ))}
-                    </select>
+                    <Select
+                        value={String(options.size)}
+                        onChange={v => update('size', Number(v))}
+                        items={SIZES.map(s => ({ value: String(s), label: `${s} × ${s}px${s >= 512 ? ' (print)' : s <= 192 ? ' (web)' : ''}` }))}
+                    />
                 </div>
 
                 <div>
                     <label style={labelStyle}>Error correction</label>
-                    <select value={options.errorLevel} onChange={e => update('errorLevel', e.target.value as QrErrorLevel)} style={{ ...inputStyle }}>
-                        {ERROR_LEVELS.map(l => (
-                            <option key={l.value} value={l.value}>{l.label} — {l.desc}</option>
-                        ))}
-                    </select>
+                    <Select
+                        value={options.errorLevel}
+                        onChange={v => update('errorLevel', v as QrErrorLevel)}
+                        items={ERROR_LEVELS.map(l => ({ value: l.value, label: `${l.label} — ${l.desc}` }))}
+                    />
                 </div>
 
                 <div>
