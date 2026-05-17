@@ -43,6 +43,49 @@ Benefit: every tool page passes authority to guides; every guide already links b
 
 ---
 
+### Phase D — AdSense "Low value content" fix (2026-05-14 rejection)
+
+**Priority: CRITICAL — do before any new tool shipments or category refactor.**
+
+Google rejected the site for "Low value content" (3rd rejection, 2026-05-14). Root cause: 70 indexed tool pages with identical templated structure outnumber 30 editorial guides 2:1. AdSense reviewers see a utility site, not a content site.
+
+**D1. Upgrade tool page content** ← highest impact
+The root problem is that 70 tool pages share an identical structure (description → widget → FAQ×8). Even at 1500 words, AdSense reviewers flag this as templated. Fix: make each top-traffic tool page genuinely unique by replacing the generic FAQ with editorial H2 sections specific to that tool.
+
+Priority: pick the 10–15 tool pages with the most GSC impressions and add:
+- Real code examples (Node.js / Python / bash snippets showing the concept in code)
+- "When to use X" vs "When not to use X" comparison
+- Platform-specific notes (AWS / GitHub Actions / Docker variations)
+- Step-by-step tutorial with the tool embedded in context
+- A comparison table vs alternatives (if applicable)
+
+This approach fixes AdSense AND improves SEO ranking simultaneously — Google reads H2 diversity as topical depth.
+
+**D2. Apply to alternative ad networks NOW** ← parallel track, no AdSense dependency
+- **Carbon Ads** — carbonads.com, dev-focused, single tasteful unit, no content review, ~$2–6 RPM.
+- **Ethical Ads** — ethicalads.io, developer/tech audience (ReadTheDocs), GDPR-native, $2–4 RPM.
+
+Apply to both this week. These can run on guides immediately and provide revenue while AdSense fix plays out.
+
+**D3. Content sprint — guides to 60+ at 2000+ words average**
+Current: 30 guides, ~1100 words average. Target: 60 guides, 2000+ words average.
+
+Prioritize guide types that Google scores as high-value editorial content:
+1. **"How to" tutorials** using the tool with code examples — e.g., "How to validate JWT tokens in Node.js", "How to format SQL queries for readability". These reference the tool but stand alone as editorial.
+2. **Comparison/versus** — "X vs Y for developers", "When to use X over Y" — highest E-E-A-T signal.
+3. **Explainer + reference combos** — combine theory (what is X) + reference table (here are all the values) + tutorial (here's how to do it). 2000–3000 words.
+4. **Affiliate-linked reviews** — "Best X for developers 2026" with real affiliate links (Bitwarden, 1Password, Vercel, Railway). These have commercial intent and high RPM if affiliate converts.
+
+**D4. Add a blog / developer updates section**
+Route: `/blog` — a simple page list like `/guides` but for short-form posts (200–500 words). Content:
+- Tool release notes ("We shipped JWT Generator — here's what it does and why")
+- Developer tips ("5 ways to use the Token Counter")
+- Behind-the-scenes ("How we built the SQL formatter in pure JS")
+
+Benefit: shows Google an active editorial team producing original content — the opposite of auto-generated. 8–10 posts are enough to change the signal.
+
+---
+
 ### Phase B — SEO cycle (ongoing, every 1–2 weeks)
 
 Framework proven by cron-generator uplift (2026-05-11). Process:
@@ -88,6 +131,54 @@ When ready to plan: decide scope first (video→GIF only? trim? compress? format
 ---
 
 Update this file as tools ship: move items from **Planned** → **Shipped** with the date, or delete them from the plan once live.
+
+---
+
+## NEW tool: Form Test Data Generator
+
+**Slug:** `form-test-data-generator`
+**Category:** Developer Tools (or future Testing subcategory)
+**Template:** 7 — Constructor/Builder (see `TOOL_CONTENT_TEMPLATES.md`)
+**Priority:** Tier 1 — ship soon, high differentiation, no direct competitor in free tools space
+
+**Concept:** User constructs a form (add fields, set type + validation rules), tool generates a test data table with one row per test case category and one column per field.
+
+**Field types to support:**
+- Text (with optional min/max length, regex pattern)
+- Email
+- Password
+- Number (integer / float, min / max)
+- Phone
+- URL
+- Date / datetime
+- Select (user enters comma-separated options)
+- Textarea (long text)
+- File (generates filename + MIME type test cases)
+- Checkbox / boolean
+
+**Generated test case categories per field:**
+| Category | What it tests |
+|---|---|
+| Valid | Happy path — correct format, mid-range value |
+| Invalid format | Wrong type, wrong pattern |
+| Boundary min | Exact minimum value / length |
+| Boundary max | Exact maximum value / length |
+| Below min | min − 1 (or empty when min = 0) |
+| Above max | max + 1 / max + 1 char |
+| Empty / null | Blank string, null, whitespace-only |
+| Special characters | `<>'"&\\/` — breaks naive escaping |
+| XSS payload | `<script>alert(1)</script>`, `"><img onerror=...>` |
+| SQL injection | `' OR 1=1--`, `; DROP TABLE users;` |
+| Oversized | 10 000-character string |
+| Unicode / emoji | `用户`, `😀`, RTL text, zero-width char |
+
+**Export formats:** CSV, JSON, Markdown table, copy as plain text
+
+**UX layout:** Wide layout (WIDE_TOOLS). Left: field builder (add field → name + type + rules). Right: live generated table. Export bar at bottom.
+
+**Why it's different from mock-data-generator:** Mock data generates realistic rows (N rows × M fields). This generates test case categories (12 categories × M fields) — one row per scenario, not per record. Target user is a QA engineer or developer testing their own form, not someone seeding a database.
+
+**SEO targets:** "form test data generator", "test data for forms", "form validation test cases", "generate test data for form fields", "QA form testing tool"
 
 ---
 
