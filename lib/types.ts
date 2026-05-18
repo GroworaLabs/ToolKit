@@ -8,7 +8,7 @@ export interface ToolMeta {
   seoTitle:       string;
   seoH1:          string;
   seoDescription: string;
-  category:       ToolCategory;
+  categories:     ToolCategory[];  // [0] = primary
   keywords:       string[];
   live:           boolean;
   featured?:      boolean;
@@ -35,10 +35,13 @@ export interface ToolVariant {
 export type ToolCategory =
     | 'Security'
     | 'Text & Writing'
-    | 'Developer Tools'
-    | 'Design'
+    | 'Code & Dev'
+    | 'Network & Web'
+    | 'Data & Format'
+    | 'Design & Media'
     | 'Value Converter'
-    | 'AI';
+    | 'AI'
+    | 'QA & Testing';
 
 /* ── Guides ─────────────────────────────────────────── */
 

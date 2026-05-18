@@ -119,9 +119,9 @@ export const getStaticProps: GetStaticProps<Props> = ({ params }) => {
 const VariantPage: NextPage<Props> = ({ tool, variant, relatedVariantItems, relatedGuides }) => {
   const toolUrl      = `${BASE_URL}/tools/${tool.slug}`;
   const variantUrl   = `${toolUrl}/${variant.slug}`;
-  const categoryHref = CATEGORY_SLUGS[tool.category] ?? '/tools';
+  const categoryHref = CATEGORY_SLUGS[tool.categories[0]] ?? '/tools';
   const relatedTools = TOOLS
-      .filter(t => t.category === tool.category && t.slug !== tool.slug && t.live)
+      .filter(t => t.categories[0] === tool.categories[0] && t.slug !== tool.slug && t.live)
       .slice(0, 4);
 
   const breadcrumb = {
@@ -130,7 +130,7 @@ const VariantPage: NextPage<Props> = ({ tool, variant, relatedVariantItems, rela
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home',           item: BASE_URL },
       { '@type': 'ListItem', position: 2, name: 'All Tools',      item: `${BASE_URL}/tools` },
-      { '@type': 'ListItem', position: 3, name: tool.category,    item: `${BASE_URL}${categoryHref}` },
+      { '@type': 'ListItem', position: 3, name: tool.categories[0],    item: `${BASE_URL}${categoryHref}` },
       { '@type': 'ListItem', position: 4, name: tool.name,        item: toolUrl },
       { '@type': 'ListItem', position: 5, name: variant.seoH1,    item: variantUrl },
     ],
@@ -196,7 +196,7 @@ const VariantPage: NextPage<Props> = ({ tool, variant, relatedVariantItems, rela
                 <li aria-hidden>›</li>
                 <li><Link href="/tools"        style={{ color: 'var(--ink-3)', textDecoration: 'none' }}>Tools</Link></li>
                 <li aria-hidden>›</li>
-                <li><Link href={categoryHref}  style={{ color: 'var(--ink-3)', textDecoration: 'none' }}>{tool.category}</Link></li>
+                <li><Link href={categoryHref}  style={{ color: 'var(--ink-3)', textDecoration: 'none' }}>{tool.categories[0]}</Link></li>
                 <li aria-hidden>›</li>
                 <li><Link href={`/tools/${tool.slug}`} style={{ color: 'var(--ink-3)', textDecoration: 'none' }}>{tool.name}</Link></li>
                 <li aria-hidden>›</li>
@@ -207,7 +207,7 @@ const VariantPage: NextPage<Props> = ({ tool, variant, relatedVariantItems, rela
             <div className="tool-grid">
               {/* Left — widget */}
               <div>
-                <p className="ov a0" style={{ marginBottom: 10 }}>{tool.category}</p>
+                <p className="ov a0" style={{ marginBottom: 10 }}>{tool.categories[0]}</p>
                 <h1 className="disp a1" style={{ fontSize: 'clamp(24px, 4vw, 40px)', marginBottom: 12 }}>
                   {variant.seoH1}
                 </h1>
@@ -323,7 +323,7 @@ const VariantPage: NextPage<Props> = ({ tool, variant, relatedVariantItems, rela
           {/* Related tools */}
           {relatedTools.length > 0 && (
               <section style={{ maxWidth: 1000, margin: '56px auto 0', padding: '0 16px' }}>
-                <p className="ov" style={{ marginBottom: 12 }}>More in {tool.category}</p>
+                <p className="ov" style={{ marginBottom: 12 }}>More in {tool.categories[0]}</p>
                 <div className="tools-grid">
                   {relatedTools.map(t => <ToolCard key={t.slug} tool={t} />)}
                 </div>

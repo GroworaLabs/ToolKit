@@ -63,10 +63,10 @@ const NotFoundPage: NextPage<Props> = ({ tools, guides, popular }) => {
       ...tools.filter(t => t.name.toLowerCase().includes(q)),
       ...tools.filter(t => !t.name.toLowerCase().includes(q) && (
         t.tagline.toLowerCase().includes(q) ||
-        t.category.toLowerCase().includes(q) ||
+        t.categories[0].toLowerCase().includes(q) ||
         (t.keywords ?? []).some(k => k.toLowerCase().includes(q))
       )),
-    ].map(t => ({ slug: t.slug, name: t.name, category: t.category }));
+    ].map(t => ({ slug: t.slug, name: t.name, category: t.categories[0] }));
 
     const vMatches: VariantHit[] = tools.flatMap(t =>
       (t.variants ?? [])

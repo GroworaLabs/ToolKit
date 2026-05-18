@@ -44,7 +44,7 @@ const HomePage: NextPage<Props> = ({ latestGuides }) => {
     ? [
         ...liveTools.filter(t => t.name.toLowerCase().includes(q)),
         ...liveTools.filter(t => !t.name.toLowerCase().includes(q) && (
-          t.tagline.toLowerCase().includes(q) || t.category.toLowerCase().includes(q)
+          t.tagline.toLowerCase().includes(q) || t.categories[0].toLowerCase().includes(q)
         )),
       ]
     : [];
@@ -242,7 +242,7 @@ const HomePage: NextPage<Props> = ({ latestGuides }) => {
                                 onMouseLeave={e => (e.currentTarget.style.background = 'var(--white)')}
                               >
                                 <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{tool.name}</span>
-                                <span style={{ fontSize: 12, color: 'var(--ink-3)', flexShrink: 0 }}>{tool.category}</span>
+                                <span style={{ fontSize: 12, color: 'var(--ink-3)', flexShrink: 0 }}>{tool.categories[0]}</span>
                               </Link>
                             ))}
                             {activeTab === 'variants' && allVariantHits.map(v => (
@@ -278,7 +278,7 @@ const HomePage: NextPage<Props> = ({ latestGuides }) => {
                                     onMouseLeave={e => (e.currentTarget.style.background = 'var(--white)')}
                                   >
                                     <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{tool.name}</span>
-                                    <span style={{ fontSize: 11, color: 'var(--ink-3)', flexShrink: 0, whiteSpace: 'nowrap' }}>{tool.category}</span>
+                                    <span style={{ fontSize: 11, color: 'var(--ink-3)', flexShrink: 0, whiteSpace: 'nowrap' }}>{tool.categories[0]}</span>
                                   </Link>
                                 ))}
                               </div>

@@ -1266,7 +1266,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.webtoolkit.tec
 
 const ToolPage: NextPage<Props> = ({ tool, relatedGuides, faq }) => {
     const Widget = TOOL_WIDGETS[tool.slug];
-    const relatedTools = TOOLS.filter(t => t.category === tool.category && t.slug !== tool.slug).slice(0, 4);
+    const relatedTools = TOOLS.filter(t => t.categories[0] === tool.categories[0] && t.slug !== tool.slug).slice(0, 4);
     const toolUrl = `${BASE_URL}/tools/${tool.slug}`;
 
     return (
@@ -1356,7 +1356,7 @@ const ToolPage: NextPage<Props> = ({ tool, relatedGuides, faq }) => {
                         itemListElement: [
                             { '@type': 'ListItem', position: 1, name: 'Home',            item: BASE_URL },
                             { '@type': 'ListItem', position: 2, name: 'All Tools',       item: `${BASE_URL}/tools` },
-                            { '@type': 'ListItem', position: 3, name: tool.category,     item: `${BASE_URL}${CATEGORY_SLUGS[tool.category] ?? '/tools'}` },
+                            { '@type': 'ListItem', position: 3, name: tool.categories[0],     item: `${BASE_URL}${CATEGORY_SLUGS[tool.categories[0]] ?? '/tools'}` },
                             { '@type': 'ListItem', position: 4, name: tool.name,         item: toolUrl },
                         ],
                     }),
@@ -1374,8 +1374,8 @@ const ToolPage: NextPage<Props> = ({ tool, relatedGuides, faq }) => {
                             <li><a href="/tools" style={{ color: 'var(--ink-3)', textDecoration: 'none' }}>Tools</a></li>
                             <li aria-hidden>›</li>
                             <li>
-                                <a href={CATEGORY_SLUGS[tool.category] ?? '/tools'} style={{ color: 'var(--ink-3)', textDecoration: 'none' }}>
-                                    {tool.category}
+                                <a href={CATEGORY_SLUGS[tool.categories[0]] ?? '/tools'} style={{ color: 'var(--ink-3)', textDecoration: 'none' }}>
+                                    {tool.categories[0]}
                                 </a>
                             </li>
                             <li aria-hidden>›</li>
@@ -1386,7 +1386,7 @@ const ToolPage: NextPage<Props> = ({ tool, relatedGuides, faq }) => {
                     <div className={`tool-grid${WIDE_TOOLS.has(tool.slug) ? ' tool-grid--wide' : ''}`}>
                         {/* Left */}
                         <div>
-                            <p className="ov a0" style={{ marginBottom: 10 }}>{tool.category}</p>
+                            <p className="ov a0" style={{ marginBottom: 10 }}>{tool.categories[0]}</p>
                             <h1 className="disp a1" style={{ fontSize: 'clamp(24px, 4vw, 40px)', marginBottom: 12 }}>
                                 {tool.seoH1}
                             </h1>
@@ -1432,7 +1432,7 @@ const ToolPage: NextPage<Props> = ({ tool, relatedGuides, faq }) => {
                 {/* ── Related tools ─────────────────────────── */}
                 {relatedTools.length > 0 && (
                     <section style={{ maxWidth: 1000, margin: '56px auto 0', padding: '0 16px' }}>
-                        <p className="ov" style={{ marginBottom: 12 }}>More in {tool.category}</p>
+                        <p className="ov" style={{ marginBottom: 12 }}>More in {tool.categories[0]}</p>
                         <div className="tools-grid">
                             {relatedTools.map(t => <ToolCard key={t.slug} tool={t} />)}
                         </div>
