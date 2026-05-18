@@ -137,6 +137,135 @@ export default function KeyboardLayoutConverterContent() {
 
         <section style={{ marginBottom: 48 }}>
           <h2 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: 'clamp(18px, 2.5vw, 24px)', color: 'var(--ink)', letterSpacing: '-0.02em', marginBottom: 16 }}>
+            QWERTY ↔ ЙЦУКЕН key mapping reference
+          </h2>
+          <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ink-2)', marginBottom: 16 }}>
+            The table below shows the physical key position mapping between English QWERTY and Ukrainian/Russian ЙЦУКЕН. When you type with the wrong layout, each character corresponds to a specific key in the other layout — this is exactly what the converter reverses.
+          </p>
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+              <thead>
+                <tr style={{ background: 'var(--bg-accent)', color: '#fff' }}>
+                  {['QWERTY key', 'Ukrainian (ЙЦУКЕН)', 'Russian (ЙЦУКЕН)', 'Key location'].map(h => (
+                    <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600, fontFamily: 'Outfit, sans-serif' }}>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['q', 'й', 'й', 'Top row, leftmost'],
+                  ['w', 'ц', 'ц', 'Top row'],
+                  ['e', 'у', 'у', 'Top row'],
+                  ['r', 'к', 'к', 'Top row'],
+                  ['t', 'е', 'е', 'Top row'],
+                  ['y', 'н', 'н', 'Top row'],
+                  ['u', 'г', 'г', 'Top row'],
+                  ['i', 'ш', 'ш', 'Top row'],
+                  ['o', 'щ', 'щ', 'Top row'],
+                  ['p', 'з', 'з', 'Top row'],
+                  ['a', 'ф', 'ф', 'Home row, leftmost'],
+                  ['s', 'і', 'ы', 'Home row (differs UA/RU)'],
+                  ['d', 'в', 'в', 'Home row'],
+                  ['f', 'а', 'а', 'Home row'],
+                  ['g', 'п', 'п', 'Home row'],
+                  ['h', 'р', 'р', 'Home row'],
+                  ['j', 'о', 'о', 'Home row'],
+                  ['k', 'л', 'л', 'Home row'],
+                  ['l', 'д', 'д', 'Home row'],
+                  ['z', 'я', 'я', 'Bottom row, leftmost'],
+                  ['x', 'ч', 'ч', 'Bottom row'],
+                  ['c', 'с', 'с', 'Bottom row'],
+                  ['v', 'м', 'м', 'Bottom row'],
+                  ['b', 'и', 'и', 'Bottom row'],
+                  ['n', 'т', 'т', 'Bottom row'],
+                  ['m', 'ь', 'ь', 'Bottom row'],
+                ].map(([en, ua, ru, pos], i) => (
+                  <tr key={en} style={{ background: i % 2 === 0 ? 'var(--white)' : 'var(--page-bg)', borderBottom: '1px solid var(--border)' }}>
+                    <td style={{ padding: '8px 14px', fontFamily: 'JetBrains Mono, monospace', fontSize: 14, fontWeight: 700, color: 'var(--green)' }}>{en}</td>
+                    <td style={{ padding: '8px 14px', fontFamily: 'JetBrains Mono, monospace', fontSize: 14, color: 'var(--ink)' }}>{ua}</td>
+                    <td style={{ padding: '8px 14px', fontFamily: 'JetBrains Mono, monospace', fontSize: 14, color: 'var(--ink)' }}>{ru}</td>
+                    <td style={{ padding: '8px 14px', fontSize: 12, color: 'var(--ink-3)' }}>{pos}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--ink-3)', marginTop: 12 }}>
+            Note: Ukrainian and Russian ЙЦУКЕН layouts are nearly identical except for a few keys. The most notable difference is the S key — Ukrainian produces <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12 }}>і</code> while Russian produces <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12 }}>ы</code>.
+          </p>
+        </section>
+
+        <section style={{ marginBottom: 48 }}>
+          <h2 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: 'clamp(18px, 2.5vw, 24px)', color: 'var(--ink)', letterSpacing: '-0.02em', marginBottom: 16 }}>
+            Keyboard layout switching shortcuts by OS
+          </h2>
+          <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ink-2)', marginBottom: 16 }}>
+            To avoid typing in the wrong layout in the first place, learn your OS keyboard shortcut. A quick muscle-memory habit eliminates the need to fix text afterwards:
+          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {[
+              {
+                os: 'Windows 10 / 11',
+                shortcut: 'Win + Space',
+                alt: 'Alt + Shift (older shortcut, still works)',
+                note: 'Cycles through all installed input languages. The language indicator in the system tray (bottom right) shows the current layout (e.g. ENG, УКР, RUS).',
+              },
+              {
+                os: 'macOS',
+                shortcut: 'Control + Space',
+                alt: 'Cmd + Space (if not used by Spotlight)',
+                note: 'Shows the Input Sources menu. Configure shortcuts in System Settings → Keyboard → Input Sources. The flag icon in the menu bar shows the active layout.',
+              },
+              {
+                os: 'Ubuntu / GNOME',
+                shortcut: 'Super + Space',
+                alt: 'Win + Space or custom binding in Settings → Keyboard → Input Sources',
+                note: 'The active layout indicator appears in the top bar. Set up IBus or GNOME input sources for reliable multi-layout support.',
+              },
+              {
+                os: 'Linux (KDE Plasma)',
+                shortcut: 'Alt + Shift (default)',
+                alt: 'Configurable in System Settings → Input Devices → Keyboard → Layouts',
+                note: 'Plasma shows the current layout in the system tray. You can also configure a per-window layout setting so each app remembers its own language.',
+              },
+            ].map(({ os, shortcut, alt, note }, i) => (
+              <div key={os} style={{ padding: '16px', background: i % 2 === 0 ? 'var(--white)' : 'var(--page-bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-l)' }}>
+                <div style={{ display: 'flex', gap: 10, alignItems: 'baseline', flexWrap: 'wrap', marginBottom: 8 }}>
+                  <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--ink)' }}>{os}</span>
+                  <code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 13, fontWeight: 700, color: 'var(--green)', background: 'var(--green-lt)', padding: '2px 8px', borderRadius: 99 }}>{shortcut}</code>
+                </div>
+                <p style={{ fontSize: 13, color: 'var(--ink-3)', lineHeight: 1.6, marginBottom: 4 }}>Alternative: {alt}</p>
+                <p style={{ fontSize: 13, color: 'var(--ink-2)', lineHeight: 1.6, margin: 0 }}>{note}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section style={{ marginBottom: 48 }}>
+          <h2 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: 'clamp(18px, 2.5vw, 24px)', color: 'var(--ink)', letterSpacing: '-0.02em', marginBottom: 16 }}>
+            Automatic layout correction tools
+          </h2>
+          <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ink-2)', marginBottom: 16 }}>
+            If you frequently forget to switch layouts, dedicated tools can detect and correct the language automatically as you type — no copy-paste needed:
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 10 }}>
+            {[
+              { name: 'Punto Switcher', platform: 'Windows', desc: 'The most popular automatic layout switcher for Russian/Ukrainian users. Detects wrong-layout typing in real time and silently corrects it. Free, by Yandex.' },
+              { name: 'Tapper', platform: 'macOS', desc: 'Auto-switches layout based on what you type. Open-source alternative to Punto Switcher for Mac. Lightweight and runs in the menu bar.' },
+              { name: 'xkeysnail / keyd', platform: 'Linux', desc: 'Keyboard remapping daemons for Linux that can be configured to auto-correct layout on hotkey. More technical to set up but highly configurable.' },
+              { name: 'Jayme / Convertify', platform: 'Browser extensions', desc: 'Browser extensions that add a right-click "convert layout" option for selected text in any web input field.' },
+            ].map(({ name, platform, desc }) => (
+              <div key={name} style={{ padding: '14px 16px', background: 'var(--white)', border: '1px solid var(--border)', borderRadius: 'var(--r-l)' }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--ink)', marginBottom: 4 }}>{name}</div>
+                <div style={{ fontSize: 11, color: 'var(--green)', fontWeight: 600, marginBottom: 6 }}>{platform}</div>
+                <p style={{ fontSize: 13, color: 'var(--ink-3)', lineHeight: 1.55, margin: 0 }}>{desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section style={{ marginBottom: 48 }}>
+          <h2 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: 'clamp(18px, 2.5vw, 24px)', color: 'var(--ink)', letterSpacing: '-0.02em', marginBottom: 16 }}>
             Privacy and security
           </h2>
           <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ink-2)' }}>

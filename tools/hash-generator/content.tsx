@@ -160,6 +160,117 @@ export default function HashGeneratorContent() {
             </div>
           </section>
 
+          {/* ── Computing hashes in code ─────────────────── */}
+          <section style={{ marginBottom: 48 }}>
+            <h2 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: 'clamp(18px, 2.5vw, 24px)', color: 'var(--ink)', letterSpacing: '-0.02em', marginBottom: 16 }}>
+              Computing SHA hashes in code
+            </h2>
+            <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ink-2)', marginBottom: 16 }}>
+              Every major language ships standard-library hash support. Below are the canonical one-liners for SHA-256 — the function to reach for in any new project.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {[
+                {
+                  lang: 'JavaScript (browser — SubtleCrypto)',
+                  code:
+`const msgBuffer = new TextEncoder().encode('hello world');
+const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+const hashArray  = Array.from(new Uint8Array(hashBuffer));
+const hashHex    = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+console.log(hashHex); // b94d27b9934d3e08...`,
+                },
+                {
+                  lang: 'Node.js (built-in crypto module)',
+                  code:
+`import { createHash } from 'crypto';
+const hash = createHash('sha256').update('hello world').digest('hex');
+console.log(hash); // b94d27b9934d3e08...
+
+// SHA-512 variant
+const hash512 = createHash('sha512').update('hello world').digest('hex');`,
+                },
+                {
+                  lang: 'Python 3 (hashlib)',
+                  code:
+`import hashlib
+
+# SHA-256
+digest = hashlib.sha256(b'hello world').hexdigest()
+print(digest)  # b94d27b9934d3e08...
+
+# SHA-512
+digest512 = hashlib.sha512(b'hello world').hexdigest()
+
+# Hashing a file
+with open('file.bin', 'rb') as f:
+    digest = hashlib.file_digest(f, 'sha256').hexdigest()  # Python 3.11+`,
+                },
+                {
+                  lang: 'Go (crypto/sha256)',
+                  code:
+`package main
+
+import (
+    "crypto/sha256"
+    "fmt"
+)
+
+func main() {
+    h := sha256.Sum256([]byte("hello world"))
+    fmt.Printf("%x\\n", h) // b94d27b9934d3e08...
+}`,
+                },
+                {
+                  lang: 'Java (java.security.MessageDigest)',
+                  code:
+`import java.security.MessageDigest;
+import java.util.HexFormat;
+
+MessageDigest md = MessageDigest.getInstance("SHA-256");
+byte[] digest = md.digest("hello world".getBytes(StandardCharsets.UTF_8));
+String hex = HexFormat.of().formatHex(digest); // Java 17+`,
+                },
+                {
+                  lang: 'PHP (hash built-in)',
+                  code:
+`// SHA-256
+$hash = hash('sha256', 'hello world');  // b94d27b9934d3e08...
+
+// SHA-512
+$hash512 = hash('sha512', 'hello world');
+
+// Hash a file
+$fileHash = hash_file('sha256', '/path/to/file.bin');`,
+                },
+                {
+                  lang: 'C# / .NET (System.Security.Cryptography)',
+                  code:
+`using System.Security.Cryptography;
+
+// .NET 5+ one-liner
+byte[] bytes    = Encoding.UTF8.GetBytes("hello world");
+byte[] hashBytes = SHA256.HashData(bytes);
+string hashHex  = Convert.ToHexString(hashBytes).ToLower();`,
+                },
+                {
+                  lang: 'Rust (sha2 crate)',
+                  code:
+`use sha2::{Sha256, Digest};
+
+let mut hasher = Sha256::new();
+hasher.update(b"hello world");
+let result = hasher.finalize();
+println!("{:x}", result); // b94d27b9934d3e08...`,
+                },
+              ].map(({ lang, code }, i) => (
+                <div key={lang} style={{ padding: '14px 16px', background: i % 2 === 0 ? 'var(--white)' : 'var(--page-bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-l)' }}>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--ink-3)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{lang}</div>
+                  <pre style={{ margin: 0, padding: '10px 12px', background: 'var(--page-bg)', borderRadius: 4, fontFamily: 'JetBrains Mono, monospace', fontSize: 12, color: 'var(--green)', lineHeight: 1.7, overflowX: 'auto' }}>{code}</pre>
+                </div>
+              ))}
+            </div>
+          </section>
+
           {/* ── Choosing the right hash algorithm ────────── */}
           <section style={{ marginBottom: 48 }}>
             <h2 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: 'clamp(18px, 2.5vw, 24px)', color: 'var(--ink)', letterSpacing: '-0.02em', marginBottom: 16 }}>
