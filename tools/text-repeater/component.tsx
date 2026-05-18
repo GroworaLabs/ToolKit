@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTextRepeater } from './use-text-repeater';
 import type { Separator } from './use-text-repeater';
 import { IcoX, IcoCopy, IcoCheck, IcoRepeatText } from '@/components/icons';
+import Select from '@/components/ui/Select';
 
 const SEPARATORS: { value: Separator; label: string }[] = [
   { value: 'newline', label: 'New line'   },
@@ -95,21 +96,11 @@ export default function TextRepeaterWidget() {
           <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--ink-3)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '.04em' }}>
             Separator
           </label>
-          <select
+          <Select
             value={separator}
-            onChange={e => setSeparator(e.target.value as Separator)}
-            style={{
-              width: '100%', boxSizing: 'border-box',
-              padding: '10px 12px', background: 'var(--page-bg)',
-              border: '1.5px solid var(--border)', borderRadius: 'var(--r-m)',
-              font: '15px/1 Outfit, system-ui, sans-serif', color: 'var(--ink)', outline: 'none',
-              cursor: 'pointer',
-            }}
-            onFocus={e => { e.target.style.borderColor = 'var(--green)'; }}
-            onBlur={e  => { e.target.style.borderColor = 'var(--border)'; }}
-          >
-            {SEPARATORS.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
-          </select>
+            onChange={v => setSeparator(v as Separator)}
+            items={SEPARATORS}
+          />
         </div>
 
         {/* Custom separator */}

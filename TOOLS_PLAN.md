@@ -36,10 +36,54 @@ Rules to enforce:
 - `categories[0]` = primary
 - Update: registry schema, `getStaticProps` on category pages, sitemap, breadcrumbs, tool cards
 
+**Known re-assignments to make when A2 ships:**
+- `form-test-data-generator` → primary: `Developer Tools`, secondary: new `Testing` category (or `QA & Testing`). This tool is the seed for the Testing vertical — plan additional QA tools around it (test case manager, API response validator, regex test runner, etc.)
+
 **A3. Internal linking** ← implement alongside A2 or as a small standalone sprint
 Add `relatedGuides: string[]` to registry entries (mirrors existing `relatedTools`). Wire it into tool `content.tsx` pages as a "Related guides" inline link block — not just the sidebar. Google treats in-body links more heavily than navigation links.
 
 Benefit: every tool page passes authority to guides; every guide already links back to tools. Creates a closed loop.
+
+**A4. Semantic tool cross-linking via tags** ← small standalone sprint, ~2–3h
+
+**Problem:** Current "Related tools" block (`[slug].tsx:1269`) shows the first 4 tools from the same category in registry order — no semantic awareness. `form-test-data-generator` never surfaces `username-generator` (Text & Writing) or `mock-data-generator`, even though they are thematically closer than most same-category tools. Wasted PageRank flow and missed discovery.
+
+**Solution: `tags` field on `ToolMeta`**
+
+1. `lib/types.ts` — add `tags?: string[]` to `ToolMeta`. Tags are a closed vocabulary (see taxonomy below) — do not allow free-form strings.
+
+2. `lib/registry.ts` — add tags to all live tools; add `getRelatedTools(slug: string, n = 4): ToolMeta[]`:
+   - Candidates = all live tools except current tool
+   - Score each candidate = number of shared tags
+   - Sort by score desc; tiebreak: same-category first, then registry order
+   - Return top N; if fewer than N candidates have any shared tag, pad with same-category tools
+
+3. `pages/tools/[slug].tsx:1269` — replace the one-liner `TOOLS.filter(t => t.category === tool.category …)` with `getRelatedTools(slug)`. Everything else (the UI block, ToolCard, `getStaticProps`) stays unchanged.
+
+**Tag taxonomy (predefined — add new tags here, never in registry entries directly):**
+
+| Namespace | Tags |
+|---|---|
+| Data generation | `data-generation` `mock-data` `user-data` `placeholder-text` |
+| Security / crypto | `security` `hashing` `encoding` `tokens` `auth` `passwords` |
+| Text processing | `text` `formatting` `conversion` `diff` |
+| Dev workflow | `testing` `api` `json` `csv` `networking` `devops` |
+| Design | `color` `design` `assets` |
+| AI | `ai` `llm` |
+
+**Example tag assignments (to illustrate cross-category linking):**
+- `form-test-data-generator` → `['testing', 'data-generation', 'user-data']`
+- `mock-data-generator` → `['data-generation', 'mock-data', 'testing', 'csv', 'json']`
+- `username-generator` → `['data-generation', 'user-data', 'placeholder-text']`
+- `lorem-ipsum` → `['data-generation', 'placeholder-text', 'text']`
+- `password-generator` → `['security', 'passwords', 'data-generation']`
+- `uuid-generator` → `['data-generation', 'tokens']`
+
+With this, `form-test-data-generator` surfaces `mock-data-generator` (2 shared tags), `username-generator` (2), `lorem-ipsum` (1), `uuid-generator` (1) — all more relevant than a random same-category tool.
+
+**SEO value:** direct — more relevant cross-links = more PageRank flow between semantically related pages. Also improves user discovery, which reduces bounce rate.
+
+**No new UI needed.** The "Related tools" block already exists and renders 4 ToolCards. This is purely a data-layer change.
 
 ---
 
@@ -135,6 +179,8 @@ Update this file as tools ship: move items from **Planned** → **Shipped** with
 ---
 
 ## NEW tool: Form Test Data Generator
+
+**Status: SHIPPED 2026-05-17**
 
 **Slug:** `form-test-data-generator`
 **Category:** Developer Tools (or future Testing subcategory)

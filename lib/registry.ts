@@ -778,6 +778,18 @@ export const TOOLS: ToolMeta[] = [
     live:           false,
   },
   {
+    slug:           'form-test-data-generator',
+    name:           'Form Test Data Generator',
+    tagline:        'Generate test cases for every form field — valid, invalid, boundary, XSS, SQL',
+    description:    'Build your form in the constructor, get 12 test case categories per field: valid input, invalid format, boundary min/max, below/above limits, empty, special characters, XSS payloads, SQL injection, oversized, and Unicode. Export as CSV, JSON, or Markdown for Cypress, Playwright, or manual testing.',
+    seoTitle:       'Form Test Data Generator — 12 Test Cases Per Field | ToolKit',
+    seoH1:          'Form Test Data Generator',
+    seoDescription: 'Build your form in the constructor and instantly get 12 test case categories for every field: valid, invalid format, boundary min/max, below/above limits, empty, special characters, XSS payloads, SQL injection, oversized input, and Unicode. Export as CSV, JSON, or Markdown for Cypress and Playwright. 100% browser-based.',
+    category:       'Developer Tools',
+    keywords:       ['form test data generator', 'test data for forms', 'form validation test cases', 'generate test data form fields', 'qa form testing tool', 'boundary value testing', 'form xss test', 'sql injection test form', 'edge case test data', 'cypress test data'],
+    live:           true,
+  },
+  {
     slug:           'mock-data-generator',
     name:           'Mock Data Generator',
     tagline:        'Generate realistic fake data for testing',

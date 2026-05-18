@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 /* ── Tools that use a wide single-column layout (sidebar drops below) ── */
-const WIDE_TOOLS = new Set<string>(['token-counter', 'ai-cost-calculator', 'agent-rules-generator', 'ai-model-comparison']);
+const WIDE_TOOLS = new Set<string>(['token-counter', 'ai-cost-calculator', 'agent-rules-generator', 'ai-model-comparison', 'form-test-data-generator']);
 
 /* ── Dynamic tool loader ───────────────────────────────── */
 
@@ -97,8 +97,9 @@ const TOOL_DATA: Record<string, () => Promise<{ faq: FaqItem[]; [key: string]: u
     'gitignore-generator':     () => import('@/tools/gitignore-generator'),
     'json-to-csv':             () => import('@/tools/json-to-csv'),
     'color-contrast-checker':  () => import('@/tools/color-contrast-checker'),
-    'mock-data-generator':     () => import('@/tools/mock-data-generator'),
-    'ai-model-comparison':     () => import('@/tools/ai-model-comparison'),
+    'mock-data-generator':          () => import('@/tools/mock-data-generator'),
+    'form-test-data-generator':     () => import('@/tools/form-test-data-generator'),
+    'ai-model-comparison':          () => import('@/tools/ai-model-comparison'),
     'keyboard-layout-converter': () => import('@/tools/keyboard-layout-converter'),
     'nginx-redirect-generator':  () => import('@/tools/nginx-redirect-generator'),
     'javascript-minifier':       () => import('@/tools/javascript-minifier'),
@@ -170,8 +171,9 @@ const TOOL_WIDGETS: Record<string, React.ComponentType> = {
     'gitignore-generator':    dynamic(() => import('@/tools/gitignore-generator/component'),    { ssr: false }) as React.ComponentType,
     'json-to-csv':            dynamic(() => import('@/tools/json-to-csv/component'),            { ssr: false }) as React.ComponentType,
     'color-contrast-checker': dynamic(() => import('@/tools/color-contrast-checker/component'), { ssr: false }) as React.ComponentType,
-    'mock-data-generator':    dynamic(() => import('@/tools/mock-data-generator/component'),    { ssr: false }) as React.ComponentType,
-    'ai-model-comparison':    dynamic(() => import('@/tools/ai-model-comparison/component'),    { ssr: false }) as React.ComponentType,
+    'mock-data-generator':          dynamic(() => import('@/tools/mock-data-generator/component'),         { ssr: false }) as React.ComponentType,
+    'form-test-data-generator':     dynamic(() => import('@/tools/form-test-data-generator/component'),    { ssr: false }) as React.ComponentType,
+    'ai-model-comparison':          dynamic(() => import('@/tools/ai-model-comparison/component'),         { ssr: false }) as React.ComponentType,
     'keyboard-layout-converter': dynamic(() => import('@/tools/keyboard-layout-converter/component'), { ssr: false }) as React.ComponentType,
     'nginx-redirect-generator':  dynamic(() => import('@/tools/nginx-redirect-generator/component'),  { ssr: false }) as React.ComponentType,
     'javascript-minifier':       dynamic(() => import('@/tools/javascript-minifier/component'),       { ssr: false }) as React.ComponentType,
@@ -1238,7 +1240,8 @@ const SIDEBAR_INFO_LOADERS: Record<string, () => Promise<{ label: string; value:
     'jwt-generator':         () => import('@/tools/jwt-generator').then(m => (m as any).sidebarInfo),
     'sql-formatter':         () => import('@/tools/sql-formatter').then(m => (m as any).sidebarInfo),
     'json-to-csv':           () => import('@/tools/json-to-csv').then(m => (m as any).sidebarInfo),
-    'mock-data-generator':   () => import('@/tools/mock-data-generator').then(m => (m as any).sidebarInfo),
+    'mock-data-generator':          () => import('@/tools/mock-data-generator').then(m => (m as any).sidebarInfo),
+    'form-test-data-generator':     () => import('@/tools/form-test-data-generator').then(m => (m as any).sidebarInfo),
     'nginx-redirect-generator': () => import('@/tools/nginx-redirect-generator').then(m => (m as any).sidebarInfo),
     'javascript-minifier':      () => import('@/tools/javascript-minifier').then(m => (m as any).sidebarInfo),
     'css-minifier':             () => import('@/tools/css-minifier').then(m => (m as any).sidebarInfo),
@@ -1556,8 +1559,9 @@ const TOOL_CONTENT: Record<string, React.ComponentType> = {
     'gitignore-generator':       dynamic(() => import('@/tools/gitignore-generator/content')) as React.ComponentType,
     'json-to-csv':               dynamic(() => import('@/tools/json-to-csv/content')) as React.ComponentType,
     'color-contrast-checker':    dynamic(() => import('@/tools/color-contrast-checker/content')) as React.ComponentType,
-    'mock-data-generator':       dynamic(() => import('@/tools/mock-data-generator/content')) as React.ComponentType,
-    'ai-model-comparison':       dynamic(() => import('@/tools/ai-model-comparison/content')) as React.ComponentType,
+    'mock-data-generator':          dynamic(() => import('@/tools/mock-data-generator/content')) as React.ComponentType,
+    'form-test-data-generator':     dynamic(() => import('@/tools/form-test-data-generator/content')) as React.ComponentType,
+    'ai-model-comparison':          dynamic(() => import('@/tools/ai-model-comparison/content')) as React.ComponentType,
     'keyboard-layout-converter': dynamic(() => import('@/tools/keyboard-layout-converter/content')) as React.ComponentType,
     'nginx-redirect-generator':  dynamic(() => import('@/tools/nginx-redirect-generator/content')) as React.ComponentType,
     'javascript-minifier':       dynamic(() => import('@/tools/javascript-minifier/content')) as React.ComponentType,
