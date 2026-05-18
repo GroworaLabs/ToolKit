@@ -806,6 +806,18 @@ export const TOOLS: ToolMeta[] = [
     live:           true,
   },
   {
+    slug:           'css-selector-generator',
+    name:           'CSS Selector Generator',
+    tagline:        'Generate Playwright, Cypress, CSS, and XPath selectors from any HTML snippet',
+    description:    'Paste any HTML snippet, click an element in the tree, and instantly get ranked selectors for Playwright (getByRole, getByLabel, getByTestId), Cypress (cy.get, cy.contains), Selenium (By.ID, By.CSS_SELECTOR, By.XPATH), CSS, and XPath. Every selector is rated Best → Good → OK → Fragile so you know which will survive a UI refactor.',
+    seoTitle:       'CSS Selector Generator — Playwright, Cypress & Selenium Locators | ToolKit',
+    seoH1:          'CSS Selector Generator for Playwright, Cypress & Selenium',
+    seoDescription: 'Paste HTML and get ranked selectors for Playwright (getByRole, getByLabel, getByTestId), Cypress (cy.get, cy.contains), Selenium (By.ID, By.CSS_SELECTOR, By.XPATH), CSS, and XPath. Every selector is rated by resilience — from data-testid (Best) to structural paths (Fragile). Free, browser-based, no signup.',
+    categories:     ['QA & Testing', 'Code & Dev'],
+    keywords:       ['css selector generator', 'playwright locator generator', 'cypress selector generator', 'selenium selector generator', 'xpath generator from html', 'playwright getbyrole generator', 'test selector builder', 'playwright locator builder', 'css selector from html online', 'selenium find element by css', 'selenium by xpath generator'],
+    live:           true,
+  },
+  {
     slug:           'toml-to-json',
     name:           'TOML to JSON Converter',
     tagline:        'Convert TOML config files to JSON',

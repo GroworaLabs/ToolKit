@@ -196,7 +196,7 @@ export function Layout({ children, activeNav }: LayoutProps) {
                             </button>
 
                             {catOpen && (() => {
-                                const catToolsAll = liveTools.filter(t => t.categories[0] === hoveredCat);
+                                const catToolsAll = liveTools.filter(t => t.categories.includes(hoveredCat as import('@/lib/types').ToolCategory));
                                 const catTools    = catToolsAll.slice(0, 8);
                                 const catHref     = categories.find(c => c.label === hoveredCat)?.href ?? '/tools';
                                 return (

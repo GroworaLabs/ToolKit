@@ -13,7 +13,11 @@
       "Bash(awk '/slug:/{s=$0} /live:/{print s, \"->\", $0}' D:/My/business/ToolKit/lib/registry.ts)",
       "Bash(grep \"true$\")",
       "Bash(npx next *)",
-      "mcp__plugin_playwright_playwright__browser_evaluate"
+      "mcp__plugin_playwright_playwright__browser_evaluate",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_click",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_hover"
     ]
   }
 }

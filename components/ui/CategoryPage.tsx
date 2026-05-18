@@ -99,10 +99,10 @@ const CategoryPage: NextPage<CategoryPageProps> = ({ category, tools }) => {
                     {/* Hero */}
                     <div style={{ marginBottom: 48 }}>
                         <p className="ov" style={{ marginBottom: 10 }}>{category.name} Tools</p>
-                        <h1 className="disp" style={{ fontSize: 'clamp(28px, 5vw, 48px)', marginBottom: 16, maxWidth: 680 }}>
+                        <h1 className="disp" style={{ fontSize: 'clamp(28px, 5vw, 48px)', marginBottom: 16 }}>
                             {category.seoH1}
                         </h1>
-                        <p style={{ fontSize: 'clamp(15px, 2vw, 17px)', color: 'var(--ink-2)', lineHeight: 1.7, maxWidth: 620 }}>
+                        <p style={{ fontSize: 'clamp(15px, 2vw, 17px)', color: 'var(--ink-2)', lineHeight: 1.7 }}>
                             {category.intro}
                         </p>
                     </div>

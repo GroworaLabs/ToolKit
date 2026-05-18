@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 /* ── Tools that use a wide single-column layout (sidebar drops below) ── */
-const WIDE_TOOLS = new Set<string>(['token-counter', 'ai-cost-calculator', 'agent-rules-generator', 'ai-model-comparison', 'form-test-data-generator']);
+const WIDE_TOOLS = new Set<string>(['token-counter', 'ai-cost-calculator', 'agent-rules-generator', 'ai-model-comparison', 'form-test-data-generator', 'css-selector-generator']);
 
 /* ── Dynamic tool loader ───────────────────────────────── */
 
@@ -106,6 +106,7 @@ const TOOL_DATA: Record<string, () => Promise<{ faq: FaqItem[]; [key: string]: u
     'css-minifier':              () => import('@/tools/css-minifier'),
     'html-minifier':             () => import('@/tools/html-minifier'),
     'html-beautifier':           () => import('@/tools/html-beautifier'),
+    'css-selector-generator':   () => import('@/tools/css-selector-generator'),
 };
 
 const TOOL_WIDGETS: Record<string, React.ComponentType> = {
@@ -180,6 +181,7 @@ const TOOL_WIDGETS: Record<string, React.ComponentType> = {
     'css-minifier':              dynamic(() => import('@/tools/css-minifier/component'),              { ssr: false }) as React.ComponentType,
     'html-minifier':             dynamic(() => import('@/tools/html-minifier/component'),             { ssr: false }) as React.ComponentType,
     'html-beautifier':           dynamic(() => import('@/tools/html-beautifier/component'),           { ssr: false }) as React.ComponentType,
+    'css-selector-generator':   dynamic(() => import('@/tools/css-selector-generator/component'),   { ssr: false }) as React.ComponentType,
 };
 
 /* ── Password generator sidebar ────────────────────────── */
@@ -1266,7 +1268,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.webtoolkit.tec
 
 const ToolPage: NextPage<Props> = ({ tool, relatedGuides, faq }) => {
     const Widget = TOOL_WIDGETS[tool.slug];
-    const relatedTools = TOOLS.filter(t => t.categories[0] === tool.categories[0] && t.slug !== tool.slug).slice(0, 4);
+    const relatedTools = TOOLS.filter(t => t.live && t.categories.includes(tool.categories[0]) && t.slug !== tool.slug).slice(0, 4);
     const toolUrl = `${BASE_URL}/tools/${tool.slug}`;
 
     return (
@@ -1390,7 +1392,7 @@ const ToolPage: NextPage<Props> = ({ tool, relatedGuides, faq }) => {
                             <h1 className="disp a1" style={{ fontSize: 'clamp(24px, 4vw, 40px)', marginBottom: 12 }}>
                                 {tool.seoH1}
                             </h1>
-                            <p className="a2" style={{ fontSize: 15, color: 'var(--ink-2)', lineHeight: 1.6, marginBottom: 24, maxWidth: 480 }}>
+                            <p className="a2" style={{ fontSize: 15, color: 'var(--ink-2)', lineHeight: 1.6, marginBottom: 24, maxWidth: WIDE_TOOLS.has(tool.slug) ? undefined : 480 }}>
                                 {tool.description}
                             </p>
                             {Widget && (
@@ -1568,6 +1570,7 @@ const TOOL_CONTENT: Record<string, React.ComponentType> = {
     'css-minifier':              dynamic(() => import('@/tools/css-minifier/content')) as React.ComponentType,
     'html-minifier':             dynamic(() => import('@/tools/html-minifier/content')) as React.ComponentType,
     'html-beautifier':           dynamic(() => import('@/tools/html-beautifier/content')) as React.ComponentType,
+    'css-selector-generator':    dynamic(() => import('@/tools/css-selector-generator/content')) as React.ComponentType,
 };
 
 function ToolContent({ slug }: { slug: string }) {
