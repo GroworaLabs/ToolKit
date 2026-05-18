@@ -27,6 +27,7 @@ export const TOOLS: ToolMeta[] = [
     categories:     ['Text & Writing'],
     keywords:       ['word counter', 'word counter online', 'character counter', 'word count tool', 'reading time calculator', 'online word counter free'],
     live:           true,
+    featured:       true,
   },
   {
     slug:           'lorem-ipsum',
@@ -63,6 +64,7 @@ export const TOOLS: ToolMeta[] = [
     categories:     ['Code & Dev'],
     keywords:       ['base64 encoder', 'base64 decoder', 'base64 encode', 'base64 decode', 'base64 converter online', 'encode to base64'],
     live:           true,
+    featured:       true,
   },
   {
     slug:           'csv-to-json',
@@ -87,6 +89,7 @@ export const TOOLS: ToolMeta[] = [
     categories:     ['Code & Dev'],
     keywords:       ['json formatter', 'json formatter online', 'json beautifier', 'json validator', 'json prettify', 'format json online', 'json minifier'],
     live:           true,
+    featured:       true,
   },
   {
     slug:           'url-encoder',
@@ -559,6 +562,7 @@ export const TOOLS: ToolMeta[] = [
     categories:     ['Text & Writing'],
     keywords:       ['random text generator', 'random word generator', 'random sentence generator', 'random paragraph generator'],
     live:           true,
+    featured:       true,
   },
   /* ── Coming soon — Developer Tools ─────────────────── */
   {
@@ -968,6 +972,7 @@ export const TOOLS: ToolMeta[] = [
     categories:     ['Code & Dev'],
     keywords:       ['cron generator', 'cron expression generator', 'cron tester', 'cron validator', 'cron expression tester', 'cron calculator', 'cron job generator online', 'crontab generator', 'cron expression validator', 'quartz cron expression generator', 'spring cron expression generator', 'aws cron expression generator', 'cron schedule generator', 'cron expression builder'],
     live:           true,
+    featured:       true,
   },
   {
     slug:           'css-minifier',
@@ -1321,6 +1326,7 @@ export const TOOLS: ToolMeta[] = [
     categories:     ['AI'],
     keywords:       ['token counter', 'tokenizer', 'gpt tokenizer', 'openai tokenizer', 'tiktoken online', 'tiktokenizer', 'claude tokenizer', 'gemini token counter', 'llm token counter', 'chatml tokenizer'],
     live:           true,
+    featured:       true,
   },
   {
     slug:           'ai-cost-calculator',
@@ -1369,6 +1375,7 @@ export const TOOLS: ToolMeta[] = [
     categories:     ['Text & Writing'],
     keywords:       ['keyboard layout converter', 'wrong keyboard layout fix', 'layout converter online', 'qwerty to cyrillic', 'english to ukrainian keyboard', 'english to russian keyboard', 'розкладка клавіатури', 'конвертер розкладки', 'переключить раскладку'],
     live:           true,
+    featured:       true,
   },
 ];
 
@@ -1398,10 +1405,11 @@ export const getCategories = (): { href: string; label: string }[] => {
   return result;
 };
 
-export const getLiveTools  = () => TOOLS.filter(t => t.live);
-export const getSoonTools  = () => TOOLS.filter(t => !t.live);
-export const getFeatured   = () => TOOLS.find(t => t.featured);
-export const getBySlug     = (slug: string) => TOOLS.find(t => t.slug === slug);
+export const getLiveTools     = () => TOOLS.filter(t => t.live);
+export const getSoonTools     = () => TOOLS.filter(t => !t.live);
+export const getFeaturedTools = () => TOOLS.filter(t => t.live && t.featured);
+export const getFeatured      = () => TOOLS.find(t => t.featured);
+export const getBySlug        = (slug: string) => TOOLS.find(t => t.slug === slug);
 export const getLiveSlugs  = () => getLiveTools().map(t => t.slug);
 
 export const getVariant = (toolSlug: string, variantSlug: string) => {
