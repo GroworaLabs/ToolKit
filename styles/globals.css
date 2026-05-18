@@ -498,6 +498,18 @@ html.dark .btn-main:hover { background: #5d5a50; box-shadow: 0 4px 12px rgba(0,0
 .b-gray  { background: var(--border);   color: var(--ink-3); border: 1px solid var(--border-md); }
 .b-blue  { background: rgba(59,130,246,.08); color: #2563eb; border: 1px solid rgba(59,130,246,.2); }
 
+/* ─── Hero two-column grid ───────────────────── */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-grid-right { display: none; }
+}
+
 /* ─── Guides grid ────────────────────────────── */
 .guides-grid {
   display: grid;
