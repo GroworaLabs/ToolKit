@@ -21,7 +21,7 @@ export function getAllGuides(): GuideMeta[] {
         slug,
         title:       data.title       ?? '',
         description: data.description ?? '',
-        category:    data.category    ?? 'Developer Tools',
+        category:    data.category    ?? 'Code & Dev',
         tools:       data.tools       ?? [],
         tags:        data.tags        ?? [],
         publishedAt: data.publishedAt ?? '',

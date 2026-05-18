@@ -20,7 +20,7 @@ export interface CategoryPageProps {
 export function makeCategoryProps(slug: string) {
     const category = getCategoryBySlug(slug);
     if (!category) return { notFound: true as const };
-    const tools = TOOLS.filter(t => t.category === category.registryKey);
+    const tools = TOOLS.filter(t => t.categories.includes(category.registryKey as import('@/lib/types').ToolCategory));
     return { props: { category, tools } };
 }
 

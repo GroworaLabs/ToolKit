@@ -27,9 +27,19 @@ const CAT_ICONS: Record<string, React.ReactNode> = {
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         </svg>
     ),
-    'Developer Tools': (
+    'Code & Dev': (
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+        </svg>
+    ),
+    'Network & Web': (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+    ),
+    'Data & Format': (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
         </svg>
     ),
     'Text & Writing': (
@@ -37,7 +47,7 @@ const CAT_ICONS: Record<string, React.ReactNode> = {
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
         </svg>
     ),
-    'Design': (
+    'Design & Media': (
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/>
             <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
@@ -54,15 +64,23 @@ const CAT_ICONS: Record<string, React.ReactNode> = {
             <path d="M12 6v12M9 10h6M9 14h6"/>
         </svg>
     ),
+    'QA & Testing': (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+        </svg>
+    ),
 };
 
 const CAT_DESCS: Record<string, string> = {
-    'Security':        'Passwords, hashes, tokens, encoding',
-    'Developer Tools': 'JSON, regex, JWT, formatters',
+    'Security':        'Passwords, hashes, tokens, JWT',
+    'Code & Dev':      'Formatters, minifiers, regex, UUID',
+    'Network & Web':   'URL, HTTP, IP/CIDR, nginx, routes',
+    'Data & Format':   'JSON, CSV, YAML, mock data',
     'Text & Writing':  'Case, diff, slugs, counters',
-    'Design':          'Colors, palettes, favicons, QR',
+    'Design & Media':  'Colors, contrast, favicons, SVG',
     'Value Converter': 'Units, bitrate, pace, torque',
     'AI':              'Tokens, prompts, LLM utilities',
+    'QA & Testing':    'Test data, form testing, payloads',
 };
 
 export function Layout({ children, activeNav }: LayoutProps) {
@@ -93,7 +111,7 @@ export function Layout({ children, activeNav }: LayoutProps) {
     const allToolHits: ToolMeta[] = q ? [
         ...liveTools.filter(t => t.name.toLowerCase().includes(q)),
         ...liveTools.filter(t => !t.name.toLowerCase().includes(q) && (
-            t.tagline.toLowerCase().includes(q) || t.category.toLowerCase().includes(q)
+            t.tagline.toLowerCase().includes(q) || t.categories[0].toLowerCase().includes(q)
         )),
     ] : [];
 
@@ -178,7 +196,7 @@ export function Layout({ children, activeNav }: LayoutProps) {
                             </button>
 
                             {catOpen && (() => {
-                                const catToolsAll = liveTools.filter(t => t.category === hoveredCat);
+                                const catToolsAll = liveTools.filter(t => t.categories[0] === hoveredCat);
                                 const catTools    = catToolsAll.slice(0, 8);
                                 const catHref     = categories.find(c => c.label === hoveredCat)?.href ?? '/tools';
                                 return (
@@ -375,7 +393,7 @@ export function Layout({ children, activeNav }: LayoutProps) {
                                                             onMouseLeave={e => (e.currentTarget.style.background = 'var(--white)')}
                                                         >
                                                             <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', whiteSpace: 'nowrap' }}>{tool.name}</span>
-                                                            <span style={{ fontSize: 11, color: 'var(--ink-3)', flexShrink: 0, background: 'var(--border)', borderRadius: 99, padding: '1px 7px', whiteSpace: 'nowrap' }}>{tool.category}</span>
+                                                            <span style={{ fontSize: 11, color: 'var(--ink-3)', flexShrink: 0, background: 'var(--border)', borderRadius: 99, padding: '1px 7px', whiteSpace: 'nowrap' }}>{tool.categories[0]}</span>
                                                         </Link>
                                                     ))}
                                                 </div>
