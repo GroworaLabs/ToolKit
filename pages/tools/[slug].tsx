@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 /* ── Tools that use a wide single-column layout (sidebar drops below) ── */
-const WIDE_TOOLS = new Set<string>(['token-counter', 'ai-cost-calculator', 'agent-rules-generator', 'ai-model-comparison', 'form-test-data-generator', 'css-selector-generator']);
+const WIDE_TOOLS = new Set<string>(['token-counter', 'ai-cost-calculator', 'agent-rules-generator', 'ai-model-comparison', 'form-test-data-generator', 'css-selector-generator', 'api-assertion-builder']);
 
 /* ── Dynamic tool loader ───────────────────────────────── */
 
@@ -107,6 +107,7 @@ const TOOL_DATA: Record<string, () => Promise<{ faq: FaqItem[]; [key: string]: u
     'html-minifier':             () => import('@/tools/html-minifier'),
     'html-beautifier':           () => import('@/tools/html-beautifier'),
     'css-selector-generator':   () => import('@/tools/css-selector-generator'),
+    'api-assertion-builder':    () => import('@/tools/api-assertion-builder'),
 };
 
 const TOOL_WIDGETS: Record<string, React.ComponentType> = {
@@ -182,6 +183,7 @@ const TOOL_WIDGETS: Record<string, React.ComponentType> = {
     'html-minifier':             dynamic(() => import('@/tools/html-minifier/component'),             { ssr: false }) as React.ComponentType,
     'html-beautifier':           dynamic(() => import('@/tools/html-beautifier/component'),           { ssr: false }) as React.ComponentType,
     'css-selector-generator':   dynamic(() => import('@/tools/css-selector-generator/component'),   { ssr: false }) as React.ComponentType,
+    'api-assertion-builder':    dynamic(() => import('@/tools/api-assertion-builder/component'),    { ssr: false }) as React.ComponentType,
 };
 
 /* ── Password generator sidebar ────────────────────────── */
@@ -1249,6 +1251,7 @@ const SIDEBAR_INFO_LOADERS: Record<string, () => Promise<{ label: string; value:
     'css-minifier':             () => import('@/tools/css-minifier').then(m => (m as any).sidebarInfo),
     'html-minifier':            () => import('@/tools/html-minifier').then(m => (m as any).sidebarInfo),
     'html-beautifier':          () => import('@/tools/html-beautifier').then(m => (m as any).sidebarInfo),
+    'api-assertion-builder':    () => import('@/tools/api-assertion-builder').then(m => (m as any).sidebarInfo),
 };
 
 function GenericInfoSidebar({ slug }: { slug: string }) {
@@ -1571,6 +1574,7 @@ const TOOL_CONTENT: Record<string, React.ComponentType> = {
     'html-minifier':             dynamic(() => import('@/tools/html-minifier/content')) as React.ComponentType,
     'html-beautifier':           dynamic(() => import('@/tools/html-beautifier/content')) as React.ComponentType,
     'css-selector-generator':    dynamic(() => import('@/tools/css-selector-generator/content')) as React.ComponentType,
+    'api-assertion-builder':     dynamic(() => import('@/tools/api-assertion-builder/content')) as React.ComponentType,
 };
 
 function ToolContent({ slug }: { slug: string }) {

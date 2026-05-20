@@ -818,6 +818,18 @@ export const TOOLS: ToolMeta[] = [
     live:           true,
   },
   {
+    slug:           'api-assertion-builder',
+    name:           'API Assertion Builder',
+    tagline:        'Paste JSON → get Jest, Playwright, pytest, and Supertest assertions',
+    description:    'Paste any JSON API response and instantly get assertion code for Jest, Playwright, pytest, or Supertest. Choose Exact values, Type-safe, or Schema mode. 100% browser-based.',
+    seoTitle:       'API Assertion Builder — JSON to Jest, Playwright & pytest Assertions | ToolKit',
+    seoH1:          'API Assertion Builder',
+    seoDescription: 'Paste a JSON API response and get ready-to-use assertions for Jest, Playwright (APIRequestContext), pytest, and Supertest. Choose exact-value, type-safe, or schema-only mode. Free, browser-based, no signup.',
+    categories:     ['QA & Testing', 'Code & Dev'],
+    keywords:       ['api assertion generator', 'json to jest assertions', 'api response assertion generator', 'playwright api test generator', 'pytest assertion generator', 'supertest assertions', 'api test assertion builder', 'json assertion tool', 'api testing tool online', 'jest toMatchObject generator'],
+    live:           true,
+  },
+  {
     slug:           'toml-to-json',
     name:           'TOML to JSON Converter',
     tagline:        'Convert TOML config files to JSON',

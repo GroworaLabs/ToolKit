@@ -727,3 +727,15 @@ html.dark .btn-main:hover { background: #5d5a50; box-shadow: 0 4px 12px rgba(0,0
   white-space: nowrap;
 }
 .tool-content td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+
+/* ── API Assertion Builder — upload row ── */
+.assert-upload-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+@media (max-width: 600px) {
+  .assert-upload-row { flex-direction: column; align-items: stretch; gap: 8px; }
+  .assert-upload-btn { width: 100%; justify-content: center; padding: 10px 16px !important; font-size: 14px !important; }
+}
