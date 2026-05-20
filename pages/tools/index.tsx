@@ -3,13 +3,18 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { Layout } from '@/components/ui/Layout';
 import { ToolCard } from '@/components/ui/ToolCard';
+import type { ToolMeta } from '@/lib/types';
 import { getByCategory, getLiveTools, getSoonTools, CATEGORY_SLUGS } from '@/lib/registry';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.webtoolkit.tech';
 
 
 const ToolsPage: NextPage = () => {
-  const byCategory = getByCategory();
+  const rawByCategory = getByCategory();
+  const byCategory = new Map<string, ToolMeta[]>();
+  if (rawByCategory.has('AI')) byCategory.set('AI', rawByCategory.get('AI')!);
+  for (const [cat, tools] of rawByCategory) { if (cat !== 'AI') byCategory.set(cat, tools); }
+
   const liveTools  = getLiveTools();
   const liveCount  = liveTools.length;
   const soonCount  = getSoonTools().length;
