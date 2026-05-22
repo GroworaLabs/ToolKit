@@ -1,6 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import { getLiveTools, getAllVariantPaths } from '@/lib/registry';
 import { getAllGuides } from '@/lib/guides';
+import { getAllBlogPosts } from '@/lib/blog';
 
 interface SitemapEntry {
   url:        string;
@@ -51,6 +52,14 @@ function buildSitemap(baseUrl: string): string {
       priority:   '0.7',
       changefreq: 'monthly' as const,
       lastmod:    g.publishedAt ? g.publishedAt.split('T')[0] : today,
+    })),
+    // Blog index + posts
+    { url: '/blog', priority: '0.7', changefreq: 'weekly', lastmod: today },
+    ...getAllBlogPosts().map(p => ({
+      url:        `/blog/${p.slug}`,
+      priority:   '0.6',
+      changefreq: 'monthly' as const,
+      lastmod:    p.publishedAt ? p.publishedAt.split('T')[0] : today,
     })),
   ];
 

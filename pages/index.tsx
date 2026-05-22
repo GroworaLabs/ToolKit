@@ -8,7 +8,8 @@ import { GuideCard } from '@/components/ui/GuideCard';
 import { getLiveTools, getSoonTools, getFeaturedTools, getByCategory, CATEGORY_SLUGS } from '@/lib/registry';
 import { CATEGORIES } from '@/lib/categories';
 import { getAllGuides } from '@/lib/guides';
-import type { ToolMeta, GuideMeta } from '@/lib/types';
+import { getAllBlogPosts } from '@/lib/blog';
+import type { ToolMeta, GuideMeta, BlogPost } from '@/lib/types';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.webtoolkit.tech';
 
@@ -81,6 +82,7 @@ interface Props {
   categoryCards: CategoryCard[];
   latestGuides:  GuideMeta[];
   guideCount:    number;
+  latestPosts:   BlogPost[];
 }
 
 export const getStaticProps: GetStaticProps<Props> = () => {
@@ -97,17 +99,19 @@ export const getStaticProps: GetStaticProps<Props> = () => {
     .filter(c => c.count > 0);
 
   const allGuides = getAllGuides();
+  const allPosts  = getAllBlogPosts();
   return {
     props: {
       featuredTools: getFeaturedTools(),
       categoryCards,
       latestGuides:  allGuides.slice(0, 6),
       guideCount:    allGuides.length,
+      latestPosts:   allPosts.slice(0, 3),
     },
   };
 };
 
-const HomePage: NextPage<Props> = ({ featuredTools, categoryCards, latestGuides, guideCount }) => {
+const HomePage: NextPage<Props> = ({ featuredTools, categoryCards, latestGuides, guideCount, latestPosts }) => {
   const liveTools = getLiveTools();
   const soonTools = getSoonTools();
   const [query, setQuery]   = useState('');
@@ -460,6 +464,56 @@ const HomePage: NextPage<Props> = ({ featuredTools, categoryCards, latestGuides,
               </div>
               <div className="guides-grid">
                 {latestGuides.map(guide => <GuideCard key={guide.slug} guide={guide} />)}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── Blog ──────────────────────────────────────────── */}
+        {latestPosts.length > 0 && (
+          <section style={{ padding: '64px 0 0' }}>
+            <div className="wrap-wide">
+              <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
+                <div>
+                  <p className="ov" style={{ marginBottom: 8 }}>Blog</p>
+                  <h2 className="hdg" style={{ fontSize: 'clamp(20px, 3vw, 26px)' }}>From the team</h2>
+                </div>
+                <Link href="/blog" style={{ fontSize: 13, fontWeight: 600, color: 'var(--green)', textDecoration: 'none' }}>
+                  All posts →
+                </Link>
+              </div>
+              <div style={{ border: '1px solid var(--border)', borderRadius: 'var(--r-l)', overflow: 'hidden', background: 'var(--white)' }}>
+                {latestPosts.map((post, i) => {
+                  const date = post.publishedAt
+                    ? new Date(post.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+                    : null;
+                  return (
+                    <Link
+                      key={post.slug}
+                      href={`/blog/${post.slug}`}
+                      style={{
+                        display: 'flex', alignItems: 'center', gap: 16,
+                        padding: '16px 20px', textDecoration: 'none',
+                        borderBottom: i < latestPosts.length - 1 ? '1px solid var(--border)' : 'none',
+                        transition: 'background .12s',
+                      }}
+                      onMouseEnter={e => (e.currentTarget.style.background = 'var(--page-bg)')}
+                      onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+                    >
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--ink)', lineHeight: 1.35, marginBottom: 3 }}>
+                          {post.title}
+                        </div>
+                        <div style={{ fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.5, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                          {post.description}
+                        </div>
+                      </div>
+                      {date && (
+                        <span style={{ fontSize: 11, color: 'var(--ink-3)', flexShrink: 0, whiteSpace: 'nowrap' }}>{date}</span>
+                      )}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </section>
