@@ -6,8 +6,9 @@ import { Layout } from '@/components/ui/Layout';
 import { FaqSection } from '@/components/ui/FaqSection';
 import { ToolCard } from '@/components/ui/ToolCard';
 import { getBySlug, getLiveSlugs, TOOLS, CATEGORY_SLUGS } from '@/lib/registry';
-import type { ToolMeta, FaqItem, GuideMeta } from '@/lib/types';
+import type { ToolMeta, FaqItem, GuideMeta, BlogPost } from '@/lib/types';
 import { getGuidesByTool } from '@/lib/guides';
+import { getPostsByTool } from '@/lib/blog';
 
 const jsonLd = (data: unknown) => JSON.stringify(data).replace(/</g, '\\u003c');
 
@@ -23,9 +24,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const tool          = getBySlug(slug);
     if (!tool) return { notFound: true };
     const relatedGuides = getGuidesByTool(slug);
+    const relatedPosts  = getPostsByTool(slug);
     const loader        = TOOL_DATA[slug];
     const faq: FaqItem[] = loader ? (await loader()).faq as FaqItem[] : [];
-    return { props: { tool, relatedGuides, faq } };
+    return { props: { tool, relatedGuides, relatedPosts, faq } };
 };
 
 /* ── Tools that use a wide single-column layout (sidebar drops below) ── */
@@ -1264,12 +1266,12 @@ function GenericInfoSidebar({ slug }: { slug: string }) {
 }
 
 /* ── Page ─────────────────────────────────────────────── */
-interface Props { tool: ToolMeta; relatedGuides: GuideMeta[]; faq: FaqItem[]; }
+interface Props { tool: ToolMeta; relatedGuides: GuideMeta[]; relatedPosts: BlogPost[]; faq: FaqItem[]; }
 
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.webtoolkit.tech';
 
-const ToolPage: NextPage<Props> = ({ tool, relatedGuides, faq }) => {
+const ToolPage: NextPage<Props> = ({ tool, relatedGuides, relatedPosts, faq }) => {
     const Widget = TOOL_WIDGETS[tool.slug];
     const relatedTools = TOOLS.filter(t => t.live && t.categories.includes(tool.categories[0]) && t.slug !== tool.slug).slice(0, 4);
     const toolUrl = `${BASE_URL}/tools/${tool.slug}`;
@@ -1416,6 +1418,19 @@ const ToolPage: NextPage<Props> = ({ tool, relatedGuides, faq }) => {
                                             <a key={g.slug} href={`/guides/${g.slug}`} style={{ display: 'block', padding: '11px 0', borderBottom: '1px solid var(--border)', textDecoration: 'none' }}>
                                                 <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--ink)', lineHeight: 1.35, marginBottom: 4 }}>{g.title}</div>
                                                 <div style={{ fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.5 }}>{g.description}</div>
+                                            </a>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                            {relatedPosts.length > 0 && (
+                                <div style={{ marginTop: 20 }}>
+                                    <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--ink-4)', marginBottom: 12 }}>From the blog</p>
+                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                        {relatedPosts.map(p => (
+                                            <a key={p.slug} href={`/blog/${p.slug}`} style={{ display: 'block', padding: '11px 0', borderBottom: '1px solid var(--border)', textDecoration: 'none' }}>
+                                                <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--ink)', lineHeight: 1.35, marginBottom: 4 }}>{p.title}</div>
+                                                <div style={{ fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.5 }}>{p.description}</div>
                                             </a>
                                         ))}
                                     </div>

@@ -16,7 +16,7 @@ export function Logo() {
     );
 }
 
-interface LayoutProps { children: ReactNode; activeNav?: 'home' | 'tools' | 'guides'; }
+interface LayoutProps { children: ReactNode; activeNav?: 'home' | 'tools' | 'guides' | 'blog'; }
 
 interface VariantHit { variantName: string; toolName: string; href: string; }
 
@@ -348,6 +348,13 @@ export function Layout({ children, activeNav }: LayoutProps) {
                             className={`nav-pill${router.pathname.startsWith('/guides') ? ' on' : ''}`}
                         >
                             Guides
+                        </Link>
+
+                        <Link
+                            href="/blog"
+                            className={`nav-pill${router.pathname.startsWith('/blog') ? ' on' : ''}`}
+                        >
+                            Blog
                         </Link>
                     </nav>
 

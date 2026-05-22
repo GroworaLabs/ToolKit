@@ -62,6 +62,22 @@ export interface GuideWithContent extends GuideMeta {
   contentHtml: string;
 }
 
+/* ── Blog ───────────────────────────────────────────── */
+
+export interface BlogPost {
+  slug:        string;
+  title:       string;
+  description: string;
+  tags:        string[];
+  publishedAt: string;   // ISO date string "YYYY-MM-DD"
+  author:      string;   // author id — see lib/authors.ts
+  tools:       string[]; // tool slugs this post is about
+}
+
+export interface BlogPostWithContent extends BlogPost {
+  contentHtml: string;
+}
+
 /* ── Authors ────────────────────────────────────────── */
 
 export interface Author {

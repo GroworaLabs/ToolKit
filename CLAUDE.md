@@ -146,8 +146,8 @@ Running status of the Month 1–2 foundation from the monetization roadmap. Upda
 
 **Tier 2 — Content upgrade (2–4 weeks)**
 - [ ] **Expand top 10 guides to 2000–2500 words** — pick by GSC impressions. Add: real code examples, step-by-step tutorials using the tool, benchmark tables, "Common mistakes" + "Pro tips" sections.
-- [ ] **Publish 25 more guides** — currently at 46 (2026-05-20), target 60+. Prioritize: tutorials ("How to do X with Y"), comparisons, "X for developers" angles. Higher word count average (2000+) beats more 900-word guides.
-- [ ] **Add developer blog / changelog section** — 5–10 short posts (200–500 words) covering tool releases, how-we-built-it, dev tips. Shows active editorial team, not auto-generated content. Route: `/blog` or `/updates`, new page type in pages router.
+- [x] **Publish 25 more guides** — `2026-05-22`. 60 guides total (was 46). 14 new guides published: html-entities, jwt-generation, llm-cost-optimization, css-selectors, json-csv, color-palette, regex-testing, time-zones, rot13-morse-nato, api-assertions, data-storage, random-data, ai-system-prompts, html-beautification.
+- [x] **Add developer blog / changelog section** — `2026-05-22`. `/blog` route, `pages/blog/index.tsx` + `pages/blog/[slug].tsx`, `lib/blog.ts`, `content/blog/*.md`. 7 posts: tool launches, how-we-built-it, monthly changelog, engineering posts. "Blog" link added to header nav. Sitemap updated.
 - [ ] **Wire first affiliate links** in existing comparison guides — Bitwarden, 1Password, Vercel, Railway. No approval needed, higher RPM than AdSense for dev audience.
 
 **Tier 3 — Structural (4+ weeks, after Tier 1+2 are done)**
