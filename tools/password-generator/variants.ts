@@ -8,7 +8,7 @@ export const variants: ToolVariant[] = [
 
     {
         slug:           'for-wifi',
-        seoTitle:       'WiFi Password Generator — Strong Passwords for Your Router | ToolKit',
+        seoTitle:       'WiFi Password Generator — Strong Router Passwords',
         seoH1:          'WiFi Password Generator',
         seoDescription: 'Generate a strong, random WiFi password instantly. WPA2/WPA3 supports up to 63 characters — use all types for maximum security. Free, browser-based, no signup.',
         intro:          'A WiFi password is one of the most important passwords in your home or office — it controls access to your entire network and every device on it. WPA2 and WPA3, the current wireless security standards, support passwords up to 63 characters. Unlike account passwords that need to be typed daily, a WiFi password is entered once per device, which means you can make it as long and random as possible without any usability penalty. This generator defaults to 20 characters with all character types enabled — the recommended setting for a residential or small business router. Avoid common mistakes like using your address, phone number, or a simple word. A strong WiFi password prevents unauthorized access, protects your bandwidth, and stops attackers from using your network as a vector for other attacks.',
@@ -49,7 +49,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'for-testing',
-        seoTitle:       'Password Generator for Testing — Realistic Test Passwords | ToolKit',
+        seoTitle:       'Password Generator for Testing — Realistic Test Data',
         seoH1:          'Password Generator for Testing & Development',
         seoDescription: 'Generate realistic test passwords for development and QA. Configurable length and character sets. Browser-based, no data stored. Free, no signup.',
         intro:          'When building or testing authentication systems, the passwords you use in your test data matter more than most developers realize. Using "password", "test123", or "admin" in test accounts creates two problems: it trains muscle memory for weak passwords, and it risks those credentials leaking into production via database seeds or exported fixtures. A realistic test password — 12-16 characters with mixed types — also validates that your input fields, password strength meters, and hashing functions handle real-world values correctly. Truncation bugs, encoding issues with special characters, and bcrypt length limits (72 bytes) are all easier to catch with realistic passwords. This generator lets you configure exactly the character set and length you need for your test scenarios, from simple alphanumeric passwords to full-complexity strings that stress-test your validation logic.',
@@ -90,7 +90,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'strong-20-characters',
-        seoTitle:       'Strong 20 Character Password Generator — High-Security Passwords | ToolKit',
+        seoTitle:       '20 Character Password Generator — High Security',
         seoH1:          '20 Character Password Generator',
         seoDescription: 'Generate strong 20-character passwords instantly. 20 characters with mixed types gives ~131 bits of entropy — effectively uncrackable. Free, browser-based, no signup.',
         intro:          'A 20-character random password with uppercase letters, lowercase letters, numbers, and symbols provides approximately 131 bits of entropy. To put that in perspective: even if every computer on Earth attempted a trillion guesses per second, cracking it would take longer than the current age of the universe. The NIST Digital Identity Guidelines recommend at least 15 characters for general accounts — 20 characters gives you a significant safety margin above that threshold. Twenty characters is also the sweet spot between security and usability: long enough to be essentially uncrackable, short enough to copy-paste or type without excessive effort. This generator defaults to exactly 20 characters with all four character sets enabled, producing the highest-entropy output this length allows.',
@@ -131,7 +131,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'no-symbols',
-        seoTitle:       'Password Generator Without Symbols — Letters & Numbers Only | ToolKit',
+        seoTitle:       'Password Generator Without Symbols — Letters & Numbers',
         seoH1:          'Password Generator Without Special Characters',
         seoDescription: 'Generate strong passwords without symbols — letters and numbers only. Ideal for systems that reject special characters. Free, browser-based, no signup.',
         intro:          'Some systems still restrict passwords to letters and numbers only — older enterprise software, legacy banking portals, certain IoT device interfaces, and some government systems reject special characters entirely. While symbol-free passwords have lower entropy per character, you can compensate by increasing length. A 20-character alphanumeric password using uppercase and lowercase letters plus digits has approximately 119 bits of entropy — still effectively uncrackable. This generator defaults to 20 characters with uppercase, lowercase, and numbers enabled, and symbols disabled. If the system requires only letters (no numbers either), increase the length further to at least 24 characters to maintain adequate entropy.',
@@ -177,9 +177,9 @@ export const variants: ToolVariant[] = [
 
     {
         slug:           '8-characters',
-        seoTitle:       '8 Character Password Generator — Minimum Length Passwords | ToolKit',
+        seoTitle:       '8 Character Password Generator — Free & Instant',
         seoH1:          '8 Character Password Generator',
-        seoDescription: 'Generate random 8-character passwords instantly. Meet minimum length requirements for most websites. All character types enabled. Free, browser-based, no signup.',
+        seoDescription: 'Generate a random 8 character password in your browser. Choose letters, numbers and symbols, copy in one click. Free, no sign-up, nothing is stored.',
         intro:          'Eight characters is the minimum password length accepted by most websites and services today. While security experts recommend longer passwords, there are situations where 8 characters is all a system allows — older enterprise portals, legacy banking systems, and some embedded device interfaces enforce this exact limit. An 8-character password using all four character types (uppercase, lowercase, digits, symbols) provides approximately 52 bits of entropy. That is not ideal for high-security accounts, but it is far stronger than common 8-character passwords like "Password1!" which follow predictable patterns. If you are forced to use 8 characters, make every character count by enabling all character types and generating it randomly rather than choosing it yourself. For any system that allows longer passwords, use at least 16 characters instead.',
         faq: [
             { q: 'Is an 8-character password secure enough?', a: 'For high-value accounts like banking or email, 8 characters is the bare minimum and not recommended. For low-risk accounts where the system enforces a maximum of 8 characters, a random 8-character password with all character types is acceptable. Always use longer passwords when possible.' },
@@ -217,9 +217,9 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           '12-characters',
-        seoTitle:       '12 Character Password Generator — Balanced Security Passwords | ToolKit',
+        seoTitle:       '12 Character Password Generator — Strong & Free',
         seoH1:          '12 Character Password Generator',
-        seoDescription: 'Generate strong 12-character passwords instantly. 12 characters with mixed types gives ~79 bits of entropy — solid security for everyday accounts. Free, browser-based.',
+        seoDescription: 'Create a strong 12 character password instantly in your browser. Mix uppercase, numbers and symbols, copy in one click. No sign-up, nothing is saved.',
         intro:          'Twelve characters is widely considered the practical minimum for a strong password in 2025. At this length with all four character types enabled, you get approximately 79 bits of entropy — enough to resist brute-force attacks from even high-end GPU clusters for decades. Many security guidelines, including those from Microsoft and Google, recommend 12 characters as the starting point for personal accounts. It strikes the right balance: short enough to type on a phone keyboard when needed, long enough to provide meaningful security. This generator defaults to 12 characters with uppercase, lowercase, numbers, and symbols all enabled. For accounts that store sensitive data — banking, primary email, cloud storage — consider stepping up to 16 or 20 characters for additional margin.',
         faq: [
             { q: 'Is 12 characters enough for a strong password?', a: 'Yes, for most personal accounts. A random 12-character password with all character types has ~79 bits of entropy. This would take centuries to crack with current GPU technology. For high-security accounts, 16-20 characters is better.' },
@@ -257,9 +257,9 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           '32-characters',
-        seoTitle:       '32 Character Password Generator — Maximum Security Passwords | ToolKit',
+        seoTitle:       '32 Character Password & Key Generator — Free',
         seoH1:          '32 Character Password Generator',
-        seoDescription: 'Generate ultra-strong 32-character passwords with ~210 bits of entropy. Ideal for API keys, master passwords, and encryption keys. Free, browser-based, no signup.',
+        seoDescription: 'Generate a random 32 character password or key in your browser. Ideal for API secrets and encryption keys. Copy in one click, no sign-up, nothing stored.',
         intro:          'A 32-character random password with all character types provides approximately 210 bits of entropy — far beyond what any brute-force attack could crack, even with theoretical future quantum computers using Grover\'s algorithm (which would halve the effective entropy to ~105 bits, still uncrackable). This length is ideal for API keys, service account passwords, database connection strings, encryption key passphrases, and any credential that will never be typed manually. At 32 characters, the password is always stored in a password manager or configuration file, so usability is not a concern. Many security-conscious organizations mandate 32-character passwords for infrastructure credentials. This generator defaults to 32 characters with all types enabled, producing maximum-entropy output suitable for the most sensitive applications.',
         faq: [
             { q: 'When should I use a 32-character password?', a: 'Use 32 characters for API keys, database passwords, service accounts, encryption passphrases, and any credential stored in a password manager or config file. There is no usability penalty since you never type it manually.' },
@@ -297,9 +297,9 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           '64-characters',
-        seoTitle:       '64 Character Password Generator — Ultra-Secure Long Passwords | ToolKit',
+        seoTitle:       '64 Character Password Generator — Free, No Sign-Up',
         seoH1:          '64 Character Password Generator',
-        seoDescription: 'Generate ultra-secure 64-character passwords with ~420 bits of entropy. Maximum length for encryption keys and infrastructure credentials. Free, browser-based.',
+        seoDescription: 'Generate a random 64 character password or key in your browser. Maximum strength, copy in one click, no sign-up, nothing stored.',
         intro:          'Sixty-four characters is the maximum password length recommended by NIST SP 800-63B, and it represents the upper practical limit for most authentication systems. A 64-character random password with all character types delivers approximately 420 bits of entropy — a number so large that expressing the time to crack it requires scientific notation with triple-digit exponents. This length is used for the most sensitive infrastructure: root database passwords, HSM (Hardware Security Module) passphrases, master encryption keys, and air-gapped system credentials. At this length, even theoretical attacks using quantum computing with Grover\'s algorithm would still face ~210 bits of effective entropy. This generator produces 64-character strings using the full printable ASCII character set. Always store these in a secure vault — they are never meant to be memorized or typed.',
         faq: [
             { q: 'Why would I need a 64-character password?', a: 'For maximum-security credentials: root database passwords, encryption key passphrases, HSM access codes, and infrastructure credentials that must withstand any foreseeable attack, including quantum computing.' },
@@ -343,7 +343,7 @@ export const variants: ToolVariant[] = [
 
     {
         slug:           'numbers-only',
-        seoTitle:       'Number-Only Password Generator — Numeric PINs & Passcodes | ToolKit',
+        seoTitle:       'Number-Only Password Generator — Numeric PINs',
         seoH1:          'Number-Only Password Generator',
         seoDescription: 'Generate random numeric passwords and PINs. Digits only (0-9). Ideal for phone PINs, lock screens, and systems requiring numeric-only codes. Free, browser-based.',
         intro:          'Some systems require numeric-only passwords: phone lock screens, SIM PINs, safe combinations, building access codes, and legacy banking systems that only accept digits. A purely numeric password has significantly lower entropy per character than a mixed-type password — each digit provides only ~3.32 bits (log₂(10)) compared to ~6.57 bits for the full printable ASCII set. To compensate, increase the length: a 10-digit random PIN has about 33 bits of entropy (sufficient for a phone lock screen with rate limiting), while a 20-digit numeric password reaches ~66 bits (adequate for most systems). This generator outputs random digits with configurable length. For any system that accepts mixed characters, always prefer a shorter mixed-type password over a longer numeric-only one.',
@@ -383,7 +383,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'letters-only',
-        seoTitle:       'Letters-Only Password Generator — Alphabetic Passwords | ToolKit',
+        seoTitle:       'Letters-Only Password Generator — Alphabetic',
         seoH1:          'Letters-Only Password Generator',
         seoDescription: 'Generate random passwords using only letters (A-Z, a-z). No digits, no symbols. For systems requiring alphabetic-only input. Free, browser-based, no signup.',
         intro:          'Certain systems restrict passwords to letters only — no digits, no symbols. This is common in older mainframe environments, some educational platforms, and systems where the password must be spoken aloud (phone support verification codes, for example). With 52 possible characters (26 uppercase + 26 lowercase), each character contributes ~5.7 bits of entropy. A 16-character letters-only password provides ~91 bits of entropy — strong enough for most purposes. For maximum security within this constraint, always use both uppercase and lowercase letters and generate randomly rather than choosing words. This generator defaults to 16 characters with both cases enabled and all other character types disabled.',
@@ -424,7 +424,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'alphanumeric',
-        seoTitle:       'Alphanumeric Password Generator — Letters & Numbers Only | ToolKit',
+        seoTitle:       'Alphanumeric Password Generator — Letters & Numbers',
         seoH1:          'Alphanumeric Password Generator',
         seoDescription: 'Generate random alphanumeric passwords (A-Z, a-z, 0-9). No special characters. Compatible with all systems. Free, browser-based, no signup.',
         intro:          'Alphanumeric passwords — letters and numbers only, no symbols — are the most universally compatible password format. Every system, device, and platform accepts them without issues. With 62 possible characters (26 uppercase + 26 lowercase + 10 digits), each character contributes ~5.95 bits of entropy. A 16-character alphanumeric password provides ~95 bits — strong enough for virtually any use case. This format avoids the common frustrations of symbol-containing passwords: copying issues in terminals, escaping problems in shell scripts, encoding errors in URLs, and rejection by systems with restrictive character policies. If you use a password manager and never type passwords manually, symbols add marginal value. Many security professionals use alphanumeric passwords with increased length as their default choice.',
@@ -465,7 +465,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'hex',
-        seoTitle:       'Hex Password Generator — Hexadecimal Keys & Tokens | ToolKit',
+        seoTitle:       'Hex Password Generator — Hexadecimal Keys & Tokens',
         seoH1:          'Hex Password Generator',
         seoDescription: 'Generate random hexadecimal strings (0-9, a-f). Ideal for encryption keys, tokens, and API secrets. Configurable length. Free, browser-based, no signup.',
         intro:          'Hexadecimal strings — characters 0-9 and a-f — are the standard format for encryption keys, authentication tokens, MAC addresses, and many API secrets. Each hex character represents exactly 4 bits, making it easy to calculate key strength: a 32-character hex string is a 128-bit key, 64 characters is 256 bits. This generator produces random hex strings using a cryptographically secure random number generator (Web Crypto API). Common use cases include WEP/WPA keys, AES encryption keys, HMAC secrets, session tokens, and color codes. Note that hex passwords have lower entropy per character (~4 bits) than full alphanumeric passwords (~5.95 bits), so they need to be longer to achieve the same strength. A 32-hex-character password (128 bits) is equivalent in strength to about a 22-character alphanumeric password.',
@@ -511,7 +511,7 @@ export const variants: ToolVariant[] = [
 
     {
         slug:           'for-bank',
-        seoTitle:       'Bank Password Generator — Secure Banking Passwords | ToolKit',
+        seoTitle:       'Bank Password Generator — Secure Banking Passwords',
         seoH1:          'Bank Account Password Generator',
         seoDescription: 'Generate strong passwords specifically for banking and financial accounts. Meets common bank requirements. Free, browser-based, nothing stored.',
         intro:          'Banking passwords protect your financial life — they deserve maximum attention. Most banks require 8-20 characters with at least one uppercase letter, one lowercase letter, one number, and one symbol, though many older banking platforms restrict allowed characters more than modern services. The biggest risk to bank accounts is not brute-force attacks (banks have rate limiting and account lockouts) but credential stuffing — attackers using email/password combinations leaked from other sites. This means your bank password must be unique and never reused anywhere else. This generator defaults to 16 characters with all types enabled, meeting the requirements of virtually every bank while providing far more security than the typical minimum. Always enable two-factor authentication on banking accounts as an additional layer — a strong password alone is necessary but not sufficient for financial security.',
@@ -551,7 +551,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'for-email',
-        seoTitle:       'Email Password Generator — Secure Your Gmail & Outlook | ToolKit',
+        seoTitle:       'Email Password Generator — Secure Gmail & Outlook',
         seoH1:          'Email Account Password Generator',
         seoDescription: 'Generate strong passwords for email accounts — Gmail, Outlook, Yahoo and more. Your email is the master key to all other accounts. Free, browser-based.',
         intro:          'Your email password is arguably the most important password you have. Email is the recovery method for nearly every other account — banking, social media, cloud storage, work tools. An attacker who gains access to your email can reset passwords across your entire digital life within minutes. Gmail, Outlook, Yahoo, and other major providers all support long passwords with full character sets. This generator defaults to 20 characters with all types enabled, providing approximately 131 bits of entropy. Since you typically log into email infrequently on new devices (most stay logged in), there is no reason to compromise on length. Always pair your email password with two-factor authentication (preferably a hardware key or authenticator app, not SMS). Never reuse your email password on any other service.',
@@ -592,7 +592,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'for-gaming',
-        seoTitle:       'Gaming Password Generator — Secure Steam, Xbox & PSN Accounts | ToolKit',
+        seoTitle:       'Gaming Password Generator — Steam, Xbox & PSN',
         seoH1:          'Gaming Account Password Generator',
         seoDescription: 'Generate strong passwords for Steam, Xbox, PlayStation, Epic Games, and Discord. Protect your game library and in-game purchases. Free, browser-based.',
         intro:          'Gaming accounts represent real financial value — Steam libraries worth hundreds or thousands of dollars, in-game purchases, rare items, and linked payment methods make them high-value targets for attackers. Account theft is rampant in gaming: phishing through fake trade offers, credential stuffing from other breaches, and social engineering through Discord are the most common attack vectors. Steam, Xbox Live, PlayStation Network, Epic Games Store, and Battle.net all support strong passwords with mixed character types. This generator defaults to 16 characters with all types enabled. Beyond password strength, enable Steam Guard, Xbox two-step verification, or PlayStation two-step verification on every gaming platform. Never enter your password on sites reached through links in chat messages — always navigate to the platform directly.',
@@ -633,7 +633,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'for-social-media',
-        seoTitle:       'Social Media Password Generator — Secure Instagram, TikTok & More | ToolKit',
+        seoTitle:       'Social Media Password Generator — Instagram, TikTok',
         seoH1:          'Social Media Password Generator',
         seoDescription: 'Generate strong passwords for Instagram, TikTok, Facebook, Twitter/X and more. Protect your accounts from hacking. Free, browser-based, no signup.',
         intro:          'Social media accounts are among the most commonly hacked accounts on the internet. Instagram, TikTok, Facebook, Twitter/X, and LinkedIn accounts are targeted for identity theft, spam distribution, cryptocurrency scams, and impersonation. The damage goes beyond the account itself — a compromised social media profile can be used to scam your followers, damage your reputation, or access other services connected via social login ("Sign in with Google/Facebook"). Most social platforms support passwords up to 128 characters with full character sets. This generator defaults to 16 characters with all types enabled. Use a unique password for each platform — if your Instagram password leaks, your TikTok should remain secure. Enable two-factor authentication on every social media account, preferably using an authenticator app rather than SMS.',
@@ -674,7 +674,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'for-school',
-        seoTitle:       'School Password Generator — Student & Campus Account Passwords | ToolKit',
+        seoTitle:       'School Password Generator — Student & Campus',
         seoH1:          'School & Student Password Generator',
         seoDescription: 'Generate secure passwords for school and university accounts. Meets typical campus IT requirements. Easy to type. Free, browser-based, no signup.',
         intro:          'School and university accounts often have specific password policies: minimum 8-12 characters, at least one uppercase letter, one number, and sometimes one symbol. Many students reuse their school password across personal accounts — this is dangerous because educational institutions are frequent targets for cyberattacks, and a breach of your university credentials could expose every account sharing that password. Campus accounts also typically connect to email, cloud storage (OneDrive, Google Drive), library systems, and sometimes financial aid portals. This generator defaults to 14 characters with all types enabled — long enough to be secure, meeting all common campus IT requirements, and practical enough to type on a shared lab computer. Always use a unique password for your school account and store it in a password manager.',
@@ -720,7 +720,7 @@ export const variants: ToolVariant[] = [
 
     {
         slug:           'bulk',
-        seoTitle:       'Bulk Password Generator — Generate Multiple Passwords at Once | ToolKit',
+        seoTitle:       'Bulk Password Generator — Multiple at Once',
         seoH1:          'Bulk Password Generator',
         seoDescription: 'Generate multiple random passwords at once. Create 10, 50, or 100 secure passwords in one click. Ideal for teams and provisioning. Free, browser-based.',
         intro:          'When provisioning user accounts, setting up test environments, or rotating credentials across multiple services, you need many unique passwords at once. Generating them one at a time is tedious and error-prone — copying the wrong password to the wrong account is a common operational mistake. This bulk generator creates multiple cryptographically random passwords simultaneously, each with the same security properties as a single generated password. Common use cases include IT teams onboarding new employees, DevOps engineers rotating database credentials, QA teams creating test accounts, and anyone migrating to a password manager who needs to replace reused passwords across many services. Each password is generated independently using the Web Crypto API, ensuring no correlation between outputs.',
@@ -761,7 +761,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'memorable',
-        seoTitle:       'Memorable Password Generator — Easy to Remember, Hard to Crack | ToolKit',
+        seoTitle:       'Memorable Password Generator — Easy to Remember',
         seoH1:          'Memorable Password Generator',
         seoDescription: 'Generate passwords that are easy to remember but hard to crack. Uses pronounceable patterns with mixed characters. Free, browser-based, no signup.',
         intro:          'There are a few passwords you need to actually memorize: your password manager master password, your computer login, and perhaps your phone PIN. For these, a purely random string like "xK#9mQ$2pL" is impractical — you will forget it, write it on a sticky note, or reset it constantly. A memorable password takes a different approach: it uses patterns that human memory can latch onto while maintaining enough randomness to resist attacks. The best strategy is a passphrase — four to six random words combined with numbers and symbols, like "correct-horse-battery-staple" but with added complexity. This generator creates passwords that balance memorability with security. For any password that goes into a password manager (not memorized), always prefer a fully random password instead.',
@@ -802,7 +802,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'passphrase',
-        seoTitle:       'Passphrase Generator — Random Word Passwords for Master Keys | ToolKit',
+        seoTitle:       'Passphrase Generator — Random Word Passwords',
         seoH1:          'Passphrase Generator',
         seoDescription: 'Generate secure passphrases from random words. Ideal for master passwords and encryption keys you need to memorize. Free, browser-based, no signup.',
         intro:          'A passphrase is a password made of multiple random words — like "marble-sunset-notebook-river" — instead of a string of random characters. The concept was popularized by the XKCD comic "correct horse battery staple" and formalized by the Diceware method. Passphrases solve a specific problem: they provide high entropy while remaining memorable enough to type without a password manager. A four-word passphrase from a large word list provides roughly 50-60 bits of entropy; six words provides 75-90 bits. The trade-off is length — passphrases are typically 20-40 characters long but far easier to remember than a 16-character random string. Use passphrases for your password manager master password, full-disk encryption passphrase, or any credential you must memorize. For everything else, use a shorter fully random password stored in your manager.',
@@ -843,7 +843,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'pronounceable',
-        seoTitle:       'Pronounceable Password Generator — Easy to Say Passwords | ToolKit',
+        seoTitle:       'Pronounceable Password Generator — Easy to Say',
         seoH1:          'Pronounceable Password Generator',
         seoDescription: 'Generate random passwords that are easy to pronounce and communicate verbally. Ideal for phone support and shared access. Free, browser-based, no signup.',
         intro:          'Sometimes a password needs to be communicated verbally — reading it to someone over the phone, dictating it to a colleague during setup, or sharing a temporary access code in a meeting. Random strings like "xK#9mQ$2" are nearly impossible to communicate accurately without the NATO phonetic alphabet. Pronounceable passwords solve this by using alternating consonant-vowel patterns that form syllable-like structures — "kobami", "luseta", "wopind" — while remaining random and unpredictable. Each syllable is selected randomly, not from a dictionary, so the passwords do not contain real words that could be guessed. This generator creates passwords with pronounceable patterns using mixed character types for the best balance of verbal communication and security.',
@@ -884,9 +884,9 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'for-kids',
-        seoTitle:       'Password Generator for Kids — Safe & Simple Passwords | ToolKit',
+        seoTitle:       'Password Generator for Kids — Safe & Easy',
         seoH1:          'Password Generator for Kids',
-        seoDescription: 'Generate safe, simple passwords for children\'s accounts. Easy to type, meets school requirements. Free, browser-based, no data stored.',
+        seoDescription: 'Create easy-to-remember, safe passwords for kids in one click. Fun word-based passwords that are still strong. Free, no sign-up, works in your browser.',
         intro:          'Children need passwords for school platforms, educational games, and supervised email accounts — but they cannot manage the same complexity adults use. A child\'s password needs to be simple enough to type independently (especially for younger kids who are still learning the keyboard), easy to remember without writing it down in an insecure place, and strong enough to meet the school or platform\'s requirements. This generator defaults to 10 characters with uppercase, lowercase, and numbers — no symbols, since young children often struggle to locate symbol keys. For older children (12+), consider enabling symbols and increasing length to 12-14 characters. Parents should store children\'s passwords in their own password manager and supervise account access appropriate to the child\'s age.',
         faq: [
             { q: 'How long should a child\'s password be?', a: 'For ages 6-9, 8-10 characters without symbols is practical. For ages 10-12, 10-12 characters. For teenagers, the same as adults — 14-16 characters with full complexity. Adjust based on typing ability and the sensitivity of the account.' },
@@ -925,7 +925,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'for-work',
-        seoTitle:       'Work Password Generator — Corporate & Enterprise Passwords | ToolKit',
+        seoTitle:       'Work Password Generator — Corporate & Enterprise',
         seoH1:          'Work & Corporate Password Generator',
         seoDescription: 'Generate passwords meeting corporate security policies. At least one uppercase, one number, one symbol. Compliant with enterprise requirements. Free, browser-based.',
         intro:          'Corporate environments typically enforce strict password policies: minimum 12-16 characters, at least one uppercase letter, one lowercase letter, one digit, and one symbol, with expiration every 60-90 days (though NIST now advises against forced rotation). These requirements exist because a single compromised employee account can give attackers access to internal networks, customer data, and intellectual property. Many enterprises use Active Directory, Okta, or similar identity providers that enforce these policies at the system level — your password will be rejected if it does not meet every requirement. This generator defaults to 16 characters with all types enabled, meeting or exceeding the policies of most enterprise environments. If your company uses single sign-on (SSO), you may only need this for your primary domain password, with SSO handling everything else.',
@@ -966,7 +966,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'for-temporary',
-        seoTitle:       'Temporary Password Generator — Short-Lived Access Codes | ToolKit',
+        seoTitle:       'Temporary Password Generator — Short-Lived Codes',
         seoH1:          'Temporary Password Generator',
         seoDescription: 'Generate temporary passwords for short-term access. Ideal for guest accounts, one-time logins, and initial setup. Free, browser-based, no signup.',
         intro:          'Temporary passwords serve a specific purpose: granting short-lived access that will be changed or revoked soon. Common scenarios include initial account setup (where the user must change the password on first login), guest access to a WiFi network or shared system, vendor or contractor access for a limited engagement, and one-time passwords for identity verification. Temporary passwords can be shorter than permanent ones because their exposure window is limited — an 8-10 character password that exists for only 24 hours has a much smaller attack surface than one used for months. This generator defaults to 10 characters with letters and numbers (no symbols for easy verbal communication). Always set an expiration on temporary credentials and revoke them as soon as the access period ends.',
@@ -1007,7 +1007,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'pin-code',
-        seoTitle:       'PIN Code Generator — Random 4-8 Digit PINs | ToolKit',
+        seoTitle:       'PIN Code Generator — Random 4-8 Digit PINs',
         seoH1:          'PIN Code Generator',
         seoDescription: 'Generate random PIN codes (4-8 digits). For bank cards, phone locks, safes, and access systems. Cryptographically random. Free, browser-based.',
         intro:          'PINs — Personal Identification Numbers — are everywhere: bank cards, phone lock screens, safe combinations, building access panels, SIM cards, and parental controls. A PIN is designed to be short and fast to enter, relying on rate limiting (account lockout after failed attempts) rather than length for security. The most common PIN length is 4 digits (10,000 combinations), but 6-digit PINs (1,000,000 combinations) are increasingly standard for phones and financial services. The critical rule for PINs is randomness: studies show that the most common 4-digit PIN is "1234" (used by over 10% of people), followed by "1111", "0000", and birth years. A randomly generated PIN avoids these predictable patterns entirely. This generator creates random numeric PINs using the Web Crypto API — the same cryptographic randomness used for full passwords.',
@@ -1047,7 +1047,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'for-database',
-        seoTitle:       'Database Password Generator — MySQL, PostgreSQL & MongoDB | ToolKit',
+        seoTitle:       'Database Password Generator — MySQL, PostgreSQL',
         seoH1:          'Database Password Generator',
         seoDescription: 'Generate strong passwords for MySQL, PostgreSQL, MongoDB and other databases. Avoids problematic characters. Free, browser-based, no data stored.',
         intro:          'Database passwords protect your most valuable asset — your data. A compromised database password gives an attacker direct access to every record, bypassing all application-level security. Database passwords have unique requirements: they are often stored in configuration files, environment variables, or connection strings, where certain characters can cause parsing issues. Single quotes, double quotes, backslashes, semicolons, and the percent sign can break connection strings in many frameworks. This generator defaults to 32 characters with alphanumeric characters — long enough for maximum security while avoiding the special characters that commonly cause configuration headaches. For databases, the password is always copy-pasted from a vault or configuration management system, never typed manually, so extreme length has zero usability cost.',
@@ -1088,7 +1088,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'for-ssh',
-        seoTitle:       'SSH Passphrase Generator — Secure Your SSH Keys | ToolKit',
+        seoTitle:       'SSH Passphrase Generator — Secure Your SSH Keys',
         seoH1:          'SSH Key Passphrase Generator',
         seoDescription: 'Generate strong passphrases for SSH private keys. Protect your server access with a secure passphrase. Free, browser-based, no data stored.',
         intro:          'An SSH key passphrase encrypts your private key file — if someone steals the file (from a backup, a compromised laptop, or a stolen drive), they cannot use it without the passphrase. Without a passphrase, anyone with your private key file has instant access to every server it is authorized for. The passphrase should be long enough to resist offline brute-force attacks against the key file encryption (typically AES-128 or AES-256). Since you type this passphrase whenever you load the key (unless using an SSH agent), it needs to be both strong and typeable. This generator defaults to 20 characters with letters and numbers — a practical balance between security and the frequent typing required. If you use an SSH agent that caches the unlocked key, you can use a longer, more complex passphrase since you only type it once per session.',
@@ -1125,7 +1125,7 @@ export const variants: ToolVariant[] = [
     },
     {
         slug:           'for-crypto',
-        seoTitle:       'Crypto Wallet Password Generator — Secure Passwords for Bitcoin & Exchanges | ToolKit',
+        seoTitle:       'Crypto Wallet Password Generator — Bitcoin & Exchanges',
         seoH1:          'Crypto Wallet Password Generator',
         seoDescription: 'Generate strong passwords for cryptocurrency wallets and exchange accounts. Maximum security for Bitcoin, Ethereum, and all crypto holdings. Free, browser-based, no signup.',
         intro:          'Cryptocurrency accounts have no fraud department, no chargeback, and no account recovery if you lose access. When a crypto exchange account or software wallet is compromised, the funds are gone — permanently and irreversibly. This makes strong, unique passwords for every crypto account more critical than almost any other type of credential. Exchange accounts (Coinbase, Kraken, Binance) are high-value targets for credential stuffing attacks because attackers know the accounts hold liquid, instantly transferable assets. Software wallets (MetaMask, Exodus, Electrum) encrypt your private keys with a password — if that password is weak, an attacker with access to your wallet file can brute-force it offline at their own pace. This generator defaults to 24 characters with all character types enabled, producing approximately 157 bits of entropy — strong enough to make offline attacks against any current encryption scheme infeasible.',
